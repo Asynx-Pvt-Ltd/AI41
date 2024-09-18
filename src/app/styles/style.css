@@ -1,0 +1,42 @@
+body {
+    color: rgb(var(--foreground-rgb));
+    background: white;
+}
+
+.site-header {
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+    width: 100%;
+    background: #fff;
+    height: 78px;
+    margin-bottom: 0;
+    box-shadow: #7198ef 0 0 11px;
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+    border-bottom: 2px solid #c7c7c700;
+    transition: box-shadow .3s ease, background-color .3s ease;
+    background: rgba(255, 255, 255, .95);
+}
+
+.site-header:hover {
+    box-shadow: #7198ef 0 4px 16px;
+}
+
+.site-brand-foot {
+    filter: invert(1) hue-rotate(35deg);
+    line-height: 54px;
+}
+
+.border-image {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    color: #333;
+    border-image: linear-gradient(89deg, #a0dbfd 1%, #947bed 26%, #fb81b5 51%, #ffbd75 98%) 1;
+    -o-border-image: linear-gradient(88deg, #0f6a97 .66%, #9679fa 28.1%, #3287bb 61.1%, #03A9F4 100%) 1;
+    border-image: linear-gradient(89deg, #a0dbfd 1%, #947bed 26%, #fb81b5 51%, #ffbd75 98%) 1;
+    border-bottom: 3px solid;
+    display: initial;
+    padding-bottom: 3px;
+}
