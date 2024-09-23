@@ -1,8 +1,7 @@
+import { del, put } from '@vercel/blob'
 import { PrismaClient } from '@prisma/client'
-import formidable, { IncomingForm } from 'formidable'
+import { IncomingForm } from 'formidable'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import path from 'path'
-import fs, { PathLike } from 'fs'
 
 const prisma = new PrismaClient()
 export const config = {
@@ -11,12 +10,6 @@ export const config = {
   }
 }
 
-const uploadDir = path.join(process.cwd(), 'public/uploads') // Directory to store uploaded files
-
-// Ensure upload directory exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true })
-}
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -27,7 +20,7 @@ export default async function handler(
     // Update a tool
     const form = new IncomingForm({
       multiples: false,
-      uploadDir,
+
       keepExtensions: true
     })
 
@@ -36,39 +29,20 @@ export default async function handler(
     console.log('====================================')
     console.log('files --->', files)
     console.log('====================================')
-    const { name, description, url, pricing, categoryId, category } = fields
-    const file = files.icon ? (files.icon[0] as formidable.File) : null
+    const { name, description, url, pricing, categoryId, category, icon } =
+      fields
 
-    var fileURL = ''
-    if (file && file.originalFilename) {
-      const existingTool = await prisma.tool.findUnique({
-        where: {
-          id: Number(id)
-        }
-      })
-      const filePath = path.join(
-        process.cwd(),
-        'public',
-        existingTool?.icon ?? ''
-      )
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath)
-      }
-      const newFilePath = path.join(
-        uploadDir,
-        file.originalFilename || file.newFilename
-      )
-      fs.renameSync(file.filepath, newFilePath)
-      fileURL = `/uploads/${path.basename(newFilePath)}`
-    }
     const categoryEx = await prisma.category.findUnique({
       where: { name: category?.join('') }
     })
-
+    const existingTool = await prisma.tool.findUnique({
+      where: { id: Number(id) }
+    })
+    await del(existingTool?.icon as string)
     const updatedTool = await prisma.tool.update({
       where: { id: Number(id) },
       data: {
-        icon: fileURL,
+        icon: icon?.join('') ?? '',
         name: name?.join('') ?? '',
         description: description?.join('') ?? '',
         url: url?.join('') ?? '',
@@ -85,14 +59,7 @@ export default async function handler(
         id: Number(id)
       }
     })
-    const filePath = path.join(
-      process.cwd(),
-      'public',
-      existingTool?.icon ?? ''
-    )
-    if (fs.existsSync(filePath)) {
-      fs.unlinkSync(filePath)
-    }
+    await del(existingTool?.icon as string)
     // Delete a tool
     await prisma.tool.delete({
       where: { id: Number(id) }

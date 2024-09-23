@@ -1,10 +1,12 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DashboardLayout from '@/app/components/DashboardLayout'
 import Image from 'next/image'
-
+import { PutBlobResult } from '@vercel/blob'
+export const dynamic = 'force-dynamic'
 function Tools() {
   const [tools, setTools] = useState<any>([])
+  const inputFileRef = useRef<HTMLInputElement>(null)
   const [formData, setFormData] = useState<any>({
     name: '',
     description: '',
@@ -16,7 +18,7 @@ function Tools() {
   const [category, setCategory] = useState('')
   const [pricing, setPricing] = useState('Free')
   const [categories, setCategories] = useState<any>([])
-  const [icon, setIcon] = useState<any>('')
+  const [iconError, setIconError] = useState<any>('')
   const [editMode, setEditMode] = useState(false)
   const [editingTool, setEditingTool] = useState<any>(null)
   const fetchTools = async () => {
@@ -62,56 +64,73 @@ function Tools() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleFileInput = (e: { target: { files: any } }) => {
-    const file = e.target.files[0]
-    setIcon(file)
-  }
-
   // Add or update tool
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    const formDataObj = new FormData()
-    formDataObj.append('name', formData.name)
-    formDataObj.append('description', formData.description)
-    formDataObj.append('url', formData.url)
-    formDataObj.append('categoryId', formData.categoryId)
-    formDataObj.append('pricing', formData.pricing)
-    formDataObj.append('category', formData.category)
-    if (icon) formDataObj.append('icon', icon)
-    if (editMode && editingTool?.id) {
-      // Update tool
-      await fetch(`/api/tools/${editingTool?.id}`, {
-        method: 'PUT',
-        body: formDataObj
-      })
-        .then((res) => {
-          console.log('====================================')
-          console.log('res --->', res)
-          console.log('====================================')
-        })
-        .catch((err) => {
-          console.log('====================================')
-          console.log('err updating --->', err)
-          console.log('====================================')
-        })
+    // const formDataObj = new FormData()
+    // formDataObj.append('name', formData.name)
+    // formDataObj.append('description', formData.description)
+    // formDataObj.append('url', formData.url)
+    // formDataObj.append('categoryId', formData.categoryId)
+    // formDataObj.append('pricing', formData.pricing)
+    // formDataObj.append('category', formData.category)
+    var data: any = {
+      name: formData.name,
+      description: formData.description,
+      url: formData.url,
+      categoryId: formData.categoryId,
+      pricing: formData.pricing,
+      category: formData.category
+    }
+    if (!inputFileRef.current?.files) {
+      setIconError('No file selected')
+      return
     } else {
-      // Create new tool
-      await fetch('/api/tools', {
-        method: 'POST',
-        body: formDataObj
-      })
-        .then((res) => {
-          console.log('====================================')
-          console.log('res --->', res)
-          console.log('====================================')
-          // const newTools = tools.push(tool)
-          // setTools(newTools)
+      setIconError('')
+      const response = await fetch(
+        `/api/image/upload?filename=${inputFileRef.current.files[0].name}`,
+        {
+          method: 'POST',
+          body: inputFileRef.current.files[0]
+        }
+      )
+      const url = ((await response.json()) as PutBlobResult).url
+      data = { ...data, icon: url }
+      if (editMode && editingTool?.id) {
+        // Update tool
+        await fetch(`/api/tools/${editingTool?.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(data)
         })
-        .catch((err) => {
-          console.log('====================================')
-          console.log('err posting --->', err)
-          console.log('====================================')
+          .then((res) => {
+            console.log('====================================')
+            console.log('res --->', res)
+            console.log('====================================')
+          })
+          .catch((err) => {
+            console.log('====================================')
+            console.log('err updating --->', err)
+            console.log('====================================')
+          })
+      } else {
+        // Create new tool
+        await fetch('/api/tools', {
+          method: 'POST',
+          body: JSON.stringify(data)
         })
+          .then((res) => {
+            console.log('====================================')
+            console.log('res --->', res)
+            console.log('====================================')
+            // const newTools = tools.push(tool)
+            // setTools(newTools)
+          })
+          .catch((err) => {
+            console.log('====================================')
+            console.log('err posting --->', err)
+            console.log('====================================')
+          })
+      }
     }
     // Refresh tools list
     setFormData({
@@ -241,9 +260,12 @@ function Tools() {
             type='file'
             name='icon'
             placeholder='icon'
-            onChange={handleFileInput}
-            className='block mb-4 p-2 border'
+            ref={inputFileRef}
+            className={`block mb-4 p-2 border ${
+              iconError ? 'border-red-600' : 'border-transparent'
+            }`}
           />
+          {iconError ? <span className='text-red-600'>{iconError}</span> : null}
           <input
             type='text'
             name='url'

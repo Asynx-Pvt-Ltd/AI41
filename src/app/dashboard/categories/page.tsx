@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import DashboardLayout from '@/app/components/DashboardLayout'
-
+export const dynamic = 'force-dynamic'
 function Categories() {
   const [categories, setCategories] = useState<any>([])
   const [formData, setFormData] = useState<any>({

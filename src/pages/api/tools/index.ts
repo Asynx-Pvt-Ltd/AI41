@@ -1,49 +1,13 @@
 import prisma from '../../../lib/primsa'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import formidable, { IncomingForm } from 'formidable'
-import fs from 'fs'
-import path from 'path'
-
-export const config = {
-  api: {
-    bodyParser: false
-  }
-}
-
-const uploadDir = path.join(process.cwd(), 'public/uploads') // Directory to store uploaded files
-
-// Ensure upload directory exists
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true })
-}
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const form = new IncomingForm({
-      multiples: false,
-      uploadDir,
-      keepExtensions: true
-    })
-
-    const [fields, files] = await form.parse(req)
-    // Access form fields and the uploaded file
-    console.log('====================================')
-    console.log('files --->', files)
-    console.log('====================================')
-    const { name, description, url, pricing, categoryId, category } = fields
-    const file = files.icon ? (files.icon[0] as formidable.File) : null
-    var fileURL = ''
-    if (file && file.originalFilename) {
-      const newFilePath = path.join(
-        uploadDir,
-        file.originalFilename || file.newFilename
-      )
-      fs.renameSync(file.filepath, newFilePath)
-      fileURL = `/uploads/${path.basename(newFilePath)}`
-    }
+    const { name, description, url, pricing, categoryId, category, icon } =
+      JSON.parse(req.body)
 
     if (category?.join('')) {
       const categoryEx = await prisma.category.findUnique({
@@ -51,11 +15,11 @@ export default async function handler(
       })
       const newTool = await prisma.tool.create({
         data: {
-          icon: fileURL,
-          name: name?.join('') ?? '',
-          description: description?.join('') ?? '',
-          url: url?.join('') ?? '',
-          pricing: pricing?.join('') ?? '',
+          icon: icon,
+          name: name,
+          description: description,
+          url: url,
+          pricing: pricing,
           categoryId: categoryEx?.id ?? -1
         }
       })
@@ -66,11 +30,11 @@ export default async function handler(
       })
       const newTool = await prisma.tool.create({
         data: {
-          icon: fileURL,
-          name: name?.join('') ?? '',
-          description: description?.join('') ?? '',
-          url: url?.join('') ?? '',
-          pricing: pricing?.join('') ?? '',
+          icon: icon,
+          name: name,
+          description: description,
+          url: url,
+          pricing: pricing,
           categoryId: categoryEx?.id ?? -1
         }
       })

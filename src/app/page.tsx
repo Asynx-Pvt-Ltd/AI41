@@ -1,13 +1,6 @@
 'use client'
 import Image from 'next/image'
-import {
-  useState,
-  useEffect,
-  AwaitedReactNode,
-  JSXElementConstructor,
-  ReactElement,
-  ReactNode
-} from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Card } from '@/app/components/Card'
 import { Header } from '@/app/components/Header'

@@ -38,4 +38,3 @@ next-env.d.ts
 .vercel
 public/uploads/*
 .vercel
-.env*.local

@@ -1,28 +1,26 @@
 'use client'
-import React, { useState, useEffect } from 'react'
+
+import React, { useState, useEffect, useRef } from 'react'
 import DashboardLayout from '@/app/components/DashboardLayout'
 import Image from 'next/image'
-interface tool {
-  name: string
-  icon: string
-  description: string
-  url: string
-}
+import { PutBlobResult } from '@vercel/blob'
+export const dynamic = 'force-dynamic'
 
 function FeatureTools() {
   const [tools, setTools] = useState<any>([])
+  const inputFileRef = useRef<HTMLInputElement>(null)
   const [formData, setFormData] = useState<any>({
     name: '',
     description: '',
     url: ''
   })
-  const [icon, setIcon] = useState<any>('')
+  const [iconError, setIconError] = useState<any>('')
   const [editMode, setEditMode] = useState(false)
   const [editingTool, setEditingTool] = useState<any>(null)
   const fetchTools = async () => {
-    const response = await fetch('/api/feature-tools')
-    const data = await response.json()
-    setTools(data)
+    const data = await fetch('/api/feature-tools')
+    const tools = await data.json()
+    setTools(tools)
   }
   // Fetch tools from the backend
   useEffect(() => {
@@ -35,52 +33,73 @@ function FeatureTools() {
     setFormData({ ...formData, [name]: value })
   }
 
-  const handleFileInput = (e: { target: { files: any } }) => {
-    const file = e.target.files[0]
-    setIcon(file)
-  }
-
   // Add or update tool
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
-    const formDataObj = new FormData()
-    formDataObj.append('title', formData.name)
-    formDataObj.append('description', formData.description)
-    formDataObj.append('url', formData.url)
-    if (icon) formDataObj.append('icon', icon)
-    if (editMode && editingTool?.id) {
-      // Update tool
-      await fetch(`/api/feature-tools/${editingTool?.id}`, {
-        method: 'PUT',
-        body: formDataObj
-      })
-        .then((res) => {
-          console.log('====================================')
-          console.log('res -->', res)
-          console.log('====================================')
-        })
-        .catch((err) => {
-          console.log('====================================')
-          console.log('err -->', err)
-          console.log('====================================')
-        })
-    } else {
-      // Create new tool
-      await fetch('/api/feature-tools', {
-        method: 'POST',
-        body: formDataObj
-      })
-        .then((res) => {
-          console.log('====================================')
-          console.log('res -->', res)
-          console.log('====================================')
-        })
-        .catch((err) => {
-          console.log('====================================')
-          console.log('err -->', err)
-          console.log('====================================')
-        })
+    // const formDataObj = new FormData()
+    // formDataObj.append('title', formData.name)
+    // formDataObj.append('description', formData.description)
+    // formDataObj.append('url', formData.url)
+    var data: any = {
+      title: formData.name,
+      description: formData.description,
+      url: formData.url
     }
+    if (!inputFileRef.current?.files?.length) {
+      setIconError('No Image Selected')
+      return
+    } else {
+      setIconError('')
+      const response = await fetch(
+        '/api/image/upload?filename=' + inputFileRef.current.files[0]?.name,
+        {
+          method: 'POST',
+          body: inputFileRef.current.files[0]
+        }
+      )
+      const url = ((await response.json()) as PutBlobResult).url
+      console.log('====================================')
+      console.log('url -->', url)
+      console.log('====================================')
+      data = { ...data, icon: url }
+      if (editMode && editingTool?.id) {
+        // Update tool
+        await fetch(`/api/feature-tools/${editingTool?.id}`, {
+          method: 'PUT',
+          body: JSON.stringify(data)
+        })
+          .then((res) => {
+            console.log('====================================')
+            console.log('res -->', res)
+            console.log('====================================')
+          })
+          .catch((err) => {
+            console.log('====================================')
+            console.log('err -->', err)
+            console.log('====================================')
+          })
+      } else {
+        console.log('====================================')
+        console.log('creating new data')
+        console.log('====================================')
+        // Create new tool
+        await fetch('/api/feature-tools', {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+          .then((res) => {
+            console.log('====================================')
+            console.log('res -->', res)
+            console.log('====================================')
+          })
+          .catch((err) => {
+            console.log('====================================')
+            console.log('err -->', err)
+            console.log('====================================')
+          })
+      }
+    }
+
     // Refresh tools list
     setFormData({
       name: '',
@@ -143,7 +162,7 @@ function FeatureTools() {
                     className='w-8 h-8'
                   />
                 </td>
-                <td className='border px-4 py-2'>{tool.name}</td>
+                <td className='border px-4 py-2'>{tool.title}</td>
                 <td className='border px-4 py-2'>
                   {tool.description.slice(0, 250)}
                 </td>
@@ -194,10 +213,15 @@ function FeatureTools() {
           <input
             type='file'
             name='icon'
+            ref={inputFileRef}
             placeholder='icon'
-            onChange={handleFileInput}
-            className='block mb-4 p-2 border'
+            className={`block mb-4 p-2 border ${
+              iconError ? 'border-red-600' : 'border-transparent'
+            }`}
           />
+          {iconError ? (
+            <span className='text-red-600 py-5'>{iconError}</span>
+          ) : null}
           <input
             type='text'
             name='url'
