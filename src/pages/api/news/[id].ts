@@ -12,48 +12,50 @@ export default async function handler(
   const { id } = req.query
 
   if (req.method === 'PUT') {
-    const { title, description, url, icon } = JSON.parse(req.body)
-    const existingTool = await prisma.featureProject.findUnique({
+    // Update a tool
+
+    const { title, icon, url } = JSON.parse(req.body)
+
+    const existingNews = await prisma.news.findUnique({
       where: { id: Number(id) }
     })
     if (
       (icon !== '' || icon !== undefined || icon !== null) &&
-      existingTool?.icon
+      existingNews?.icon
     ) {
-      await del(existingTool?.icon as string)
+      await del(existingNews?.icon as string)
     }
-    const updatedTool = await prisma.featureProject.update({
+    const updatedTool = await prisma.news.update({
       where: { id: Number(id) },
       data: {
-        icon: icon ?? existingTool?.icon,
+        icon: icon ?? existingNews?.icon,
         title: title,
-        description: description,
-        link: url
+        url: url
       }
     })
     return res.status(200).json(updatedTool)
   }
 
   if (req.method === 'DELETE') {
-    const existingTool = await prisma.featureProject.findUnique({
+    const existingNews = await prisma.news.findUnique({
       where: {
         id: Number(id)
       }
     })
-    await del(existingTool?.icon as string)
+    await del(existingNews?.icon as string)
     // Delete a tool
-    await prisma.featureProject.delete({
+    await prisma.news.delete({
       where: { id: Number(id) }
     })
-    const featureProjects = await prisma.featureProject.findMany()
-    return res.status(200).json(featureProjects)
+    const news = await prisma.news.findMany()
+    return res.status(200).json(news)
   }
 
   if (req.method === 'GET') {
-    const tool = await prisma.featureProject.findUnique({
+    const news = await prisma.news.findUnique({
       where: { id: Number(id) }
     })
-    return res.status(200).json(tool)
+    return res.status(200).json(news)
   }
   return res.status(404).json({ message: 'Not Found' })
 }

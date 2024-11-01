@@ -6,36 +6,62 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'POST') {
-    const { name, description, url, pricing, categoryId, category, icon } =
-      JSON.parse(req.body)
-
-    if (category?.join('')) {
+    const {
+      name,
+      description,
+      shortDescription,
+      url,
+      pricing,
+      categoryId,
+      category,
+      icon,
+      thumbnail,
+      tags
+    } = JSON.parse(req.body)
+    console.log('====================================')
+    console.log('JSON.parse --->', JSON.parse(req.body))
+    console.log('====================================')
+    if (categoryId !== '') {
       const categoryEx = await prisma.category.findUnique({
-        where: { name: category.join('') }
+        where: { id: categoryId }
       })
       const newTool = await prisma.tool.create({
         data: {
-          icon: icon,
+          icon: icon ?? '',
+          thumbnail: thumbnail ?? '',
           name: name,
+          slug: name.toLowerCase().split(' ').join('-'),
           description: description,
+          shortDescription: shortDescription,
           url: url,
           pricing: pricing,
-          categoryId: categoryEx?.id ?? -1
+          categoryId: categoryEx?.id ?? -1,
+          tags: tags
         }
       })
       return res.json(newTool)
     } else {
       const categoryEx = await prisma.category.create({
-        data: { name: category?.join('') ?? '' }
+        data: {
+          name: category,
+          slug: category
+            .split(' ')
+            .map((s: string) => s.toLowerCase())
+            .join('-')
+        }
       })
       const newTool = await prisma.tool.create({
         data: {
           icon: icon,
+          thumbnail: thumbnail ?? '',
           name: name,
+          slug: name.toLowerCase().split(' ').join('-'),
           description: description,
+          shortDescription: shortDescription,
           url: url,
           pricing: pricing,
-          categoryId: categoryEx?.id ?? -1
+          categoryId: categoryEx?.id ?? -1,
+          tags: tags
         }
       })
       return res.json(newTool)

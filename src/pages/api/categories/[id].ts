@@ -26,7 +26,8 @@ export default async function handler(
     await prisma.category.delete({
       where: { id: Number(id) }
     })
-    return res.status(204).json({ message: 'Category deleted' })
+    const categories = await prisma.category.findMany()
+    return res.status(200).json(categories)
   }
 
   if (req.method === 'GET') {

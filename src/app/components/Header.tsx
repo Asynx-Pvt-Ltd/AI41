@@ -1,9 +1,17 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import '../styles/style.css'
-
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownSection,
+  Button,
+  DropdownItem
+} from '@nextui-org/react'
 export const Header = () => {
   const [darkMode, setDarkMode] = useState(false)
+  const [menuDisplay, setMenuDisplay] = useState(false)
   const toggleDarkMode = () => {
     setDarkMode(!darkMode)
   }
@@ -18,61 +26,77 @@ export const Header = () => {
   }, [darkMode])
 
   return (
-    <header id='header' className='site-header dark:bg-gray-800'>
-      <div className='container mx-auto flex items-center justify-between py-4 px-8'>
+    <header id='header' className='site-header dark:bg-gray-800 w-full'>
+      <div className='container mx-auto flex flex-col sm:flex-row items-center justify-between py-4 px-8'>
         {/* Left: Logo/Image */}
-        <div className='flex items-center'>
-          {/* <Image
-          src='/logo.png' // Replace with your logo path
-          alt='Logo'
-          width={50}
-          height={50}
-          className='mr-2'
-        /> */}
-          <span className='text-xl font-bold text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'>
+        <Link href='/' className='flex items-center cursor-pointer'>
+          <span className='text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'>
             AI XPORIA
           </span>
-        </div>
+        </Link>
 
         {/* Right: Navigation */}
-        <nav className='flex space-x-6'>
+        <nav className='flex flex-wrap justify-around sm:justify-start space-x-2 sm:space-x-6 mt-4 sm:mt-0'>
           <Link
             href='/full-list'
-            className='text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+            className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
           >
             Full List
           </Link>
           <Link
             href='/ai-categories'
-            className='text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+            className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
           >
-            AI Categries
+            AI Categories
           </Link>
           <Link
             href='/ai-tutorials'
-            className='text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+            className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
           >
             AI Tutorials
           </Link>
-          <nav className='relative group'>
-            <div className='text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'>
-              More
-            </div>
-            <div className='absolute hidden  group-hover:block group-hover:flex-col bg-white text-gray-800 shadow-lg rounded-md mt-1 w-48 left-[-32px]'>
-              <Link
-                href='/ai-news'
-                className='flex px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+
+          <Dropdown
+            isOpen={menuDisplay}
+            onMouseLeave={() => setMenuDisplay(false)}
+          >
+            <DropdownTrigger>
+              <div
+                className='text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 cursor-pointer'
+                onMouseEnter={() => setMenuDisplay(true)}
+                onClick={() => setMenuDisplay(!menuDisplay)}
               >
-                AI News
-              </Link>
-              <Link
-                href='/submit-ai'
-                className='flex px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
-              >
-                Submit AI
-              </Link>
-            </div>
-          </nav>
+                More
+              </div>
+            </DropdownTrigger>
+            <DropdownMenu
+              aria-label='Static Actions'
+              itemClasses={{
+                base: [
+                  'data-[hover=true]:text-foreground',
+                  'data-[hover=true]:bg-transparent',
+                  'dark:data-[hover=true]:bg-gray-500'
+                ]
+              }}
+            >
+              <DropdownItem key='news' className='bg-white hover:bg-white'>
+                <Link
+                  href='/ai-news'
+                  className='flex px-4 py-2 text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+                >
+                  AI News
+                </Link>
+              </DropdownItem>
+              <DropdownItem key='submit-ai' className='bg-white hover:bg-white'>
+                <Link
+                  href='/submit-ai'
+                  className='flex px-4 py-2 text-sm sm:text-base md:text-lg lg:text-xl text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400'
+                >
+                  Submit AI
+                </Link>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
           <button
             onClick={toggleDarkMode}
             className='text-gray-700 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400 focus:outline-none'

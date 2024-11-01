@@ -18,7 +18,7 @@ export default function SubmitAI() {
         'Indexed on Google'
       ],
       icon: '/fast-listing-icon.png',
-      url: 'https://www.aixploria.com/en/fast-listing/'
+      url: ''
     },
     {
       name: 'Verified Listing ',
@@ -33,7 +33,7 @@ export default function SubmitAI() {
         'Indexed on Google'
       ],
       icon: '/verifiedai-icon.webp',
-      url: 'https://www.aixploria.com/en/fast-listing/'
+      url: ''
     },
     {
       name: 'Featured Listing ',
@@ -48,9 +48,8 @@ export default function SubmitAI() {
         'Indexed on Google'
       ],
       icon: '/verifiedai-icon-or.webp',
-      url: 'https://www.aixploria.com/en/fast-listing/'
+      url: '/'
     }
-    // Add more plans here
   ]
 
   const faqs = [
@@ -174,12 +173,9 @@ export default function SubmitAI() {
                   </ul>
                 </div>
                 <div className='p-4 text-center'>
-                  <a
-                    href={plan.url}
-                    className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg inline-block'
-                  >
+                  <span className='bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg inline-block'>
                     Submit your tool
-                  </a>
+                  </span>
                 </div>
               </div>
             ))}

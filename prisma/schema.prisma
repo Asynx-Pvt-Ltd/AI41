@@ -11,18 +11,23 @@ datasource db {
 model Category {
     id    Int    @id @default(autoincrement())
     name  String @unique
+    slug  String @unique
     tools Tool[]
 }
 
 model Tool {
-    id          Int      @id @default(autoincrement())
-    icon        String // Store the URL or path to the icon
-    name        String
-    description String
-    url         String
-    pricing     String
-    categoryId  Int
-    category    Category @relation(fields: [categoryId], references: [id])
+    id               Int      @id @default(autoincrement())
+    icon             String // Store the URL or path to the icon
+    thumbnail        String // Store the URL or path to the icon
+    name             String
+    slug             String
+    description      String
+    shortDescription String
+    url              String
+    pricing          String
+    categoryId       Int
+    category         Category @relation(fields: [categoryId], references: [id])
+    tags             String[]
 }
 
 model FeatureProject {
@@ -31,4 +36,19 @@ model FeatureProject {
     title       String @unique
     description String
     link        String
+}
+
+model Tutorial {
+    id    Int      @id @default(autoincrement())
+    icon  String
+    title String
+    url   String
+    tags  String[]
+}
+
+model News {
+    id    Int    @id @default(autoincrement())
+    icon  String
+    title String
+    url   String
 }

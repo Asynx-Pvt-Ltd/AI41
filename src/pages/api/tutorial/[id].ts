@@ -12,45 +12,48 @@ export default async function handler(
   const { id } = req.query
 
   if (req.method === 'PUT') {
-    const { title, description, url, icon } = JSON.parse(req.body)
-    const existingTool = await prisma.featureProject.findUnique({
+    // Update a tool
+
+    const { title, icon, url, tags } = JSON.parse(req.body)
+
+    const existingTutorial = await prisma.tutorial.findUnique({
       where: { id: Number(id) }
     })
     if (
       (icon !== '' || icon !== undefined || icon !== null) &&
-      existingTool?.icon
+      existingTutorial?.icon
     ) {
-      await del(existingTool?.icon as string)
+      await del(existingTutorial?.icon as string)
     }
-    const updatedTool = await prisma.featureProject.update({
+    const updatedTool = await prisma.tutorial.update({
       where: { id: Number(id) },
       data: {
-        icon: icon ?? existingTool?.icon,
+        icon: icon ?? existingTutorial?.icon,
         title: title,
-        description: description,
-        link: url
+        url: url,
+        tags: tags
       }
     })
     return res.status(200).json(updatedTool)
   }
 
   if (req.method === 'DELETE') {
-    const existingTool = await prisma.featureProject.findUnique({
+    const existingTool = await prisma.tutorial.findUnique({
       where: {
         id: Number(id)
       }
     })
     await del(existingTool?.icon as string)
     // Delete a tool
-    await prisma.featureProject.delete({
+    await prisma.tutorial.delete({
       where: { id: Number(id) }
     })
-    const featureProjects = await prisma.featureProject.findMany()
-    return res.status(200).json(featureProjects)
+    const tutorials = await prisma.tutorial.findMany()
+    return res.status(200).json(tutorials)
   }
 
   if (req.method === 'GET') {
-    const tool = await prisma.featureProject.findUnique({
+    const tool = await prisma.tutorial.findUnique({
       where: { id: Number(id) }
     })
     return res.status(200).json(tool)

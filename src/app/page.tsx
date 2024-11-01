@@ -76,7 +76,7 @@ export default function Page() {
   return (
     <div className='flex flex-col min-h-screen'>
       <Header />
-      <main className='bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center flex-grow'>
+      <main className='bg-white dark:bg-gray-800 w-full h-auto pt-10 pl-6 pr-6 pb-6 text-center flex-grow'>
         <h1 className='text-4xl font-bold text-gray-900 dark:text-white mb-4'>
           AI Tools Directory
         </h1>
@@ -141,10 +141,7 @@ export default function Page() {
             </select>
           </div>
         </div>
-
-        {/* Card 1 */}
         <Card />
-
         <hr className='my-6 mx-9 border-t-4 border-gray-500 dark:border-white' />
         <ToolsByCategories />
         <section className='container p-4 mt-4'>
@@ -154,38 +151,41 @@ export default function Page() {
           <h1 className='text-2xl font-bold mb-6'>Popular AI Platforms</h1>
           <AIPlatformsCarousel />
         </section>
-        <section className='w-full h-72 flex flex-row justify-center my-9'>
-          <div className='flex flex-1 flex-col justify-center items-center'>
+        <section className='w-full flex md:flex-row flex-col justify-center items-center mt-11 mb-10'>
+          <div className='flex flex-1 md:flex-col flex-row justify-center items-center'>
             <Image
               src={'/ai-tools-directory.webp'}
-              width={200}
-              height={200}
-              alt={''}
+              alt={'ai tools directory'}
+              width={800}
+              height={800}
+              className='w-auto h-auto'
             />
           </div>
-          <div className='flex flex-1 flex-col justify-evenly'>
-            <h1 className='text-2xl font-bold'>
-              The World&apos;s Best AI Tools Directory
-            </h1>
-            <p className='text-left mt-6'>
-              Aixploria is an online platform focused on artificial
-              intelligence, offering a comprehensive directory of the best AI
-              tools available. Our website organizes listings into categories,
-              making it easy to find AI tools that match your needs. In fact,
-              you&apos;ll find one of the most extensive collections of
-              AI-powered websites here, updated daily to ensure you never miss
-              the latest developments—so be sure to bookmark the page.
-              <br />
-              <br />
-              Recently, we&apos;ve started publishing articles that explain how
-              different AI tools work. If you come across an AI tool that
-              isn&apos;t listed, you can now submit it to be added to the
-              directory or even ranked among the top 10. Essentially, Aixploria
-              serves as both a directory and a search engine dedicated to AI,
-              featuring a simple, clean interface that allows you to easily
-              search for tools using keywords, just like you would with a
-              traditional search engine.
-            </p>
+          <div className='flex flex-1 md:flex-col flex-row justify-evenly px-2'>
+            <div className='flex flex-col'>
+              <h1 className='text-2xl font-bold text-center'>
+                The World&apos;s Best AI Tools Directory
+              </h1>
+              <p className='text-left mt-6'>
+                Aixploria is an online platform focused on artificial
+                intelligence, offering a comprehensive directory of the best AI
+                tools available. Our website organizes listings into categories,
+                making it easy to find AI tools that match your needs. In fact,
+                you&apos;ll find one of the most extensive collections of
+                AI-powered websites here, updated daily to ensure you never miss
+                the latest developments—so be sure to bookmark the page.
+                <br />
+                <br />
+                Recently, we&apos;ve started publishing articles that explain
+                how different AI tools work. If you come across an AI tool that
+                isn&apos;t listed, you can now submit it to be added to the
+                directory or even ranked among the top 10. Essentially,
+                Aixploria serves as both a directory and a search engine
+                dedicated to AI, featuring a simple, clean interface that allows
+                you to easily search for tools using keywords, just like you
+                would with a traditional search engine.
+              </p>
+            </div>
           </div>
         </section>
       </main>

@@ -2,7 +2,7 @@ import React from 'react'
 import Image from 'next/image'
 function Footer() {
   return (
-    <footer className='bg-gray-900 text-white py-8 sticky'>
+    <footer className='w-full bg-gray-900 text-white py-8 sticky'>
       <div className='container mx-auto px-4'>
         <div className='grid grid-cols-1 md:grid-cols-4 gap-8'>
           {/* Site Branding */}

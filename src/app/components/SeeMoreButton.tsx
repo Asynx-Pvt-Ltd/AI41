@@ -2,7 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 
-const SeeMoreButton = ({ text = 'See More', redirectTo = '/list-aitools' }) => {
+const SeeMoreButton = ({ text = 'See More', redirectTo = '/full-list' }) => {
   return (
     <Link
       href={redirectTo}

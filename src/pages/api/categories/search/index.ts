@@ -7,43 +7,36 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id } = req.query
-
   if (req.method === 'GET') {
     // Update a tool
     const { searchTerm = '', categoryId = '', pricing = '' } = req.query
 
     try {
       // Build the query object based on the provided search criteria
-      const whereClause: any = {
-        AND: [
-          {
-            name: {
-              contains:
-                typeof searchTerm === 'object'
-                  ? searchTerm.join('')
-                  : searchTerm
-            }
-          }
-        ]
+      var whereClause: any = {
+        name: {
+          contains:
+            typeof searchTerm === 'object' ? searchTerm.join('') : searchTerm,
+          mode: 'insensitive'
+        }
       }
-      if (categoryId) {
-        whereClause.AND.push({
+      if (Number(categoryId) !== -1) {
+        whereClause = {
+          ...whereClause,
           categoryId: {
             equals: Number(categoryId)
           }
-        })
+        }
       }
       if (pricing) {
-        whereClause.AND.push({
+        whereClause = {
+          ...whereClause,
           pricing: {
             equals: pricing
           }
-        })
+        }
       }
-      console.log('====================================')
-      console.log('where -->', whereClause)
-      console.log('====================================')
+
       // Query the tools from the database
       // Query the tools from the database
       const filteredtools = await prisma.tool.findMany({
