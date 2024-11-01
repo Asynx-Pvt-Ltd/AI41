@@ -108,13 +108,16 @@ function Tools() {
       setSubmitting(false)
       return
     }
-    if (inputFileRef.current?.files?.length === 0 && !editMode) {
+    if (inputFileRef.current?.files?.length === 0 && editMode === false) {
       // setIconError('No Icon selected')
       toast.error('No icon selected')
       setSubmitting(false)
       return
     }
-    if (inputFileRefThumbnail.current?.files?.length === 0 && !editMode) {
+    if (
+      inputFileRefThumbnail.current?.files?.length === 0 &&
+      editMode === false
+    ) {
       // setThumbnailError('No Thumbnail Selected')
       toast.error('No thumbnail selected')
       setSubmitting(false)
@@ -151,7 +154,12 @@ function Tools() {
         const url = ((await response.json()) as PutBlobResult).url
         data = { ...data, thumbnail: url }
       }
-      if (editMode && editingTool?.id) {
+      if (
+        editMode === true &&
+        (editingTool?.id !== '' ||
+          editingTool?.id !== null ||
+          editingTool?.id !== undefined)
+      ) {
         // Update tool
         await fetch(`/api/tools/${editingTool?.id}`, {
           method: 'PUT',
