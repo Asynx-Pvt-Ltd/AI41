@@ -124,8 +124,8 @@ export default function Tool() {
                         }
                         width={566}
                         height={288}
-                        alt={tool.name}
-                        className="w-[566px] h-[288px] object-cover object-top "
+                        alt="ChatGPT"
+                        className="w-[566px] h-[288px] object-cover object-top"
                       />
                     </div>
                     <div className="flex flex-row mt-3">
@@ -145,9 +145,19 @@ export default function Tool() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-around lg:mt-0 mt-6">
-                    <h1 className="text-2xl font-bold mb-4 text-gray-800">
-                      {tool?.name}
-                    </h1>
+                    <div className="flex flex-row justify-center">
+                      <Image
+                        src={tool.icon}
+                        alt={tool.name}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8"
+                      />
+                      <h1 className="text-2xl font-bold mb-4 text-gray-800">
+                        {tool?.name}
+                      </h1>
+                    </div>
+
                     <div className="flex flex-row max-w-[450px] py-1 px-2 lg:py-2 lg:px-4 bg-white shadow-lg lg:p-2">
                       <p className="text-gray-600 mb-4 text-center tracking-[0.3px] leading-[2] p-[6px] whitespace-pre-line">
                         {tool?.shortDescription}
@@ -167,9 +177,10 @@ export default function Tool() {
             </div>
             <div className="flex flex-row justify-center gap-2 mt-[65px] lg:mt-6 mx-auto flex-wrap lg:flex-nowrap">
               <div className="flex flex-col max-w-[880px] w-full bg-white shadow-lg p-5">
-                <p className="text-gray-600 mb-4 text-left whitespace-pre-line">
-                  {tool?.description}
-                </p>
+                <p
+                  className="text-gray-600 mb-4 text-left whitespace-pre-line"
+                  dangerouslySetInnerHTML={{ __html: tool?.description }}
+                ></p>
               </div>
               <div className="flex flex-col max-w-[390px] w-full">
                 <div className="flex flex-row justify-center items-center text-center w-full h-[70px] bg-white shadow-lg">

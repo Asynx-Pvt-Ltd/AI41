@@ -27,7 +27,9 @@ export default async function handler(
       thumbnail,
       tags
     } = JSON.parse(req.body)
-
+    console.log('====================================')
+    console.log('tool edit --->', JSON.parse(req.body))
+    console.log('====================================')
     const categoryEx = await prisma.category.findUnique({
       where: { id: Number(categoryId) }
     })
@@ -49,10 +51,17 @@ export default async function handler(
     const updatedTool = await prisma.tool.update({
       where: { id: Number(id) },
       data: {
-        icon: icon ?? existingTool?.icon,
-        thumbnail: thumbnail ?? existingTool?.thumbnail,
+        icon:
+          icon !== '' || icon !== null || icon !== undefined
+            ? icon
+            : existingTool?.icon,
+        thumbnail:
+          thumbnail !== '' || thumbnail !== null || thumbnail !== undefined
+            ? thumbnail
+            : existingTool?.thumbnail,
         name: name,
         slug: name.toLowerCase().split(' ').join('-'),
+        shortDescription: shortDescription,
         description: description,
         url: url,
         pricing: pricing,
