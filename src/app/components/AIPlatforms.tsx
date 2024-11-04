@@ -35,7 +35,7 @@ const AIPlatformsCarousel: React.FC = () => {
               src={tool.icon || tool.thumbnail || "/default-icon.png"} // Fallback to default if both are missing
               alt={tool.name}
               title={tool.name}
-              width={50}
+              width={40}
               height={100}
               style={{ maxWidth: 150, margin: "0px 10px" }}
             />
