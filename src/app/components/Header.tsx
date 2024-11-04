@@ -57,7 +57,7 @@ export const Header = () => {
           </Link>
 
           <Dropdown
-            isOpen={true}
+            isOpen={menuDisplay}
             onMouseLeave={() => setMenuDisplay(false)}
             className="bg-[#222222]"
           >
