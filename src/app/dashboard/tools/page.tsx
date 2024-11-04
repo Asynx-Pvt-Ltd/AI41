@@ -30,6 +30,8 @@ function Tools() {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editingTool, setEditingTool] = useState<any>(null);
+  const [iconFile, setIconFile] = useState<File | null>(null);
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
   const fetchTools = async () => {
     setLoading(true);
     setCategory("");
@@ -82,7 +84,17 @@ function Tools() {
       setFormData({ ...formData, [name]: value });
     }
   };
+  const handleIconChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setIconFile(e.target.files[0]);
+    }
+  };
 
+  const handleThumbnailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      setThumbnailFile(e.target.files[0]);
+    }
+  };
   // Add or update tool
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -127,29 +139,24 @@ function Tools() {
     } else {
       setIconError("");
       setThumbnailError("");
-      if (
-        inputFileRef.current?.files &&
-        inputFileRef.current.files.length > 0
-      ) {
+      if (iconFile) {
         const response = await fetch(
-          `/api/image/upload?filename=${inputFileRef.current?.files[0].name}`,
+          `/api/image/upload?filename=${iconFile.name}`,
           {
             method: "POST",
-            body: inputFileRef.current?.files[0],
+            body: iconFile,
           }
         );
         const url = ((await response.json()) as PutBlobResult).url;
         data = { ...data, icon: url };
       }
-      if (
-        inputFileRefThumbnail.current?.files &&
-        inputFileRefThumbnail.current?.files.length > 0
-      ) {
+
+      if (thumbnailFile) {
         const response = await fetch(
-          `/api/image/upload?filename=${inputFileRefThumbnail.current?.files[0].name}`,
+          `/api/image/upload?filename=${thumbnailFile.name}`,
           {
             method: "POST",
-            body: inputFileRefThumbnail.current?.files[0],
+            body: thumbnailFile,
           }
         );
         const url = ((await response.json()) as PutBlobResult).url;
@@ -382,7 +389,7 @@ function Tools() {
                   type="file"
                   name="icon"
                   placeholder="icon"
-                  ref={inputFileRef}
+                  onChange={handleIconChange}
                   className={`block mt-px ml-12 p-2 border`}
                 />
               </div>
@@ -395,7 +402,7 @@ function Tools() {
                   type="file"
                   name="thumbnail"
                   placeholder="Thumbnail"
-                  ref={inputFileRefThumbnail}
+                  onChange={handleThumbnailChange}
                   className={`block mt-px p-2 border`}
                 />
               </div>
