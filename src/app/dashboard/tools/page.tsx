@@ -295,11 +295,16 @@ function Tools() {
                         />
                       </td>
                       <td className="border px-4 py-2">{tool.name}</td>
-                      <td className="border px-4 py-2">
-                        {tool.description.length > 250
-                          ? `${tool.description.slice(0, 250)}...`
-                          : tool.description}
-                      </td>
+                      <td
+                        className="border px-4 py-2"
+                        dangerouslySetInnerHTML={{
+                          __html:
+                            tool.description.length > 250
+                              ? `${tool.description.slice(0, 250)}...`
+                              : tool.description,
+                        }}
+                      ></td>
+
                       <td className="border px-4 py-2">
                         <a
                           href={tool.url}
