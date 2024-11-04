@@ -57,12 +57,13 @@ export const Header = () => {
           </Link>
 
           <Dropdown
-            isOpen={menuDisplay}
+            isOpen={true}
             onMouseLeave={() => setMenuDisplay(false)}
+            className="bg-[#222222]"
           >
             <DropdownTrigger>
               <div
-                className="text-sm sm:text-base md:text-lg lg:text-xl text-white dark:text-gray-300 hover:text-gray-300 dark:hover:text-blue-400 cursor-pointer"
+                className=" text-sm sm:text-base md:text-lg lg:text-xl text-white dark:text-gray-300 hover:text-gray-300 dark:hover:text-blue-400 cursor-pointer"
                 onMouseEnter={() => setMenuDisplay(true)}
                 onClick={() => setMenuDisplay(!menuDisplay)}
               >
