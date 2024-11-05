@@ -217,9 +217,12 @@ export default function Tool() {
                           </div>
                         </div>
                         <div className="flex flex-row justify-center items-cneter py-2">
-                          <p className="my-3 text-justify text-zinc-400 tracking-wide leading-relaxed text-sm line-clamp-3 overflow-hidden px-2">
-                            {tool.shortDescription}
-                          </p>
+                          <p
+                            className="my-3 text-justify text-zinc-400 tracking-wide leading-relaxed text-sm line-clamp-3 overflow-hidden px-2"
+                            dangerouslySetInnerHTML={{
+                              __html: tool.shortDescription,
+                            }}
+                          />
                         </div>
                         <div className="flex flex-col justify-center items-center mt-2">
                           <Link
