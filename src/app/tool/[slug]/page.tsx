@@ -223,7 +223,7 @@ export default function Tool() {
                         </div>
                         <div className="flex flex-col justify-center items-center mt-2">
                           <Link
-                            href={"/tool/" + tool.name}
+                            href={"/tool/" + tool.slug}
                             className="w-14 h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black"
                           >
                             Visit
