@@ -1,6 +1,6 @@
 import React from "react";
 
-const FormattedContent = ({ content }) => {
+const FormattedContent = ({ content }: { content: string }) => {
   return (
     <div className="prose prose-lg max-w-none w-full">
       <div
