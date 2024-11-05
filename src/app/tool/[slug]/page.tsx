@@ -6,6 +6,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Card } from "@/app/components/Card";
 import Link from "next/link";
+import FormattedContent from "@/app/components/FormattedContent";
+
 export default function Tool() {
   const [tool, setTool] = useState<any>();
   const [alternatives, setAlternatives] = useState<any>([]);
@@ -113,8 +115,8 @@ export default function Tool() {
                     </div>
                   </div>
                 </div>
-                <div className="flex flex-row w-full justify-between flex-wrap md:flex-nowrap">
-                  <div className="flex flex-col w-full md:w-3/4 md:pr-4">
+                <div className="flex w-full flex-wrap md:flex-nowrap">
+                  <div className="flex flex-col w-full md:pr-4">
                     <div className="flex flex-row w-full md:w-3/4 p-2 bg-white shadow-lg">
                       <Image
                         src={
@@ -128,11 +130,11 @@ export default function Tool() {
                         className="w-[566px] h-[288px] object-cover object-top"
                       />
                     </div>
-                    <div className="flex flex-row mt-3">
+                    <div className="flex flex-row mt-3 w-fit">
                       {tool.tags?.map((t: string, i: number) => (
                         <Link
                           key={i}
-                          className="bg-gray-200 border rounded-md text-sm lg:text-xl border-gray-400 p-1 lg:p-2 m-2"
+                          className="bg-slate-100 border rounded-md text-sm lg:text-medium border-gray-700 p-1 lg:p-[] m-2"
                           href={`/ai-categories/${t
                             .trim()
                             .split(" ")
@@ -145,7 +147,7 @@ export default function Tool() {
                     </div>
                   </div>
                   <div className="flex flex-col justify-around lg:mt-0 mt-6">
-                    <div className="flex flex-row justify-center">
+                    <div className="flex flex-row justify-center gap-1">
                       <Image
                         src={tool.icon}
                         alt={tool.name}
@@ -158,8 +160,8 @@ export default function Tool() {
                       </h1>
                     </div>
 
-                    <div className="flex flex-row max-w-[450px] py-1 px-2 lg:py-2 lg:px-4 bg-white shadow-lg lg:p-2">
-                      <p className="text-gray-600 mb-4 text-center tracking-[0.3px] leading-[2] p-[6px] whitespace-pre-line">
+                    <div className="flex flex-row max-w-[800px] py-1 px-2 lg:py-2 lg:px-4 bg-white shadow-lg lg:p-2">
+                      <p className="text-gray-600 mb-4 text-justify tracking-[0.3px] leading-[2] p-[6px] whitespace-pre-line line-clamp-5 overflow-hidden">
                         {tool?.shortDescription}
                       </p>
                     </div>
@@ -177,10 +179,11 @@ export default function Tool() {
             </div>
             <div className="flex flex-row justify-center gap-2 mt-[65px] lg:mt-6 mx-auto flex-wrap lg:flex-nowrap">
               <div className="flex flex-col max-w-[880px] w-full bg-white shadow-lg p-5">
-                <p
+                {/* <p
                   className="text-gray-600 mb-4 text-left whitespace-pre-line"
                   dangerouslySetInnerHTML={{ __html: tool?.description }}
-                ></p>
+                ></p> */}
+                <FormattedContent content={tool?.description} />
               </div>
               <div className="flex flex-col max-w-[390px] w-full">
                 <div className="flex flex-row justify-center items-center text-center w-full h-[70px] bg-white shadow-lg">

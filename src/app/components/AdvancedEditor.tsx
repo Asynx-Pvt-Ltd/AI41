@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useEditor, EditorContent, BubbleMenu } from "@tiptap/react";
+import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
@@ -23,10 +23,8 @@ import {
   AlignRight,
   Heading1,
   Heading2,
-  Quote,
   Undo,
   Redo,
-  Code,
 } from "lucide-react";
 
 interface EditorProps {
@@ -50,7 +48,7 @@ const ToolbarButton: React.FC<ToolbarButtonProps> = ({
   <button
     type="button"
     onMouseDown={(e) => {
-      e.preventDefault(); // Prevent the editor from losing focus
+      e.preventDefault();
       onClick();
     }}
     className={`p-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
@@ -70,14 +68,10 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
         orderedList: false,
       }),
       BulletList.configure({
-        HTMLAttributes: {
-          class: "list-disc ml-4",
-        },
+        HTMLAttributes: { class: "list-disc ml-4" },
       }),
       OrderedList.configure({
-        HTMLAttributes: {
-          class: "list-decimal ml-4",
-        },
+        HTMLAttributes: { class: "list-decimal ml-4" },
       }),
       ListItem,
       Link.configure({
@@ -87,13 +81,9 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
         },
       }),
       Image.configure({
-        HTMLAttributes: {
-          class: "max-w-full h-auto rounded-lg",
-        },
+        HTMLAttributes: { class: "max-w-full h-auto rounded-lg" },
       }),
-      TextAlign.configure({
-        types: ["heading", "paragraph"],
-      }),
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
       Underline,
       TextStyle,
       Color,
@@ -103,12 +93,21 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
     autofocus: true,
     editorProps: {
       attributes: {
-        class:
+        className:
           "prose prose-sm sm:prose-base lg:prose-lg xl:prose-2xl focus:outline-none min-h-[200px] w-full",
+      },
+      handleKeyDown: (view, event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          editor?.chain().focus().insertContent("<br>").run();
+          return true;
+        }
+        return false;
       },
     },
     onUpdate: ({ editor }) => {
-      onChange(editor.getHTML());
+      const html = editor.getHTML().replace(/<p><\/p>/g, "<br>");
+      onChange(html);
     },
   });
 
@@ -161,7 +160,6 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
               title="Underline (Ctrl+U)"
             />
           </div>
-
           {/* Lists */}
           <div className="flex gap-1 border-r pr-2 mr-2">
             <ToolbarButton
@@ -177,7 +175,6 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
               title="Numbered List"
             />
           </div>
-
           {/* Alignment */}
           <div className="flex gap-1 border-r pr-2 mr-2">
             <ToolbarButton
@@ -201,7 +198,6 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
               title="Align Right"
             />
           </div>
-
           {/* Headings */}
           <div className="flex gap-1 border-r pr-2 mr-2">
             <ToolbarButton
@@ -221,7 +217,6 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
               title="Heading 2"
             />
           </div>
-
           {/* Links and Images */}
           <div className="flex gap-1 border-r pr-2 mr-2">
             <ToolbarButton
@@ -237,7 +232,6 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
               title="Add Image"
             />
           </div>
-
           {/* Undo/Redo */}
           <div className="flex gap-1">
             <ToolbarButton
@@ -252,7 +246,6 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
             />
           </div>
         </div>
-
         {/* Color Picker */}
         <div className="flex gap-2 mt-2">
           <select
@@ -270,17 +263,15 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
           </select>
         </div>
       </div>
-
       {/* Editor Content */}
       <div className="p-4">
         <EditorContent editor={editor} />
       </div>
-
       {/* List Styles */}
       <style>{`
-        .ProseMirror ul { list-style-type: disc; padding-left: 1.5em; }
-        .ProseMirror ol { list-style-type: decimal; padding-left: 1.5em; }
-      `}</style>
+                .ProseMirror ul { list-style-type: disc; padding-left: 1.5em; }
+                .ProseMirror ol { list-style-type: decimal; padding-left: 1.5em; }
+            `}</style>
     </div>
   );
 };
