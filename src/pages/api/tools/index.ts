@@ -1,11 +1,11 @@
-import prisma from '../../../lib/primsa'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import prisma from "../../../lib/primsa";
+import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
+  if (req.method === "POST") {
     const {
       name,
       description,
@@ -16,58 +16,56 @@ export default async function handler(
       category,
       icon,
       thumbnail,
-      tags
-    } = JSON.parse(req.body)
-    console.log('====================================')
-    console.log('JSON.parse --->', JSON.parse(req.body))
-    console.log('====================================')
-    if (categoryId !== '') {
+      tags,
+    } = JSON.parse(req.body);
+
+    if (categoryId) {
       const categoryEx = await prisma.category.findUnique({
-        where: { id: categoryId }
-      })
+        where: { id: categoryId },
+      });
       const newTool = await prisma.tool.create({
         data: {
-          icon: icon ?? '',
-          thumbnail: thumbnail ?? '',
+          icon: icon ?? "",
+          thumbnail: thumbnail ?? "",
           name: name,
-          slug: name.toLowerCase().split(' ').join('-'),
+          slug: name.toLowerCase().split(" ").join("-"),
           description: description,
           shortDescription: shortDescription,
           url: url,
           pricing: pricing,
           categoryId: categoryEx?.id ?? -1,
-          tags: tags
-        }
-      })
-      return res.json(newTool)
+          tags: tags,
+        },
+      });
+      return res.json(newTool);
     } else {
       const categoryEx = await prisma.category.create({
         data: {
           name: category,
           slug: category
-            .split(' ')
+            .split(" ")
             .map((s: string) => s.toLowerCase())
-            .join('-')
-        }
-      })
+            .join("-"),
+        },
+      });
       const newTool = await prisma.tool.create({
         data: {
           icon: icon,
-          thumbnail: thumbnail ?? '',
+          thumbnail: thumbnail ?? "",
           name: name,
-          slug: name.toLowerCase().split(' ').join('-'),
+          slug: name.toLowerCase().split(" ").join("-"),
           description: description,
           shortDescription: shortDescription,
           url: url,
           pricing: pricing,
           categoryId: categoryEx?.id ?? -1,
-          tags: tags
-        }
-      })
-      return res.json(newTool)
+          tags: tags,
+        },
+      });
+      return res.json(newTool);
     }
-  } else if (req.method === 'GET') {
-    const tools = await prisma.tool.findMany()
-    return res.json(tools)
+  } else if (req.method === "GET") {
+    const tools = await prisma.tool.findMany();
+    return res.json(tools);
   }
 }
