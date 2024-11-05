@@ -25,7 +25,6 @@ const AIPlatformsCarousel: React.FC = () => {
 
     getLatestTools();
   }, []);
-
   return (
     <div className="overflow-hidden whitespace-nowrap relative">
       <ul className="flex animate-scroll">
