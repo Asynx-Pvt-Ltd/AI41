@@ -369,9 +369,9 @@ function Tools() {
                 className="block mb-4 p-2 border"
               /> */}
               <AdvancedEditor
-                value={formData.description}
+                value={formData.shortDescription}
                 onChange={(html) =>
-                  setFormData({ ...formData, description: html })
+                  setFormData({ ...formData, shortDescription: html })
                 }
               />
               <label>
