@@ -102,7 +102,7 @@ function Footer() {
           </div>
 
           {/* Company */}
-          <div>
+          {/* <div>
             <ul className="space-y-2">
               <li className="font-bold text-lg">Company</li>
               <li>
@@ -151,7 +151,7 @@ function Footer() {
                 </a>
               </li>
             </ul>
-          </div>
+          </div> */}
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-6">
