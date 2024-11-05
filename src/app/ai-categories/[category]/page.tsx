@@ -58,7 +58,7 @@ export default function Page() {
                       className="flex bg-white dark:bg-gray-800 dark:border ml-2 dark:border-slate-500 rounded-lg shadow-lg p-4"
                     >
                       <div className="flex flex-col gap-2">
-                        <div className="flex flex-row justify-center">
+                        <div className="flex flex-row justify-center mb-1">
                           <Image
                             src={tool.icon}
                             width={32}
@@ -76,9 +76,12 @@ export default function Page() {
                           </span>
                         </div>
                         <div className="flex">
-                          <p className="text-left text-pretty line-clamp-3 overflow-hidden">
-                            {tool.shortDescription}
-                          </p>
+                          <p
+                            className="text-pretty line-clamp-3 overflow-hidden"
+                            dangerouslySetInnerHTML={{
+                              __html: tool.shortDescription,
+                            }}
+                          ></p>
                         </div>
                         <div className="flex flex-row justify-center">
                           <Link

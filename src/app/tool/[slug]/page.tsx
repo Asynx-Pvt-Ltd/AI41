@@ -163,9 +163,12 @@ export default function Tool() {
                     </div>
 
                     <div className="flex flex-row max-w-[800px] py-1 px-2 lg:py-2 lg:px-4 bg-white shadow-lg lg:p-2">
-                      <p className="text-gray-600 mb-4 text-justify tracking-[0.3px] leading-[2] p-[6px] whitespace-pre-line line-clamp-5 overflow-hidden">
-                        {tool?.shortDescription}
-                      </p>
+                      <p
+                        className="text-gray-600 mb-4 text-justify tracking-[0.3px] leading-[2] p-[6px] whitespace-pre-line line-clamp-5 overflow-hidden"
+                        dangerouslySetInnerHTML={{
+                          __html: tool?.shortDescription,
+                        }}
+                      ></p>
                     </div>
                     <a
                       href={tool?.url}
@@ -216,7 +219,7 @@ export default function Tool() {
                             </h4>
                           </div>
                         </div>
-                        <div className="flex flex-row justify-center items-cneter py-2">
+                        <div className="flex flex-row justify-center items-center py-2">
                           <p
                             className="my-3 text-justify text-zinc-400 tracking-wide leading-relaxed text-sm line-clamp-3 overflow-hidden px-2"
                             dangerouslySetInnerHTML={{
