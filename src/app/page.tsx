@@ -128,7 +128,6 @@ export default function Page() {
                 </option>
               ))}
             </select>
-
             {/* Price Filter */}
             <select
               value={price}

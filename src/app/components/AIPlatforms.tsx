@@ -9,7 +9,7 @@ interface Tool {
 }
 
 const fetchTools = async (): Promise<Tool[]> => {
-  const res = await fetch("http://localhost:3000/api/tools");
+  const res = await fetch("/api/tools");
   const data = await res.json();
   return data.slice(-5); // Get the latest 5 tools
 };
