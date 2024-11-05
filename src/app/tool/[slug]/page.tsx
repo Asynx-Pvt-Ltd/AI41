@@ -47,7 +47,9 @@ export default function Tool() {
               <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto bg-white p-2 lg:p-8 shadow-lg rounded-lg justify-around">
                 <div className="flex flex-row justify-between">
                   <div className="flex flex-col">
-                    <span>{tool.category}</span>
+                    <span className=" border-slate-400 border-1 px-2 rounded-lg">
+                      {tool.category}
+                    </span>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex flex-row justify-around">
@@ -155,7 +157,7 @@ export default function Tool() {
                         height={32}
                         className="w-8 h-8"
                       />
-                      <h1 className="text-2xl font-bold mb-4 text-gray-800">
+                      <h1 className="text-2xl font-bold  text-gray-800">
                         {tool?.name}
                       </h1>
                     </div>
@@ -192,12 +194,11 @@ export default function Tool() {
                   </span>
                 </div>
                 {alternatives ? (
-                  alternatives?.map((tool: any, idx: number) => (
+                  alternatives.slice(-4).map((tool: any, idx: number) => (
                     <div
                       key={idx}
                       className="flex flex-row rounded-md w-full p-2 mt-2 overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
                     >
-                      {/* <div className='relative z-50'> */}
                       <div className="flex flex-col justify-around">
                         <div className="flex flex-row justify-center align-middle mt-6">
                           <div className="flex flex-col justify-center mr-1">
@@ -215,15 +216,14 @@ export default function Tool() {
                             </h4>
                           </div>
                         </div>
-                        <div className="flex flex-row justify-center items-cneter">
-                          <p className="my-4 text-zinc-400 tracking-wide leading-relaxed text-sm">
+                        <div className="flex flex-row justify-center items-cneter py-2">
+                          <p className="my-3 text-justify text-zinc-400 tracking-wide leading-relaxed text-sm line-clamp-3 overflow-hidden px-2">
                             {tool.shortDescription}
                           </p>
                         </div>
                         <div className="flex flex-col justify-center items-center mt-2">
                           <Link
-                            href={tool.url}
-                            target={"_blank"}
+                            href={"/tool/" + tool.name}
                             className="w-14 h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black"
                           >
                             Visit
