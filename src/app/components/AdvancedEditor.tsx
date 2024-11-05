@@ -264,7 +264,7 @@ const AdvancedEditor = ({ value, onChange }: EditorProps) => {
         </div>
       </div>
       {/* Editor Content */}
-      <div className="p-4">
+      <div className="pt-[3vh] pb-[5vh] pl-[1vw] pr-[2vw]">
         <EditorContent editor={editor} />
       </div>
       {/* List Styles */}
