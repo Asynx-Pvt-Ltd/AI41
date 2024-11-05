@@ -73,7 +73,6 @@ export default function Page() {
       findTools();
     }
   };
-
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
