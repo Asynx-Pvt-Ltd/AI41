@@ -4,9 +4,9 @@ import "../styles/style.css";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#222222] text-white py-8 sticky rounded-t-[3vw] font-roboto text-xl">
+    <footer className="w-full bg-[#222222] text-white py-8 sticky rounded-t-[3vw] font-roboto text-lg">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="flex justify-between items-start">
           {/* Site Branding */}
           <div className="space-y-4">
             <div className="my-2 justify-center site-brand-foot">
@@ -21,54 +21,27 @@ function Footer() {
                 decoding="async"
               />
             </div>
-            <p>Artificial intelligence for everyone</p>
-            <ul className="flex space-x-4">
-              <li>
-                <a href="#" className="block w-12 h-12">
-                  <Image
-                    src="/icon-lang-english-us.webp"
-                    alt="English"
-                    className="mx-auto"
-                    width={20}
-                    height={0}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
-              </li>
-              <li>
-                <a href="#" className="block w-12 h-12">
-                  <Image
-                    src="/icon-lang-fr.webp"
-                    alt="Français"
-                    className="mx-auto"
-                    width={20}
-                    height={0}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </a>
-              </li>
-            </ul>
+            <p className="text-base">
+              A project by{" "}
+              <strong className="underline">
+                <a href="https://aiforeveryone.org/">Ai For Everyone</a>
+              </strong>
+              - making the world better with A.I.
+            </p>
           </div>
 
           {/* Resources */}
           <div>
             <ul className="space-y-2">
-              <li className="font-bold text-lg">Resources</li>
+              <li className="font-bold text-xl">Resources</li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  Tutorials, tips and blog
+                <a href="/ai-tutorials" className="hover:text-gray-300">
+                  AI Tutorials
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  AI Conferences Agenda
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-300">
-                  AI Glossary & Lexicon
+                <a href="/ai-news" className="hover:text-gray-300">
+                  AI News
                 </a>
               </li>
             </ul>
@@ -77,140 +50,32 @@ function Footer() {
           {/* Useful Tools */}
           <div>
             <ul className="space-y-2">
-              <li className="font-bold text-lg">Useful Tools</li>
+              <li className="font-bold text-xl">Useful Links</li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  Best AI Youtube Channels
+                <a href="/ai-categories" className="hover:text-gray-300">
+                  AI Categories
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  Top 100 AI
+                <a href="/full-list" className="hover:text-gray-300">
+                  Explore 100+ AI's
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-gray-300">
-                  GPTs List
-                </a>
-              </li>
-              <li>
-                <a href="#" className="hover:text-gray-300">
-                  Hubspot AI Tools
+                <a href="/submit-ai" className="hover:text-gray-300">
+                  Submit AI
                 </a>
               </li>
             </ul>
           </div>
-
-          {/* Company */}
-          {/* <div>
-            <ul className="space-y-2">
-              <li className="font-bold text-lg">Company</li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                  rel="nofollow noopener"
-                >
-                  Submit an AI Tool
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                  rel="nofollow noopener"
-                >
-                  Submit a GPTs
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                  rel="nofollow noopener"
-                >
-                  Submit an AI Event
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                  rel="nofollow noopener"
-                >
-                  Contact Us
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  className="hover:text-gray-300"
-                  rel="nofollow noopener"
-                >
-                  Feature your tool ★
-                </a>
-              </li>
-            </ul>
-          </div> */}
         </div>
 
         <div className="border-t border-gray-700 mt-8 pt-6">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="flex flex-row justify-evenly items-center text-center">
+          <div className="flex flex-col md:flex-row justify-center items-center">
+            <div className="flex flex-row items-center text-center">
               <span className="text-sm">
                 © 2024 Aixploria. All rights reserved.
               </span>
-              <Image
-                className="ml-2"
-                src="/aixploria-eco-friendly-green.webp"
-                alt="Green World"
-                title="Eco-Friendly"
-                width={15}
-                height={15}
-                loading="lazy"
-                decoding="async"
-              />
-              {/* <div className='flex justify-center items-center space-x-4 mt-2'> */}
-              <a
-                href="#"
-                className="hover:text-gray-300 text-[12px] ml-2"
-                rel="nofollow noopener"
-              >
-                Cookie Policy
-              </a>
-              <a
-                href="#"
-                className="hover:text-gray-300 text-[12px] ml-2"
-                rel="nofollow noopener"
-              >
-                Conditions of use
-              </a>
-              <a
-                href="#"
-                className="hover:text-gray-300 text-[12px] ml-2"
-                rel="nofollow noopener"
-              >
-                Legals informations
-              </a>
-              {/* </div> */}
-            </div>
-            <div className="flex items-center space-x-4 mb-4 md:mb-0">
-              <a
-                href="#"
-                target="_blank"
-                title="Aixploria X"
-                rel="noopener noreferrer"
-              >
-                <Image
-                  src="/x-icon-ai-style.webp"
-                  alt="Aixploria X"
-                  width={20}
-                  height={20}
-                  className="invert filter"
-                  loading="lazy"
-                  decoding="async"
-                />
-              </a>
             </div>
           </div>
         </div>
