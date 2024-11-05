@@ -393,8 +393,8 @@ function Tools() {
               />
               <div className="flex flex-row items-center">
                 <span className="pt-2 pr-2">
-                  Icon: <span className="text-red-500">*</span>
-                  (Only in case of new tool)
+                  Icon : <span className="text-red-500">*</span>
+                  (Only in case of new tool, reomm size 32x32(pixel))
                 </span>
                 <input
                   type="file"
@@ -407,7 +407,7 @@ function Tools() {
               <div className="flex flex-row">
                 <span className="pt-2 pr-2">
                   Thumbnail: <span className="text-red-500">*</span>
-                  (Only in case of new tool)
+                  (Only in case of new tool,recomm size - 566x28(pixel))
                 </span>
                 <input
                   type="file"
