@@ -360,13 +360,19 @@ function Tools() {
               <label>
                 Short Description <span className="text-red-500">*</span>
               </label>
-              <textarea
+              {/* <textarea
                 name="shortDescription"
                 placeholder="Short Description"
                 rows={3}
                 value={formData.shortDescription}
                 onChange={handleInputChange}
                 className="block mb-4 p-2 border"
+              /> */}
+              <AdvancedEditor
+                value={formData.description}
+                onChange={(html) =>
+                  setFormData({ ...formData, description: html })
+                }
               />
               <label>
                 Description <span className="text-red-500">*</span>
