@@ -1,5 +1,7 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
+
 import "../styles/style.css";
 
 function Footer() {
@@ -24,7 +26,9 @@ function Footer() {
             <p className="text-base">
               A project by{" "}
               <strong className="underline">
-                <a href="https://aiforeveryone.org/">Ai For Everyone</a>
+                <Link href="https://aiforeveryone.org/" target="_blank">
+                  Ai For Everyone
+                </Link>
               </strong>
               - making the world better with A.I.
             </p>
