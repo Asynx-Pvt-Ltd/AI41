@@ -74,7 +74,6 @@ export const Card = () => {
                             <span className="text-xl my-auto mx-1 ">★</span>
                             <span className="text-xl my-auto">Featured</span>
                           </div>
-                          <div className="flex flex-row justify-center align-middle mt-3">
                             <div className="flex flex-col justify-center mr-1">
                               <Image
                                 src={project?.icon}
@@ -92,9 +91,9 @@ export const Card = () => {
                           </div>
                           <div className="flex flex-row justify-center ">
                             <p
-                              className="my-4 text-zinc-400 tracking-wide leading-relaxed text-sm text-pretty text-justify px-2 m-auto line-clamp-8 overflow-hidden"
+                              className="my-3 text-black tracking-wide leading-0 text-sm text-pretty text-justify px-2 m-auto line-clamp-5 overflow-hidden not-italic "
                               dangerouslySetInnerHTML={{
-                                __html: project.description.slice(0, 200),
+                                __html: project.description,
                               }}
                             ></p>
                           </div>
