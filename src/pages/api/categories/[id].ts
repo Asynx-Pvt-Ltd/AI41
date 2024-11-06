@@ -1,39 +1,40 @@
-import { PrismaClient } from '@prisma/client'
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { PrismaClient } from "@prisma/client";
+import type { NextApiRequest, NextApiResponse } from "next";
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { id } = req.query
+  const { id } = req.query;
 
-  if (req.method === 'PUT') {
+  if (req.method === "PUT") {
     // Update a tool
-    const { name } = JSON.parse(req.body)
+    const { name, fontIcon } = JSON.parse(req.body);
     const updatedCategory = await prisma.category.update({
       where: { id: Number(id) },
       data: {
-        name
-      }
-    })
-    return res.status(200).json(updatedCategory)
+        name,
+        fontIcon,
+      },
+    });
+    return res.status(200).json(updatedCategory);
   }
 
-  if (req.method === 'DELETE') {
+  if (req.method === "DELETE") {
     // Delete a tool
     await prisma.category.delete({
-      where: { id: Number(id) }
-    })
-    const categories = await prisma.category.findMany()
-    return res.status(200).json(categories)
+      where: { id: Number(id) },
+    });
+    const categories = await prisma.category.findMany();
+    return res.status(200).json(categories);
   }
 
-  if (req.method === 'GET') {
+  if (req.method === "GET") {
     const category = await prisma.category.findUnique({
-      where: { id: Number(id) }
-    })
-    return res.status(200).json(category)
+      where: { id: Number(id) },
+    });
+    return res.status(200).json(category);
   }
 }
