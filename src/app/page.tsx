@@ -140,9 +140,9 @@ export default function Page() {
             </select>
           </div>
         </div>
-        <Card />
-        <hr className="my-6 mx-9 border-t-4 border-gray-500 dark:border-white" />
         <ToolsByCategories />
+        <hr className="my-7 mx-9 border-t-4 border-gray-500 dark:border-white" />
+        <Card />
         <section className="container p-4 mt-4">
           <SeeMoreButton />
         </section>
