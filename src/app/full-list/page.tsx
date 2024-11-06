@@ -32,18 +32,11 @@ export default function FullList() {
       try {
         const response = await fetch("/api/categories");
         if (!response.ok) {
-          console.log("====================================");
-          console.log("Failed to fetch categories");
-          console.log("====================================");
           return;
         }
         const data = await response.json();
         setCategories(data);
-      } catch (error: any) {
-        console.log("====================================");
-        console.log("error.message --->", error.message);
-        console.log("====================================");
-      }
+      } catch (error: any) {}
     };
 
     fetchCategories();

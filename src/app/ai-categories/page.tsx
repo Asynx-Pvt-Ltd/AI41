@@ -40,6 +40,7 @@ export default function Page() {
                     >
                       <div className="flex items-center">
                         <h3 className="text-lg font-semibold">
+                          <i className={item.fontIcon}></i>{" "}
                           {item.name ? item.name : "General"}
                         </h3>
                       </div>
