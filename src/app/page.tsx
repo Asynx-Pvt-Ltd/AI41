@@ -140,6 +140,9 @@ export default function Page() {
             </select>
           </div>
         </div>
+        <div>
+          <h1 className="text-2xl pt-[6vh] font-semibold">AI Categories</h1>
+        </div>
         <ToolsByCategories />
         <hr className="my-7 mx-9 border-t-4 border-gray-500 dark:border-white" />
         <Card />
