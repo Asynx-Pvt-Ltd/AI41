@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Card } from "@/app/components/Card";
 import Link from "next/link";
 import FormattedContent from "@/app/components/FormattedContent";
+import { FaExternalLinkAlt } from "react-icons/fa";
 
 export default function Tool() {
   const [tool, setTool] = useState<any>();
@@ -44,12 +45,18 @@ export default function Tool() {
         {tool ? (
           <>
             <div className="flex flex-row">
-              <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto bg-white p-2 lg:p-8 shadow-lg rounded-lg justify-around">
+              <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-8 shadow-sm shadow-[#222222] rounded-lg justify-around">
                 <div className="flex flex-row justify-between">
                   <div className="flex flex-col">
-                    <span className=" border-slate-400 border-1 px-2 rounded-lg">
+                    <Link
+                      className=" border-slate-400 border-1 px-2 rounded-lg"
+                      href={
+                        "/ai-categories/" +
+                        tool.category.replaceAll(" ", "-").toLowerCase()
+                      }
+                    >
                       {tool.category}
-                    </span>
+                    </Link>
                   </div>
                   <div className="flex flex-col">
                     <div className="flex flex-row justify-around">
@@ -119,7 +126,7 @@ export default function Tool() {
                 </div>
                 <div className="flex w-full flex-wrap md:flex-nowrap">
                   <div className="flex flex-col w-full md:pr-4">
-                    <div className="flex flex-row w-full md:w-3/4 p-2 bg-white shadow-lg">
+                    <div className="flex flex-row w-full md:w-3/4 p-[3px] bg-[#222222] overflow-hidden rounded-lg shadow-lg">
                       <Image
                         src={
                           tool.thumbnail == ""
@@ -157,14 +164,14 @@ export default function Tool() {
                         height={32}
                         className="w-8 h-8"
                       />
-                      <h1 className="text-2xl font-bold  text-gray-800">
+                      <h1 className="text-2xl font-bold text-gray-800 ">
                         {tool?.name}
                       </h1>
                     </div>
 
-                    <div className="flex flex-row max-w-[800px] py-1 px-2 lg:py-2 lg:px-4 bg-white shadow-lg lg:p-2">
+                    <div className="flex flex-row max-w-[700px] py-1 px-2 lg:py-2 lg:px-4 bg-[rgba(34,34,34,0.9)] rounded-lg shadow-lg shadow-[#222222] lg:p-2">
                       <p
-                        className="text-gray-600 mb-4 text-justify tracking-[0.3px] leading-[2] p-[6px] whitespace-pre-line line-clamp-5 overflow-hidden"
+                        className="text-white mb-4 text-justify tracking-[0.3px] leading-normal p-[6px] whitespace-pre-line line-clamp-5 overflow-hidden"
                         dangerouslySetInnerHTML={{
                           __html: tool?.shortDescription,
                         }}
@@ -174,9 +181,9 @@ export default function Tool() {
                       href={tool?.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="max-w-32 self-center inline-block mt-4 lg:mt-0 bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                      className="flex gap-2 items-center max-w-32 self-center mt-4 lg:mt-0 bg-[rgba(34,34,34,0.9)] text-white px-4 py-2 rounded-md hover:bg-[#222222] transition"
                     >
-                      Visit Site
+                      Visit Site <FaExternalLinkAlt size={12} />
                     </a>
                   </div>
                 </div>
@@ -191,9 +198,9 @@ export default function Tool() {
                 <FormattedContent content={tool?.description} />
               </div>
               <div className="flex flex-col max-w-[390px] w-full">
-                <div className="flex flex-row justify-center items-center text-center w-full h-[70px] bg-white shadow-lg">
-                  <span className="font-bold">
-                    Alternatives for {tool.name}
+                <div className="flex flex-row justify-center items-center text-center w-full h-[70px] bg-white shadow-lg border border-slate-400 rounded-md">
+                  <span className="font-bold text-xl">
+                    Alternatives to {tool.name}
                   </span>
                 </div>
                 {alternatives ? (
@@ -203,36 +210,36 @@ export default function Tool() {
                       className="flex flex-row rounded-md w-full p-2 mt-2 overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
                     >
                       <div className="flex flex-col justify-around">
-                        <div className="flex flex-row justify-center align-middle mt-6">
+                        <div className="flex flex-row justify-center items-center mt-4">
                           <div className="flex flex-col justify-center mr-1">
                             <Image
                               src={tool?.icon}
                               alt={tool?.name}
                               width={32}
                               height={32}
-                              className="w-8 h-8"
+                              className="w-10 h-10"
                             />
                           </div>
-                          <div className="flex flex-col items-center justify-center  ml-1">
-                            <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide">
+                          <div className="flex flex-col items-center justify-center">
+                            <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
                               {tool.name}
                             </h4>
                           </div>
                         </div>
-                        <div className="flex flex-row justify-center items-center py-2">
+                        <div className="flex flex-row justify-center items-center py-1">
                           <p
-                            className="my-3 text-justify text-zinc-400 tracking-wide leading-relaxed text-sm line-clamp-3 overflow-hidden px-2"
+                            className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-2"
                             dangerouslySetInnerHTML={{
                               __html: tool.shortDescription,
                             }}
                           />
                         </div>
-                        <div className="flex flex-col justify-center items-center mt-2">
+                        <div className="flex flex-col justify-center items-center mb-4">
                           <Link
                             href={"/tool/" + tool.slug}
-                            className="w-14 h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black"
+                            className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2"
                           >
-                            Visit
+                            Visit <FaExternalLinkAlt size={10} />
                           </Link>
                         </div>
                       </div>
