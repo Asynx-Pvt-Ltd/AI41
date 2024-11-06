@@ -188,9 +188,7 @@ function Categories() {
                 className="max-w-52 block mb-4 p-2 border"
               />
 
-              <label>
-                Font Awesome class <span className="text-red-500">*</span>
-              </label>
+              <label>Font Awesome class</label>
               <input
                 type="text"
                 name="fontIcon"
