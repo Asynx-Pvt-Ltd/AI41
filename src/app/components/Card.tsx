@@ -74,6 +74,7 @@ export const Card = () => {
                             <span className="text-xl my-auto mx-1 ">★</span>
                             <span className="text-xl my-auto">Featured</span>
                           </div>
+                          <div className="flex flex-row justify-center align-middle mt-5">
                             <div className="flex flex-col justify-center mr-1">
                               <Image
                                 src={project?.icon}
