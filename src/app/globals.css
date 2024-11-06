@@ -76,11 +76,14 @@
     }
 
     100% {
-      transform: translateX(-50%);
+      transform: translateX(-100%);
     }
   }
 
   .animate-scroll {
     animation: scroll 20s linear infinite;
+  }
+  .animate-pause {
+    animation-play-state: paused;
   }
 }
