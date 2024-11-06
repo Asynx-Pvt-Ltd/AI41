@@ -39,10 +39,7 @@ function Categories() {
       toast.error("Add name");
       return;
     }
-    if (formData.fontIcon === "") {
-      toast.error("Add font icon class");
-      return;
-    }
+
     setSubmitting(true);
     var slug = formData.name
       .split(" ")
