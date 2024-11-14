@@ -2,7 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
+
 interface Project {
   icon: string;
   title: string;
@@ -26,11 +26,7 @@ export const Card = () => {
         setLoading(false);
         setProjects(ft);
       })
-      .catch((err) => {
-        console.log("====================================");
-        console.log("err -->", err);
-        console.log("====================================");
-      });
+      .catch((err) => {});
   }, []);
 
   return (
@@ -92,20 +88,20 @@ export const Card = () => {
                           </div>
                           <div className="flex flex-row justify-center ">
                             <p
-                              className="my-3 text-black tracking-wide leading-0 text-sm text-pretty text-justify px-2 m-auto line-clamp-5 overflow-hidden not-italic "
+                              className="my-3 text-black tracking-wide leading-tight text-sm text-pretty text-justify px-2 m-auto line-clamp-5 overflow-hidden not-italic "
                               dangerouslySetInnerHTML={{
                                 __html: project.description,
                               }}
                             ></p>
                           </div>
                           <div className="flex flex-col justify-center items-center mt-2">
-                            <Link
+                            <a
                               href={project.link}
                               target={"_blank"}
                               className="w-14 h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black"
                             >
                               Visit
-                            </Link>
+                            </a>
                           </div>
                         </div>
                         {/* </div> */}
