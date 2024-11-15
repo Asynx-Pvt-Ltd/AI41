@@ -52,5 +52,5 @@ model News {
     icon  String
     title String
     url   String
-    date?  String
+    date  String?
 }
