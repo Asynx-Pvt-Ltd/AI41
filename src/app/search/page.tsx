@@ -91,7 +91,7 @@ function Search() {
                             __html: tool.description,
                           }}
                         />
-                        <Link href={"/tool/" + tool.slug}>
+                        <Link href={"/tool/" + tool.name}>
                           <Button className="mt-3 dark:bg-white dark:text-black">
                             Visit
                           </Button>
