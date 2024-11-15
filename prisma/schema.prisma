@@ -43,7 +43,7 @@ model Tutorial {
     id    Int      @id @default(autoincrement())
     icon  String
     title String
-    url   String
+    url   String   @unique
     tags  String[]
 }
 
