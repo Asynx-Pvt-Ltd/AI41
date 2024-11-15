@@ -4,7 +4,9 @@ import DashboardLayout from "@/app/components/DashboardLayout";
 import Image from "next/image";
 import { PutBlobResult } from "@vercel/blob";
 import { toast } from "react-toastify";
+
 export const dynamic = "force-dynamic";
+
 function Tutorials() {
   const [tutorials, setTutorials] = useState<any>([]);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -19,6 +21,7 @@ function Tutorials() {
   const [submitting, setSubmitting] = useState(false);
   const [editingTool, setEditingTool] = useState<any>(null);
   const [keywords, setKeywords] = useState("");
+  const [currentKeywords, setCurrentKeywords] = useState("");
 
   const fetchTools = async () => {
     setLoading(true);
@@ -41,6 +44,19 @@ function Tutorials() {
       setFormData({ ...formData, [name]: value });
     }
   };
+
+  useEffect(() => {
+    const fetchKeywords = async () => {
+      const response = await fetch("/api/getKeywords", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setCurrentKeywords(data);
+    };
+    fetchKeywords();
+  }, [keywords]);
   const handleKeywordSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -54,6 +70,7 @@ function Tutorials() {
 
     if (res.status === 200) {
       toast.success("Success");
+      setKeywords("");
     } else toast.error(`Error status ${res.status}`);
   };
   // Add or update tool
@@ -158,59 +175,61 @@ function Tutorials() {
 
         <>
           {loading === false ? (
-            <table className="min-w-full bg-white">
-              <thead>
-                <tr>
-                  <th className="py-2 px-4">Thumbnail</th>
-                  <th className="py-2 px-4">Title</th>
-                  <th className="py-2 px-4">URL</th>
-                  <th className="py-2 px-4"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {tutorials.length > 0 &&
-                  tutorials?.map((tutorial: any) => (
-                    <tr key={tutorial.id}>
-                      <td className="border px-4 py-2">
-                        <Image
-                          src={tutorial.icon}
-                          alt={tutorial.title}
-                          width={128}
-                          height={128}
-                          className="w-32 h-32"
-                        />
-                      </td>
-                      <td className="border px-4 py-2">{tutorial.title}</td>
+            <div className="bg-white h-[80vh] overflow-y-auto">
+              <table className="min-w-full bg-white">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4">Thumbnail</th>
+                    <th className="py-2 px-4">Title</th>
+                    <th className="py-2 px-4">URL</th>
+                    <th className="py-2 px-4"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tutorials.length > 0 &&
+                    tutorials?.map((tutorial: any) => (
+                      <tr key={tutorial.id}>
+                        <td className="border px-4 py-2">
+                          <Image
+                            src={tutorial.icon}
+                            alt={tutorial.title}
+                            width={128}
+                            height={128}
+                            className="w-32 h-32"
+                          />
+                        </td>
+                        <td className="border px-4 py-2">{tutorial.title}</td>
 
-                      <td className="border px-4 py-2">
-                        <a
-                          href={tutorial.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {tutorial.url}
-                        </a>
-                      </td>
-                      <td className="h-auto align-middle border px-4 py-2">
-                        <div className="flex flex-row">
-                          <button
-                            className="bg-blue-500 text-white px-4 py-3 mr-2"
-                            onClick={() => handleEdit(tutorial)}
+                        <td className="border px-4 py-2">
+                          <a
+                            href={tutorial.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            Edit
-                          </button>
-                          <button
-                            className="bg-red-500 text-white px-4 py-2"
-                            onClick={() => handleDelete(tutorial.id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                            {tutorial.url}
+                          </a>
+                        </td>
+                        <td className="h-auto align-middle border px-4 py-2">
+                          <div className="flex flex-row">
+                            <button
+                              className="bg-blue-500 text-white px-4 py-3 mr-2"
+                              onClick={() => handleEdit(tutorial)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="bg-red-500 text-white px-4 py-2"
+                              onClick={() => handleDelete(tutorial.id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <div className="flex flex-row justify-center items-center">
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
@@ -295,6 +314,7 @@ function Tutorials() {
               onChange={(e) => setKeywords(e.target.value)}
             />
           </label>
+          <p>Current Value: {currentKeywords}</p>
           <input
             type="submit"
             className="p-2 px-4 bg-green-500 text-white w-fit"
