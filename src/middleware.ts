@@ -2,6 +2,14 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const middleware = (req: NextRequest) => {
+  const allowedOrigins = ["localhost:3000"];
+  const origin = req.headers.get("x-forwarded-host") ?? "";
+  const isAllowedOrigin = allowedOrigins.includes(origin);
+
+  if (isAllowedOrigin) {
+    return NextResponse.next();
+  }
+
   const authHeader = req.headers.get("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return NextResponse.json(
