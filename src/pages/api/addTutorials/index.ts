@@ -63,10 +63,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   if (req.method === "POST") {
     const { keyword } = req.body;
+
     await prisma.tutorialKeyword.deleteMany({});
     const prismaRes = await prisma.tutorialKeyword.create({
       data: {
-        keyword: keyword,
+        keyword: keyword.replaceAll(",", " "),
       },
     });
     return res.status(200).json(prismaRes);
