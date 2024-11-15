@@ -30,17 +30,6 @@ const newsEndpoint = async (): Promise<NewsItem[]> => {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
-  const token = authHeader.split(" ")[1];
-
-  if (token !== process.env.AUTHORIZATION_TOKEN) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
-
   if (req.method === "GET") {
     try {
       const results = await newsEndpoint();
