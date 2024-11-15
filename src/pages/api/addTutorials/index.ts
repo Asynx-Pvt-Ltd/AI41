@@ -35,27 +35,41 @@ const fetchVideos = async (query: string): Promise<YouTubeAPIResponse> => {
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    const videosData = await fetchVideos("chatgpt");
-    const formattedResults = videosData.items.map((item) => ({
-      title: item.snippet.title,
-      url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-      icon: item.snippet.thumbnails.default.url,
-    }));
+  if (req.method === "GET") {
+    try {
+      const keywordEntry = await prisma.tutorialKeyword.findFirst();
+      const videosData = await fetchVideos(keywordEntry.keyword);
+      const formattedResults = videosData.items.map((item) => ({
+        title: item.snippet.title,
+        url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        icon: item.snippet.thumbnails.default.url,
+      }));
 
-    const prismaResult = await prisma.tutorial.createMany({
-      data: formattedResults,
-      skipDuplicates: true,
-    });
+      const prismaResult = await prisma.tutorial.createMany({
+        data: formattedResults,
+        skipDuplicates: true,
+      });
 
-    return res.status(200).json({
-      success: true,
-      message: "Videos fetched and stored successfully.",
-      prismaResult,
+      return res.status(200).json({
+        success: true,
+        message: "Videos fetched and stored successfully.",
+        prismaResult,
+      });
+    } catch (error) {
+      if (error instanceof Error)
+        return res.status(500).json({ success: false, message: error.message });
+    }
+  }
+
+  if (req.method === "POST") {
+    const { keyword } = req.body;
+    await prisma.tutorialKeyword.deleteMany({});
+    const prismaRes = await prisma.tutorialKeyword.create({
+      data: {
+        keyword: keyword,
+      },
     });
-  } catch (error) {
-    if (error instanceof Error)
-      return res.status(500).json({ success: false, message: error.message });
+    return res.status(200).json(prismaRes);
   }
 };
 
