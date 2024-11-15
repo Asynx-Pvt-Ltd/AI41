@@ -1,21 +1,35 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import prisma from "@/lib/primsa";
 
-const newsEndpoint = async () => {
+// Define the structure of the news item and stories
+type Story = {
+  title: string;
+  link: string;
+  thumbnail: string;
+  date: string;
+};
+
+type NewsItem = {
+  title: string;
+  url: string;
+  icon: string;
+  stories?: Story[];
+};
+
+const newsEndpoint = async (): Promise<NewsItem[]> => {
   const response = await fetch(
-    "https://" +
-      process.env.SERP_API_ENDPOINT +
-      "?engine=google_news" +
-      "&no_cache=true" +
-      `&topic_token=${process.env.SERP_API_TOPIC_TOKEN}` +
-      `&api_key=${process.env.SERP_API_KEY}`,
-    { cache: "force-cache" }
+    `https://${process.env.SERP_API_ENDPOINT}?engine=google_news&topic_token=${process.env.SERP_API_TOPIC_TOKEN}&api_key=${process.env.SERP_API_KEY}`
   );
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch news: ${response.statusText}`);
+  }
+
   const data = await response.json();
-  return data.news_results;
+  return data.news_results as NewsItem[];
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // Check for authorization header
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).json({ error: "Unauthorized" });
@@ -23,14 +37,34 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const token = authHeader.split(" ")[1];
 
-  // Verify the token
   if (token !== process.env.AUTHORIZATION_TOKEN) {
     return res.status(401).json({ error: "Unauthorized" });
   }
 
   if (req.method === "GET") {
-    const results = await newsEndpoint();
-    return res.json(results);
+    try {
+      const results = await newsEndpoint();
+
+      const formattedResults = results.flatMap(
+        (item) =>
+          item.stories?.map((story) => ({
+            title: story.title,
+            url: story.link,
+            icon: story.thumbnail || "",
+            date: story.date,
+          })) || []
+      );
+
+      const prismaRes = await prisma.news.createMany({
+        data: formattedResults,
+        skipDuplicates: true,
+      });
+      return res.status(200).json(prismaRes);
+    } catch (error: any) {
+      return res
+        .status(500)
+        .json({ error: error.message || "Internal Server Error" });
+    }
   }
 
   return res.status(405).json({ error: "Method not allowed" });
