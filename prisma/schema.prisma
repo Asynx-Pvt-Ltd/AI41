@@ -54,3 +54,8 @@ model News {
     url   String
     date  String?
 }
+
+model tutorialKeyword {
+    id Int @id @default(autoincrement())
+    keyword String
+}
