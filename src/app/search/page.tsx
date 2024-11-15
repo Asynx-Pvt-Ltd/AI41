@@ -7,6 +7,7 @@ import prisma from "../../lib/primsa";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import Image from "next/image";
+import Link from "next/link";
 interface Tools {
   icon: string;
   name: string;
