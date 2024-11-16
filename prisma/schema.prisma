@@ -45,7 +45,7 @@ model Tutorial {
     title   String
     url     String   @unique
     tags    String[]
-    videoId     String @unique
+    videoId     String? @unique
     viewCount   String?
     likeCount   String?
 }
