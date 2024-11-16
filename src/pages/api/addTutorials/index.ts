@@ -64,6 +64,7 @@ const fetchStatistics = async (
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  return await prisma.tutorial.deleteMany({});
   if (req.method === "GET") {
     try {
       const keywordEntry = await prisma.tutorialKeyword.findFirst();

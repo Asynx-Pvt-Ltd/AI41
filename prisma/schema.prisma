@@ -46,8 +46,8 @@ model Tutorial {
     url   String   @unique
     tags  String[]
     videoId String @unique
-    viewCount BigInt
-    likeCount BigInt
+    viewCount String
+    likeCount String
 }
 
 model News {
