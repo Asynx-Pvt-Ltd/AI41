@@ -12,8 +12,8 @@ interface Tutorial {
   url: string;
   tags: string[];
   videoId: string;
-  viewCount: bigint;
-  likeCount: bigint;
+  viewCount: string;
+  likeCount: string;
 }
 
 export default function Page() {
@@ -92,9 +92,9 @@ export default function Page() {
                           <Image
                             src={video.icon}
                             alt={video.title}
-                            width={"100"}
-                            height={"100"}
-                            className="w-full h-auto object-cover"
+                            width={400}
+                            height={100}
+                            className="w-[320px] h-[180px] object-cover"
                           />
                         </div>
                         <div className="p-4">

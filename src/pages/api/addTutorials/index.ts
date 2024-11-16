@@ -11,6 +11,9 @@ interface YouTubeVideo {
       default: {
         url: string;
       };
+      medium: {
+        url: string;
+      };
     };
   };
 }
@@ -64,7 +67,7 @@ const fetchStatistics = async (
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  return await prisma.tutorial.deleteMany({});
+  // return await prisma.tutorial.deleteMany({});
   if (req.method === "GET") {
     try {
       const keywordEntry = await prisma.tutorialKeyword.findFirst();
@@ -78,7 +81,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const formattedResults = videosData.items.map((item) => ({
         title: item.snippet.title,
         url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
-        icon: item.snippet.thumbnails.default.url,
+        icon: item.snippet.thumbnails.medium.url,
         videoId: item.id.videoId,
       }));
 
@@ -92,7 +95,6 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         ...result,
         ...formattedStatistics[index],
       }));
-
       const prismaResult = await prisma.tutorial.createMany({
         data: mergedResults,
         skipDuplicates: true,

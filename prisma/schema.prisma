@@ -40,14 +40,14 @@ model FeatureProject {
 }
 
 model Tutorial {
-    id    Int      @id @default(autoincrement())
-    icon  String
-    title String
-    url   String   @unique
-    tags  String[]
-    videoId String @unique
-    viewCount String
-    likeCount String
+    id      Int      @id @default(autoincrement())
+    icon    String
+    title   String
+    url     String   @unique
+    tags    String[]
+    videoId     String @unique
+    viewCount   String?
+    likeCount   String?
 }
 
 model News {
