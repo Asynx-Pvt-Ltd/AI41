@@ -34,11 +34,6 @@ export default function Page() {
         setLoading(false);
         setTutorials(d);
         setFiltered(d);
-      })
-      .catch((err) => {
-        console.log("====================================");
-        console.log("err --->", err);
-        console.log("====================================");
       });
   }, []);
 
