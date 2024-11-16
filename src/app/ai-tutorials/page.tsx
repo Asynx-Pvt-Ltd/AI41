@@ -32,6 +32,12 @@ const formatCount = (count: string): string => {
   return num.toString();
 };
 
+const decodeHtmlEntities = (text: string): string => {
+  const textArea = document.createElement("textarea");
+  textArea.innerHTML = text;
+  return textArea.value;
+};
+
 export default function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
@@ -82,9 +88,14 @@ export default function Page() {
     fetch("/api/tutorial")
       .then((res) => res.json())
       .then((d) => {
+        // Decode HTML entities in titles when setting the initial data
+        const decodedData = d.map((item: Tutorial) => ({
+          ...item,
+          title: decodeHtmlEntities(item.title),
+        }));
         setLoading(false);
-        setTutorials(d);
-        setFiltered(d);
+        setTutorials(decodedData);
+        setFiltered(decodedData);
       });
   }, []);
 
@@ -123,7 +134,7 @@ export default function Page() {
                   value={sortBy}
                   className="px-4 py-2 border rounded-md text-gray-700 dark:text-gray-300 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 >
-                  <option value="none">Relavance</option>
+                  <option value="none">Sort by...</option>
                   <option value="viewsDesc">Most Views</option>
                   <option value="viewsAsc">Least Views</option>
                   <option value="likesDesc">Most Likes</option>
@@ -145,7 +156,11 @@ export default function Page() {
                     >
                       <div className="relative">
                         <Image
-                          src={video.icon}
+                          src={
+                            video.icon
+                              ? video.icon
+                              : "https://via.placeholder.com/150"
+                          }
                           alt={video.title}
                           width={400}
                           height={100}

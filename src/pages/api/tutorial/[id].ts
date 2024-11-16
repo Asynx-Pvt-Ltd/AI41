@@ -23,7 +23,9 @@ export default async function handler(
       (icon !== "" || icon !== undefined || icon !== null) &&
       existingTutorial?.icon
     ) {
-      await del(existingTutorial?.icon as string);
+      try {
+        await del(existingTutorial?.icon as string);
+      } catch {}
     }
     const updatedTool = await prisma.tutorial.update({
       where: { id: Number(id) },
