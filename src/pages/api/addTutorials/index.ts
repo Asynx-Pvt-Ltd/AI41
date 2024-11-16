@@ -19,6 +19,18 @@ interface YouTubeAPIResponse {
   items: YouTubeVideo[];
 }
 
+interface VideoStatistics {
+  viewCount: string;
+  likeCount: string;
+}
+
+interface FormattedVideo {
+  title: string;
+  url: string;
+  icon: string;
+  videoId: string;
+}
+
 const fetchVideos = async (query: string): Promise<YouTubeAPIResponse> => {
   const url = `https://www.googleapis.com/youtube/v3/search?regionCode=US&maxResults=50&key=${
     process.env.YOUTUBE_API_KEY
@@ -34,19 +46,54 @@ const fetchVideos = async (query: string): Promise<YouTubeAPIResponse> => {
   return data;
 };
 
+const fetchStatistics = async (
+  data: FormattedVideo[]
+): Promise<{ items: { statistics: VideoStatistics }[] }> => {
+  const videoIds = data.map((video) => video.videoId);
+  const formattedVIdeoIds = encodeURIComponent(videoIds.join(","));
+
+  const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${process.env.YOUTUBE_API_KEY}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch statistics: ${response.statusText}`);
+  }
+
+  const resData = await response.json();
+  return resData;
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
       const keywordEntry = await prisma.tutorialKeyword.findFirst();
+      if (!keywordEntry || !keywordEntry.keyword)
+        return res.status(400).json({
+          success: false,
+          message: "No keyword found in the database.",
+        });
+
       const videosData = await fetchVideos(keywordEntry.keyword);
       const formattedResults = videosData.items.map((item) => ({
         title: item.snippet.title,
         url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         icon: item.snippet.thumbnails.default.url,
+        videoId: item.id.videoId,
+      }));
+
+      const statistics = await fetchStatistics(formattedResults);
+      const formattedStatistics = statistics.items.map((item) => ({
+        viewCount: item.statistics.viewCount,
+        likeCount: item.statistics.likeCount,
+      }));
+
+      const mergedResults = formattedResults.map((result, index) => ({
+        ...result,
+        ...formattedStatistics[index],
       }));
 
       const prismaResult = await prisma.tutorial.createMany({
-        data: formattedResults,
+        data: mergedResults,
         skipDuplicates: true,
       });
 
@@ -62,7 +109,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   if (req.method === "POST") {
-    const { keyword } = req.body;
+    const { keyword } = req.body as { keyword: string };
 
     await prisma.tutorialKeyword.deleteMany({});
     const prismaRes = await prisma.tutorialKeyword.create({
