@@ -44,7 +44,7 @@ model Tutorial {
     icon  String
     title String
     url   String   @unique
-    tags  String[]?
+    tags  String[]
     viewCount BigInt
     likeCount BigInt
 }
