@@ -57,5 +57,5 @@ model News {
 
 model tutorialKeyword {
     id Int @id @default(autoincrement())
-    keyword String
+    keyword String?
 }
