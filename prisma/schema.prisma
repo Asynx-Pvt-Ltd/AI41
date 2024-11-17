@@ -57,7 +57,8 @@ model News {
     title String
     url   String
     date  String?
-    slugUrl String
+    slugUrl String @unique
+    description String
 }
 
 model tutorialKeyword {
