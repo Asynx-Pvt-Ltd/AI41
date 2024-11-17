@@ -40,7 +40,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           item.stories?.map((story) => ({
             title: story.title,
             url: story.link,
-            slugUrl: `/ai-news/${story.title}`,
+            slugUrl: encodeURI(`/ai-news/${story.title.replaceAll(" ", "-")}`),
             icon: story.thumbnail || "",
             date: story.date,
           })) || []
