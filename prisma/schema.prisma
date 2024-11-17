@@ -29,6 +29,7 @@ model Tool {
     categoryId       Int
     category         Category @relation(fields: [categoryId], references: [id])
     tags             String[]
+    bestFor          String[]
 }
 
 model FeatureProject {
@@ -56,6 +57,7 @@ model News {
     title String
     url   String
     date  String?
+    slugUrl String
 }
 
 model tutorialKeyword {

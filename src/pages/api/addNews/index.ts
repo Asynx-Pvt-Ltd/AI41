@@ -7,6 +7,7 @@ type Story = {
   link: string;
   thumbnail: string;
   date: string;
+  slugUrl: string;
 };
 
 type NewsItem = {
@@ -39,6 +40,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
           item.stories?.map((story) => ({
             title: story.title,
             url: story.link,
+            slugUrl: `/ai-news/${story.title}`,
             icon: story.thumbnail || "",
             date: story.date,
           })) || []
@@ -48,7 +50,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         data: formattedResults,
         skipDuplicates: true,
       });
-      return res.status(200).json(prismaRes);
+      return res.status(200).json({ formattedResults, prismaRes });
     } catch (error: any) {
       return res
         .status(500)
