@@ -71,12 +71,12 @@ export default function Page() {
                     {n.title}
                   </h2>
                   <div className="px-4 mb-4">
-                    <p className="text-gray-600 text-[14px] text-justify line-clamp-3 leading-tight">
+                    <p className="text-gray-600 text-[13px] text-justify line-clamp-3 leading-tight text-balance">
                       {n.description}
                     </p>
                   </div>
                   <div className="px-4 pb-4">
-                    <p className="text-left text-xs text-gray-500">
+                    <p className="text-left text-xs text-gray-500 font-semibold">
                       {getTimeAgo(n.date)}
                     </p>
                   </div>
