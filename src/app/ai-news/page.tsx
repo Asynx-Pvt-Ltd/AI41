@@ -60,7 +60,7 @@ export default function Page() {
                   className="bg-white shadow-lg rounded-lg overflow-hidden w-[320px] h-[380px] flex flex-col justify-around gap-1"
                 >
                   <Image
-                    src={n.icon}
+                    src={n.icon || "/ai-tools-directory.webp"}
                     alt={n.title}
                     width={100}
                     height={192}

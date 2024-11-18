@@ -74,7 +74,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      let maxNews = 2;
+      let maxNews = 8;
       for (const item of results) {
         if (item.stories) {
           for (const story of item.stories) {
