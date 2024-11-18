@@ -5,7 +5,7 @@ import Footer from "@/app/components/Footer";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
-
+import Link from "next/link";
 interface NewsItem {
   id: number;
   icon: string;
@@ -106,14 +106,14 @@ const Page: NextPage<Props> = ({ params }) => {
 
               <div className="flex items-center space-x-4 text-gray-600 dark:text-gray-400">
                 <span className="text-sm">{formattedDate}</span>
-                <a
+                <Link
                   href={newsItem.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"
                 >
                   Original Source
-                </a>
+                </Link>
               </div>
             </header>
 
