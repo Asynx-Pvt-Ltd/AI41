@@ -90,7 +90,7 @@ const Page: NextPage<Props> = ({ params }) => {
         <article className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden">
           <div className="relative h-[400px] w-full">
             <Image
-              src={newsItem.icon}
+              src={newsItem.icon || "/ai-tools-directory.webp"}
               alt={newsItem.title}
               layout="fill"
               objectFit="cover"
