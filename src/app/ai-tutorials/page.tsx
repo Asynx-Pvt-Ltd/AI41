@@ -44,6 +44,81 @@ const decodeHtmlEntities = (text: string): string => {
   return textArea.value;
 };
 
+interface TutorialCardProps {
+  video: Tutorial;
+  onVideoClick: (video: Tutorial, e: React.MouseEvent) => void;
+}
+
+const TutorialCard: React.FC<TutorialCardProps> = ({ video, onVideoClick }) => {
+  const [showAllTags, setShowAllTags] = useState(false);
+
+  const displayedTags = showAllTags ? video.tags : video.tags.slice(0, 2);
+
+  const remainingTagsCount = video.tags.length - 2;
+
+  const handleTagsToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setShowAllTags(!showAllTags);
+  };
+
+  return (
+    <div
+      className="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
+      onClick={(e) => onVideoClick(video, e)}
+    >
+      <div className="flex flex-col justify-between h-full">
+        <div className="relative">
+          <Image
+            src={video.icon || "https://via.placeholder.com/150"}
+            alt={video.title}
+            width={400}
+            height={100}
+            className="w-full h-[180px] object-cover"
+          />
+        </div>
+
+        <h3 className="text-lg font-semibold p-4 text-gray-800 dark:text-white">
+          {video.title}
+        </h3>
+
+        <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-2 p-4">
+          <span>👁️ {formatCount(video.viewCount)}</span>
+          <span>👍 {formatCount(video.likeCount)}</span>
+        </div>
+
+        {/* <div className="px-4 pb-4">
+          <p className="text-sm text-gray-500 dark:text-gray-400 flex flex-wrap gap-1">
+            {displayedTags.map((tag, i) => (
+              <span
+                key={i}
+                className="bg-blue-500 text-white px-2 py-1 rounded-lg text-xs text-pretty"
+              >
+                #{tag}
+              </span>
+            ))}
+            {!showAllTags && remainingTagsCount > 0 && (
+              <button
+                onClick={handleTagsToggle}
+                className="text-blue-500 hover:text-blue-600 font-medium focus:outline-none"
+              >
+                +{remainingTagsCount} more
+              </button>
+            )}
+            {showAllTags && (
+              <button
+                onClick={handleTagsToggle}
+                className="text-blue-500 hover:text-blue-600 font-medium focus:outline-none"
+              >
+                Show less
+              </button>
+            )}
+          </p>
+        </div> */}
+      </div>
+    </div>
+  );
+};
+
 export default function Page() {
   const [searchTerm, setSearchTerm] = useState("");
   const [tutorials, setTutorials] = useState<Tutorial[]>([]);
@@ -253,44 +328,14 @@ export default function Page() {
               </div>
             </div>
 
-            <div className="container mx-auto px-4 py-8">
+            <div className="container mx-auto px-4 py-2 mt-2">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                 {filtered.map((video, index) => (
-                  <div
+                  <TutorialCard
                     key={index}
-                    className="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
-                    onClick={(e) => handleVideoClick(video, e)}
-                  >
-                    <div className="flex flex-col justify-between h-full">
-                      <div className="relative">
-                        <Image
-                          src={video.icon || "https://via.placeholder.com/150"}
-                          alt={video.title}
-                          width={400}
-                          height={100}
-                          className="w-full h-[180px] object-cover"
-                        />
-                      </div>
-
-                      <h3 className="text-lg font-semibold p-4 text-gray-800 dark:text-white">
-                        {video.title}
-                      </h3>
-
-                      <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-2 p-4">
-                        <span>👁️ {formatCount(video.viewCount)}</span>
-                        <span>👍 {formatCount(video.likeCount)}</span>
-                      </div>
-                      <div className="px-4 pb-4">
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {video.tags.map((tag: string, i: number) => (
-                            <span key={i} className="mr-2">
-                              #{tag}
-                            </span>
-                          ))}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                    video={video}
+                    onVideoClick={handleVideoClick}
+                  />
                 ))}
               </div>
             </div>
@@ -301,7 +346,7 @@ export default function Page() {
           </div>
         )}
       </main>
-      <Footer />{" "}
+      <Footer />
       <VideoModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
