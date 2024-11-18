@@ -36,10 +36,35 @@ function News() {
   );
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<FormData>(initialFormData);
+  const [keywordData, setKeywordData] = useState({
+    keyword: "",
+    keywordUrl: "",
+  });
   const [editMode, setEditMode] = useState(false);
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null);
+
+  const handleAddKeyword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!keywordData.keyword || !keywordData.keywordUrl)
+      return toast.error("Add Necessary Data");
+
+    const response = await fetch("/api/getNewsKeyword", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(keywordData),
+    });
+    if (response.status === 200) {
+      toast.success("Keyword Added Successfully");
+      setKeywordData({
+        keyword: "",
+        keywordUrl: "",
+      });
+    } else toast.error("Error on adding keyword data");
+  };
 
   const fetchNews = useCallback(async () => {
     try {
@@ -304,6 +329,38 @@ function News() {
               </button>
             </>
           )}
+        </form>
+        <h2 className="mt-10 text-xl font-bold">Keyword & URL</h2>
+        <form onSubmit={(e) => handleAddKeyword(e)}>
+          <label>Keyword</label>
+          <input
+            type="text"
+            name="keyword"
+            placeholder="Keyword"
+            value={keywordData.keyword}
+            onChange={(e) =>
+              setKeywordData({ ...keywordData, keyword: e.target.value })
+            }
+            className="max-w-52 block mb-4 p-2 border"
+          />
+          <label>URL</label>
+          <input
+            type="text"
+            name="url"
+            placeholder="URL"
+            value={keywordData.keywordUrl}
+            onChange={(e) =>
+              setKeywordData({ ...keywordData, keywordUrl: e.target.value })
+            }
+            className="max-w-52 block mb-4 p-2 border"
+          />
+          <button
+            type="submit"
+            className="max-w-44 mt-4 bg-green-500 text-white px-4 py
+          2"
+          >
+            Add Keyword
+          </button>
         </form>
       </div>
     </DashboardLayout>
