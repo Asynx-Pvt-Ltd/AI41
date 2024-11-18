@@ -6,7 +6,7 @@ interface YouTubeVideo {
     videoId: string;
   };
   snippet: {
-    tags: any;
+    tags: string[];
     title: string;
     thumbnails: {
       default: {
@@ -26,6 +26,9 @@ interface YouTubeAPIResponse {
 interface VideoStatistics {
   viewCount: string;
   likeCount: string;
+  snippet: {
+    tags: string[];
+  };
 }
 
 interface FormattedVideo {
@@ -33,7 +36,6 @@ interface FormattedVideo {
   url: string;
   icon: string;
   videoId: string;
-  tags: string[];
 }
 
 const fetchVideos = async (query: string): Promise<YouTubeAPIResponse> => {
@@ -53,10 +55,15 @@ const fetchVideos = async (query: string): Promise<YouTubeAPIResponse> => {
 
 const fetchStatistics = async (
   data: FormattedVideo[]
-): Promise<{ items: { statistics: VideoStatistics }[] }> => {
+): Promise<{
+  items: {
+    snippet: any;
+    statistics: VideoStatistics;
+  }[];
+}> => {
   const videoIds = data.map((video) => video.videoId);
   const formattedVIdeoIds = videoIds.join(",");
-  const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${formattedVIdeoIds}&key=${process.env.YOUTUBE_API_KEY}`;
+  const url = `https://www.googleapis.com/youtube/v3/videos?part=snippet,statistics&id=${formattedVIdeoIds}&key=${process.env.YOUTUBE_API_KEY}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -84,13 +91,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         icon: item.snippet.thumbnails.medium.url,
         videoId: item.id.videoId,
-        tags: item.snippet.tags,
       }));
 
       const statistics = await fetchStatistics(formattedResults);
       const formattedStatistics = statistics.items.map((item) => ({
         viewCount: item.statistics.viewCount,
         likeCount: item.statistics.likeCount,
+        tags: item.snippet.tags,
       }));
 
       const mergedResults = formattedResults.map((result, index) => ({
