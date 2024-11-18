@@ -14,6 +14,12 @@ interface NewsItem {
   description: string;
 }
 
+interface KeywordItem {
+  id: string;
+  keyword: string;
+  keywordUrl: string;
+}
+
 interface FormData {
   title: string;
   url: string;
@@ -25,6 +31,11 @@ const initialFormData: FormData = {
   title: "",
   url: "",
   description: "",
+};
+
+const initialKeywordData = {
+  keyword: "",
+  keywordUrl: "",
 };
 
 export const dynamic = "force-dynamic";
@@ -44,26 +55,93 @@ function News() {
   const [loading, setLoading] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [editingNews, setEditingNews] = useState<NewsItem | null>(null);
+  const [editingKeyword, setEditingKeyword] = useState<KeywordItem | null>(
+    null
+  );
+  const [keywords, setKeywords] = useState<KeywordItem[]>([]);
+
+  const fetchKeywords = useCallback(async () => {
+    try {
+      const response = await fetch("/api/getNewsKeyword");
+      const data = await response.json();
+      setKeywords(data);
+    } catch (error) {
+      toast.error("Failed to fetch keywords");
+      console.error("Error fetching keywords:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchKeywords();
+  }, [fetchKeywords]);
 
   const handleAddKeyword = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!keywordData.keyword || !keywordData.keywordUrl)
+    if (!keywordData.keyword || !keywordData.keywordUrl) {
       return toast.error("Add Necessary Data");
+    }
 
-    const response = await fetch("/api/getNewsKeyword", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(keywordData),
-    });
-    if (response.status === 200) {
-      toast.success("Keyword Added Successfully");
-      setKeywordData({
-        keyword: "",
-        keywordUrl: "",
+    try {
+      const url = editingKeyword
+        ? `/api/getNewsKeyword/${editingKeyword.id}`
+        : "/api/getNewsKeyword";
+      const method = editingKeyword ? "PUT" : "POST";
+
+      const response = await fetch(url, {
+        method,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          keyword: keywordData.keyword,
+          keywordUrl: keywordData.keywordUrl,
+        }),
       });
-    } else toast.error("Error on adding keyword data");
+
+      if (response.status === 200) {
+        toast.success(
+          editingKeyword
+            ? "Keyword Updated Successfully"
+            : "Keyword Added Successfully"
+        );
+        setKeywordData(initialKeywordData);
+        setEditingKeyword(null);
+        fetchKeywords();
+      } else {
+        toast.error(
+          editingKeyword ? "Error updating keyword" : "Error adding keyword"
+        );
+      }
+    } catch (error) {
+      toast.error("Error processing keyword");
+      console.error("Error processing keyword:", error);
+    }
+  };
+
+  const handleEditKeyword = (keyword: KeywordItem) => {
+    setEditingKeyword(keyword);
+    setKeywordData({
+      keyword: keyword.keyword,
+      keywordUrl: keyword.keywordUrl,
+    });
+  };
+
+  const handleDeleteKeyword = async (id: string) => {
+    try {
+      const response = await fetch(`/api/getNewsKeyword/${id}`, {
+        method: "DELETE",
+      });
+
+      if (response.status === 200) {
+        toast.success("Keyword deleted successfully");
+        fetchKeywords();
+      } else {
+        toast.error("Error deleting keyword");
+      }
+    } catch (error) {
+      toast.error("Error deleting keyword");
+      console.error("Error deleting keyword:", error);
+    }
   };
 
   const fetchNews = useCallback(async () => {
@@ -331,7 +409,50 @@ function News() {
           )}
         </form>
         <h2 className="mt-10 text-xl font-bold">Keyword & URL</h2>
-        <form onSubmit={(e) => handleAddKeyword(e)}>
+        <div className="mt-8">
+          <table className="min-w-full bg-white mb-4">
+            <thead>
+              <tr>
+                <th className="py-2 px-4">Keyword</th>
+                <th className="py-2 px-4">URL</th>
+                <th className="py-2 px-4">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              {keywords.map((item) => (
+                <tr key={item.id}>
+                  <td className="border px-4 py-2">{item.keyword}</td>
+                  <td className="border px-4 py-2">
+                    <a
+                      href={item.keywordUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {item.keywordUrl}
+                    </a>
+                  </td>
+                  <td className="border px-4 py-2">
+                    <div className="flex flex-row">
+                      <button
+                        className="bg-blue-500 text-white px-4 py-2 mr-2"
+                        onClick={() => handleEditKeyword(item)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-500 text-white px-4 py-2"
+                        onClick={() => handleDeleteKeyword(item.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <form onSubmit={handleAddKeyword}>
           <label>Keyword</label>
           <input
             type="text"
@@ -356,11 +477,22 @@ function News() {
           />
           <button
             type="submit"
-            className="max-w-44 mt-4 bg-green-500 text-white px-4 py
-          2"
+            className="max-w-44 mt-4 bg-green-500 text-white px-4 py-2"
           >
-            Add Keyword
+            {editingKeyword ? "Update Keyword" : "Add Keyword"}
           </button>
+          {editingKeyword && (
+            <button
+              type="button"
+              className="max-w-44 mt-4 ml-2 bg-gray-500 text-white px-4 py-2"
+              onClick={() => {
+                setEditingKeyword(null);
+                setKeywordData(initialKeywordData);
+              }}
+            >
+              Cancel Edit
+            </button>
+          )}
         </form>
       </div>
     </DashboardLayout>
