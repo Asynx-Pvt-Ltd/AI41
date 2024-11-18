@@ -22,6 +22,80 @@ interface Props {
   };
 }
 
+const RelatedNews = ({ currentNewsId }: { currentNewsId: number }) => {
+  const [relatedNews, setRelatedNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchRelatedNews = async () => {
+      try {
+        const response = await fetch("/api/news", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch related news");
+        }
+
+        const data = await response.json();
+        const filteredNews = data
+          .filter((news: NewsItem) => news.id !== currentNewsId)
+          .slice(-6);
+        setRelatedNews(filteredNews);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching related news:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchRelatedNews();
+  }, []);
+
+  if (loading) return null;
+
+  return (
+    <section className="container mx-auto px-4 py-5 max-w-7xl">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+        More AI News
+      </h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {relatedNews.map((news) => (
+          <Link
+            href={"/news/" + encodeURIComponent(news.slugUrl)}
+            key={news.id}
+            className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
+          >
+            <div className="relative h-48 w-full">
+              <Image
+                src={news.icon || "/ai-tools-directory.webp"}
+                alt={news.title}
+                layout="fill"
+                objectFit="cover"
+                className="transition-transform duration-300 hover:scale-105"
+              />
+            </div>
+            <div className="p-4">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white line-clamp-2 mb-2">
+                {news.title}
+              </h3>
+              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-3">
+                {news.description}
+              </p>
+              <div className="mt-2 text-xs text-gray-500 dark:text-gray-400">
+                {format(new Date(news.date), "MMMM d, yyyy")}
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+    </section>
+  );
+};
+
 const Page: NextPage<Props> = ({ params }) => {
   const [newsItem, setNewsItem] = useState<NewsItem | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -123,6 +197,7 @@ const Page: NextPage<Props> = ({ params }) => {
           </div>
         </article>
       </main>
+      <RelatedNews currentNewsId={newsItem.id} />
       <Footer />
     </div>
   );
