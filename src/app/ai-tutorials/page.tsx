@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Header } from "../components/Header";
 import Footer from "../components/Footer";
+import Link from "next/link";
+import VideoModal from "../components/VideoModal";
 
 interface Tutorial {
   id: number;
@@ -51,9 +53,17 @@ export default function Page() {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [categories, setCategories] = useState<string[]>(["all"]);
   const [activeCategories, setActiveCategories] = useState<string[]>(["all"]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<Tutorial | null>(null);
 
   const handleSearch = (e: { target: { value: string } }) => {
     setSearchTerm(e.target.value);
+  };
+
+  const handleVideoClick = (video: Tutorial, e: React.MouseEvent) => {
+    e.preventDefault();
+    setSelectedVideo(video);
+    setIsModalOpen(true);
   };
 
   const handleSort = (e: { target: { value: string } }) => {
@@ -101,11 +111,18 @@ export default function Page() {
 
     tutorials.forEach((tutorial) => {
       categories.forEach((category) => {
-        if (
-          category !== "all" &&
-          tutorial.title.toLowerCase().includes(category.toLowerCase())
-        ) {
-          activeCats.add(category);
+        if (category !== "all") {
+          const categoryLower = category.toLowerCase();
+          const titleMatch = tutorial.title
+            .toLowerCase()
+            .includes(categoryLower);
+          const tagsMatch = tutorial.tags.some((tag) =>
+            tag.toLowerCase().includes(categoryLower)
+          );
+
+          if (titleMatch || tagsMatch) {
+            activeCats.add(category);
+          }
         }
       });
     });
@@ -122,15 +139,21 @@ export default function Page() {
 
     // Apply search filter
     if (search) {
-      filteredResults = filteredResults.filter((v) =>
-        v.title.toLowerCase().includes(search.toLowerCase())
+      const searchLower = search.toLowerCase();
+      filteredResults = filteredResults.filter(
+        (tutorial) =>
+          tutorial.title.toLowerCase().includes(searchLower) ||
+          tutorial.tags.some((tag) => tag.toLowerCase().includes(searchLower))
       );
     }
 
     // Apply category filter
     if (category !== "all") {
-      filteredResults = filteredResults.filter((tutorial) =>
-        tutorial.title.toLowerCase().includes(category.toLowerCase())
+      const categoryLower = category.toLowerCase();
+      filteredResults = filteredResults.filter(
+        (tutorial) =>
+          tutorial.title.toLowerCase().includes(categoryLower) ||
+          tutorial.tags.some((tag) => tag.toLowerCase().includes(categoryLower))
       );
     }
 
@@ -213,7 +236,6 @@ export default function Page() {
                 </select>
               </div>
 
-              {/* Category Filter Tabs - Only show active categories */}
               <div className="flex flex-wrap justify-center gap-2 w-full md:w-2/3 lg:w-1/2 mt-4">
                 {activeCategories.map((category) => (
                   <button
@@ -236,20 +258,13 @@ export default function Page() {
                 {filtered.map((video, index) => (
                   <div
                     key={index}
-                    className="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200"
+                    className="bg-white dark:bg-gray-700 shadow-lg rounded-lg overflow-hidden hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
+                    onClick={(e) => handleVideoClick(video, e)}
                   >
-                    <a
-                      href={video.url}
-                      target="_blank"
-                      className="flex flex-col justify-between h-full"
-                    >
+                    <div className="flex flex-col justify-between h-full">
                       <div className="relative">
                         <Image
-                          src={
-                            video.icon
-                              ? video.icon
-                              : "https://via.placeholder.com/150"
-                          }
+                          src={video.icon || "https://via.placeholder.com/150"}
                           alt={video.title}
                           width={400}
                           height={100}
@@ -274,7 +289,7 @@ export default function Page() {
                           ))}
                         </p>
                       </div>
-                    </a>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -286,7 +301,13 @@ export default function Page() {
           </div>
         )}
       </main>
-      <Footer />
+      <Footer />{" "}
+      <VideoModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        videoId={selectedVideo?.videoId || ""}
+        title={selectedVideo?.title || ""}
+      />
     </div>
   );
 }
