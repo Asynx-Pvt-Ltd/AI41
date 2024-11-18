@@ -39,7 +39,7 @@ const generateDescription = async (
     {
       role: "system",
       content:
-        "Browser Web, Be precise and conscise. Return only description without any additional informations.",
+        "Browser Web, Be precise and conscise. Return only description without any additional informations. Do not include hyperlinks.",
     },
     {
       role: "user",
