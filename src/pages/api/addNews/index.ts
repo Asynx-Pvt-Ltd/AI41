@@ -39,7 +39,7 @@ const generateDescription = async (
     {
       role: "system",
       content:
-        "Browser Web, Be precise and conscise. Return only description without any additional informations. Do not include hyperlinks.",
+        "Browser Web, Be precise and conscise. Return only description without any additional informations. Do not include hyperlinks and [1][2] etc.",
     },
     {
       role: "user",
@@ -67,12 +67,14 @@ const generateDescription = async (
 };
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+  // return await prisma.news.deleteMany({});
+
   if (req.method === "GET") {
     try {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      let maxNews = 1;
+      let maxNews = 2;
       for (const item of results) {
         if (item.stories) {
           for (const story of item.stories) {
@@ -84,7 +86,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             formattedResults.push({
               title: story.title,
               url: story.link,
-              slugUrl: encodeURI(`${story.title.replaceAll(" ", "-")}`),
+              slugUrl: encodeURIComponent(
+                `${story.title.replaceAll(" ", "-")}`
+              ),
               icon: story.thumbnail || "",
               date: story.date,
               description,
