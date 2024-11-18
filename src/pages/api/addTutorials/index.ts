@@ -6,6 +6,7 @@ interface YouTubeVideo {
     videoId: string;
   };
   snippet: {
+    tags: any;
     title: string;
     thumbnails: {
       default: {
@@ -32,6 +33,7 @@ interface FormattedVideo {
   url: string;
   icon: string;
   videoId: string;
+  tags: string[];
 }
 
 const fetchVideos = async (query: string): Promise<YouTubeAPIResponse> => {
@@ -53,9 +55,8 @@ const fetchStatistics = async (
   data: FormattedVideo[]
 ): Promise<{ items: { statistics: VideoStatistics }[] }> => {
   const videoIds = data.map((video) => video.videoId);
-  const formattedVIdeoIds = encodeURIComponent(videoIds.join(","));
-
-  const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${videoIds}&key=${process.env.YOUTUBE_API_KEY}`;
+  const formattedVIdeoIds = videoIds.join(",");
+  const url = `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${formattedVIdeoIds}&key=${process.env.YOUTUBE_API_KEY}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -83,6 +84,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
         icon: item.snippet.thumbnails.medium.url,
         videoId: item.id.videoId,
+        tags: item.snippet.tags,
       }));
 
       const statistics = await fetchStatistics(formattedResults);
