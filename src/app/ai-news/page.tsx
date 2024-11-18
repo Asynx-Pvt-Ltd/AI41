@@ -54,7 +54,7 @@ export default function Page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-5">
               {news.map((n: any, index: number) => (
                 <Link
-                  href={n.slugUrl}
+                  href={"/ai-news/" + n.slugUrl}
                   target="_blank"
                   key={index}
                   className="bg-white shadow-lg rounded-lg overflow-hidden w-[320px] h-[380px] flex flex-col justify-around gap-1"

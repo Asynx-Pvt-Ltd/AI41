@@ -84,9 +84,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             formattedResults.push({
               title: story.title,
               url: story.link,
-              slugUrl: encodeURI(
-                `/ai-news/${story.title.replaceAll(" ", "-")}`
-              ),
+              slugUrl: encodeURI(`${story.title.replaceAll(" ", "-")}`),
               icon: story.thumbnail || "",
               date: story.date,
               description,
