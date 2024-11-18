@@ -13,6 +13,11 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     return res.status(200).json(prismaRes);
   }
+
+  if (req.method === "GET") {
+    const prismaRes = await prisma.newsKeyword.findMany();
+    return res.status(200).json(prismaRes);
+  }
 };
 
 export default handler;

@@ -21,6 +21,94 @@ interface Props {
     slug: string;
   };
 }
+// Define the keyword type
+interface Keyword {
+  id: number;
+  keyword: string;
+  keywordUrl: string;
+}
+interface Keyword {
+  id: number;
+  keyword: string;
+  keywordUrl: string;
+}
+
+const LinkedDescription = ({ description }: { description: string }) => {
+  const [keywords, setKeywords] = useState<Keyword[]>([]);
+  const [processedContent, setProcessedContent] = useState<React.ReactNode[]>(
+    []
+  );
+
+  useEffect(() => {
+    const fetchKeywords = async () => {
+      try {
+        const res = await fetch("/api/getNewsKeyword");
+        const data = await res.json();
+        setKeywords(data);
+      } catch (error) {
+        console.error("Error fetching keywords:", error);
+      }
+    };
+    fetchKeywords();
+  }, []);
+
+  useEffect(() => {
+    if (!keywords.length || !description) return;
+
+    const processText = (text: string) => {
+      let result: React.ReactNode[] = [];
+      let lastIndex = 0;
+
+      const keywordPattern = new RegExp(
+        `(${keywords.map((k) => k.keyword).join("|")})`,
+        "gi"
+      );
+
+      let match: RegExpExecArray | null;
+      let currentMatch: RegExpExecArray | null = null;
+
+      while ((currentMatch = keywordPattern.exec(text)) !== null) {
+        match = currentMatch;
+
+        if (match.index > lastIndex) {
+          result.push(text.slice(lastIndex, match.index));
+        }
+
+        const matchedText = match[0];
+        const keyword = keywords.find(
+          (k) => k.keyword.toLowerCase() === matchedText.toLowerCase()
+        );
+
+        if (keyword) {
+          result.push(
+            <Link
+              key={`${keyword.id}-${match.index}`}
+              href={keyword.keywordUrl}
+              className="text-blue-500 hover:underline"
+            >
+              {matchedText}
+            </Link>
+          );
+        } else {
+          result.push(matchedText);
+        }
+
+        lastIndex = keywordPattern.lastIndex;
+      }
+
+      // Add any remaining text
+      if (lastIndex < text.length) {
+        result.push(text.slice(lastIndex));
+      }
+
+      return result;
+    };
+
+    setProcessedContent(processText(description));
+  }, [keywords, description]);
+
+  return <div className="whitespace-pre-wrap">{processedContent}</div>;
+};
 
 const RelatedNews = ({ currentNewsId }: { currentNewsId: number }) => {
   const [relatedNews, setRelatedNews] = useState<NewsItem[]>([]);
@@ -192,7 +280,7 @@ const Page: NextPage<Props> = ({ params }) => {
             </header>
 
             <div className="prose dark:prose-invert prose-lg max-w-none text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-              {newsItem.description}
+              <LinkedDescription description={newsItem.description} />
             </div>
           </div>
         </article>
