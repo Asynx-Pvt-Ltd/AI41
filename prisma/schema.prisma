@@ -65,3 +65,9 @@ model tutorialKeyword {
     id Int @id @default(autoincrement())
     keyword String?
 }
+
+model newsKeyword{
+    id Int @id @default(autoincrement())
+    keyword String
+    keywordUrl String
+}
