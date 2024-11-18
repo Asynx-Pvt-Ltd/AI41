@@ -4,29 +4,36 @@ import DashboardLayout from "@/app/components/DashboardLayout";
 import Image from "next/image";
 import { PutBlobResult } from "@vercel/blob";
 import { toast } from "react-toastify";
+import AdvancedEditor from "@/app/components/AdvancedEditor";
 
 interface NewsItem {
   id: string;
   title: string;
   url: string;
   icon: string;
+  description: string;
 }
 
 interface FormData {
   title: string;
   url: string;
+  description: string;
   icon?: string;
 }
 
 const initialFormData: FormData = {
   title: "",
   url: "",
+  description: "",
 };
 
 export const dynamic = "force-dynamic";
 
 function News() {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [expandedNews, setExpandedNews] = useState<{ [key: string]: boolean }>(
+    {}
+  );
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const [editMode, setEditMode] = useState(false);
@@ -52,8 +59,15 @@ function News() {
     fetchNews();
   }, [fetchNews]);
 
+  const toggleDescription = useCallback((newsId: string) => {
+    setExpandedNews((prev) => ({
+      ...prev,
+      [newsId]: !prev[newsId],
+    }));
+  }, []);
+
   const handleInputChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const { name, value } = e.target;
       setFormData((prev) => ({ ...prev, [name]: value }));
     },
@@ -125,6 +139,7 @@ function News() {
     setFormData({
       title: newsItem.title,
       url: newsItem.url,
+      description: newsItem.description || "",
     });
   }, []);
 
@@ -164,6 +179,7 @@ function News() {
               <tr>
                 <th className="py-2 px-4">Icon</th>
                 <th className="py-2 px-4">Title</th>
+                <th className="py-2 px-4">Description</th>
                 <th className="py-2 px-4">URL</th>
                 <th className="py-2 px-4"></th>
               </tr>
@@ -182,6 +198,27 @@ function News() {
                     />
                   </td>
                   <td className="border px-4 py-2">{n.title}</td>
+                  <td className="border px-4 py-2">
+                    {n.description ? (
+                      <>
+                        {expandedNews[n.id]
+                          ? n.description
+                          : `${n.description.slice(0, 100)}${
+                              n.description.length > 100 ? "..." : ""
+                            }`}
+                        {n.description.length > 100 && (
+                          <button
+                            onClick={() => toggleDescription(n.id)}
+                            className="ml-2 text-blue-500 hover:underline"
+                          >
+                            {expandedNews[n.id] ? "See Less" : "See More"}
+                          </button>
+                        )}
+                      </>
+                    ) : (
+                      "N/A"
+                    )}
+                  </td>
                   <td className="border px-4 py-2">
                     <a href={n.url} target="_blank" rel="noopener noreferrer">
                       {n.url}
@@ -225,6 +262,14 @@ function News() {
                 value={formData.title}
                 onChange={handleInputChange}
                 className="max-w-52 block mb-4 p-2 border"
+              />
+              <label>Description</label>
+
+              <AdvancedEditor
+                value={formData.description}
+                onChange={(html) =>
+                  setFormData({ ...formData, description: html })
+                }
               />
               <div className="flex flex-row">
                 <span className="pt-2 pr-2">
