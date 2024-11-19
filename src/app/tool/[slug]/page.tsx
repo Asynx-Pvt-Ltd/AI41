@@ -13,30 +13,78 @@ export default function Tool() {
   const [tool, setTool] = useState<any>();
   const [alternatives, setAlternatives] = useState<any>([]);
   const params = useParams<{ slug: string }>();
-  console.log("====================================");
-  console.log("params --->", params);
-  console.log("====================================");
+
   useEffect(() => {
     if (params && params.slug) {
       fetch(`/api/tools/slug/${params?.slug}`)
         .then((res) => res.json())
         .then((d) => {
-          console.log("====================================");
-          console.log("tool ===>", d.tool);
-          console.log("====================================");
-          console.log("====================================");
-          console.log("alternatives ===>", d.alternatives);
-          console.log("====================================");
           setTool(d.tool);
           setAlternatives(d.alternatives);
         })
-        .catch((err) => {
-          console.log("====================================");
-          console.log("err --->", err);
-          console.log("====================================");
-        });
+        .catch((err) => {});
     }
   }, [params]);
+
+  const ToolTags = ({ tags }: { tags: string[] }) => {
+    const [showAll, setShowAll] = useState(false);
+
+    if (!tags || tags.length === 0) return null;
+
+    return (
+      <div className="flex flex-row flex-wrap items-center gap-2">
+        {showAll ? (
+          <>
+            {tags.map((t, i) => (
+              <Link
+                key={i}
+                href={`/ai-categories/${t
+                  .trim()
+                  .split(" ")
+                  .map((s) => s.toLowerCase())
+                  .join("-")}`}
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+              >
+                #{t}
+              </Link>
+            ))}
+            {tags.length > 2 && (
+              <button
+                onClick={() => setShowAll(false)}
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+              >
+                See Less
+              </button>
+            )}
+          </>
+        ) : (
+          <>
+            {tags.slice(0, 2).map((t, i) => (
+              <Link
+                key={i}
+                href={`/ai-categories/${t
+                  .trim()
+                  .split(" ")
+                  .map((s) => s.toLowerCase())
+                  .join("-")}`}
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+              >
+                #{t}
+              </Link>
+            ))}
+            {tags.length > 2 && (
+              <button
+                onClick={() => setShowAll(true)}
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+              >
+                +{tags.length - 2} tags
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -140,19 +188,7 @@ export default function Tool() {
                       />
                     </div>
                     <div className="flex flex-row mt-3 w-fit">
-                      {tool.tags?.map((t: string, i: number) => (
-                        <Link
-                          key={i}
-                          className="bg-slate-100 border rounded-md text-sm lg:text-medium border-gray-700 p-1 lg:p-[] m-2"
-                          href={`/ai-categories/${t
-                            .trim()
-                            .split(" ")
-                            .map((s) => s.toLowerCase())
-                            .join("-")}`}
-                        >
-                          <span className="font-normal">#{t}</span>
-                        </Link>
-                      ))}
+                      <ToolTags tags={tool.tags} />
                     </div>
                   </div>
                   <div className="flex flex-col justify-around lg:mt-0 mt-6">
