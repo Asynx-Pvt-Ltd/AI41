@@ -77,7 +77,12 @@ const generateDescription = async (
     },
     {
       role: "user",
-      content: `Provide description in less than 200 words for this latest AI news - ${title} - ${url}`,
+      content: `Provide description in less than 200 words for this latest AI news - ${title} - ${url}
+      
+      Use simple grammar and sepatate paragraphs + key takeaways at top
+
+      Do not include [1][2] etc.
+      `,
     },
   ];
   const response = await fetch(`https://api.perplexity.ai/chat/completions`, {
@@ -108,7 +113,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      let maxNews = 1;
+      let maxNews = 8;
       for (const item of results) {
         if (item.stories) {
           for (const story of item.stories) {
