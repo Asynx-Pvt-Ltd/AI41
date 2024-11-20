@@ -12,23 +12,13 @@ export default function Page() {
   const [categories, setcategories] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const params = useParams<{ category: string }>();
-  console.log("====================================");
-  console.log("params --->", params?.category);
-  console.log("====================================");
+
   useEffect(() => {
     fetch("/api/categories?category=" + params?.category)
       .then((res) => res.json())
       .then((d) => {
-        console.log("====================================");
-        console.log("d --->", d);
-        console.log("====================================");
         setLoading(false);
         setcategories(d);
-      })
-      .catch((err) => {
-        console.log("====================================");
-        console.log("err --->", err);
-        console.log("====================================");
       });
   }, []);
 
@@ -77,7 +67,7 @@ export default function Page() {
                         </div>
                         <div className="flex">
                           <p
-                            className="text-pretty line-clamp-3 overflow-hidden"
+                            className="text-balance text-justify line-clamp-3 overflow-hidden text-sm"
                             dangerouslySetInnerHTML={{
                               __html: tool.shortDescription,
                             }}
