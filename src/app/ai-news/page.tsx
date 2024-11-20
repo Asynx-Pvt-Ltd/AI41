@@ -6,7 +6,7 @@ import { Header } from "../components/Header";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
-
+import FormatMarkdownText from "../components/textFormatter";
 // Types for better type safety
 type NewsItem = {
   title: string;
@@ -128,8 +128,8 @@ export default function Page() {
                   <Image
                     src={n.icon || "/ai-tools-directory.webp"}
                     alt={n.title}
-                    width={100}
-                    height={192}
+                    width={400}
+                    height={180}
                     className="w-[400px] h-[180px] object-cover rounded-[inherit]"
                   />
 
@@ -137,8 +137,8 @@ export default function Page() {
                     {n.title}
                   </h2>
                   <div className="px-4 mb-4">
-                    <p className="text-gray-600 text-[13px] text-justify line-clamp-3 leading-tight text-balance">
-                      {n.description}
+                    <p className="text-gray-600 text-[12px] text-justify line-clamp-3 leading-tight text-balance font-normal">
+                      <FormatMarkdownText text={n.description} />
                     </p>
                   </div>
                   <div className="px-4 pb-4">
