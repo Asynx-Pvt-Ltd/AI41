@@ -19,7 +19,7 @@ type NewsItem = {
 
 const newsEndpoint = async (): Promise<NewsItem[]> => {
   const response = await fetch(
-    `https://${process.env.SERP_API_ENDPOINT}?engine=google_news&num=10&topic_token=${process.env.SERP_API_TOPIC_TOKEN}&api_key=${process.env.SERP_API_KEY}`
+    `https://${process.env.SERP_API_ENDPOINT}?engine=google_news&topic_token=${process.env.SERP_API_TOPIC_TOKEN}&api_key=${process.env.SERP_API_KEY}`
   );
 
   if (!response.ok) {
@@ -29,6 +29,40 @@ const newsEndpoint = async (): Promise<NewsItem[]> => {
   const data = await response.json();
   const newsResults = data.news_results;
   return newsResults as NewsItem[];
+};
+
+const rephraseTitle = async (title: string): Promise<string> => {
+  const messagecontent = [
+    {
+      role: "system",
+      content:
+        "Be precise and conscise. Return only title without any additional informations. Do not include hyperlinks and things like [1][2] etc.",
+    },
+    {
+      role: "user",
+      content: `${title} - Rephrase the title of the article, by keeping its original meaning.
+      - Make it click-worthy
+      - Use a simple english grammar`,
+    },
+  ];
+  const response = await fetch(`https://api.perplexity.ai/chat/completions`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.PERPLEXITY_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "llama-3.1-sonar-small-128k-online",
+      messages: messagecontent,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to generate description: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data.choices[0].message.content;
 };
 
 const generateDescription = async (
@@ -74,17 +108,18 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      let maxNews = 8;
+      let maxNews = 1;
       for (const item of results) {
         if (item.stories) {
           for (const story of item.stories) {
             if (newsCount >= maxNews) break;
+            const title = await rephraseTitle(story.title);
             const description = await generateDescription(
               story.title,
               story.link
             );
             formattedResults.push({
-              title: story.title,
+              title,
               url: story.link,
               slugUrl: encodeURIComponent(
                 `${story.title.replaceAll(" ", "-")}`
