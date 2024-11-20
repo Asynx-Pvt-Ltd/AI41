@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
+import FormatMarkdownText from "@/app/components/textFormatter";
 interface NewsItem {
   id: number;
   icon: string;
@@ -107,9 +108,20 @@ const LinkedDescription = ({ description }: { description: string }) => {
     setProcessedContent(processText(description));
   }, [keywords, description]);
 
-  return <div className="whitespace-pre-wrap">{processedContent}</div>;
+  // Return the processed content without formatting
+  return processedContent;
 };
 
+// Separate component for formatting
+const NewsDescription = ({ description }: { description: string }) => {
+  const linkedContent = LinkedDescription({ description });
+
+  return (
+    <div className="whitespace-pre-wrap">
+      <FormatMarkdownText text={linkedContent} />
+    </div>
+  );
+};
 const RelatedNews = ({ currentNewsId }: { currentNewsId: number }) => {
   const [relatedNews, setRelatedNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -280,7 +292,7 @@ const Page: NextPage<Props> = ({ params }) => {
             </header>
 
             <div className="prose dark:prose-invert prose-lg max-w-none text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-              <LinkedDescription description={newsItem.description} />
+              <NewsDescription description={newsItem.description} />
             </div>
           </div>
         </article>
