@@ -10,16 +10,19 @@ function Tools() {
   const [tools, setTools] = useState<any>([]);
   const inputFileRef = useRef<HTMLInputElement>(null);
   const inputFileRefThumbnail = useRef<HTMLInputElement>(null);
+  const [selectedCategories, setSelectedCategories] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
   const [formData, setFormData] = useState<any>({
     name: "",
     description: "",
     shortDescription: "",
     url: "",
-    category: "",
+    categories: [], // Changed from category/categoryId to categories array
     pricing: "",
-    categoryId: -1,
     tags: [],
   });
+
   const [category, setCategory] = useState("");
   const [categoryId, setCategoryId] = useState("");
   const [pricing, setPricing] = useState("Free");
@@ -99,28 +102,29 @@ function Tools() {
   const handleFormSubmit = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setSubmitting(true);
-    var data: any = {
-      name: formData.name,
-      description: formData.description,
-      shortDescription: formData.shortDescription,
-      url: formData.url,
-      categoryId: formData.categoryId !== -1 ? formData.categoryId : categoryId,
-      pricing: formData.pricing || pricing,
-      category: formData.category || category,
-      tags: formData.tags,
-    };
+
     if (
       formData.name === "" ||
       formData.shortDescription === "" ||
       formData.description === "" ||
       formData.url === "" ||
-      formData.category === "" ||
-      formData.categoryId === ""
+      formData.categories.length === 0
     ) {
       toast.error("Add necessary data");
       setSubmitting(false);
       return;
     }
+
+    var data: any = {
+      name: formData.name,
+      description: formData.description,
+      shortDescription: formData.shortDescription,
+      url: formData.url,
+      categories: formData.categories,
+      pricing: formData.pricing || pricing,
+      tags: formData.tags,
+    };
+
     if (inputFileRef.current?.files?.length === 0 && editMode === false) {
       // setIconError('No Icon selected')
       toast.error("No icon selected");
@@ -172,38 +176,17 @@ function Tools() {
         await fetch(`/api/tools/${editingTool?.id}`, {
           method: "PUT",
           body: JSON.stringify(data),
-        })
-          .then((res) => {
-            setSubmitting(false);
-
-            console.log("====================================");
-            console.log("res --->", res);
-            console.log("====================================");
-          })
-          .catch((err) => {
-            console.log("====================================");
-            console.log("err updating --->", err);
-            console.log("====================================");
-          });
+        }).then((res) => {
+          setSubmitting(false);
+        });
       } else {
         // Create new tool
         await fetch("/api/tools", {
           method: "POST",
           body: JSON.stringify(data),
-        })
-          .then((res) => {
-            setSubmitting(false);
-            console.log("====================================");
-            console.log("res --->", res);
-            console.log("====================================");
-            // const newTools = tools.push(tool)
-            // setTools(newTools)
-          })
-          .catch((err) => {
-            console.log("====================================");
-            console.log("err posting --->", err);
-            console.log("====================================");
-          });
+        }).then((res) => {
+          setSubmitting(false);
+        });
       }
     }
     // Refresh tools list
@@ -216,25 +199,15 @@ function Tools() {
     fetchTools();
   };
 
-  const handleEdit = (tool: {
-    name: string;
-    icon: string;
-    description: string;
-    url: string;
-    categoryId: number;
-  }) => {
+  const handleEdit = (tool: any) => {
     setEditMode(true);
-    const category = categories.filter(
-      (c: { id: any }) => c.id === tool?.categoryId
-    );
-    setCategory(category.name);
     setEditingTool(tool);
-    setFormData(tool);
+    setSelectedCategories(tool.categories);
+    setFormData({
+      ...tool,
+      categories: tool.categories,
+    });
   };
-
-  console.log("====================================");
-  console.log("tools --->", tools);
-  console.log("====================================");
 
   const handleDelete = async (id: any) => {
     setLoading(true);
@@ -253,10 +226,18 @@ function Tools() {
       });
   };
 
-  const handleCategoryChange = (e: { target: { value: string } }) => {
-    const c = categories.filter((c: any) => c.name === e.target.value);
-    setCategory(e.target.value);
-    setFormData({ ...formData, category: e.target.value, categoryId: c[0].id });
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    const newCategories = selectedOptions.map((option) => ({
+      id: parseInt(option.value),
+      name: option.text,
+    }));
+
+    setSelectedCategories(newCategories);
+    setFormData({
+      ...formData,
+      categories: newCategories,
+    });
   };
 
   const handlePricingChange = (e: { target: { value: string } }) => {
@@ -429,19 +410,34 @@ function Tools() {
                 className="max-w-52 block mb-4 p-2 border"
               />
               <label>
-                Category <span className="text-red-500">*</span>
+                Categories <span className="text-red-500">*</span>
               </label>
               <select
-                value={formData.category}
+                multiple
+                value={selectedCategories.map((cat) => cat.id.toString())}
                 onChange={handleCategoryChange}
-                className="px-4 py-2 mb-4 border rounded-md text-gray-700 dark:text-gray-300 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/2"
+                className="px-4 py-2 mb-4 border rounded-md text-gray-700 dark:text-gray-300 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/2 h-32"
               >
                 {categories.map((category: { id: number; name: string }) => (
-                  <option key={category.id} value={category.name}>
+                  <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
                 ))}
               </select>
+              <div className="mb-4">
+                <p className="font-medium mb-2">Selected Categories:</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedCategories.map((cat) => (
+                    <span
+                      key={cat.id}
+                      className="bg-blue-100 text-blue-800 px-2 py-1 rounded"
+                    >
+                      {cat.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
               <label>
                 Pricing <span className="text-red-500">*</span>
               </label>

@@ -9,25 +9,24 @@ datasource db {
 }
 
 model Category {
-    id    Int    @id @default(autoincrement())
-    name  String @unique
-    slug  String @unique
+    id       Int    @id @default(autoincrement())
+    name     String @unique
+    slug     String @unique
     fontIcon String?
-    tools Tool[]
+    tools    ToolsOnCategories[]
 }
 
 model Tool {
     id               Int      @id @default(autoincrement())
-    icon             String // Store the URL or path to the icon
-    thumbnail        String // Store the URL or path to the icon
+    icon             String
+    thumbnail        String
     name             String
     slug             String
     description      String
     shortDescription String
     url              String
     pricing          String
-    categoryId       Int
-    category         Category @relation(fields: [categoryId], references: [id])
+    categories       ToolsOnCategories[]
     tags             String[]
     bestFor          String[]
 }
@@ -70,4 +69,13 @@ model newsKeyword{
     id Int @id @default(autoincrement())
     keyword String
     keywordUrl String
+}
+
+model ToolsOnCategories {
+    tool       Tool     @relation(fields: [toolId], references: [id])
+    toolId     Int
+    category   Category @relation(fields: [categoryId], references: [id])
+    categoryId Int
+
+    @@id([toolId, categoryId])
 }
