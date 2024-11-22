@@ -10,7 +10,7 @@ export default async function handler(
     const { category } = req.query;
 
     if (category) {
-      const categories = await prisma.JobRole.findUnique({
+      const categories = await prisma.jobRole.findUnique({
         where: {
           slug: typeof category === "object" ? category.join("") : category,
         },
@@ -21,7 +21,7 @@ export default async function handler(
 
       return res.status(200).json(categories);
     }
-    const categories = await prisma.JobRole.findMany({
+    const categories = await prisma.jobRole.findMany({
       include: {
         tools: true,
       },
@@ -31,7 +31,7 @@ export default async function handler(
 
   if (req.method === "POST") {
     const { name, slug } = JSON.parse(req.body);
-    const newCategory = await prisma.JobRole.create({
+    const newCategory = await prisma.jobRole.create({
       data: {
         name: name,
         slug: slug,

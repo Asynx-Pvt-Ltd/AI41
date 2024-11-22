@@ -16,20 +16,32 @@ export default async function handler(
       icon,
       thumbnail,
       tags,
-      jobRoles, // Optional field
+      jobRoles,
     } = JSON.parse(req.body);
 
     try {
-      const toolData = {
+      const toolData: {
+        icon: string;
+        thumbnail: string;
+        name: string;
+        slug: string;
+        description: string;
+        shortDescription: string;
+        url: string;
+        pricing: string;
+        tags: string[];
+        categories: { create: any[] };
+        jobRoles?: { create: any[] };
+      } = {
         icon: icon ?? "",
         thumbnail: thumbnail ?? "",
-        name: name,
+        name,
         slug: name.toLowerCase().split(" ").join("-"),
-        description: description,
-        shortDescription: shortDescription,
-        url: url,
-        pricing: pricing,
-        tags: tags,
+        description,
+        shortDescription,
+        url,
+        pricing,
+        tags,
         categories: {
           create: categories.map((cat: { id: number; name: string }) => ({
             category: {
@@ -41,9 +53,8 @@ export default async function handler(
         },
       };
 
-      // Only add jobRoles if they are provided
       if (jobRoles && jobRoles.length > 0) {
-        toolData["jobRoles"] = {
+        toolData.jobRoles = {
           create: jobRoles.map((role: { id: number; name: string }) => ({
             jobRole: {
               connect: {
@@ -62,10 +73,14 @@ export default async function handler(
               category: true,
             },
           },
+          jobRoles: {
+            include: {
+              jobRole: true,
+            },
+          },
         },
       });
 
-      // Transform the response to match the expected format
       const transformedTool = {
         ...newTool,
         categories: newTool.categories.map((tc) => ({
@@ -76,7 +91,7 @@ export default async function handler(
           newTool.jobRoles?.map((jr) => ({
             id: jr.jobRole.id,
             name: jr.jobRole.name,
-          })) || [], // Return empty array if no job roles
+          })) ?? [],
       };
 
       return res.json(transformedTool);
@@ -101,18 +116,16 @@ export default async function handler(
         },
       });
 
-      // Transform the response to match your existing format
       const transformedTools = tools.map((tool) => ({
         ...tool,
         categories: tool.categories.map((tc) => ({
           id: tc.category.id,
           name: tc.category.name,
         })),
-        jobRoles:
-          tool.jobRoles?.map((jr) => ({
-            id: jr.jobRole.id,
-            name: jr.jobRole.name,
-          })) || [], // Return empty array if no job roles
+        jobRoles: tool.jobRoles.map((jr) => ({
+          id: jr.jobRole.id,
+          name: jr.jobRole.name,
+        })),
       }));
 
       return res.json(transformedTools);
@@ -121,4 +134,6 @@ export default async function handler(
       return res.status(500).json({ error: "Failed to fetch tools" });
     }
   }
+
+  return res.status(405).json({ error: "Method not allowed" });
 }
