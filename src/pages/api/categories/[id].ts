@@ -24,6 +24,10 @@ export default async function handler(
   }
 
   if (req.method === "DELETE") {
+    await prisma.ToolsOnCategories.deleteMany({
+      where: { categoryId: Number(id) },
+    });
+
     // Delete a tool
     await prisma.category.delete({
       where: { id: Number(id) },
