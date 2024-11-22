@@ -55,7 +55,12 @@ export const Header = () => {
           >
             AI Tutorials
           </Link>
-
+          <Link
+            href="/job"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-white dark:text-gray-300 hover:text-gray-300 dark:hover:text-blue-400"
+          >
+            AI Jobs
+          </Link>
           <Dropdown
             isOpen={menuDisplay}
             onMouseLeave={() => setMenuDisplay(false)}

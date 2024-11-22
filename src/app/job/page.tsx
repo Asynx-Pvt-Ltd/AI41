@@ -27,7 +27,7 @@ export default function Page() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
-        <h1 className="text-3xl font-bold text-center mb-4">AI Roles</h1>
+        <h1 className="text-3xl font-bold text-center mb-4">AI Jobs</h1>
         {loading === false ? (
           <div className="container mx-auto px-4 py-8">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
