@@ -81,7 +81,7 @@ const generateDescription = async (
       
       Use simple grammar and sepatate paragraphs + key takeaways at top
 
-      Do not include [1][2] etc.
+      Do not include [1][2] and "" etc.
       `,
     },
   ];
