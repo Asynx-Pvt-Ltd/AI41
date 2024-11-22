@@ -95,16 +95,18 @@ export default function Tool() {
             <div className="flex flex-row">
               <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-8 shadow-sm shadow-[#222222] rounded-lg justify-around">
                 <div className="flex flex-row justify-between">
-                  <div className="flex flex-col">
-                    <Link
-                      className=" border-slate-400 border-1 px-2 rounded-lg"
-                      href={
-                        "/ai-categories/" +
-                        tool.category.replaceAll(" ", "-").toLowerCase()
-                      }
-                    >
-                      {tool.category}
-                    </Link>
+                  <div className="flex gap-1">
+                    {tool.categories.map((cat) => (
+                      <Link
+                        className=" border-slate-400 border-1 px-2 rounded-lg"
+                        href={
+                          "/ai-categories/" +
+                          cat.name.replaceAll(" ", "-").toLowerCase()
+                        }
+                      >
+                        {cat.name}
+                      </Link>
+                    ))}
                   </div>
                   <div className="flex flex-col">
                     <div className="flex flex-row justify-around">
@@ -172,9 +174,9 @@ export default function Tool() {
                     </div>
                   </div>
                 </div>
-                <div className="flex w-full flex-wrap md:flex-nowrap">
-                  <div className="flex flex-col w-full md:pr-4">
-                    <div className="flex flex-row w-full md:w-3/4 p-[3px] bg-[#222222] overflow-hidden rounded-lg shadow-lg">
+                <div className="flex w-full flex-wrap justify-between md:flex-nowrap">
+                  <div className="flex flex-col md:pr-4">
+                    <div className="flex flex-row p-[3px] bg-[#222222] overflow-hidden rounded-lg shadow-lg">
                       <Image
                         src={
                           tool.thumbnail == ""
