@@ -9,83 +9,111 @@ import Link from "next/link";
 import URL from "../../../../public/url.png";
 
 export default function Page() {
-  const [categories, setcategories] = useState<any>([]);
+  const [category, setCategory] = useState<any>(null);
+  const [tools, setTools] = useState<any[]>([]);
+
   const [loading, setLoading] = useState<boolean>(true);
   const params = useParams<{ category: string }>();
 
   useEffect(() => {
-    fetch("/api/categories?category=" + params?.category)
-      .then((res) => res.json())
-      .then((d) => {
+    Promise.all([
+      fetch(`/api/categories?category=${params?.category}`).then((res) =>
+        res.json()
+      ),
+      fetch("/api/tools").then((res) => res.json()),
+    ])
+      .then(([categoryData, toolsData]) => {
+        setCategory(categoryData);
+
+        // Filter tools that belong to the current category
+        const filteredTools = toolsData.filter((tool: any) =>
+          tool.categories.some((cat: any) => cat.id === categoryData.id)
+        );
+
+        setTools(filteredTools);
         setLoading(false);
-        setcategories(d);
+      })
+      .catch((err) => {
+        console.error("Failed to fetch data:", err);
+        setLoading(false);
       });
-  }, []);
+  }, [params?.category]);
 
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
-        <h1 className="font-bold text-4xl uppercase ">{params?.category}</h1>
+        <h1 className="font-bold text-4xl uppercase">{params?.category}</h1>
         {loading === false ? (
           <div className="container mx-auto px-4 py-8">
             <div className="max-w-7xl mx-auto px-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-10">
-                {categories?.tools?.map(
-                  (
-                    tool: {
-                      url: string;
-                      name: any;
-                      icon: string;
-                      slug: string;
-                      description: string;
-                      shortDescription: string;
-                    },
-                    idx: number
-                  ) => (
-                    <div
-                      key={idx}
-                      className="flex bg-white dark:bg-gray-800 dark:border ml-2 dark:border-slate-500 rounded-lg shadow-lg p-4"
-                    >
-                      <div className="flex flex-col gap-2">
-                        <div className="flex flex-row justify-center mb-1">
-                          <Image
-                            src={tool.icon}
-                            width={32}
-                            height={32}
-                            alt={tool.name}
-                            className="w-8 h-8"
-                          />
-                          <span className="mt-1 ml-2">
+              {tools.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 py-10">
+                  {tools.map(
+                    (
+                      tool: {
+                        url: string;
+                        name: any;
+                        icon: string;
+                        slug: string;
+                        description: string;
+                        shortDescription: string;
+                      },
+                      idx: number
+                    ) => (
+                      <div
+                        key={idx}
+                        className="flex bg-white dark:bg-gray-800 dark:border ml-2 dark:border-slate-500 rounded-lg shadow-lg p-4"
+                      >
+                        <div className="flex flex-col gap-2">
+                          <div className="flex flex-row justify-center mb-1">
+                            <Image
+                              src={tool.icon}
+                              width={32}
+                              height={32}
+                              alt={tool.name}
+                              className="w-8 h-8"
+                            />
+                            <span className="mt-1 ml-2">
+                              <Link
+                                href={`/tool/${tool.slug}`}
+                                className="text-black dark:text-white hover:underline"
+                              >
+                                {tool.name}
+                              </Link>
+                            </span>
+                          </div>
+                          <div className="flex">
+                            <p
+                              className="text-balance text-justify line-clamp-3 overflow-hidden text-sm"
+                              dangerouslySetInnerHTML={{
+                                __html: tool.shortDescription,
+                              }}
+                            ></p>
+                          </div>
+                          <div className="flex flex-row justify-center">
                             <Link
                               href={`/tool/${tool.slug}`}
-                              className="text-black dark:text-white hover:underline"
+                              className="text-blue-500 hover:underline"
                             >
-                              {tool.name}
+                              <Image
+                                src={URL}
+                                alt="url"
+                                width={24}
+                                height={24}
+                              />
                             </Link>
-                          </span>
-                        </div>
-                        <div className="flex">
-                          <p
-                            className="text-balance text-justify line-clamp-3 overflow-hidden text-sm"
-                            dangerouslySetInnerHTML={{
-                              __html: tool.shortDescription,
-                            }}
-                          ></p>
-                        </div>
-                        <div className="flex flex-row justify-center">
-                          <Link
-                            href={`/tool/${tool.slug}`}
-                            className="text-blue-500 hover:underline"
-                          >
-                            <Image src={URL} alt="url" width={24} height={24} />
-                          </Link>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  )
-                )}
-              </div>
+                    )
+                  )}
+                </div>
+              ) : (
+                <div className="text-center py-10 text-gray-500">
+                  No tools found in this category.
+                </div>
+              )}
             </div>
           </div>
         ) : (
