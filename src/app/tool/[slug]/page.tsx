@@ -96,17 +96,19 @@ export default function Tool() {
               <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-8 shadow-sm shadow-[#222222] rounded-lg justify-around">
                 <div className="flex flex-row justify-between">
                   <div className="flex gap-1">
-                    {tool.categories.map((cat) => (
-                      <Link
-                        className=" border-slate-400 border-1 px-2 rounded-lg"
-                        href={
-                          "/ai-categories/" +
-                          cat.name.replaceAll(" ", "-").toLowerCase()
-                        }
-                      >
-                        {cat.name}
-                      </Link>
-                    ))}
+                    {tool.categories.map(
+                      (cat: { id: number; name: string }) => (
+                        <Link
+                          className=" border-slate-400 border-1 px-2 rounded-lg"
+                          href={
+                            "/ai-categories/" +
+                            cat.name.replaceAll(" ", "-").toLowerCase()
+                          }
+                        >
+                          {cat.name}
+                        </Link>
+                      )
+                    )}
                   </div>
                   <div className="flex flex-col">
                     <div className="flex flex-row justify-around">
