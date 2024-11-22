@@ -13,17 +13,23 @@ function Tools() {
   const [selectedCategories, setSelectedCategories] = useState<
     Array<{ id: number; name: string }>
   >([]);
+  const [selectedJobRoles, setSelectedJobRoles] = useState<
+    Array<{ id: number; name: string }>
+  >([]);
+
   const [formData, setFormData] = useState<any>({
     name: "",
     description: "",
     shortDescription: "",
     url: "",
-    categories: [], // Changed from category/categoryId to categories array
+    categories: [],
+    jobRoles: [],
     pricing: "",
     tags: [],
   });
 
   const [category, setCategory] = useState("");
+  const [jobRoles, setJobRoles] = useState<any>([]);
   const [categoryId, setCategoryId] = useState("");
   const [pricing, setPricing] = useState("Free");
   const [categories, setCategories] = useState<any>([]);
@@ -35,6 +41,7 @@ function Tools() {
   const [editingTool, setEditingTool] = useState<any>(null);
   const [iconFile, setIconFile] = useState<File | null>(null);
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null);
+
   const fetchTools = async () => {
     setLoading(true);
     setCategory("");
@@ -53,30 +60,51 @@ function Tools() {
   }, []);
 
   useEffect(() => {
+    const fetchJobRoles = async () => {
+      try {
+        const response = await fetch("/api/job-roles");
+        if (!response.ok) {
+          console.log("Failed to fetch job roles");
+          return;
+        }
+        const data = await response.json();
+        setJobRoles(data);
+      } catch (error: any) {
+        console.log("error fetching job roles:", error.message);
+      }
+    };
+
     const fetchCategories = async () => {
       try {
         const response = await fetch("/api/categories");
         if (!response.ok) {
-          console.log("====================================");
           console.log("Failed to fetch categories");
-          console.log("====================================");
           return;
         }
         const data = await response.json();
-        setCategory(data[0].name);
-        setCategoryId(data[0].id);
-        setFormData({ ...formData, categoryId: data[0].id });
-        setFormData({ ...formData, category: data[0].name });
         setCategories(data);
       } catch (error: any) {
-        console.log("====================================");
-        console.log("error.message --->", error.message);
-        console.log("====================================");
+        console.log("error fetching categories:", error.message);
       }
     };
 
     fetchCategories();
+    fetchJobRoles();
   }, []);
+
+  const handleJobRoleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedOptions = Array.from(e.target.selectedOptions);
+    const newJobRoles = selectedOptions.map((option) => ({
+      id: parseInt(option.value),
+      name: option.text,
+    }));
+
+    setSelectedJobRoles(newJobRoles);
+    setFormData({
+      ...formData,
+      jobRoles: newJobRoles,
+    });
+  };
 
   // Handle form input changes
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
@@ -121,6 +149,7 @@ function Tools() {
       shortDescription: formData.shortDescription,
       url: formData.url,
       categories: formData.categories,
+      jobRoles: formData.jobRoles,
       pricing: formData.pricing || pricing,
       tags: formData.tags,
     };
@@ -202,10 +231,12 @@ function Tools() {
   const handleEdit = (tool: any) => {
     setEditMode(true);
     setEditingTool(tool);
-    setSelectedCategories(tool.categories);
+    setSelectedCategories(tool.categories || []);
+    setSelectedJobRoles(tool.jobRoles || []);
     setFormData({
       ...tool,
-      categories: tool.categories,
+      categories: tool.categories || [],
+      jobRoles: tool.jobRoles || [],
     });
   };
 
@@ -437,7 +468,34 @@ function Tools() {
                   ))}
                 </div>
               </div>
-
+              <label>
+                Job Roles <span className="text-red-500">*</span>
+              </label>
+              <select
+                multiple
+                value={selectedJobRoles.map((role) => role.id.toString())}
+                onChange={handleJobRoleChange}
+                className="px-4 py-2 mb-4 border rounded-md text-gray-700 dark:text-gray-300 dark:bg-gray-700 border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 w-full md:w-1/2 h-32"
+              >
+                {jobRoles.map((role: { id: number; name: string }) => (
+                  <option key={role.id} value={role.id}>
+                    {role.name}
+                  </option>
+                ))}
+              </select>
+              <div className="mb-4">
+                <p className="font-medium mb-2">Selected Job Roles:</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedJobRoles.map((role) => (
+                    <span
+                      key={role.id}
+                      className="bg-purple-100 text-purple-800 px-2 py-1 rounded"
+                    >
+                      {role.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
               <label>
                 Pricing <span className="text-red-500">*</span>
               </label>

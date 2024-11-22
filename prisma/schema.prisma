@@ -16,6 +16,22 @@ model Category {
     tools    ToolsOnCategories[]
 }
 
+model JobRole {
+  id       Int    @id @default(autoincrement())
+  name     String @unique
+  slug     String @unique
+  tools    ToolsOnJobRoles[]
+}
+
+model ToolsOnJobRoles {
+  tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  toolId     Int
+  jobRole    JobRole  @relation(fields: [jobRoleId], references: [id], onDelete: Cascade)
+  jobRoleId  Int
+
+  @@id([toolId, jobRoleId])
+}
+
 model Tool {
     id               Int      @id @default(autoincrement())
     icon             String
@@ -28,7 +44,7 @@ model Tool {
     pricing          String
     categories       ToolsOnCategories[]
     tags             String[]
-    bestFor          String[]
+    jobRoles         ToolsOnJobRoles[]
 }
 
 model FeatureProject {
@@ -40,41 +56,41 @@ model FeatureProject {
 }
 
 model Tutorial {
-    id      Int      @id @default(autoincrement())
-    icon    String
-    title   String
-    url     String   @unique
-    tags    String[]
-    videoId     String? @unique
+    id          Int      @id @default(autoincrement())
+    icon        String
+    title       String
+    url         String   @unique
+    tags        String[]
+    videoId     String?  @unique
     viewCount   String?
     likeCount   String?
 }
 
 model News {
-    id    Int    @id @default(autoincrement())
-    icon  String
-    title String
-    url   String
-    date  String?
-    slugUrl String @unique
+    id          Int      @id @default(autoincrement())
+    icon        String
+    title       String
+    url         String
+    date        String?
+    slugUrl     String   @unique
     description String
 }
 
 model tutorialKeyword {
-    id Int @id @default(autoincrement())
+    id      Int     @id @default(autoincrement())
     keyword String?
 }
 
-model newsKeyword{
-    id Int @id @default(autoincrement())
-    keyword String
+model newsKeyword {
+    id         Int    @id @default(autoincrement())
+    keyword    String
     keywordUrl String
 }
 
 model ToolsOnCategories {
-    tool       Tool     @relation(fields: [toolId], references: [id])
+    tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
     toolId     Int
-    category   Category @relation(fields: [categoryId], references: [id])
+    category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
     categoryId Int
 
     @@id([toolId, categoryId])

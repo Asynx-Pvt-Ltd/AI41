@@ -12,36 +12,50 @@ export default async function handler(
       shortDescription,
       url,
       pricing,
-      categories, // Changed from categoryId/category to categories array
+      categories,
       icon,
       thumbnail,
       tags,
+      jobRoles, // Optional field
     } = JSON.parse(req.body);
 
     try {
-      // Create the tool with multiple categories
-      const newTool = await prisma.tool.create({
-        data: {
-          icon: icon ?? "",
-          thumbnail: thumbnail ?? "",
-          name: name,
-          slug: name.toLowerCase().split(" ").join("-"),
-          description: description,
-          shortDescription: shortDescription,
-          url: url,
-          pricing: pricing,
-          tags: tags,
-          // Create relationships with all selected categories
-          categories: {
-            create: categories.map((cat: { id: number; name: string }) => ({
-              category: {
-                connect: {
-                  id: cat.id,
-                },
+      const toolData = {
+        icon: icon ?? "",
+        thumbnail: thumbnail ?? "",
+        name: name,
+        slug: name.toLowerCase().split(" ").join("-"),
+        description: description,
+        shortDescription: shortDescription,
+        url: url,
+        pricing: pricing,
+        tags: tags,
+        categories: {
+          create: categories.map((cat: { id: number; name: string }) => ({
+            category: {
+              connect: {
+                id: cat.id,
               },
-            })),
-          },
+            },
+          })),
         },
+      };
+
+      // Only add jobRoles if they are provided
+      if (jobRoles && jobRoles.length > 0) {
+        toolData["jobRoles"] = {
+          create: jobRoles.map((role: { id: number; name: string }) => ({
+            jobRole: {
+              connect: {
+                id: role.id,
+              },
+            },
+          })),
+        };
+      }
+
+      const newTool = await prisma.tool.create({
+        data: toolData,
         include: {
           categories: {
             include: {
@@ -50,7 +64,22 @@ export default async function handler(
           },
         },
       });
-      return res.json(newTool);
+
+      // Transform the response to match the expected format
+      const transformedTool = {
+        ...newTool,
+        categories: newTool.categories.map((tc) => ({
+          id: tc.category.id,
+          name: tc.category.name,
+        })),
+        jobRoles:
+          newTool.jobRoles?.map((jr) => ({
+            id: jr.jobRole.id,
+            name: jr.jobRole.name,
+          })) || [], // Return empty array if no job roles
+      };
+
+      return res.json(transformedTool);
     } catch (error) {
       console.error("Error creating tool:", error);
       return res.status(500).json({ error: "Failed to create tool" });
@@ -64,6 +93,11 @@ export default async function handler(
               category: true,
             },
           },
+          jobRoles: {
+            include: {
+              jobRole: true,
+            },
+          },
         },
       });
 
@@ -74,6 +108,11 @@ export default async function handler(
           id: tc.category.id,
           name: tc.category.name,
         })),
+        jobRoles:
+          tool.jobRoles?.map((jr) => ({
+            id: jr.jobRole.id,
+            name: jr.jobRole.name,
+          })) || [], // Return empty array if no job roles
       }));
 
       return res.json(transformedTools);

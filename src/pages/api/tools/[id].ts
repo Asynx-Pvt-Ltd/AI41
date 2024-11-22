@@ -9,7 +9,6 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { id } = req.query;
-
   if (req.method === "PUT") {
     try {
       const {
@@ -22,24 +21,26 @@ export default async function handler(
         icon,
         thumbnail,
         tags,
+        jobRoles,
       } = JSON.parse(req.body);
 
       const existingTool = await prisma.tool.findUnique({
         where: { id: Number(id) },
+        include: {
+          jobRoles: true,
+        },
       });
 
-      // Handle file deletions if new files are uploaded
-      if (
-        (icon !== "" || icon !== undefined || icon !== null) &&
-        existingTool?.icon
-      ) {
-        await del(existingTool?.icon as string);
+      if (!existingTool) {
+        return res.status(404).json({ error: "Tool not found" });
       }
-      if (
-        (thumbnail !== "" || thumbnail !== undefined || thumbnail !== null) &&
-        existingTool?.thumbnail
-      ) {
-        await del(existingTool?.thumbnail as string);
+
+      // Handle file deletions if new files are uploaded
+      if (icon && existingTool.icon) {
+        await del(existingTool.icon);
+      }
+      if (thumbnail && existingTool.thumbnail) {
+        await del(existingTool.thumbnail);
       }
 
       // Delete existing category relationships
@@ -49,44 +50,86 @@ export default async function handler(
         },
       });
 
-      // Update tool with new categories
+      // Delete existing job role relationships if jobRoles is provided
+      if (jobRoles !== undefined) {
+        await prisma.toolsOnJobRoles.deleteMany({
+          where: {
+            toolId: Number(id),
+          },
+        });
+      }
+
+      // Prepare the update data
+      const updateData: any = {
+        icon: icon || existingTool.icon || "",
+        thumbnail: thumbnail || existingTool.thumbnail || "",
+        name,
+        slug: name.toLowerCase().split(" ").join("-"),
+        shortDescription,
+        description,
+        url,
+        pricing,
+        tags,
+        categories: {
+          create: categories.map((cat: { id: number; name: string }) => ({
+            category: {
+              connect: {
+                id: cat.id,
+              },
+            },
+          })),
+        },
+      };
+
+      // Only include jobRoles in update if it's provided
+      if (jobRoles !== undefined) {
+        updateData.jobRoles = {
+          create:
+            jobRoles.length > 0
+              ? jobRoles.map((role: { id: number; name: string }) => ({
+                  jobRole: {
+                    connect: {
+                      id: role.id,
+                    },
+                  },
+                }))
+              : [],
+        };
+      }
+
+      // Update tool with new data
       const updatedTool = await prisma.tool.update({
         where: { id: Number(id) },
-        data: {
-          icon:
-            icon !== "" || icon !== null || icon !== undefined
-              ? icon
-              : existingTool?.icon,
-          thumbnail:
-            thumbnail !== "" || thumbnail !== null || thumbnail !== undefined
-              ? thumbnail
-              : existingTool?.thumbnail,
-          name: name,
-          slug: name.toLowerCase().split(" ").join("-"),
-          shortDescription: shortDescription,
-          description: description,
-          url: url,
-          pricing: pricing,
-          tags: tags,
-          categories: {
-            create: categories.map((cat: { id: number; name: string }) => ({
-              category: {
-                connect: {
-                  id: cat.id,
-                },
-              },
-            })),
-          },
-        },
+        data: updateData,
         include: {
           categories: {
             include: {
               category: true,
             },
           },
+          jobRoles: {
+            include: {
+              jobRole: true,
+            },
+          },
         },
       });
-      return res.status(200).json(updatedTool);
+
+      // Transform the response to match the expected format
+      const transformedTool = {
+        ...updatedTool,
+        categories: updatedTool.categories.map((tc) => ({
+          id: tc.category.id,
+          name: tc.category.name,
+        })),
+        jobRoles:
+          updatedTool.jobRoles?.map((jr) => ({
+            id: jr.jobRole.id,
+            name: jr.jobRole.name,
+          })) || [],
+      };
+
+      return res.status(200).json(transformedTool);
     } catch (error) {
       console.error("Error updating tool:", error);
       return res.status(500).json({ error: "Failed to update tool" });
