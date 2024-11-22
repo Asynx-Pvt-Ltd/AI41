@@ -86,6 +86,76 @@ export default function Tool() {
     );
   };
 
+  const CategoryTags = ({
+    categories,
+  }: {
+    categories: { id: number; name: string }[];
+  }) => {
+    const [showAll, setShowAll] = useState(false);
+
+    if (!categories || categories.length === 0) return null;
+
+    return (
+      <div className="flex gap-1 items-center">
+        {showAll ? (
+          <>
+            {categories.map((cat) => (
+              <Link
+                key={cat.id}
+                className="bg-blue-600 text-white px-3 py-1 rounded-full 
+                hover:bg-blue-700 transition-all duration-300 shadow-md 
+                hover:shadow-lg transform hover:-translate-y-1 text-xs"
+                href={
+                  "/ai-categories/" +
+                  cat.name.replaceAll(" ", "-").toLowerCase()
+                }
+              >
+                {cat.name}
+              </Link>
+            ))}
+            {categories.length > 2 && (
+              <button
+                onClick={() => setShowAll(false)}
+                className=" text-white px-3 py-1 rounded-full 
+                bg-gray-500 transition-all duration-300 shadow-md 
+                hover:shadow-lg transform hover:-translate-y-1 text-xs "
+              >
+                See Less
+              </button>
+            )}
+          </>
+        ) : (
+          <>
+            {categories.slice(0, 2).map((cat) => (
+              <Link
+                key={cat.id}
+                className="bg-blue-600 text-white px-3 py-1 rounded-full 
+                hover:bg-blue-700 transition-all duration-300 shadow-md 
+                hover:shadow-lg transform hover:-translate-y-1 text-xs"
+                href={
+                  "/ai-categories/" +
+                  cat.name.replaceAll(" ", "-").toLowerCase()
+                }
+              >
+                {cat.name}
+              </Link>
+            ))}
+            {categories.length > 2 && (
+              <button
+                onClick={() => setShowAll(true)}
+                className="bg-gray-500 text-white px-3 py-1 rounded-full 
+                hover:bg-blue-700 transition-all duration-300 shadow-md 
+                hover:shadow-lg transform hover:-translate-y-1 text-xs"
+              >
+                +{categories.length - 2} more
+              </button>
+            )}
+          </>
+        )}
+      </div>
+    );
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -96,19 +166,7 @@ export default function Tool() {
               <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-8 shadow-sm shadow-[#222222] rounded-lg justify-around">
                 <div className="flex flex-row justify-between">
                   <div className="flex gap-1">
-                    {tool.categories.map(
-                      (cat: { id: number; name: string }) => (
-                        <Link
-                          className=" border-slate-400 border-1 px-2 rounded-lg"
-                          href={
-                            "/ai-categories/" +
-                            cat.name.replaceAll(" ", "-").toLowerCase()
-                          }
-                        >
-                          {cat.name}
-                        </Link>
-                      )
-                    )}
+                    <CategoryTags categories={tool.categories} />
                   </div>
                   <div className="flex flex-col">
                     <div className="flex flex-row justify-around">
