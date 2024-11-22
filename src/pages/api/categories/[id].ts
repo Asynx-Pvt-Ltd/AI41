@@ -11,12 +11,13 @@ export default async function handler(
 
   if (req.method === "PUT") {
     // Update a tool
-    const { name, fontIcon } = JSON.parse(req.body);
+    const { name, fontIcon, slug } = JSON.parse(req.body);
     const updatedCategory = await prisma.category.update({
       where: { id: Number(id) },
       data: {
         name,
         fontIcon,
+        slug,
       },
     });
     return res.status(200).json(updatedCategory);
