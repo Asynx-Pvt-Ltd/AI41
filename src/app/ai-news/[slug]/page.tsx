@@ -2,7 +2,7 @@
 import { NextPage } from "next";
 import { Header } from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
@@ -36,9 +36,6 @@ interface Keyword {
 
 const LinkedDescription = ({ description }: { description: string }) => {
   const [keywords, setKeywords] = useState<Keyword[]>([]);
-  const [processedContent, setProcessedContent] = useState<React.ReactNode[]>(
-    []
-  );
 
   useEffect(() => {
     const fetchKeywords = async () => {
@@ -53,75 +50,140 @@ const LinkedDescription = ({ description }: { description: string }) => {
     fetchKeywords();
   }, []);
 
-  useEffect(() => {
-    if (!keywords.length || !description) return;
+  const processInlineElements = (text: string): React.ReactNode[] => {
+    let parts: React.ReactNode[] = [];
+    let currentPosition = 0;
 
-    const processText = (text: string) => {
-      let result: React.ReactNode[] = [];
-      let lastIndex = 0;
+    // Process bold text first
+    const boldRegex = /\*\*(.*?)\*\*/g;
+    let lastBoldIndex = 0;
+    let textWithBold = text;
+    let boldParts: React.ReactNode[] = [];
 
-      const keywordPattern = new RegExp(
-        `(${keywords.map((k) => k.keyword).join("|")})`,
-        "gi"
+    let boldMatch;
+    while ((boldMatch = boldRegex.exec(text)) !== null) {
+      if (boldMatch.index > lastBoldIndex) {
+        boldParts.push(text.slice(lastBoldIndex, boldMatch.index));
+      }
+      boldParts.push(
+        <strong key={`bold-${boldMatch.index}`} className="font-bold">
+          {boldMatch[1]}
+        </strong>
+      );
+      lastBoldIndex = boldMatch.index + boldMatch[0].length;
+    }
+
+    if (lastBoldIndex < text.length) {
+      boldParts.push(text.slice(lastBoldIndex));
+    }
+
+    // Now process keywords within each part
+    const processKeywords = (part: React.ReactNode): React.ReactNode => {
+      if (React.isValidElement(part)) {
+        return part;
+      }
+
+      const textPart = String(part);
+      const keywordParts: React.ReactNode[] = [];
+      let currentPos = 0;
+
+      // Sort keywords by length (longest first)
+      const sortedKeywords = [...keywords].sort(
+        (a, b) => b.keyword.length - a.keyword.length
       );
 
-      let match: RegExpExecArray | null;
-      let currentMatch: RegExpExecArray | null = null;
+      while (currentPos < textPart.length) {
+        let match: { keyword: Keyword; index: number } | null = null;
 
-      while ((currentMatch = keywordPattern.exec(text)) !== null) {
-        match = currentMatch;
+        // Find the earliest matching keyword from current position
+        for (const keyword of sortedKeywords) {
+          const indexFromCurrent = textPart
+            .toLowerCase()
+            .indexOf(keyword.keyword.toLowerCase(), currentPos);
 
-        if (match.index > lastIndex) {
-          result.push(text.slice(lastIndex, match.index));
+          if (
+            indexFromCurrent !== -1 &&
+            (!match || indexFromCurrent < match.index)
+          ) {
+            match = { keyword, index: indexFromCurrent };
+          }
         }
 
-        const matchedText = match[0];
-        const keyword = keywords.find(
-          (k) => k.keyword.toLowerCase() === matchedText.toLowerCase()
-        );
+        if (match) {
+          if (match.index > currentPos) {
+            keywordParts.push(textPart.slice(currentPos, match.index));
+          }
 
-        if (keyword) {
-          result.push(
+          const matchedText = textPart.slice(
+            match.index,
+            match.index + match.keyword.keyword.length
+          );
+
+          keywordParts.push(
             <Link
-              key={`${keyword.id}-${match.index}`}
-              href={keyword.keywordUrl}
+              key={`${match.keyword.id}-${match.index}`}
+              href={match.keyword.keywordUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-blue-500 hover:underline"
             >
               {matchedText}
             </Link>
           );
+
+          currentPos = match.index + match.keyword.keyword.length;
         } else {
-          result.push(matchedText);
+          keywordParts.push(textPart.slice(currentPos));
+          break;
         }
-
-        lastIndex = keywordPattern.lastIndex;
       }
 
-      // Add any remaining text
-      if (lastIndex < text.length) {
-        result.push(text.slice(lastIndex));
-      }
-
-      return result;
+      return keywordParts;
     };
 
-    setProcessedContent(processText(description));
-  }, [keywords, description]);
+    const processedParts = boldParts.map((part, index) => (
+      <React.Fragment key={index}>{processKeywords(part)}</React.Fragment>
+    ));
 
-  // Return the processed content without formatting
-  return processedContent;
-};
+    return processedParts;
+  };
 
-// Separate component for formatting
-const NewsDescription = ({ description }: { description: string }) => {
-  const linkedContent = LinkedDescription({ description });
+  // Process paragraphs
+  const paragraphs = description.split("\n").filter((p) => p.trim());
+
+  const processText = (paragraph: string): React.ReactNode => {
+    const headerMatch = paragraph.match(/^(#{1,3})\s+(.+)$/);
+    if (headerMatch) {
+      const level = headerMatch[1].length;
+      const content = headerMatch[2];
+
+      return React.createElement(
+        `h${level}`,
+        {
+          className: `text-${4 - level}xl font-bold my-${
+            level + 1
+          } text-gray-900 dark:text-white`,
+        },
+        processInlineElements(content)
+      );
+    }
+
+    return (
+      <p className="mb-4 text-gray-800 dark:text-gray-200">
+        {processInlineElements(paragraph)}
+      </p>
+    );
+  };
 
   return (
     <div className="whitespace-pre-wrap">
-      <FormatMarkdownText text={linkedContent} />
+      {paragraphs.map((paragraph, index) => (
+        <React.Fragment key={index}>{processText(paragraph)}</React.Fragment>
+      ))}
     </div>
   );
 };
+
 const RelatedNews = ({ currentNewsId }: { currentNewsId: number }) => {
   const [relatedNews, setRelatedNews] = useState<NewsItem[]>([]);
   const [loading, setLoading] = useState(true);
@@ -292,7 +354,7 @@ const Page: NextPage<Props> = ({ params }) => {
             </header>
 
             <div className="prose dark:prose-invert prose-lg max-w-none text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-              <NewsDescription description={newsItem.description} />
+              <LinkedDescription description={newsItem.description} />
             </div>
           </div>
         </article>
