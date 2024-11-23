@@ -102,7 +102,7 @@ export default function Tool() {
                   .split(" ")
                   .map((s) => s.toLowerCase())
                   .join("-")}`}
-                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
               >
                 #{t}
               </Link>
@@ -110,7 +110,7 @@ export default function Tool() {
             {tags.length > 2 && (
               <button
                 onClick={() => setShowAll(false)}
-                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
               >
                 See Less
               </button>
@@ -126,7 +126,7 @@ export default function Tool() {
                   .split(" ")
                   .map((s) => s.toLowerCase())
                   .join("-")}`}
-                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
               >
                 #{t}
               </Link>
@@ -134,7 +134,7 @@ export default function Tool() {
             {tags.length > 2 && (
               <button
                 onClick={() => setShowAll(true)}
-                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
               >
                 +{tags.length - 2} tags
               </button>
@@ -222,7 +222,7 @@ export default function Tool() {
         {tool ? (
           <>
             <div className="flex flex-row">
-              <div className="flex flex-col h-fit max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
+              <div className="flex flex-col h-fit w-[1278px] mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
                 <div className="flex flex-row justify-between">
                   <div className="flex gap-1">
                     <CategoryTags categories={tool.categories} />
@@ -293,9 +293,9 @@ export default function Tool() {
                     </div>
                   </div>
                 </div>
-                <div className="flex w-full flex-wrap justify-between md:flex-nowrap">
+                <div className="flex flex-wrap justify-between md:flex-nowrap">
                   <div className="flex flex-col md:pr-4">
-                    <div className="flex flex-row p-[3px] bg-[#222222] overflow-hidden rounded-lg shadow-lg">
+                    <div className="flex w-full flex-row p-[3px] bg-[#222222] overflow-hidden rounded-lg shadow-lg">
                       <Image
                         src={
                           tool.thumbnail == ""
@@ -329,9 +329,9 @@ export default function Tool() {
                       </h1>
                     </div>
 
-                    <div className="flex flex-row max-w-[700px] py-1 px-2 lg:py-2 lg:px-4 bg-[rgba(34,34,34,0.9)] rounded-lg shadow-lg shadow-[#222222] lg:p-2">
+                    <div className="flex flex-row max-w-[500px] py-1 px-2 lg:py-4 lg:px-4 bg-[rgba(34,34,34,0.9)] rounded-lg shadow-lg shadow-[#222222] lg:p-2">
                       <p
-                        className="text-white mb-4 text-justify tracking-[0.3px] leading-normal p-[6px] whitespace-pre-line line-clamp-5 overflow-hidden"
+                        className="text-white text-justify leading-tight line-clamp-5 overflow-hidden text-balance"
                         dangerouslySetInnerHTML={{
                           __html: tool?.shortDescription,
                         }}
