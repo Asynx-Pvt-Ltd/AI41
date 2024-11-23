@@ -26,6 +26,65 @@ export default function Tool() {
     }
   }, [params]);
 
+  const JobRoles = ({
+    roles,
+  }: {
+    roles: { jobRole: { name: string; slug: string } }[];
+  }) => {
+    const [showAll, setShowAll] = useState(false);
+
+    if (!roles || roles.length === 0) return null;
+
+    return (
+      <div className="flex gap-2">
+        <span className="text-gray-700 font-medium">Best For:</span>
+        <div className="flex flex-wrap items-center gap-1">
+          {showAll ? (
+            <>
+              {roles.map((role, i) => (
+                <Link
+                  key={i}
+                  href={`/job/${role.jobRole.slug}`}
+                  className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors"
+                >
+                  {role.jobRole.name}
+                </Link>
+              ))}
+              {roles.length > 2 && (
+                <button
+                  onClick={() => setShowAll(false)}
+                  className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+                >
+                  See Less
+                </button>
+              )}
+            </>
+          ) : (
+            <>
+              {roles.slice(0, 2).map((role, i) => (
+                <Link
+                  key={i}
+                  href={`/job/${role.jobRole.slug}`}
+                  className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm hover:bg-green-200 transition-colors"
+                >
+                  {role.jobRole.name}
+                </Link>
+              ))}
+              {roles.length > 2 && (
+                <button
+                  onClick={() => setShowAll(true)}
+                  className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-sm hover:bg-gray-300 transition-colors"
+                >
+                  +{roles.length - 2} roles
+                </button>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    );
+  };
+
   const ToolTags = ({ tags }: { tags: string[] }) => {
     const [showAll, setShowAll] = useState(false);
 
@@ -163,7 +222,7 @@ export default function Tool() {
         {tool ? (
           <>
             <div className="flex flex-row">
-              <div className="flex flex-col lg:h-[460px] max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-8 shadow-sm shadow-[#222222] rounded-lg justify-around">
+              <div className="flex flex-col h-fit max-w-[1278px] w-full mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
                 <div className="flex flex-row justify-between">
                   <div className="flex gap-1">
                     <CategoryTags categories={tool.categories} />
@@ -251,6 +310,9 @@ export default function Tool() {
                     </div>
                     <div className="flex flex-row mt-3 w-fit">
                       <ToolTags tags={tool.tags} />
+                    </div>
+                    <div className="flex flex-row mt-5 w-fit">
+                      <JobRoles roles={tool.jobRoles} />
                     </div>
                   </div>
                   <div className="flex flex-col justify-around lg:mt-0 mt-6">
