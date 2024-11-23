@@ -6,7 +6,6 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
-import FormatMarkdownText from "@/app/components/textFormatter";
 interface NewsItem {
   id: number;
   icon: string;
