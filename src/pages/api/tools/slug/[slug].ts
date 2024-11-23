@@ -20,6 +20,11 @@ export default async function handler(
                 category: true,
               },
             },
+            jobRoles: {
+              include: {
+                jobRole: true,
+              },
+            },
           },
         });
 

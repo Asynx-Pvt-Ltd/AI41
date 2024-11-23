@@ -81,20 +81,7 @@ export default async function handler(
         },
       });
 
-      const transformedTool = {
-        ...newTool,
-        categories: newTool.categories.map((tc) => ({
-          id: tc.category.id,
-          name: tc.category.name,
-        })),
-        jobRoles:
-          newTool.jobRoles?.map((jr) => ({
-            id: jr.jobRole.id,
-            name: jr.jobRole.name,
-          })) ?? [],
-      };
-
-      return res.json(transformedTool);
+      return res.json(newTool);
     } catch (error) {
       console.error("Error creating tool:", error);
       return res.status(500).json({ error: "Failed to create tool" });
