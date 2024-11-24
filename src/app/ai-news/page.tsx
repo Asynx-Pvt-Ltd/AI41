@@ -123,7 +123,7 @@ export default function Page() {
                   href={"/ai-news/" + encodeURIComponent(n.slugUrl)}
                   target="_blank"
                   key={index}
-                  className="bg-white shadow-lg rounded-lg overflow-hidden w-[320px] h-[380px] flex flex-col justify-around gap-1 hover:shadow-xl transition-shadow duration-200"
+                  className="bg-white shadow-lg rounded-lg overflow-hidden w-[320px] h-[320px] flex flex-col justify-around gap-1 hover:shadow-xl transition-shadow duration-200"
                 >
                   <Image
                     src={n.icon || "/ai-tools-directory.webp"}
@@ -133,14 +133,17 @@ export default function Page() {
                     className="w-[400px] h-[180px] object-cover rounded-[inherit]"
                   />
 
-                  <h2 className="text-lg font-semibold p-2 line-clamp-2">
+                  <h2 className="text-lg font-semibold p-2 line-clamp-2 font-roboto">
                     {n.title}
                   </h2>
-                  <div className="px-4 mb-4">
-                    <p className="text-gray-600 text-[12px] text-justify line-clamp-3 leading-tight text-balance font-normal">
-                      <FormatMarkdownText text={n.description} />
-                    </p>
-                  </div>
+                  {/* <div className="px-4 mb-4">
+                    <p
+                      className="text-gray-600 text-[12px] text-justify line-clamp-3 leading-tight text-balance font-normal h-[50px]"
+                      dangerouslySetInnerHTML={{
+                        __html: n.description,
+                      }}
+                    />
+                  </div> */}
                   <div className="px-4 pb-4">
                     <p className="text-left text-xs text-gray-500 font-semibold">
                       {getTimeAgo(n.date)}
