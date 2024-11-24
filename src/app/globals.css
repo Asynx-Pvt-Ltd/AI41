@@ -87,3 +87,50 @@
     animation-play-state: paused;
   }
 }
+
+.news-para {
+  display: flex;
+  flex-direction: column;
+  gap: 5vh;
+
+  h2 {
+    font-weight: bold;
+  }
+}
+.keytakeaways {
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  background-color: rgb(204, 230, 253);
+  padding: 2vh 2vw;
+  border-radius: 2vw;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 2vh;
+    text-align: center;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    list-style: none;
+    padding: 0vh 1vw;
+    position: relative;
+  }
+  ul li::before {
+    content: "✅";
+    display: inline-block;
+    width: 1.2em;
+    margin-left: -1.2em;
+    margin-right: 0.3em;
+  }
+}
+
+.news-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 2vh;
+}

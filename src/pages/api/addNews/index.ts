@@ -54,6 +54,7 @@ const rephraseTitle = async (title: string): Promise<string> => {
       model: "llama-3.1-sonar-small-128k-online",
       messages: messagecontent,
     }),
+    cache: "force-cache",
   });
 
   if (!response.ok) {
@@ -72,16 +73,37 @@ const generateDescription = async (
     {
       role: "system",
       content:
-        "You are an AI news summarizer. Create clear, concise summaries without citations, quotes, or special characters. Focus on key points and implications.",
+        "You are an AI news summarizer. Generate structured article summaries with clear key takeaways and paragraphs. Never include citations, quotes, or special characters. Use simple grammar and clear language.",
     },
     {
       role: "user",
-      content: `Summarize this AI news article in under 200 words:
+      content: `Analyze and summarize this AI news article:
   
   Title: ${title}
   URL: ${url}
   
-  Include key takeaways at the top, followed by a brief explanation.`,
+  Format your response exactly like this:
+  <div classname="news-para">
+  <div class="keytakeaways">
+  <h2>Key Takeaways</h2>
+  <ul>
+  <li>[First key takeaway]</li>
+  <li>[Second key takeaway]</li>
+  <li>[Third key takeaway]</li>
+  </ul>
+  </div>
+
+  <div class="news-summary">
+  <h2>Summary:</h2>
+  
+  <p>[First paragraph focusing on main points]</p>
+  
+  <p>[Second paragraph covering additional details]</p>
+  
+  <p>[Final paragraph with implications or conclusions]</p>
+  </div>
+  </div>
+  Keep total length under 200 words. Use simple language and short sentences.`,
     },
   ];
 
@@ -95,6 +117,7 @@ const generateDescription = async (
       model: "llama-3.1-sonar-small-128k-online",
       messages: messagecontent,
     }),
+    cache: "force-cache",
   });
 
   if (!response.ok) {
@@ -105,6 +128,11 @@ const generateDescription = async (
   return data.choices[0].message.content;
 };
 
+const formatTitle = (title: string): string => {
+  // Remove both single and double quotes
+  return title.replace(/['"]+/g, "").trim();
+};
+
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   // return await prisma.news.deleteMany({});
 
@@ -113,20 +141,21 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      let maxNews = 8;
+      let maxNews = 1;
       for (const item of results) {
         if (item.stories) {
           for (const story of item.stories) {
             if (newsCount >= maxNews) break;
             const title = await rephraseTitle(story.title);
+            const cleanTitle = formatTitle(title);
             const description = await generateDescription(
               story.title,
               story.link
             );
             formattedResults.push({
-              title,
+              title: cleanTitle,
               url: story.link,
-              slugUrl: encodeURIComponent(`${title.replaceAll(" ", "-")}`),
+              slugUrl: encodeURIComponent(`${cleanTitle.replaceAll(" ", "-")}`),
               icon: story.thumbnail || "",
               date: story.date,
               description,
