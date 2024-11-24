@@ -63,9 +63,9 @@ export default function Page() {
                     ) => (
                       <div
                         key={idx}
-                        className="flex bg-white dark:bg-gray-800 dark:border ml-2 dark:border-slate-500 rounded-lg shadow-lg p-4"
+                        className="flex bg-white border-2 border-black dark:bg-gray-800 dark:border ml-2 dark:border-slate-500 rounded-lg shadow-lg p-2 py-4"
                       >
-                        <div className="flex flex-col gap-2">
+                        <div className="flex flex-col gap-3">
                           <div className="flex flex-row justify-center mb-1">
                             <Image
                               src={tool.icon}
@@ -85,16 +85,16 @@ export default function Page() {
                           </div>
                           <div className="flex">
                             <p
-                              className="text-balance text-justify line-clamp-3 overflow-hidden text-sm"
+                              className="text-center text-balance line-clamp-2 overflow-hidden text-sm"
                               dangerouslySetInnerHTML={{
                                 __html: tool.shortDescription,
                               }}
                             ></p>
                           </div>
-                          <div className="flex flex-row justify-center">
+                          <div className="flex flex-row justify-center mt-1">
                             <Link
                               href={`/tool/${tool.slug}`}
-                              className="text-blue-500 hover:underline"
+                              className="text-blue-500 hover:underline flex gap-2"
                             >
                               <Image
                                 src={URL}
@@ -102,6 +102,9 @@ export default function Page() {
                                 width={24}
                                 height={24}
                               />
+                              <button className="px-2 bg-blue-600 text-white rounded-md">
+                                view
+                              </button>
                             </Link>
                           </div>
                         </div>

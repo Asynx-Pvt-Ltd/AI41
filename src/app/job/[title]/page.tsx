@@ -111,7 +111,7 @@ export default function JobRolePage() {
                       <h3 className="text-xl font-semibold">{tool.name}</h3>
                     </div>
                     <div
-                      className="text-gray-600 dark:text-gray-300 mb-4"
+                      className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2 text-sm"
                       dangerouslySetInnerHTML={{
                         __html: tool.shortDescription,
                       }}
