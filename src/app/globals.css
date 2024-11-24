@@ -91,7 +91,7 @@
 .news-para {
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 1vh;
   span {
     padding: 0;
     margin: 0;
@@ -104,7 +104,6 @@
 .keytakeaways {
   display: flex;
   flex-direction: column;
-  gap: 1vh;
   background-color: rgb(204, 230, 253);
   padding: 2vh 2vw;
   border-radius: 2vw;
@@ -119,7 +118,7 @@
   ul {
     display: flex;
     flex-direction: column;
-    gap: 2vh;
+    gap: 1vh;
     list-style: none;
     padding: 0vh 1vw;
     position: relative;
@@ -136,5 +135,5 @@
 .news-summary {
   display: flex;
   flex-direction: column;
-  gap: 2vh;
+  gap: 1vh;
 }

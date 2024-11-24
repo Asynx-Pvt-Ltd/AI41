@@ -121,7 +121,6 @@ export default function Page() {
               {filteredNews.map((n: NewsItem, index: number) => (
                 <Link
                   href={"/ai-news/" + encodeURIComponent(n.slugUrl)}
-                  target="_blank"
                   key={index}
                   className="bg-white shadow-lg rounded-lg overflow-hidden w-[320px] h-[320px] flex flex-col justify-around gap-1 hover:shadow-xl transition-shadow duration-200"
                 >
