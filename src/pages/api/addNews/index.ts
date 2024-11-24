@@ -36,15 +36,14 @@ const rephraseTitle = async (title: string): Promise<string> => {
     {
       role: "system",
       content:
-        "Be precise and conscise. Return only title without any additional informations. Do not include hyperlinks and things like [1][2] etc.",
+        "You are a headline writer. Rephrase titles to be engaging while maintaining accuracy. Output only the clean title text without quotes, citations, or special characters.",
     },
     {
       role: "user",
-      content: `${title} - Rephrase the title of the article, by keeping its original meaning.
-      - Make it click-worthy
-      - Use a simple english grammar`,
+      content: `Rephrase this headline to be more engaging while keeping its core meaning: ${title}`,
     },
   ];
+
   const response = await fetch(`https://api.perplexity.ai/chat/completions`, {
     method: "POST",
     headers: {
@@ -73,18 +72,19 @@ const generateDescription = async (
     {
       role: "system",
       content:
-        "Browser Web, Be precise and conscise. Return only description without any additional informations. Do not include hyperlinks and [1][2] etc.",
+        "You are an AI news summarizer. Create clear, concise summaries without citations, quotes, or special characters. Focus on key points and implications.",
     },
     {
       role: "user",
-      content: `Provide description in less than 200 words for this latest AI news - ${title} - ${url}
-      
-      Use simple grammar and sepatate paragraphs + key takeaways at top
-
-      Do not include [1][2] and "" etc.
-      `,
+      content: `Summarize this AI news article in under 200 words:
+  
+  Title: ${title}
+  URL: ${url}
+  
+  Include key takeaways at the top, followed by a brief explanation.`,
     },
   ];
+
   const response = await fetch(`https://api.perplexity.ai/chat/completions`, {
     method: "POST",
     headers: {
@@ -126,9 +126,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
             formattedResults.push({
               title,
               url: story.link,
-              slugUrl: encodeURIComponent(
-                `${story.title.replaceAll(" ", "-")}`
-              ),
+              slugUrl: encodeURIComponent(`${title.replaceAll(" ", "-")}`),
               icon: story.thumbnail || "",
               date: story.date,
               description,
