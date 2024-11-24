@@ -6,6 +6,8 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { format } from "date-fns";
 import Link from "next/link";
+import DOMPurify from "isomorphic-dompurify";
+
 interface NewsItem {
   id: number;
   icon: string;
@@ -21,17 +23,94 @@ interface Props {
     slug: string;
   };
 }
-// Define the keyword type
 interface Keyword {
   id: number;
   keyword: string;
   keywordUrl: string;
 }
-interface Keyword {
-  id: number;
-  keyword: string;
-  keywordUrl: string;
+
+interface KeywordProcessorProps {
+  htmlContent: string;
 }
+
+const KeywordProcessor: React.FC<KeywordProcessorProps> = ({ htmlContent }) => {
+  const [keywords, setKeywords] = useState<Keyword[]>([]);
+  const [processedContent, setProcessedContent] = useState<string>(htmlContent);
+
+  useEffect(() => {
+    const fetchKeywords = async () => {
+      try {
+        const response = await fetch("/api/getNewsKeyword");
+        if (!response.ok) throw new Error("Failed to fetch keywords");
+        const data: Keyword[] = await response.json();
+        setKeywords(data);
+        processHtmlWithKeywords(data);
+      } catch (error) {
+        console.error("Error fetching keywords:", error);
+      }
+    };
+
+    fetchKeywords();
+  }, [htmlContent]);
+
+  const processHtmlWithKeywords = (keywordList: Keyword[]) => {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = DOMPurify.sanitize(htmlContent);
+
+    const processNode = (node: ChildNode) => {
+      if (node.nodeType === Node.TEXT_NODE) {
+        const content = node.textContent || "";
+        let lastIndex = 0;
+        const fragments: string[] = [];
+
+        const sortedKeywords = [...keywordList].sort(
+          (a, b) => b.keyword.length - a.keyword.length
+        );
+
+        for (const keywordObj of sortedKeywords) {
+          const regex = new RegExp(`\\b${keywordObj.keyword}\\b`, "gi");
+          let match;
+
+          while ((match = regex.exec(content)) !== null) {
+            if (match.index > lastIndex) {
+              fragments.push(content.substring(lastIndex, match.index));
+            }
+
+            fragments.push(
+              `<a href="${keywordObj.keywordUrl}" target="_blank" rel="noopener noreferrer" class="text-blue-500 hover:underline">${match[0]}</a>`
+            );
+
+            lastIndex = regex.lastIndex;
+          }
+        }
+
+        if (lastIndex < content.length) {
+          fragments.push(content.substring(lastIndex));
+        }
+
+        if (fragments.length > 0) {
+          const span = document.createElement("span");
+          span.innerHTML = fragments.join("");
+          node.parentNode?.replaceChild(span, node);
+        }
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        if ((node as HTMLElement).tagName.toLowerCase() !== "a") {
+          Array.from(node.childNodes).forEach(processNode);
+        }
+      }
+    };
+
+    Array.from(tempDiv.childNodes).forEach(processNode);
+    setProcessedContent(tempDiv.innerHTML);
+  };
+
+  return (
+    <div
+      className="prose dark:prose-invert prose-lg max-w-none text-gray-800 dark:text-gray-200"
+      dangerouslySetInnerHTML={{ __html: processedContent }}
+    />
+  );
+};
 
 const RelatedNews = ({ currentNewsId }: { currentNewsId: number }) => {
   const [relatedNews, setRelatedNews] = useState<NewsItem[]>([]);
@@ -203,7 +282,7 @@ const Page: NextPage<Props> = ({ params }) => {
             </header>
 
             <div className="prose dark:prose-invert prose-lg max-w-none text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-              <div dangerouslySetInnerHTML={{ __html: newsItem.description }} />
+              <KeywordProcessor htmlContent={newsItem.description} />
             </div>
           </div>
         </article>

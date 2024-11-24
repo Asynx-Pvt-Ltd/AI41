@@ -91,8 +91,12 @@
 .news-para {
   display: flex;
   flex-direction: column;
-  gap: 5vh;
-
+  gap: 2vh;
+  span {
+    padding: 0;
+    margin: 0;
+    height: 0;
+  }
   h2 {
     font-weight: bold;
   }

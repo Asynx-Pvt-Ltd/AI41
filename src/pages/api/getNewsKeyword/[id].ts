@@ -11,7 +11,6 @@ export default async function handler(
 
   if (req.method === "PUT") {
     const { keyword, keywordUrl } = req.body;
-    console.log(keyword);
     const updatedCategory = await prisma.newsKeyword.update({
       where: { id: Number(id) },
       data: {
