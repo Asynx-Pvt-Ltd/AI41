@@ -17,6 +17,7 @@ export default async function handler(
       thumbnail,
       tags,
       jobRoles,
+      priceTag,
     } = JSON.parse(req.body);
 
     try {
@@ -32,6 +33,7 @@ export default async function handler(
         tags: string[];
         categories: { create: any[] };
         jobRoles?: { create: any[] };
+        priceTag: string[];
       } = {
         icon: icon ?? "",
         thumbnail: thumbnail ?? "",
@@ -51,6 +53,7 @@ export default async function handler(
             },
           })),
         },
+        priceTag: priceTag ?? "",
       };
 
       if (jobRoles && jobRoles.length > 0) {
