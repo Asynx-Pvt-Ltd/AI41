@@ -26,6 +26,7 @@ function Tools() {
     jobRoles: [],
     pricing: "",
     tags: [],
+    priceTag: [],
   });
 
   const [category, setCategory] = useState("");
@@ -109,7 +110,8 @@ function Tools() {
   // Handle form input changes
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
-    if (name === "tags") {
+
+    if (name === "tags" || name === "priceTag") {
       setFormData({ ...formData, [name]: value.split(",") });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -152,6 +154,7 @@ function Tools() {
       jobRoles: formData.jobRoles,
       pricing: formData.pricing || pricing,
       tags: formData.tags,
+      priceTag: formData.priceTag,
     };
 
     if (inputFileRef.current?.files?.length === 0 && editMode === false) {
@@ -508,6 +511,15 @@ function Tools() {
                 <option value={"Fremium"}>Freemium</option>
                 <option value={"Paid"}>Paid</option>
               </select>
+              <label className="mt-4">Price Tag</label>
+              <input
+                type="text"
+                name="priceTag"
+                placeholder="Price Tags seperated by ,"
+                value={formData.priceTag}
+                onChange={handleInputChange}
+                className="px-4 py-2 border rounded-md text-gray-700 w-fit "
+              />
               <label className="mt-4">Tags</label>
               <input
                 type="text"
