@@ -61,7 +61,7 @@ function ToolsByCategories() {
     <section className="container mx-auto">
       <div className="max-w-7xl mx-auto px-8">
         <div className="grid grid-cols-1 gap-x-4 gap-y-3 md:grid-cols-3 lg:grid-cols-4 py-10">
-          {categories.map((category) => {
+          {categories.slice(0, 8).map((category) => {
             const categoryTools = getToolsForCategory(category.id);
             return categoryTools.length > 0 ? (
               <div
@@ -72,7 +72,7 @@ function ToolsByCategories() {
                   <i className={category.fontIcon}></i> {category.name}
                 </h2>
                 <hr className="my-6 mx-6 border-t-4 border-gray-500 dark:border-white" />
-                <div className="max-h-40 overflow-y-auto">
+                <div className="max-h-52 overflow-y-auto pr-2">
                   <ul className="list-none pl-5">
                     {categoryTools.map((tool, idx) => (
                       <li
