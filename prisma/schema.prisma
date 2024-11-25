@@ -45,6 +45,7 @@ model Tool {
     categories       ToolsOnCategories[]
     tags             String[]
     jobRoles         ToolsOnJobRoles[]
+    priceTag         String[]
 }
 
 model FeatureProject {
