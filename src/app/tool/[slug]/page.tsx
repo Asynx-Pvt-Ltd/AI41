@@ -97,14 +97,10 @@ export default function Tool() {
             {tags.map((t, i) => (
               <Link
                 key={i}
-                href={`/ai-categories/${t
-                  .trim()
-                  .split(" ")
-                  .map((s) => s.toLowerCase())
-                  .join("-")}`}
-                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
+                href={`/plans`}
+                className="px-3 py-1 bg-orange-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
               >
-                #{t}
+                {t}
               </Link>
             ))}
             {tags.length > 2 && (
@@ -121,14 +117,10 @@ export default function Tool() {
             {tags.slice(0, 2).map((t, i) => (
               <Link
                 key={i}
-                href={`/ai-categories/${t
-                  .trim()
-                  .split(" ")
-                  .map((s) => s.toLowerCase())
-                  .join("-")}`}
-                className="px-3 py-1 bg-gray-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
+                href={`/plans`}
+                className="px-3 py-1 bg-orange-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
               >
-                #{t}
+                {t}
               </Link>
             ))}
             {tags.length > 2 && (
@@ -309,7 +301,7 @@ export default function Tool() {
                       />
                     </div>
                     <div className="flex flex-row mt-3 w-fit">
-                      <ToolTags tags={tool.tags} />
+                      <ToolTags tags={tool.priceTag} />
                     </div>
                     <div className="flex flex-row mt-5 w-fit">
                       <JobRoles roles={tool.jobRoles} />
