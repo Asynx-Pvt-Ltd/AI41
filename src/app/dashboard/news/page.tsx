@@ -277,76 +277,78 @@ function News() {
         {loading ? (
           <LoadingSpinner />
         ) : (
-          <table className="min-w-full bg-white">
-            <thead>
-              <tr>
-                <th className="py-2 px-4">Icon</th>
-                <th className="py-2 px-4">Title</th>
-                <th className="py-2 px-4">Description</th>
-                <th className="py-2 px-4">URL</th>
-                <th className="py-2 px-4"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {news.map((n) => (
-                <tr key={n.id}>
-                  <td className="border px-4 py-2">
-                    <Image
-                      src={n.icon}
-                      alt={n.title}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8"
-                      loading="lazy"
-                    />
-                  </td>
-                  <td className="border px-4 py-2">{n.title}</td>
-                  <td className="border px-4 py-2">
-                    {n.description ? (
-                      <>
-                        {expandedNews[n.id]
-                          ? n.description
-                          : `${n.description.slice(0, 100)}${
-                              n.description.length > 100 ? "..." : ""
-                            }`}
-                        {n.description.length > 100 && (
-                          <button
-                            onClick={() => toggleDescription(n.id)}
-                            className="ml-2 text-blue-500 hover:underline"
-                          >
-                            {expandedNews[n.id] ? "See Less" : "See More"}
-                          </button>
-                        )}
-                      </>
-                    ) : (
-                      "N/A"
-                    )}
-                  </td>
-                  <td className="border px-4 py-2">
-                    <a href={n.url} target="_blank" rel="noopener noreferrer">
-                      {n.url}
-                    </a>
-                  </td>
-                  <td className="border px-4 py-2">
-                    <div className="flex flex-row">
-                      <button
-                        className="bg-blue-500 text-white px-4 py-3 mr-2"
-                        onClick={() => handleEdit(n)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="bg-red-500 text-white px-4 py-2"
-                        onClick={() => handleDelete(n.id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  </td>
+          <div className="bg-white max-h-[80vh] overflow-y-auto">
+            <table className="min-w-full bg-white">
+              <thead>
+                <tr>
+                  <th className="py-2 px-4">Icon</th>
+                  <th className="py-2 px-4">Title</th>
+                  <th className="py-2 px-4">Description</th>
+                  <th className="py-2 px-4">URL</th>
+                  <th className="py-2 px-4"></th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {news.map((n) => (
+                  <tr key={n.id}>
+                    <td className="border px-4 py-2">
+                      <Image
+                        src={n.icon}
+                        alt={n.title}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8"
+                        loading="lazy"
+                      />
+                    </td>
+                    <td className="border px-4 py-2">{n.title}</td>
+                    <td className="border px-4 py-2">
+                      {n.description ? (
+                        <>
+                          {expandedNews[n.id]
+                            ? n.description
+                            : `${n.description.slice(0, 100)}${
+                                n.description.length > 100 ? "..." : ""
+                              }`}
+                          {n.description.length > 100 && (
+                            <button
+                              onClick={() => toggleDescription(n.id)}
+                              className="ml-2 text-blue-500 hover:underline"
+                            >
+                              {expandedNews[n.id] ? "See Less" : "See More"}
+                            </button>
+                          )}
+                        </>
+                      ) : (
+                        "N/A"
+                      )}
+                    </td>
+                    <td className="border px-4 py-2">
+                      <a href={n.url} target="_blank" rel="noopener noreferrer">
+                        {n.url}
+                      </a>
+                    </td>
+                    <td className="border px-4 py-2">
+                      <div className="flex flex-row">
+                        <button
+                          className="bg-blue-500 text-white px-4 py-3 mr-2"
+                          onClick={() => handleEdit(n)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="bg-red-500 text-white px-4 py-2"
+                          onClick={() => handleDelete(n.id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
 
         <h2 className="text-xl font-bold mt-4">Add News</h2>

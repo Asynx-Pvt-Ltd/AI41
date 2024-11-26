@@ -49,9 +49,6 @@ function Tools() {
     setPricing("Free");
     const response = await fetch("/api/tools");
     const data = await response.json();
-    console.log("====================================");
-    console.log("tools -->", data);
-    console.log("====================================");
     setTools(data);
     setLoading(false);
   };
@@ -70,23 +67,18 @@ function Tools() {
         }
         const data = await response.json();
         setJobRoles(data);
-      } catch (error: any) {
-        console.log("error fetching job roles:", error.message);
-      }
+      } catch (error: any) {}
     };
 
     const fetchCategories = async () => {
       try {
         const response = await fetch("/api/categories");
         if (!response.ok) {
-          console.log("Failed to fetch categories");
           return;
         }
         const data = await response.json();
         setCategories(data);
-      } catch (error: any) {
-        console.log("error fetching categories:", error.message);
-      }
+      } catch (error: any) {}
     };
 
     fetchCategories();
@@ -253,11 +245,7 @@ function Tools() {
         setTools(d);
         setLoading(false);
       })
-      .catch((err) => {
-        console.log("====================================");
-        console.log("err --->", err);
-        console.log("====================================");
-      });
+      .catch((err) => {});
   };
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -286,69 +274,71 @@ function Tools() {
 
         <>
           {loading === false ? (
-            <table className="min-w-full bg-white">
-              <thead>
-                <tr>
-                  <th className="py-2 px-4">Icon</th>
-                  <th className="py-2 px-4">Name</th>
-                  <th className="py-2 px-4">Description</th>
-                  <th className="py-2 px-4">URL</th>
-                  <th className="py-2 px-4"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {tools.length > 0 &&
-                  tools?.map((tool: any) => (
-                    <tr key={tool.id}>
-                      <td className="border px-4 py-2">
-                        <Image
-                          src={tool.icon}
-                          alt={tool.name}
-                          width={32}
-                          height={32}
-                          className="w-8 h-8"
-                        />
-                      </td>
-                      <td className="border px-4 py-2">{tool.name}</td>
-                      <td
-                        className="border px-4 py-2"
-                        dangerouslySetInnerHTML={{
-                          __html:
-                            tool.description.length > 250
-                              ? `${tool.description.slice(0, 250)}...`
-                              : tool.description,
-                        }}
-                      ></td>
+            <div className="bg-white max-h-[80vh] overflow-y-auto">
+              <table className="min-w-full bg-white">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4">Icon</th>
+                    <th className="py-2 px-4">Name</th>
+                    <th className="py-2 px-4">Description</th>
+                    <th className="py-2 px-4">URL</th>
+                    <th className="py-2 px-4"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tools.length > 0 &&
+                    tools?.map((tool: any) => (
+                      <tr key={tool.id}>
+                        <td className="border px-4 py-2">
+                          <Image
+                            src={tool.icon}
+                            alt={tool.name}
+                            width={32}
+                            height={32}
+                            className="w-8 h-8"
+                          />
+                        </td>
+                        <td className="border px-4 py-2">{tool.name}</td>
+                        <td
+                          className="border px-4 py-2"
+                          dangerouslySetInnerHTML={{
+                            __html:
+                              tool.description.length > 250
+                                ? `${tool.description.slice(0, 250)}...`
+                                : tool.description,
+                          }}
+                        ></td>
 
-                      <td className="border px-4 py-2">
-                        <a
-                          href={tool.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {tool.url}
-                        </a>
-                      </td>
-                      <td className="h-auto align-middle border px-4 py-2">
-                        <div className="flex flex-row">
-                          <button
-                            className="bg-blue-500 text-white px-4 py-3 mr-2"
-                            onClick={() => handleEdit(tool)}
+                        <td className="border px-4 py-2">
+                          <a
+                            href={tool.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
-                            Edit
-                          </button>
-                          <button
-                            className="bg-red-500 text-white px-4 py-2"
-                            onClick={() => handleDelete(tool.id)}
-                          >
-                            Delete
-                          </button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
+                            {tool.url}
+                          </a>
+                        </td>
+                        <td className="h-auto align-middle border px-4 py-2">
+                          <div className="flex flex-row">
+                            <button
+                              className="bg-blue-500 text-white px-4 py-3 mr-2"
+                              onClick={() => handleEdit(tool)}
+                            >
+                              Edit
+                            </button>
+                            <button
+                              className="bg-red-500 text-white px-4 py-2"
+                              onClick={() => handleDelete(tool.id)}
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <div className="flex flex-row justify-center items-center">
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>

@@ -161,69 +161,71 @@ function FeatureTools() {
         <h1 className="text-2xl font-bold mb-4">Feature Tools</h1>
         <>
           {loading === false ? (
-            <table className="min-w-full bg-white">
-              <thead>
-                <tr>
-                  <th className="py-2 px-4">Icon</th>
-                  <th className="py-2 px-4">Name</th>
-                  <th className="py-2 px-4">Description</th>
-                  <th className="py-2 px-4">URL</th>
-                  <th className="py-2 px-4"></th>
-                </tr>
-              </thead>
-              <tbody>
-                {tools.length > 0
-                  ? tools.map((tool: any) => (
-                      <tr key={tool.id}>
-                        <td className="border px-4 py-2">
-                          <Image
-                            src={tool.icon}
-                            alt={tool.title}
-                            width={32}
-                            height={32}
-                            className="w-8 h-8"
-                          />
-                        </td>
-                        <td className="border px-4 py-2">{tool.title}</td>
-                        <td
-                          className="border px-4 py-2"
-                          dangerouslySetInnerHTML={{
-                            __html:
-                              tool.description.length > 250
-                                ? `${tool.description.slice(0, 250)}...`
-                                : tool.description,
-                          }}
-                        ></td>
-                        <td className="border px-4 py-2">
-                          <a
-                            href={tool.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {tool.link}
-                          </a>
-                        </td>
-                        <td className="h-auto align-middle border px-4 py-2">
-                          <div className="flex flex-row">
-                            <button
-                              className="bg-blue-500 text-white px-4 py-2 mr-2"
-                              onClick={() => handleEdit(tool)}
+            <div className="bg-white max-h-[80vh] overflow-y-auto">
+              <table className="min-w-full bg-white">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4">Icon</th>
+                    <th className="py-2 px-4">Name</th>
+                    <th className="py-2 px-4">Description</th>
+                    <th className="py-2 px-4">URL</th>
+                    <th className="py-2 px-4"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {tools.length > 0
+                    ? tools.map((tool: any) => (
+                        <tr key={tool.id}>
+                          <td className="border px-4 py-2">
+                            <Image
+                              src={tool.icon}
+                              alt={tool.title}
+                              width={32}
+                              height={32}
+                              className="w-8 h-8"
+                            />
+                          </td>
+                          <td className="border px-4 py-2">{tool.title}</td>
+                          <td
+                            className="border px-4 py-2"
+                            dangerouslySetInnerHTML={{
+                              __html:
+                                tool.description.length > 250
+                                  ? `${tool.description.slice(0, 250)}...`
+                                  : tool.description,
+                            }}
+                          ></td>
+                          <td className="border px-4 py-2">
+                            <a
+                              href={tool.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
                             >
-                              Edit
-                            </button>
-                            <button
-                              className="bg-red-500 text-white px-4 py-2"
-                              onClick={() => handleDelete(tool.id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  : null}
-              </tbody>
-            </table>
+                              {tool.link}
+                            </a>
+                          </td>
+                          <td className="h-auto align-middle border px-4 py-2">
+                            <div className="flex flex-row">
+                              <button
+                                className="bg-blue-500 text-white px-4 py-2 mr-2"
+                                onClick={() => handleEdit(tool)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="bg-red-500 text-white px-4 py-2"
+                                onClick={() => handleDelete(tool.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    : null}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <div className="flex flex-row justify-center items-center">
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>

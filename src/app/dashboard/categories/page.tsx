@@ -125,44 +125,46 @@ function Categories() {
         <>
           {/* Category List Table */}
           {loading === false ? (
-            <table className="min-w-full bg-white">
-              <thead>
-                <tr>
-                  <th className="py-2 px-4">Name</th>
-                  <th className="py-2 px-4">Font Icon</th>
-                  <th className="py-2 px-4">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {categories.length
-                  ? categories.map((category: any) => (
-                      <tr key={category.id}>
-                        <td className="border px-4 py-2">{category.name}</td>
-                        <td className="border px-4 py-2">
-                          <i className={category.fontIcon}></i>
-                          <span className="ml-2">{category.fontIcon}</span>
-                        </td>
-                        <td className="h-auto align-middle justify-center border px-4 py-2">
-                          <div className="flex flex-row justify-center">
-                            <button
-                              className="bg-blue-500 text-white px-4 py-3 mr-2"
-                              onClick={() => handleEdit(category)}
-                            >
-                              Edit
-                            </button>
-                            <button
-                              className="bg-red-500 text-white px-4 py-2"
-                              onClick={() => handleDelete(category.id)}
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                    ))
-                  : null}
-              </tbody>
-            </table>
+            <div className="bg-white max-h-[80vh] overflow-y-auto">
+              <table className="min-w-full bg-white">
+                <thead>
+                  <tr>
+                    <th className="py-2 px-4">Name</th>
+                    <th className="py-2 px-4">Font Icon</th>
+                    <th className="py-2 px-4">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {categories.length
+                    ? categories.map((category: any) => (
+                        <tr key={category.id}>
+                          <td className="border px-4 py-2">{category.name}</td>
+                          <td className="border px-4 py-2">
+                            <i className={category.fontIcon}></i>
+                            <span className="ml-2">{category.fontIcon}</span>
+                          </td>
+                          <td className="h-auto align-middle justify-center border px-4 py-2">
+                            <div className="flex flex-row justify-center">
+                              <button
+                                className="bg-blue-500 text-white px-4 py-3 mr-2"
+                                onClick={() => handleEdit(category)}
+                              >
+                                Edit
+                              </button>
+                              <button
+                                className="bg-red-500 text-white px-4 py-2"
+                                onClick={() => handleDelete(category.id)}
+                              >
+                                Delete
+                              </button>
+                            </div>
+                          </td>
+                        </tr>
+                      ))
+                    : null}
+                </tbody>
+              </table>
+            </div>
           ) : (
             <div className="flex justify-center items-center">
               <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>

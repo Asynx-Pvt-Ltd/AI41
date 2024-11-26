@@ -197,7 +197,7 @@ function Tutorials() {
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
           </div>
         ) : (
-          <div className="bg-white h-[80vh] overflow-y-auto">
+          <div className="bg-white max-h-[80vh] overflow-y-auto">
             <table className="min-w-full bg-white">
               <thead>
                 <tr>
