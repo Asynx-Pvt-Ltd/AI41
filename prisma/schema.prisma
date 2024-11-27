@@ -45,7 +45,9 @@ model Tool {
     categories       ToolsOnCategories[]
     tags             String[]
     jobRoles         ToolsOnJobRoles[]
-    priceTag         String[]
+    hasFreePrice     Int?
+    hasPaidPrice     Int?
+    paidPrice        String?
 }
 
 model FeatureProject {
