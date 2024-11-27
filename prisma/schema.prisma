@@ -45,8 +45,8 @@ model Tool {
     categories       ToolsOnCategories[]
     tags             String[]
     jobRoles         ToolsOnJobRoles[]
-    hasFreePrice     Int?
-    hasPaidPrice     Int?
+    hasFreePrice     Boolean?
+    hasPaidPrice     Boolean?
     paidPrice        String?
 }
 
