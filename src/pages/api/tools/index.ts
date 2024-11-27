@@ -57,10 +57,9 @@ export default async function handler(
             },
           })),
         },
-        // Add these fields if they are present
-        ...(hasFreePrice !== undefined && { hasFreePrice }),
-        ...(hasPaidPrice !== undefined && { hasPaidPrice }),
-        ...(paidPrice !== undefined && { paidPrice }),
+        ...(hasFreePrice !== null && { hasFreePrice }),
+        ...(hasPaidPrice !== null && { hasPaidPrice }),
+        ...(paidPrice !== null && { paidPrice }),
       };
 
       if (jobRoles && jobRoles.length > 0) {

@@ -163,10 +163,12 @@ function Tools() {
       jobRoles: formData.jobRoles,
       pricing: formData.pricing || pricing,
       tags: formData.tags,
+      hasFreePrice: formData.hasFreePrice,
+      hasPaidPrice: formData.hasPaidPrice,
+      paidPrice: formData.paidPrice,
     };
 
     if (inputFileRef.current?.files?.length === 0 && editMode === false) {
-      // setIconError('No Icon selected')
       toast.error("No icon selected");
       setSubmitting(false);
       return;
@@ -175,10 +177,8 @@ function Tools() {
       inputFileRefThumbnail.current?.files?.length === 0 &&
       editMode === false
     ) {
-      // setThumbnailError('No Thumbnail Selected')
       toast.error("No thumbnail selected");
       setSubmitting(false);
-
       return;
     } else {
       setIconError("");
@@ -229,7 +229,7 @@ function Tools() {
         });
       }
     }
-    // Refresh tools list
+
     setFormData({
       name: "",
       description: "",
@@ -237,13 +237,24 @@ function Tools() {
       url: "",
       categories: [],
       jobRoles: [],
-      pricing: "",
+      pricing: "Free",
       tags: [],
       hasFreePrice: false,
       hasPaidPrice: false,
       paidPrice: "",
     });
+
     setEditMode(false);
+    setEditingTool(null);
+    setSelectedCategories([]);
+    setSelectedJobRoles([]);
+    setPricing("Free");
+
+    if (inputFileRef.current) inputFileRef.current.value = "";
+    if (inputFileRefThumbnail.current) inputFileRefThumbnail.current.value = "";
+    setIconFile(null);
+    setThumbnailFile(null);
+
     fetchTools();
   };
 
@@ -252,11 +263,25 @@ function Tools() {
     setEditingTool(tool);
     setSelectedCategories(tool.categories || []);
     setSelectedJobRoles(tool.jobRoles || []);
+
+    if (inputFileRef.current) inputFileRef.current.value = "";
+    if (inputFileRefThumbnail.current) inputFileRefThumbnail.current.value = "";
+
+    setIconFile(null);
+    setThumbnailFile(null);
+
     setFormData({
       ...tool,
       categories: tool.categories || [],
       jobRoles: tool.jobRoles || [],
+      pricing: tool.pricing || "Free",
+      hasFreePrice: tool.hasFreePrice ?? false,
+      hasPaidPrice: tool.hasPaidPrice ?? false,
+      paidPrice: tool.paidPrice ?? "",
+      tags: tool.tags || [],
     });
+
+    setPricing(tool.pricing || "Free");
   };
 
   const handleDelete = async (id: any) => {

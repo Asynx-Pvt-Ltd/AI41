@@ -22,6 +22,9 @@ export default async function handler(
         thumbnail,
         tags,
         jobRoles,
+        hasFreePrice,
+        hasPaidPrice,
+        paidPrice,
       } = JSON.parse(req.body);
 
       const existingTool = await prisma.tool.findUnique({
@@ -79,6 +82,9 @@ export default async function handler(
             },
           })),
         },
+        ...(hasFreePrice !== undefined && { hasFreePrice }),
+        ...(hasPaidPrice !== undefined && { hasPaidPrice }),
+        ...(paidPrice !== undefined && { paidPrice }),
       };
 
       // Only include jobRoles in update if it's provided
