@@ -577,7 +577,7 @@ function Tools() {
                       className="max-w-52 p-2 border rounded"
                       placeholder="100"
                       min="0"
-                      step="0.01"
+                      step="1"
                     />
                   </div>
                 )}
