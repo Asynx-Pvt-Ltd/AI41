@@ -17,6 +17,9 @@ export default async function handler(
       thumbnail,
       tags,
       jobRoles,
+      hasFreePrice,
+      hasPaidPrice,
+      paidPrice,
     } = JSON.parse(req.body);
 
     try {
@@ -32,6 +35,9 @@ export default async function handler(
         tags: string[];
         categories: { create: any[] };
         jobRoles?: { create: any[] };
+        hasFreePrice?: boolean;
+        hasPaidPrice?: boolean;
+        paidPrice?: string;
       } = {
         icon: icon ?? "",
         thumbnail: thumbnail ?? "",
@@ -51,6 +57,10 @@ export default async function handler(
             },
           })),
         },
+        // Add these fields if they are present
+        ...(hasFreePrice !== undefined && { hasFreePrice }),
+        ...(hasPaidPrice !== undefined && { hasPaidPrice }),
+        ...(paidPrice !== undefined && { paidPrice }),
       };
 
       if (jobRoles && jobRoles.length > 0) {
