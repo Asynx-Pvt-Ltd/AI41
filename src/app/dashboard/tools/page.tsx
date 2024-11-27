@@ -6,6 +6,21 @@ import { PutBlobResult } from "@vercel/blob";
 import { toast } from "react-toastify";
 import AdvancedEditor from "@/app/components/AdvancedEditor";
 export const dynamic = "force-dynamic";
+
+interface ToolFormData {
+  name: string;
+  description: string;
+  shortDescription: string;
+  url: string;
+  categories: Array<{ id: number; name: string }>;
+  jobRoles: Array<{ id: number; name: string }>;
+  pricing: string;
+  tags: string[];
+  hasFreePrice: boolean | null;
+  hasPaidPrice: boolean | null;
+  paidPrice: string | null;
+}
+
 function Tools() {
   const [tools, setTools] = useState<any>([]);
   const inputFileRef = useRef<HTMLInputElement>(null);
@@ -17,7 +32,7 @@ function Tools() {
     Array<{ id: number; name: string }>
   >([]);
 
-  const [formData, setFormData] = useState<any>({
+  const [formData, setFormData] = useState<ToolFormData>({
     name: "",
     description: "",
     shortDescription: "",
@@ -26,7 +41,9 @@ function Tools() {
     jobRoles: [],
     pricing: "",
     tags: [],
-    priceTag: [],
+    hasFreePrice: false,
+    hasPaidPrice: false,
+    paidPrice: "",
   });
 
   const [category, setCategory] = useState("");
@@ -103,7 +120,7 @@ function Tools() {
   const handleInputChange = (e: { target: { name: any; value: any } }) => {
     const { name, value } = e.target;
 
-    if (name === "tags" || name === "priceTag") {
+    if (name === "tags") {
       setFormData({ ...formData, [name]: value.split(",") });
     } else {
       setFormData({ ...formData, [name]: value });
@@ -146,7 +163,6 @@ function Tools() {
       jobRoles: formData.jobRoles,
       pricing: formData.pricing || pricing,
       tags: formData.tags,
-      priceTag: formData.priceTag,
     };
 
     if (inputFileRef.current?.files?.length === 0 && editMode === false) {
@@ -217,7 +233,15 @@ function Tools() {
     setFormData({
       name: "",
       description: "",
+      shortDescription: "",
       url: "",
+      categories: [],
+      jobRoles: [],
+      pricing: "",
+      tags: [],
+      hasFreePrice: false,
+      hasPaidPrice: false,
+      paidPrice: "",
     });
     setEditMode(false);
     fetchTools();
@@ -265,6 +289,23 @@ function Tools() {
   const handlePricingChange = (e: { target: { value: string } }) => {
     setPricing(e.target.value);
     setFormData({ ...formData, pricing: e.target.value });
+  };
+
+  const handlePriceCheckboxChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, checked } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: checked,
+    }));
+  };
+
+  const handlePaidPriceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData((prev) => ({
+      ...prev,
+      paidPrice: e.target.value,
+    }));
   };
 
   return (
@@ -461,9 +502,7 @@ function Tools() {
                   ))}
                 </div>
               </div>
-              <label>
-                Job Roles <span className="text-red-500">*</span>
-              </label>
+              <label>Job Roles</label>
               <select
                 multiple
                 value={selectedJobRoles.map((role) => role.id.toString())}
@@ -501,15 +540,49 @@ function Tools() {
                 <option value={"Fremium"}>Freemium</option>
                 <option value={"Paid"}>Paid</option>
               </select>
-              <label className="mt-4">Price Tag</label>
-              <input
-                type="text"
-                name="priceTag"
-                placeholder="Price Tags seperated by ,"
-                value={formData.priceTag}
-                onChange={handleInputChange}
-                className="px-4 py-2 border rounded-md text-gray-700 w-fit "
-              />
+              <div className="flex flex-col gap-4 mt-4">
+                <label className="font-medium">Pricing Options</label>
+
+                <div className="flex items-center gap-4">
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      name="hasFreePrice"
+                      checked={formData.hasFreePrice ?? false}
+                      onChange={handlePriceCheckboxChange}
+                      className="w-4 h-4"
+                    />
+                    Free Tier
+                  </label>
+
+                  <label className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      name="hasPaidPrice"
+                      checked={formData.hasPaidPrice ?? false}
+                      onChange={handlePriceCheckboxChange}
+                      className="w-4 h-4"
+                    />
+                    Paid Tier
+                  </label>
+                </div>
+
+                {formData.hasPaidPrice && (
+                  <div className="flex flex-col gap-2">
+                    <label>Price ($)</label>
+                    <input
+                      type="number"
+                      value={formData.paidPrice ?? ""}
+                      onChange={handlePaidPriceChange}
+                      className="max-w-52 p-2 border rounded"
+                      placeholder="100"
+                      min="0"
+                      step="0.01"
+                    />
+                  </div>
+                )}
+              </div>
+
               <label className="mt-4">Tags</label>
               <input
                 type="text"
