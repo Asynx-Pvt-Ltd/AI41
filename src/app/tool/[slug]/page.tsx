@@ -301,7 +301,22 @@ export default function Tool() {
                       />
                     </div>
                     <div className="flex flex-row mt-3 w-fit">
-                      <ToolTags tags={tool.priceTag} />
+                      {tool.hasFreePrice && (
+                        <Link
+                          href={`/plan`}
+                          className="px-3 py-1 bg-green-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
+                        >
+                          Free
+                        </Link>
+                      )}
+                      {tool.hasPaidPrice && (
+                        <Link
+                          href={`/plan`}
+                          className="px-3 py-1 bg-orange-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
+                        >
+                          From ${tool.paidPrice}
+                        </Link>
+                      )}
                     </div>
                     <div className="flex flex-row mt-5 w-fit">
                       <JobRoles roles={tool.jobRoles} />
