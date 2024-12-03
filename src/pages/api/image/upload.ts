@@ -1,23 +1,50 @@
-import { put } from '@vercel/blob'
-import { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiRequest, NextApiResponse } from "next";
+import fs from "fs";
+import path from "path";
+import crypto from "crypto";
 
-// The next lines are required for Pages API Routes only
 export const config = {
   api: {
-    bodyParser: false
-  }
-}
+    bodyParser: false,
+  },
+};
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'POST') {
-    const blob = await put(req.query.filename as string, req, {
-      access: 'public'
-    })
+  if (req.method === "POST") {
+    try {
+      const uploadDir = "/var/www/uploads"; // External, writable directory
 
-    return res.status(200).json(blob)
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      const originalFilename = req.query.filename as string;
+      const fileExtension = path.extname(originalFilename);
+      const uniqueFilename = `${crypto
+        .randomBytes(16)
+        .toString("hex")}${fileExtension}`;
+      const filePath = path.join(uploadDir, uniqueFilename);
+
+      const writeStream = fs.createWriteStream(filePath);
+      await new Promise((resolve, reject) => {
+        req.pipe(writeStream);
+        req.on("end", resolve);
+        req.on("error", reject);
+        writeStream.on("error", reject);
+      });
+
+      return res.status(200).json({
+        url: `https://uploads.shadowctrl.me/${uniqueFilename}`,
+        pathname: filePath,
+      });
+    } catch (error) {
+      console.error("Upload error:", error);
+      return res.status(500).json({ message: "Upload failed" });
+    }
   } else {
-    return res.json({ message: 'Method Not Allowed' })
+    return res.status(405).json({ message: "Method Not Allowed" });
   }
 }
