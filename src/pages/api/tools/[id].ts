@@ -151,7 +151,9 @@ export default async function handler(
       });
 
       if (existingTool?.icon) {
-        await del(existingTool.icon as string);
+        try {
+          await del(existingTool.icon as string);
+        } catch {}
       }
 
       // Delete the tool (cascading delete will handle category relationships)
