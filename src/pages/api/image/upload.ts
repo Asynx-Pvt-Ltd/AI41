@@ -15,7 +15,7 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const uploadDir = "/var/www/uploads"; // External, writable directory
+      const uploadDir = process.env.IMAGE_UPLOAD_DIR as string; // External, writable directory
 
       if (!fs.existsSync(uploadDir)) {
         fs.mkdirSync(uploadDir, { recursive: true });
@@ -37,7 +37,7 @@ export default async function handler(
       });
 
       return res.status(200).json({
-        url: `https://uploads.shadowctrl.me/${uniqueFilename}`,
+        url: `${process.env.IMAGE_UPLOAD_ENDPOINT}/${uniqueFilename}`,
         pathname: filePath,
       });
     } catch (error) {
