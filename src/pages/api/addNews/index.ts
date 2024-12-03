@@ -133,33 +133,97 @@ const formatTitle = (title: string): string => {
   return title.replace(/['"]+/g, "").trim();
 };
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // return await prisma.news.deleteMany({});
+async function generateAIImagePrompt(newsTitle: string): Promise<string> {
+  const aiPrompts = [
+    `Futuristic digital visualization of Artificial Intelligence, representing: ${newsTitle}`,
+    `High-tech neural network illustration capturing the essence of: ${newsTitle}`,
+    `Cybernetic concept art depicting advanced AI technology: ${newsTitle}`,
+    `Stunning abstract representation of artificial intelligence and machine learning: ${newsTitle}`,
+    `Cutting-edge AI visualization with interconnected digital neural pathways: ${newsTitle}`,
+  ];
 
+  return aiPrompts[Math.floor(Math.random() * aiPrompts.length)];
+}
+
+const generateImage = async (prompt: string) => {
+  const res = await fetch("https://api.openai.com/v1/images/generations", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "dall-e-2",
+      prompt,
+      n: 1,
+      size: "256x256",
+    }),
+  });
+
+  const image = await res.json();
+
+  const fetchImage = await fetch(image.data[0].url);
+  const arrayBuffer = await fetchImage.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
+  return buffer;
+};
+
+const uploadImage = async (image: Buffer, cleanTitle: string) => {
+  const iconFile = new File(
+    [image],
+    `${cleanTitle.replace(/[^a-z0-9]/gi, "_")}.png`,
+    { type: "image/png" }
+  );
+
+  const imageUploadResponse = await fetch(
+    `/api/image/upload?filename=${iconFile.name}`,
+    {
+      method: "POST",
+      body: iconFile,
+    }
+  );
+
+  if (!imageUploadResponse.ok) {
+    throw new Error(`Image upload failed: ${await imageUploadResponse.text()}`);
+  }
+
+  const uploadedImageData = await imageUploadResponse.json();
+  return uploadedImageData.url;
+};
+
+const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      let maxNews = 8;
+      const maxNews = 8;
+
       for (const item of results) {
         if (item.stories) {
           for (const story of item.stories) {
             if (newsCount >= maxNews) break;
+
             const title = await rephraseTitle(story.title);
             const cleanTitle = formatTitle(title);
             const description = await generateDescription(
               story.title,
               story.link
             );
+            const prompt = await generateAIImagePrompt(cleanTitle);
+            const image = await generateImage(prompt);
+
+            const imageUrl = await uploadImage(image, cleanTitle);
+
             formattedResults.push({
               title: cleanTitle,
               url: story.link,
               slugUrl: encodeURIComponent(`${cleanTitle.replaceAll(" ", "-")}`),
-              icon: story.thumbnail || "",
+              icon: imageUrl, // Use generated image URL
               date: story.date,
               description,
             });
+
             newsCount++;
           }
           if (newsCount >= maxNews) break;
@@ -170,6 +234,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         data: formattedResults,
         skipDuplicates: true,
       });
+
       return res.status(200).json({ formattedResults, prismaRes });
     } catch (error: any) {
       return res
