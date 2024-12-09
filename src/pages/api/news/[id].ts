@@ -1,9 +1,20 @@
-import { del, put } from "@vercel/blob";
 import { PrismaClient } from "@prisma/client";
-import { IncomingForm } from "formidable";
+import fs from "fs";
+import path from "path";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
+const uploadDir = process.env.IMAGE_UPLOAD_DIR as string;
+
+const safeDeleteFile = (filePath: string) => {
+  try {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  } catch (error) {
+    console.error(`Failed to delete file ${filePath}:`, error);
+  }
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,21 +23,23 @@ export default async function handler(
   const { id } = req.query;
 
   if (req.method === "PUT") {
-    // Update a tool
-
     const { title, icon, url } = JSON.parse(req.body);
 
     const existingNews = await prisma.news.findUnique({
       where: { id: Number(id) },
     });
+
     if (
-      (icon !== "" || icon !== undefined || icon !== null) &&
+      icon !== "" &&
+      icon !== undefined &&
+      icon !== null &&
       existingNews?.icon
     ) {
-      try {
-        await del(existingNews?.icon as string);
-      } catch {}
+      safeDeleteFile(
+        path.join(uploadDir, path.basename(existingNews.icon as string))
+      );
     }
+
     const updatedTool = await prisma.news.update({
       where: { id: Number(id) },
       data: {
@@ -44,13 +57,17 @@ export default async function handler(
         id: Number(id),
       },
     });
-    try {
-      await del(existingNews?.icon as string);
-    } catch {}
-    // Delete a tool
+
+    if (existingNews?.icon) {
+      safeDeleteFile(
+        path.join(uploadDir, path.basename(existingNews.icon as string))
+      );
+    }
+
     await prisma.news.delete({
       where: { id: Number(id) },
     });
+
     const news = await prisma.news.findMany();
     return res.status(200).json(news);
   }
