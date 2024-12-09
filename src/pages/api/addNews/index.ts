@@ -169,28 +169,27 @@ const generateImage = async (prompt: string) => {
 };
 
 const uploadImage = async (image: Buffer, cleanTitle: string) => {
-  const iconFile = new File(
-    [image],
-    `${cleanTitle.replace(/[^a-z0-9]/gi, "_")}.png`,
-    { type: "image/png" }
-  );
+  const sanitizedFilename =
+    cleanTitle.replace(/[^a-z0-9]/gi, "_").toLowerCase() + ".png";
 
-  const imageUploadResponse = await fetch(
-    `/api/image/upload?filename=${iconFile.name}`,
-    {
-      method: "POST",
-      body: iconFile,
-    }
-  );
+  const encodedFilename = encodeURIComponent(sanitizedFilename);
+
+  const fullUploadUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/image/upload?filename=${encodedFilename}`;
+
+  const imageUploadResponse = await fetch(fullUploadUrl, {
+    method: "POST",
+    body: image,
+  });
 
   if (!imageUploadResponse.ok) {
-    throw new Error(`Image upload failed: ${await imageUploadResponse.text()}`);
+    const errorText = await imageUploadResponse.text();
+    console.error("Upload error:", errorText);
+    throw new Error(`Image upload failed: ${errorText}`);
   }
 
   const uploadedImageData = await imageUploadResponse.json();
   return uploadedImageData.url;
 };
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "GET") {
     try {
