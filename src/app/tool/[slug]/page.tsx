@@ -300,10 +300,10 @@ export default function Tool() {
                         className="w-[566px] h-[288px] object-cover object-top"
                       />
                     </div>
-                    <div className="flex flex-row mt-3 w-fit">
+                    <div className="flex flex-row mt-3 w-fit gap-1">
                       {tool.hasFreePrice && (
                         <Link
-                          href={`/plan`}
+                          href={`/plans`}
                           className="px-3 py-1 bg-green-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
                         >
                           Free
@@ -311,7 +311,7 @@ export default function Tool() {
                       )}
                       {tool.hasPaidPrice && (
                         <Link
-                          href={`/plan`}
+                          href={`/plans`}
                           className="px-3 py-1 bg-orange-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
                         >
                           From ${tool.paidPrice}
