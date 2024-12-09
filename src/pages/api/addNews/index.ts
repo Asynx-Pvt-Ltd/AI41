@@ -156,7 +156,7 @@ const generateImage = async (prompt: string) => {
       model: "dall-e-2",
       prompt,
       n: 1,
-      size: "256x256",
+      size: "1792x1024",
     }),
   });
 
@@ -196,7 +196,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       const results = await newsEndpoint();
       const formattedResults = [];
       let newsCount = 0;
-      const maxNews = 8;
+      const maxNews = 1;
 
       for (const item of results) {
         if (item.stories) {
