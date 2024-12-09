@@ -1,8 +1,21 @@
-import { del } from "@vercel/blob";
 import { PrismaClient } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
+const uploadDir = process.env.IMAGE_UPLOAD_DIR as string;
+
+// Helper function to safely delete a file
+const safeDeleteFile = (filePath: string) => {
+  try {
+    if (fs.existsSync(filePath)) {
+      fs.unlinkSync(filePath);
+    }
+  } catch (error) {
+    console.error(`Failed to delete file ${filePath}:`, error);
+  }
+};
 
 export default async function handler(
   req: NextApiRequest,
@@ -38,12 +51,14 @@ export default async function handler(
         return res.status(404).json({ error: "Tool not found" });
       }
 
-      // Handle file deletions if new files are uploaded
+      // Delete old images if new ones are provided
       if (icon && existingTool.icon) {
-        await del(existingTool.icon);
+        safeDeleteFile(path.join(uploadDir, path.basename(existingTool.icon)));
       }
       if (thumbnail && existingTool.thumbnail) {
-        await del(existingTool.thumbnail);
+        safeDeleteFile(
+          path.join(uploadDir, path.basename(existingTool.thumbnail))
+        );
       }
 
       // Delete existing category relationships
@@ -150,10 +165,17 @@ export default async function handler(
         },
       });
 
+      // Delete associated images
       if (existingTool?.icon) {
-        try {
-          await del(existingTool.icon as string);
-        } catch {}
+        safeDeleteFile(
+          path.join(uploadDir, path.basename(existingTool.icon as string))
+        );
+      }
+
+      if (existingTool?.thumbnail) {
+        safeDeleteFile(
+          path.join(uploadDir, path.basename(existingTool.thumbnail as string))
+        );
       }
 
       // Delete the tool (cascading delete will handle category relationships)
