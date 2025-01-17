@@ -139,8 +139,16 @@ function Categories() {
                     ? categories.map((category: any) => (
                         <tr key={category.id}>
                           <td className="border px-4 py-2">{category.name}</td>
-                          <td className="border px-4 py-2">
+                          <td className="border px-4 py-2 flex items-center">
                             <i className={category.fontIcon}></i>
+                            <lord-icon
+                              src={`https://cdn.lordicon.com/${category.fontIcon}.json`}
+                              trigger="hover"
+                              style={{
+                                width: "25" + "px",
+                                height: "25" + "px",
+                              }}
+                            ></lord-icon>
                             <span className="ml-2">{category.fontIcon}</span>
                           </td>
                           <td className="h-auto align-middle justify-center border px-4 py-2">
