@@ -190,11 +190,11 @@ function Categories() {
                 className="max-w-52 block mb-4 p-2 border"
               />
 
-              <label>Font Awesome class</label>
+              <label>Lordicon code</label>
               <input
                 type="text"
                 name="fontIcon"
-                placeholder="e.g. fa-solid fa-user"
+                placeholder="e.g. jeuxydnh"
                 value={formData.fontIcon}
                 onChange={handleInputChange}
                 className="max-w-52 block mb-4 p-2 border"

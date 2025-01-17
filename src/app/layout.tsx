@@ -20,10 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <Script
-          src="https://kit.fontawesome.com/224b290536.js"
-          crossOrigin="anonymous"
-        />
+        <Script src="https://cdn.lordicon.com/lordicon.js" />
       </head>
       <body className={inter.className}>
         <ClientSideToastContainer />

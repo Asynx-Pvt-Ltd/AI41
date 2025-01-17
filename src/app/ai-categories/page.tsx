@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Header } from "../components/Header";
-
+import { Player } from "@lordicon/react";
 import Footer from "../components/Footer";
 import Link from "next/link";
 
@@ -39,8 +39,15 @@ export default function Page() {
                       className="bg-white shadow-md rounded-lg px-6 py-4 flex items-center justify-between"
                     >
                       <div className="flex items-center">
-                        <h3 className="text-lg font-semibold">
-                          <i className={item.fontIcon}></i>{" "}
+                        <h3 className="text-lg font-semibold flex items-center gap-1">
+                          <lord-icon
+                            src={`https://cdn.lordicon.com/${item.fontIcon}.json`}
+                            trigger="hover"
+                            style={{
+                              width: "25" + "px",
+                              height: "25" + "px",
+                            }}
+                          ></lord-icon>
                           {item.name ? item.name : "General"}
                         </h3>
                       </div>
