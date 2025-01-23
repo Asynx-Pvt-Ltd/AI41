@@ -6,6 +6,9 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import VideoModal from "../components/VideoModal";
 
+import FAQTutorialsAccordion from "@/app/components/tutorials/faqTutorials";
+import TipsToUse from "@/app/components/tutorials/TipsToUse";
+
 interface Tutorial {
   id: number;
   icon: string;
@@ -286,10 +289,22 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
+      <main className="flex-grow bg-gray-50 dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
         {loading === false ? (
           <>
             <div className="flex flex-col items-center justify-center space-y-4">
+              <div className=" text-black w-full p-4">
+                <div className=" text-center">
+                  <h1 className="text-3xl font-bold mb-6">
+                    Master AI Tools with Expert Tutorials
+                  </h1>
+                  <p className="text-xl mb-8">
+                    Learn to harness the power of AI tools effectively with our
+                    curated video tutorials and guides.
+                  </p>
+                </div>
+              </div>
+
               <div className="flex w-full md:w-2/3 lg:w-1/2 gap-4">
                 <input
                   type="text"
@@ -346,6 +361,16 @@ export default function Page() {
           </div>
         )}
       </main>
+
+      {/* Support */}
+      <div className="">
+        <TipsToUse />
+      </div>
+
+      {/*FAQ Tutorials */}
+      <div className="mb-10">
+        <FAQTutorialsAccordion />
+      </div>
       <Footer />
       <VideoModal
         isOpen={isModalOpen}

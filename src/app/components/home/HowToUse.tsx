@@ -20,7 +20,7 @@ import {
   Folder,
   LayoutDashboard,
 } from "lucide-react";
-import { CardDesign, CardContent } from "./cardDesign";
+import { CardDesign, CardContent } from "../ui/cardDesign";
 import Link from "next/link";
 
 const MainFeatures = () => {
@@ -288,7 +288,11 @@ const WhyUseSection = () => {
       description: (
         <>
           Instead of wasting hours trawling through countless websites and
-          reviews, directories bring all AI tools together in one place.
+          reviews, directories bring all{" "}
+          <Link href={"/full-list"} className="underline text-bold text-black">
+            AI tools
+          </Link>{" "}
+          together in one place.
         </>
       ),
     },
@@ -308,7 +312,11 @@ const WhyUseSection = () => {
       description: (
         <>
           Keep up with the constantly changing AI industry through our regularly
-          updated directory and dedicated AI news page.
+          updated directory and dedicated{" "}
+          <Link href={"/ai-news"} className="underline text-bold text-black">
+            AI news
+          </Link>{" "}
+          page.
         </>
       ),
     },

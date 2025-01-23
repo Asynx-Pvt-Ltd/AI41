@@ -10,7 +10,7 @@ import "./styles/style.css";
 import AIPlatformsCarousel from "@/app/components/AIPlatforms";
 import Footer from "@/app/components/Footer";
 import ToolsByCategories from "@/app/components/ToolsByCategories";
-import FAQAccordion from "./components/home/Faq";
+import FAQAccordion from "./components/home/FaqHome";
 import {
   AIToolsSection,
   HowToUseSection,
