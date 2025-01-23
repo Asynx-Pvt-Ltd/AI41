@@ -412,7 +412,7 @@ export default function Page() {
               Do you have a tool that you believe deserves attention? We are
               always on the lookout for new AI tools to add to our collection.
             </p>
-            <Link href="/submit-tool">
+            <Link href="/submit-ai">
               <button className="bg-[#222222] text-white font-bold py-3 px-8 rounded-lg">
                 Submit Your Tool
               </button>
