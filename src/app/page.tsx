@@ -258,6 +258,8 @@ export default function Page() {
             <Link
               href={"https://aiforeveryone.org/"}
               className="underline text-bold text-black"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               AI for Everyone
             </Link>
@@ -302,6 +304,8 @@ export default function Page() {
             <Link
               href={"/submit-ai"}
               className="underline text-bold text-black"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               ‘Submit AI Tool’
             </Link>
