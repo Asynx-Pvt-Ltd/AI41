@@ -86,10 +86,10 @@ const MainFeatures = () => {
   ];
 
   return (
-    <section className="py-16 bg-white dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-12 text-center">Main Features</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <section className="bg-white dark:bg-gray-900 my-8">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold my-8 text-center">Main Features</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <CardDesign
               key={index}
@@ -98,7 +98,7 @@ const MainFeatures = () => {
               <CardContent className="p-6 text-center mt-5">
                 <div className="flex justify-center">{feature.icon}</div>
                 <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
-                <p className="text-sm text-left text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
                   {feature.description}
                 </p>
               </CardContent>
@@ -172,24 +172,28 @@ const AIToolsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="bg-gray-50 dark:bg-gray-900 py-8">
+      <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-4">
           AI Tools for Every Task
         </h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
           No matter what your job is, we have the right tools to match them.
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {tools.map((tool, index) => (
             <CardDesign
               key={index}
               className="hover:shadow-lg transition-shadow duration-300"
             >
-              <CardContent className="p-6 text-center mt-5">
-                <div className="flex justify-center">{tool.icon}</div>
-                <h3 className="text-xl font-semibold mb-3">{tool.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300">
+              <CardContent className="p-6">
+                <div className="flex items-center mb-3 mt-5">
+                  {tool.icon}
+                  <h3 className="text-lg font-semibold mb-3 ml-4">
+                    {tool.title}
+                  </h3>
+                </div>
+                <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
                   {tool.description}
                 </p>
               </CardContent>
@@ -248,14 +252,14 @@ const HowToUseSection = () => {
   ];
 
   return (
-    <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-8">
+      <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-4">How To Use?</h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
           Using our AI Tools directory is pretty simple and fast. Follow these
           steps to choose the right tools that fit your needs.
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => (
             <div key={index} className="relative">
               {index < steps.length - 1 && (
@@ -263,11 +267,13 @@ const HowToUseSection = () => {
               )}
               <CardDesign className="relative z-10 hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-6">
-                  <div className="bg-gray-100 dark:bg-gray-800 rounded-full w-12 h-12 flex items-center justify-center mb-4 mt-4">
-                    {step.icon}
+                  <div className="flex items-center mb-2">
+                    <div className="bg-gray-100 dark:bg-gray-800 rounded-full w-12 flex items-center justify-center mb-4 mt-4">
+                      {step.icon}
+                    </div>
+                    <h3 className="text-lg font-semibold ml-4">{step.title}</h3>
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <p className="text-gray-600 dark:text-gray-300 text-justify">
                     {step.description}
                   </p>
                 </CardContent>
@@ -333,12 +339,12 @@ const WhyUseSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-8 bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-4">
           Why Use An AI Directory?
         </h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+        <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
           Have a look at how our AI directory can help you find the right fit
           from a list of all AI tools:
         </p>
@@ -348,12 +354,12 @@ const WhyUseSection = () => {
               key={index}
               className="hover:shadow-lg transition-shadow duration-300"
             >
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4 mt-4">
+              <CardContent className="p-6 mt-5">
+                <div className="flex items-center mb-3 mt-5">
                   {reason.icon}
-                  <h3 className="text-xl font-semibold ml-4">{reason.title}</h3>
+                  <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300">
+                <p className="text-gray-600 dark:text-gray-300 text-justify">
                   {reason.description}
                 </p>
               </CardContent>
@@ -368,7 +374,7 @@ const WhyUseSection = () => {
 const WhyChooseUsSection = () => {
   const features = [
     {
-      icon: <Database className="w-12 h-12 text-blue-500" />,
+      icon: <Database className="w-8 h-8 text-blue-500" />,
       title: "Extensive Collection",
       description: (
         <>
@@ -378,7 +384,7 @@ const WhyChooseUsSection = () => {
       ),
     },
     {
-      icon: <Zap className="w-12 h-12 text-yellow-500" />,
+      icon: <Zap className="w-8 h-8 text-yellow-500" />,
       title: "Latest AI Tools",
       description: (
         <>
@@ -394,7 +400,7 @@ const WhyChooseUsSection = () => {
       ),
     },
     {
-      icon: <ClipboardCheck className="w-12 h-12 text-green-500" />,
+      icon: <ClipboardCheck className="w-8 h-8 text-green-500" />,
       title: "Accurate Information",
       description: (
         <>
@@ -412,7 +418,7 @@ const WhyChooseUsSection = () => {
       ),
     },
     {
-      icon: <Users className="w-12 h-12 text-purple-500" />,
+      icon: <Users className="w-8 h-8 text-purple-500" />,
       title: "User Trust",
       description: (
         <>
@@ -425,8 +431,8 @@ const WhyChooseUsSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white dark:bg-gray-900">
-      <div className="max-w-6xl mx-auto px-4">
+    <section className="py-8 bg-white dark:bg-gray-900">
+      <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">
@@ -441,22 +447,16 @@ const WhyChooseUsSection = () => {
               key={index}
               className="hover:shadow-lg transition-shadow duration-300"
             >
-              <CardContent className="p-8 mt-5">
-                <div className="flex flex-col items-center md:items-start md:flex-row">
-                  <div className="mb-4 md:mb-0 md:mr-6">
-                    <div className="p-3 rounded-full bg-gray-100 dark:bg-gray-700">
-                      {feature.icon}
-                    </div>
-                  </div>
-                  <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-xl font-semibold mb-2">
-                      {feature.title}
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      {feature.description}
-                    </p>
-                  </div>
+              <CardContent className="p-6 mt-5">
+                <div className="flex items-center justify-center mb-3 mt-5">
+                  {feature.icon}
+                  <h3 className="text-lg font-semibold ml-4">
+                    {feature.title}
+                  </h3>
                 </div>
+                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 py-2">
+                  {feature.description}
+                </p>
               </CardContent>
             </CardDesign>
           ))}

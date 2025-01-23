@@ -273,11 +273,11 @@ export default function Page() {
       <Header />
       <main className="bg-white dark:bg-gray-800 w-full h-auto pt-10 pl-6 pr-6 pb-6 text-center flex-grow">
         {/* Hero Section */}
-        <section className="max-w-4xl mx-auto mb-16">
-          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-4 font-roboto">
+        <section className="max-w-7xl mx-auto mb-16">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-roboto">
             Discover The Best AI Tools Instantly!
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+          <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             Have a look at our curated list of AI tools to simplify your tasks.
             Easily compare and select the best AI tools for your needs.
           </p>
@@ -368,7 +368,7 @@ export default function Page() {
           </div>
           <div className="flex flex-1 md:flex-col flex-row justify-evenly px-8">
             <div className="flex flex-col">
-              <h2 className="text-3xl font-bold text-center mb-6">
+              <h2 className="text-2xl font-bold text-center mb-6">
                 The World's Best AI Tools Directory
               </h2>
               <p className="text-justify text-gray-600 dark:text-gray-300">
@@ -404,11 +404,11 @@ export default function Page() {
 
         {/* Call to Action */}
         <section className="py-16 bg-white dark:bg-gray-800">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">
               Submit an AI Tool Today!
             </h2>
-            <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
+            <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
               Do you have a tool that you believe deserves attention? We are
               always on the lookout for new AI tools to add to our collection.
             </p>
