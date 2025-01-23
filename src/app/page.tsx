@@ -254,12 +254,14 @@ export default function Page() {
         <>
           You can use our directory and apply the “free” filter. You can also
           use a directory dedicated exclusively to free tools like{" "}
-          <Link
-            href={"https://aiforeveryone.org/"}
-            className="underline text-bold text-black"
-          >
-            AI for Everyone
-          </Link>{" "}
+          <strong>
+            <Link
+              href={"https://aiforeveryone.org/"}
+              className="underline text-bold text-black"
+            >
+              AI for Everyone
+            </Link>
+          </strong>{" "}
           to find the best, free AI tools. Each listing also shows if a tool is
           completely free or has premium features, so you can pick the right
           option without wasting time.
@@ -296,9 +298,14 @@ export default function Page() {
         <>
           If you have developed an AI tool, we'd be glad to showcase it. Please
           visit our{" "}
-          <Link href={"/submit-ai"} className="underline text-bold text-black">
-            ‘Submit AI Tool’
-          </Link>{" "}
+          <strong>
+            <Link
+              href={"/submit-ai"}
+              className="underline text-bold text-black"
+            >
+              ‘Submit AI Tool’
+            </Link>
+          </strong>{" "}
           section of our page to list it. We will manually test your tool. If it
           passes the test, we will showcase it in our directory.
         </>
@@ -334,70 +341,80 @@ export default function Page() {
           <br />
           <span className="">
             <span>
-              <Link
-                href={"https://chatgpt.com/"}
-                className="underline text-bold text-black"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <b>Chat GPT:</b>
-              </Link>{" "}
+              <strong>
+                <Link
+                  href={"https://chatgpt.com/"}
+                  className="underline text-bold text-black"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>Chat GPT:</b>
+                </Link>
+              </strong>{" "}
               The pioneering AI chatbot that works well for many purposes, right
               from writing a poem to coding.
             </span>
             <br />
             <br />
             <span>
-              <Link
-                href={"https://gemini.google.com/"}
-                className="underline text-bold text-black"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <b>Gemini:</b>
-              </Link>{" "}
+              <strong>
+                <Link
+                  href={"https://gemini.google.com/"}
+                  className="underline text-bold text-black"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>Gemini:</b>
+                </Link>
+              </strong>{" "}
               An AI tool based on Google's vast database. You can use it to make
               data-driven decisions.
             </span>
             <br />
             <br />
             <span>
-              <Link
-                href={"https://claude.ai/"}
-                className="underline text-bold text-black"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <b>Claude:</b>
-              </Link>{" "}
+              <strong>
+                <Link
+                  href={"https://claude.ai/"}
+                  className="underline text-bold text-black"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>Claude:</b>
+                </Link>
+              </strong>{" "}
               Another AI chatbot where you can feed your response style directly
               for more personalized responses.
             </span>
             <br />
             <br />
             <span>
-              <Link
-                href={"https://x.com/i/grok"}
-                className="underline text-bold text-black"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <b>Grok:</b>
-              </Link>{" "}
+              <strong>
+                <Link
+                  href={"https://x.com/i/grok"}
+                  className="underline text-bold text-black"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>Grok:</b>
+                </Link>
+              </strong>{" "}
               A versatile AI tool on the X (formerly Twitter) platform that
               specializes in image generation.
             </span>
             <br />
             <br />
             <span>
-              <Link
-                href={"https://www.perplexity.ai/"}
-                className="underline text-bold text-black"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <b>Perplexity AI:</b>
-              </Link>{" "}
+              <strong>
+                <Link
+                  href={"https://www.perplexity.ai/"}
+                  className="underline text-bold text-black"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <b>Perplexity AI:</b>
+                </Link>
+              </strong>{" "}
               An advanced search engine AI tool that uses real-time data, mainly
               for research purposes.
             </span>
@@ -647,11 +664,13 @@ export default function Page() {
               Do you have a tool that you believe deserves attention? We are
               always on the lookout for new AI tools to add to our collection.
             </p>
-            <Link href="/submit-ai">
-              <button className="bg-[#222222] text-white font-bold py-3 px-8 rounded-lg">
-                Submit Your Tool
-              </button>
-            </Link>
+            <strong>
+              <Link href="/submit-ai">
+                <button className="bg-[#222222] text-white font-bold py-3 px-8 rounded-lg">
+                  Submit Your Tool
+                </button>
+              </Link>
+            </strong>
           </div>
         </section>
       </main>
