@@ -61,7 +61,7 @@ function Footer() {
                 </a>
               </li>
               <li>
-                <a href="/full-list" className="hover:text-gray-300">
+                <a href="/all-ai-tools" className="hover:text-gray-300">
                   Explore 100+ AI's
                 </a>
               </li>

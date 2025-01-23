@@ -38,7 +38,7 @@ export const Header = () => {
         {/* Right: Navigation */}
         <nav className="flex flex-wrap justify-around sm:justify-start space-x-2 sm:space-x-6 mt-4 sm:mt-0">
           <Link
-            href="/full-list"
+            href="/all-ai-tools"
             className="text-sm sm:text-base md:text-lg lg:text-xl text-white dark:text-gray-300 hover:text-gray-300 dark:hover:text-blue-400"
           >
             Full List
