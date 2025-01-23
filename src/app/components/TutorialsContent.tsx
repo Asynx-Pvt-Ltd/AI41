@@ -1,12 +1,5 @@
 import React, { useState } from "react";
 import { BookOpen, Settings, Combine, Brain, PenTool } from "lucide-react";
-// import {
-//   Card,
-//   CardHeader,
-//   CardTitle,
-//   CardDescription,
-//   CardContent,
-// } from "@/app/components/ui/CardsCN";
 import {
   Tabs,
   TabsList,
@@ -95,7 +88,7 @@ const TipsToUse = () => {
   return (
     <div className=" bg-gray-50 dark:bg-gray-900">
       {/* Main Content */}
-      <div className="container mx-auto px-4 pt-12 pb-5">
+      <div className="container mx-auto px-4 py-12">
         <Tabs defaultValue="overview" className="space-y-8">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-2 gap-4">
             <TabsTrigger value="overview">Overview</TabsTrigger>

@@ -23,8 +23,8 @@ const FAQTutorialsAccordion: React.FC<FAQTutorialsAccordionProps> = ({
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto space-y-4 mt-8">
-      <h2 className="text-3xl font-bold text-center mb-8">{title}</h2>
+    <div className="w-full max-w-3xl mx-auto space-y-4 pb-8">
+      <h2 className="text-3xl font-bold text-center p-5">{title}</h2>
       {faqs.map((faq, index) => (
         <div key={index} className="border rounded-lg overflow-hidden">
           <button

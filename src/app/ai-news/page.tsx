@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import FormatMarkdownText from "../components/textFormatter";
+import AINewsPage from "../components/NewsContent";
 // Types for better type safety
 type NewsItem = {
   title: string;
@@ -78,10 +79,16 @@ export default function Page() {
     <div className="flex flex-col min-h-screen">
       <Header />
       <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-5 pb-6 text-center">
-        <div className="container py-8">
-          <h1 className="text-3xl font-bold text-center mb-8">
-            Latest AI News & Trends
-          </h1>
+        <div className="container py-8 ">
+          <section className="text-center mb-12">
+            <h1 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+              AI News & Insights
+            </h1>
+            <p className="text-md text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+              Navigate the fast-evolving AI landscape with curated news,
+              emerging trends, and strategic insights.
+            </p>
+          </section>
 
           {/* Search and Filter Section */}
           <div className="max-w-4xl mx-auto mb-8 px-4">
@@ -158,6 +165,7 @@ export default function Page() {
           )}
         </div>
       </main>
+      <AINewsPage />
       <Footer />
     </div>
   );

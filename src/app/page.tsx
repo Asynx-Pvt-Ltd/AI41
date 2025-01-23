@@ -398,7 +398,7 @@ export default function Page() {
           <WhyChooseUsSection />
         </main>
         {/* FAQ Section */}
-        <section className="py-12 bg-gray-50 dark:bg-gray-900">
+        <section className=" bg-gray-50 dark:bg-gray-900">
           <FAQ faqs={faqs} title="Frequently Asked Questions" />
         </section>
 

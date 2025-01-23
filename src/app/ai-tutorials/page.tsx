@@ -349,7 +349,7 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-gray-50 dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
+      <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
         {loading === false ? (
           <>
             <div className="flex flex-col items-center justify-center space-y-4">
@@ -423,12 +423,12 @@ export default function Page() {
       </main>
 
       {/* Support */}
-      <div className="">
+      <div>
         <TipsToUse />
       </div>
 
       {/*FAQ Tutorials */}
-      <div className="mb-10">
+      <div>
         <FAQ faqs={faqs} title="Frequently Asked Questions" />
       </div>
       <Footer />
