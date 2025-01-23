@@ -20,7 +20,7 @@ import {
   Folder,
   LayoutDashboard,
 } from "lucide-react";
-import { CardDesign, CardContent } from "../ui/cardDesign";
+import { CardDesign, CardContent } from "@/app/components/ui/cardDesign";
 import Link from "next/link";
 
 const MainFeatures = () => {

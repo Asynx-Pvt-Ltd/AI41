@@ -6,8 +6,8 @@ import Footer from "../components/Footer";
 import Link from "next/link";
 import VideoModal from "../components/VideoModal";
 
-import FAQTutorialsAccordion from "@/app/components/tutorials/faqTutorials";
-import TipsToUse from "@/app/components/tutorials/TipsToUse";
+import FAQ from "@/app/components/ui/FAQ";
+import TipsToUse from "@/app/components/TutorialsContent";
 
 interface Tutorial {
   id: number;
@@ -286,6 +286,66 @@ export default function Page() {
     applyFilters(tutorials, searchTerm, selectedCategory);
   }, [searchTerm, selectedCategory]);
 
+  const faqs = [
+    {
+      question: "How do I make AI Writing Tools sound more like me?",
+      answer: (
+        <>
+          You need to feed your style to the tool. So, begin with samples of
+          your writing. The more they know your voice, the better they mimic it.
+          Similarly, you can include specific instructions in your prompt, like
+          “write in a humorous, sarcastic tone.”
+        </>
+      ),
+    },
+    {
+      question: "Can AI replace human efforts completely?",
+      answer: (
+        <>
+          Not quite. AI tools are mainly used to automate repetitive tasks.
+          Still, there’s no replacement for humans' decision-making ability and
+          creativity.
+        </>
+      ),
+    },
+    {
+      question: "Can I train AI tools with my own data?",
+      answer: (
+        <>
+          Our list includes some free and paid tools. You can go through the
+          dedicated page of each tool to know the pricing details.
+        </>
+      ),
+    },
+    {
+      question: "How do I apply AI tools for creative work?",
+      answer: (
+        <>
+          AI tools are really helpful in brainstorming ideas from scratch and
+          can even help you craft the content. You can use them along with your
+          imagination to achieve better results.
+        </>
+      ),
+    },
+    {
+      question: "Are the tools listed verified and reliable?",
+      answer:
+        "We're serious about reliability. Every tool in our directory is vetted through user feedback and performance checks. We even consider the credibility of the developers. That means you will see only trusted, high-quality tools for your purpose.",
+    },
+    {
+      question: "Can I list a tool in your directory?",
+      answer: (
+        <>
+          Of course. You can{" "}
+          <Link href={"/submit-ai"} className="underline text-bold text-black">
+            submit your AI
+          </Link>{" "}
+          tool to our directory. Just contact us to know more!
+        </>
+      ),
+    },
+  ];
+
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -369,7 +429,7 @@ export default function Page() {
 
       {/*FAQ Tutorials */}
       <div className="mb-10">
-        <FAQTutorialsAccordion />
+        <FAQ faqs={faqs} title="Frequently Asked Questions" />
       </div>
       <Footer />
       <VideoModal

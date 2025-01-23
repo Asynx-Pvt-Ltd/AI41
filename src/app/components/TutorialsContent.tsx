@@ -14,7 +14,7 @@ import {
   TabsContent,
 } from "@/app/components/ui/TabsCN";
 
-import { CardDesign, CardContent } from "../ui/cardDesign";
+import { CardDesign, CardContent } from "./ui/cardDesign";
 import Link from "next/link";
 
 const TipsToUse = () => {
