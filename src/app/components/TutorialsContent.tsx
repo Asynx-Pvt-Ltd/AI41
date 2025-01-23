@@ -35,7 +35,7 @@ const TipsToUse = () => {
           GPT works really well for creative purposes. But when it comes to
           research, Perplexity AI has an edge. With this knowledge, you can
           choose the right tool for{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
+          <Link href={"/job"} className="underline text-bold text-black">
             your job purpose
           </Link>
           .
@@ -150,7 +150,7 @@ const TipsToUse = () => {
                   <li>
                     Not{" "}
                     <Link
-                      href={"/full-list"}
+                      href={"/all-ai-tools"}
                       className="underline text-bold text-black"
                     >
                       all AI tools

@@ -266,6 +266,20 @@ export default function Page() {
         </>
       ),
     },
+    {
+      question: "How can I get my AI tool listed?",
+      answer: (
+        <>
+          If you have developed an AI tool, we'd be glad to showcase it. Please
+          visit our{" "}
+          <Link href={"/submit-ai"} className="underline text-bold text-black">
+            ‘Submit AI Tool’
+          </Link>{" "}
+          section of our page to list it. We will manually test your tool. If it
+          passes the test, we will showcase it in our directory.
+        </>
+      ),
+    },
   ];
 
   return (

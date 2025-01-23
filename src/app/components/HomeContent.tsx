@@ -19,6 +19,7 @@ import {
   FileText,
   Folder,
   LayoutDashboard,
+  ShieldCheck,
 } from "lucide-react";
 import { CardDesign, CardContent } from "@/app/components/ui/cardDesign";
 import Link from "next/link";
@@ -33,7 +34,7 @@ const MainFeatures = () => {
           Find the right AI tool easily with our advanced filters. You can
           filter by category or pricing model to find what you need. Just find
           the perfect AI tools{" "}
-          <Link href={"/jobs"} className="underline text-bold text-black">
+          <Link href={"/job"} className="underline text-bold text-black">
             for your job
           </Link>{" "}
           in a flash without wasting time scrolling.
@@ -60,7 +61,10 @@ const MainFeatures = () => {
         <>
           We understand that time is so precious. That’s why we have done all
           the heavy lifting for you. Our curated collections take{" "}
-          <Link href={"/full-list"} className="underline text-bold text-black">
+          <Link
+            href={"/all-ai-tools"}
+            className="underline text-bold text-black"
+          >
             {" "}
             all important AI tools
           </Link>{" "}
@@ -86,10 +90,10 @@ const MainFeatures = () => {
   ];
 
   return (
-    <section className="bg-white dark:bg-gray-900 my-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-white dark:bg-gray-900 my-10">
+      <div className="max-w-7xl mx-auto mb-5">
         <h2 className="text-3xl font-bold my-8 text-center">Main Features</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <CardDesign
               key={index}
@@ -172,8 +176,8 @@ const AIToolsSection = () => {
   ];
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-8">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-gray-50 dark:bg-gray-900 py-5">
+      <div className="max-w-7xl mx-auto mb-5">
         <h2 className="text-3xl font-bold text-center mb-4">
           AI Tools for Every Task
         </h2>
@@ -186,12 +190,10 @@ const AIToolsSection = () => {
               key={index}
               className="hover:shadow-lg transition-shadow duration-300"
             >
-              <CardContent className="p-6">
-                <div className="flex items-center mb-3 mt-5">
+              <CardContent className="p-6 text-center mt-5">
+                <div className="flex mt-5">
                   {tool.icon}
-                  <h3 className="text-lg font-semibold mb-3 ml-4">
-                    {tool.title}
-                  </h3>
+                  <h3 className="text-xl font-semibold ml-4">{tool.title}</h3>
                 </div>
                 <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
                   {tool.description}
@@ -252,33 +254,27 @@ const HowToUseSection = () => {
   ];
 
   return (
-    <section className="py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-4">How To Use?</h2>
+    <section className="bg-gray-50 dark:bg-gray-800 py-5">
+      <div className="max-w-7xl mx-auto mb-5">
+        <h2 className="text-3xl font-bold mb-4 text-center">How To Use?</h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
           Using our AI Tools directory is pretty simple and fast. Follow these
           steps to choose the right tools that fit your needs.
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((step, index) => (
-            <div key={index} className="relative">
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/4 right-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700 transform translate-x-1/2" />
-              )}
-              <CardDesign className="relative z-10 hover:shadow-lg transition-shadow duration-300">
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-2">
-                    <div className="bg-gray-100 dark:bg-gray-800 rounded-full w-12 flex items-center justify-center mb-4 mt-4">
-                      {step.icon}
-                    </div>
-                    <h3 className="text-lg font-semibold ml-4">{step.title}</h3>
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-justify">
-                    {step.description}
-                  </p>
-                </CardContent>
-              </CardDesign>
-            </div>
+            <CardDesign
+              key={index}
+              className="hover:shadow-lg transition-shadow duration-300"
+            >
+              <CardContent className="p-6 text-center mt-5">
+                <div className="flex justify-center mb-3">{step.icon}</div>
+                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
+                <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
+                  {step.description}
+                </p>
+              </CardContent>
+            </CardDesign>
           ))}
         </div>
       </div>
@@ -293,12 +289,12 @@ const WhyUseSection = () => {
       title: "Save Time",
       description: (
         <>
-          Instead of wasting hours trawling through countless websites and
-          reviews, directories bring all{" "}
-          <Link href={"/full-list"} className="underline text-bold text-black">
-            AI tools
-          </Link>{" "}
-          together in one place.
+          Instead of wasting a few hours of your life trawling through countless
+          websites and reviews, directories bring all AI tools together in one
+          place. Assume that you need a design tool or a coding assistant you do
+          not have to go through your search results to test dozens of options.
+          All you would do is have an organized list at your fingertips, so to
+          speak; it's as if you had a trusted guide to show you the way.
         </>
       ),
     },
@@ -307,8 +303,13 @@ const WhyUseSection = () => {
       title: "Explore Hidden Gems",
       description: (
         <>
-          Find important AI tools flying under the radar. Discover tools that
-          can change the way you work.
+          The internet is replete with some important AI tools, but many of them
+          are flying under the radar. So, how do you find those gems if you
+          don't even know they exist? Well, an AI directory lists almost all AI
+          tools, irrespective of their popularity. If you spend a little time on
+          our AI directory, you can find many important AI tools that you can’t
+          view in the search results. You may stumble upon a tool that can
+          change the way how you work.
         </>
       ),
     },
@@ -317,12 +318,14 @@ const WhyUseSection = () => {
       title: "Stay Ahead",
       description: (
         <>
-          Keep up with the constantly changing AI industry through our regularly
-          updated directory and dedicated{" "}
+          The AI industry is constantly changing. An AI tool directory can let
+          you catch up with it. Unlike websites carrying on with old
+          information, directories are regularly updated. You will always know
+          what is happening. We even provide you with a dedicated{" "}
           <Link href={"/ai-news"} className="underline text-bold text-black">
             AI news
           </Link>{" "}
-          page.
+          page to inform you of the latest trends in the industry.
         </>
       ),
     },
@@ -331,8 +334,22 @@ const WhyUseSection = () => {
       title: "Tailored To Your Needs",
       description: (
         <>
-          Filter through tools based on features and use cases to find exactly
-          what you're looking for.
+          Not all AI tools are the same. Some are better suited for creative
+          tasks, while some may be better at solving technical challenges. Our
+          AI directory helps you filter through tools based on features and use
+          cases. That makes it easier to find what exactly you’re looking for.
+        </>
+      ),
+    },
+    {
+      icon: <ShieldCheck className="w-8 h-8 text-blue-500" />,
+      title: "Make Informed Choices",
+      description: (
+        <>
+          Our AI tool directory has well-descriptive, dedicated pages for each
+          tool. You can view all about AI tools here, right from founding year
+          to price. That means you need not browse through multiple websites for
+          that. So you can make an informed decision quickly.
         </>
       ),
     },
@@ -348,7 +365,7 @@ const WhyUseSection = () => {
           Have a look at how our AI directory can help you find the right fit
           from a list of all AI tools:
         </p>
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {reasons.map((reason, index) => (
             <CardDesign
               key={index}
@@ -359,7 +376,7 @@ const WhyUseSection = () => {
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 text-justify">
+                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
                   {reason.description}
                 </p>
               </CardContent>

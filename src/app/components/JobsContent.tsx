@@ -87,9 +87,12 @@ export default function JobsContent() {
         <>
           In case you are investing in a paid AI tool, always consider
           scalability. Remember, your job requirements change over time. A good
-          tool can grow with you—either through modular features or frequent
-          updates with increasing data loads. Stay tuned to our AI news page to
-          get to know the latest updates on your favorite AI tools.
+          tool can grow with you either through modular features or frequent
+          updates with increasing data loads. Stay tuned to our{" "}
+          <Link href={"/ai-news"} className="underline text-bold text-black">
+            AI news
+          </Link>{" "}
+          page to get to know the latest updates on your favorite AI tools.
         </>
       ),
     },
@@ -102,7 +105,14 @@ export default function JobsContent() {
           use. Be sure to opt for tools with a user-friendly interface and
           tutorials. Tools with the least learning curve enable you to focus on
           your job rather than wasting time trying to figure out how the tool
-          works.
+          works.Is it too difficult to use your current AI tool? Check out our{" "}
+          <Link
+            href={"/ai-tutorials"}
+            className="underline text-bold text-black"
+          >
+            video tutorials
+          </Link>{" "}
+          on how to use the AI tools effectively.
         </>
       ),
     },
@@ -214,7 +224,18 @@ export default function JobsContent() {
         </h1>
         <p className="text-md text-gray-600 dark:text-gray-300 text-center">
           Never get left behind in the tech race. Use our page to find the
-          perfect AI tools that fit your job like a glove. Stay ahead now!
+          perfect{" "}
+          <Link
+            href={"/all-ai-tools"}
+            className="underline text-bold text-black"
+          >
+            AI tools
+          </Link>{" "}
+          that fit{" "}
+          <Link href={"/job"} className="underline text-bold text-black">
+            your job
+          </Link>{" "}
+          like a glove. Stay ahead now!
         </p>
       </div>
     </div>

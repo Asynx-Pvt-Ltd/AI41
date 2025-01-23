@@ -178,11 +178,17 @@ export default function FullList() {
                 Where To Find A List With All AI Tools?
               </h1>
               <p className="text-justify mt-2 pl-4">
-                Luckily, our AI tool directory has a curated list of all AI
-                tools. You can use our advanced filtering system to find the
-                tools that match your purpose. We even provide a dedicated page
-                for each tool with all details. So the decision-making process
-                will be much easier.
+                Luckily, our AI tool directory has a curated list of all{" "}
+                <Link
+                  href={"/all-ai-tools"}
+                  className="underline text-bold text-black"
+                >
+                  AI tools
+                </Link>
+                . You can use our advanced filtering system to find the tools
+                that match your purpose. We even provide a dedicated page for
+                each tool with all details. So the decision-making process will
+                be much easier.
               </p>
             </div>
             <div className="flex flex-1 flex-col justify-center items-center">

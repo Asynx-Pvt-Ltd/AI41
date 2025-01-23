@@ -93,8 +93,34 @@ export default function AllAITools() {
       description: (
         <>
           Never rely on the marketing hype. Check out what users are saying
-          through unbiased platforms like G2, IsItLegit or Trustpilot.
-          Sometimes, someone in your network has already done the legwork. So,
+          through unbiased platforms like{" "}
+          <Link
+            href={"http://g2.com/"}
+            className="underline text-bold text-black"
+            target="_blank"
+            rel="noopener"
+          >
+            G2
+          </Link>
+          ,{" "}
+          <Link
+            href={"https://isitlegit.co/"}
+            className="underline text-bold text-black"
+            target="_blank"
+            rel="noopener"
+          >
+            IsItLegit
+          </Link>{" "}
+          or{" "}
+          <Link
+            href={"https://www.trustpilot.com/"}
+            className="underline text-bold text-black"
+            target="_blank"
+            rel="noopener"
+          >
+            Trustpilot
+          </Link>
+          . Sometimes, someone in your network has already done the legwork. So,
           ask the experts in your network circle, too. You can also go through
           the case studies to get a more clear picture.
         </>
@@ -180,28 +206,28 @@ export default function AllAITools() {
   const comparisonData = [
     {
       category: "Support",
-      free: "Limited availability, slow response times",
-      paid: "Preferential support via live chat, prompt issue resolution",
+      free: "Support may not be available, or it takes time for them to respond. You might be on your own in most cases.",
+      paid: "All AI tools offer preferential support to paid customers. You can contact them through live chats to solve issues promptly.",
     },
     {
       category: "Features",
-      free: "Basic features only, advanced features locked",
-      paid: "Full access to comprehensive feature set",
+      free: "You will have only some basic features. Advanced ones will be locked behind the paywall.",
+      paid: "Access to full features.",
     },
     {
       category: "Updates",
-      free: "Infrequent, potentially outdated",
-      paid: "Regular updates with latest industry innovations",
+      free: "Updates might be limited. You will be stuck in the past without any progress.",
+      paid: "Give regular updates to keep the tool updated in the industry. You can enjoy many fresh features before your competitors.",
     },
     {
       category: "Scalability",
-      free: "Limited handling of complex tasks",
-      paid: "Highly scalable, easy plan upgrades",
+      free: "Free tools can never handle complex tasks efficiently. They may not grow as per your needs.",
+      paid: "Highly scalable. You can easily upgrade your plan to add more features.",
     },
     {
       category: "Target Audience",
-      free: "Budget-constrained users",
-      paid: "Businesses with automation budgets",
+      free: "Better for those with a tight budget and can’t spend anything on AI tools.",
+      paid: "Suits more for businesses with sufficient funds for automation.",
     },
   ];
 
@@ -214,31 +240,46 @@ export default function AllAITools() {
       title: "Plagiarism Concerns",
       description: (
         <>
-          AI tools often generate content that risks copyright infringement. The
-          New York Times has sued OpenAI and Microsoft for mimicking their
-          content, challenging the notion of AI-generated uniqueness.
+          Most users believe that AI gives them unique responses. Well, it may
+          not be true. Over the past years, many AI tools have been under the
+          shadow of plagiarism. For instance, the{" "}
+          <Link
+            href={
+              "https://www.forbes.com/sites/britneynguyen/2023/12/27/new-york-times-sues-openai-and-microsoft-billions-owed-for-ai-copyright-infringement-case-claims/"
+            }
+            className="underline text-bold text-black"
+            target="_blank"
+            rel="noopener"
+          >
+            New York Times
+          </Link>{" "}
+          has sued Open AI and Microsoft over Copyright Infringement for
+          mimicking their content.
         </>
       ),
     },
     {
       icon: <Palette className="text-[#FFA500]" />,
-      title: "AI Creativity",
+      title: "Creativity",
       description: (
         <>
-          Beyond mere replication, AI shows significant growth in creative
-          sectors. The Writers Guild of America (WGA) went on strike in 2023 to
-          address the technology's impact on creative industries.
+          Yet, we can’t conclude that AI is just replicating. Its intense growth
+          in the creative sector is worth mentioning. The writers' community
+          takes this threat seriously. In 2023, the Writers Guild of America
+          (WGA) went on strike to address this issue.
         </>
       ),
     },
     {
       icon: <Briefcase className="text-[#00C49A]" />,
-      title: "Employment Dynamics",
+      title: "Employment Generation",
       description: (
         <>
-          Contrary to job-loss fears, the AI industry is generating numerous
-          jobs. Millions of employees work on data labeling and response
-          correction, making AI a potential top-employing industry.
+          A lot of people spread panic that AI is taking over jobs. But many
+          don’t notice the jobs generated by the AI industry over the past few
+          years. Millions of employees spend hours labelling data and correcting
+          the responses to train all AI tools. And in the coming years, AI is
+          expected to become one of the top employing industries in the world.
         </>
       ),
     },
@@ -247,32 +288,38 @@ export default function AllAITools() {
       title: "Catastrophic Forgetting",
       description: (
         <>
-          AI tools struggle with 'catastrophic forgetting' - rapidly losing
-          previous learning when acquiring new information. Developers
-          continuously work to overcome this significant technological
-          challenge.
+          While learning new things, all AI tools often forget older data
+          quickly. This is called catastrophic forgetting. As the name suggests,
+          it is one of the biggest challenges in the growth of AI technology.
+          Developers have to work extra hard to make sure that this is not
+          happening. For this, they may have to feed all AI tools with similar
+          data repeatedly.
         </>
       ),
     },
     {
       icon: <Scroll className="text-[#8ECAE6]" />,
-      title: "Archaeological Innovations",
+      title: "Archaeological Contributions",
       description: (
         <>
-          AI is revolutionizing historical research. For instance, it helped
-          interpret the Herculaneum papyri by analyzing scroll patterns,
-          enabling archaeologists to unroll ancient documents without damage.
+          AI is not just about the future. Many are using it to dig into the
+          past, also. For example, AI has been used to interpret the Herculaneum
+          papyri— ancient scrolls damaged by the eruption of Mount Vesuvius. It
+          can figure out the patterns of how these were rolled. That makes it
+          easier for the archaeologists to unroll them without any damage.
         </>
       ),
     },
     {
       icon: <Gavel className="text-[#6A4C93]" />,
-      title: "Judicial Applications",
+      title: "AI in Judiciary",
       description: (
         <>
-          AI is making inroads into the judicial system. Tools like COMPAS
-          assess criminal recidivism risk, potentially influencing sentencing
-          and bail decisions.
+          AI is gradually influencing even the judicial system. COMPAS
+          (Correctional Offender Management Profiling for Alternative
+          Sanctions), for example, is a risk assessment tool to evaluate the
+          tendency of a convicted criminal to re-offend a criminal act. This
+          could be used to determine the length of sentences and bail.
         </>
       ),
     },
@@ -513,9 +560,19 @@ export default function AllAITools() {
           </p>
           <ul className="flex flex-col gap-3 list-disc text-justify pl-[5vw] max-w-5xl">
             <li>
-              Generative AI is the most popular AI technology. Approximately 51%
-              of companies use these important AI tools for various purposes
-              like content creation, automation, customer support, etc.
+              <Link
+                href={
+                  "https://www.hostinger.co.uk/tutorials/ai-statistics#ai-investment"
+                }
+                className="underline text-bold text-black"
+                target="_blank"
+                rel="noopener"
+              >
+                Generative AI
+              </Link>{" "}
+              is the most popular AI technology. Approximately 51% of companies
+              use these important AI tools for various purposes like content
+              creation, automation, customer support, etc.
             </li>
             <li>
               By the end of 2030, the{" "}
@@ -586,9 +643,14 @@ export default function AllAITools() {
 
       <section className="bg-gray-50 dark:bg-gray-800 py-5">
         <div className="max-w-7xl mx-auto mb-5">
-          <h2 className="text-3xl font-bold mb-8 text-center">
+          <h2 className="text-3xl font-bold mb-4 text-center">
             AI Tools Facts and Curiosities
           </h2>
+          <p className="text-md text-gray-600 dark:text-gray-300 mb-8 text-center">
+            AI is everywhere. However, people still have many misconceptions
+            about technology. Here are some little-known facts about AI to clear
+            them all:
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {KeyFacts.map((facts, index) => (
               <CardDesign
@@ -616,18 +678,18 @@ export default function AllAITools() {
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Find The Best AI Tools With Our List!
         </h1>
-        <p className="text-md text-gray-600 dark:text-gray-300 text-justify">
+        <p className="text-md text-gray-600 dark:text-gray-300 text-justify max-w-7xl">
           Still doubtful of where to start? Well, our AI directory paves the
           starting line with a curated list of the top-performing tools in
           various industries. Go through our dedicated product pages to see all{" "}
           <Link
-            href={"/all-ai-list"}
+            href={"/all-ai-tools"}
             className="underline text-bold text-black"
           >
             AI tools
           </Link>{" "}
           that work for your{" "}
-          <Link href={"/jobs"} className="underline text-bold text-black">
+          <Link href={"/job"} className="underline text-bold text-black">
             job purpose
           </Link>
           . Get started now!

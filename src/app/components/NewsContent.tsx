@@ -37,7 +37,7 @@ const AINewsPage: React.FC = () => {
       description: (
         <>
           News about AI usually introduces you to new tools to{" "}
-          <Link href={"/jobs"} className="underline text-bold text-black">
+          <Link href={"/job"} className="underline text-bold text-black">
             simplify your job
           </Link>{" "}
           tasks. You might find Otter.ai for transcription, DeepBrain for making
@@ -144,7 +144,9 @@ const AINewsPage: React.FC = () => {
             5 Reasons Why You Must Stay Ahead With the Latest AI News
           </h2>
           <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
-            No matter what your job is, we have the right tools to match them.
+            The AI industry is moving fast. If you're not keeping up, you're
+            falling behind. Have a look at why staying updated is no longer
+            optional but a necessity:
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {KeyFeatures.map((features, index) => (

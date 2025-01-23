@@ -312,8 +312,8 @@ export default function Page() {
       question: "Can I train AI tools with my own data?",
       answer: (
         <>
-          Our list includes some free and paid tools. You can go through the
-          dedicated page of each tool to know the pricing details.
+          Yes. Many AI tools allow you to train their algorithms with your data.
+          You can use this feature to personalize the response.
         </>
       ),
     },
@@ -328,9 +328,14 @@ export default function Page() {
       ),
     },
     {
-      question: "Are the tools listed verified and reliable?",
-      answer:
-        "We're serious about reliability. Every tool in our directory is vetted through user feedback and performance checks. We even consider the credibility of the developers. That means you will see only trusted, high-quality tools for your purpose.",
+      question: "How do I apply AI tools for creative work?",
+      answer: (
+        <>
+          AI tools are really helpful in brainstorming ideas from scratch and
+          can even help you craft the content. You can use them along with your
+          imagination to achieve better results.
+        </>
+      ),
     },
     {
       question: "Can I list a tool in your directory?",
