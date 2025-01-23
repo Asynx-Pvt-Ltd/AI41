@@ -267,6 +267,30 @@ export default function Page() {
       ),
     },
     {
+      question: "How can I find tools specific to my skillset?",
+      answer: (
+        <>
+          Selecting AI tools that match your skillset requires a bit of
+          self-assessment. First of all, analyze your current abilities—are you
+          a beginner or an expert? Most directories, including ours, offer
+          specific settings to filter based on ease of use, skill levels, and so
+          on. You can use them to find the right fit. Similarly, you can also
+          keep an eye on our AI tutorials section to check whether the interface
+          of the tool is simple enough. If you're still not sure, start with
+          tools that offer free versions or trials.
+        </>
+      ),
+    },
+    {
+      question: "Where to find the latest AI news?",
+      answer: (
+        <>
+          Right here! We curate and hand-pick the latest AI news straight on our
+          website. All of them are cross-verified by our expert teams.
+        </>
+      ),
+    },
+    {
       question: "How can I get my AI tool listed?",
       answer: (
         <>
@@ -277,6 +301,203 @@ export default function Page() {
           </Link>{" "}
           section of our page to list it. We will manually test your tool. If it
           passes the test, we will showcase it in our directory.
+        </>
+      ),
+    },
+    {
+      question: "How can I report an error?",
+      answer: (
+        <>
+          Caught something that doesn't seem right? You can reach out to us
+          directly to report the issue. We always try to correct errors quickly
+          so our directory remains accurate and useful.
+        </>
+      ),
+    },
+    {
+      question: "How many AI tools are there?",
+      answer: (
+        <>
+          Counting AI tools is like counting stars. New ones emerge all the
+          time. Some fade into insignificance over time. We have listed
+          thousands of tools here. More are being found and added daily. So, the
+          figure is ever-changing.
+        </>
+      ),
+    },
+    {
+      question: "What are the best free AI tools?",
+      answer: (
+        <>
+          These are the best mainstream AI tools now:
+          <br />
+          <br />
+          <span className="">
+            <span>
+              <Link
+                href={"https://chatgpt.com/"}
+                className="underline text-bold text-black"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <b>Chat GPT:</b>
+              </Link>{" "}
+              The pioneering AI chatbot that works well for many purposes, right
+              from writing a poem to coding.
+            </span>
+            <br />
+            <br />
+            <span>
+              <Link
+                href={"https://gemini.google.com/"}
+                className="underline text-bold text-black"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <b>Gemini:</b>
+              </Link>{" "}
+              An AI tool based on Google's vast database. You can use it to make
+              data-driven decisions.
+            </span>
+            <br />
+            <br />
+            <span>
+              <Link
+                href={"https://claude.ai/"}
+                className="underline text-bold text-black"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <b>Claude:</b>
+              </Link>{" "}
+              Another AI chatbot where you can feed your response style directly
+              for more personalized responses.
+            </span>
+            <br />
+            <br />
+            <span>
+              <Link
+                href={"https://x.com/i/grok"}
+                className="underline text-bold text-black"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <b>Grok:</b>
+              </Link>{" "}
+              A versatile AI tool on the X (formerly Twitter) platform that
+              specializes in image generation.
+            </span>
+            <br />
+            <br />
+            <span>
+              <Link
+                href={"https://www.perplexity.ai/"}
+                className="underline text-bold text-black"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <b>Perplexity AI:</b>
+              </Link>{" "}
+              An advanced search engine AI tool that uses real-time data, mainly
+              for research purposes.
+            </span>
+          </span>
+        </>
+      ),
+    },
+    {
+      question: "How do I find AI tools tailored to my industry?",
+      answer: (
+        <>
+          It’s pretty easy. We have a dedicated AI Jobs page for that. Just type
+          in your job or industry. Within seconds, we will show you the best AI
+          tools for your purpose. You can even make use of the advanced search
+          and categorization features to filter tools by industry.
+        </>
+      ),
+    },
+    {
+      question: "How do I deal with data security when using AI tools?",
+      answer: (
+        <>
+          You must always know how a specific AI tool manages the data before
+          trying it. Only pick tools with robust privacy policies. For
+          industries that handle sensitive information, always look for
+          adherence to{" "}
+          <strong>
+            <Link
+              href={"https://gdprinfo.eu/"}
+              className="underline text-bold text-black"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GDPR
+            </Link>
+          </strong>{" "}
+          or HIPAA regulations. We will instantly remove any AI tools that are
+          spotted with data breaches.
+        </>
+      ),
+    },
+    {
+      question: "Can I use AI for educational purposes?",
+      answer: (
+        <>
+          Yes, of course. There are many AI tools that are made specifically for
+          the education sector. For example,{" "}
+          <strong>
+            <Link
+              href={"https://discover.carnegielearning.com/texas-mathia"}
+              className="underline text-bold text-black"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Carnegie Learning's MATHia
+            </Link>
+          </strong>{" "}
+          is a dedicated tool for personalized math education. Quizlet is
+          another AI tool that you can use for exam preparation. The main
+          highlight is that most of these AI tools can adapt to your learning
+          style. They give real-time feedback. Above all, they make education
+          more interactive and practical.
+        </>
+      ),
+    },
+    {
+      question:
+        "How do you address the integration problems that may arise from using several AI tools from your directory?",
+      answer: (
+        <>
+          That is indeed a puzzle. Remember, we never guarantee the integration
+          capabilities of the tools listed here. Yet, we try to help you in this
+          regard. First of all, our team adds a detailed tech spec in each
+          listing so you know what you are getting into. We also have a
+          dedicated tutorial page that addresses the most common integration
+          issues and how to solve them.
+        </>
+      ),
+    },
+    {
+      question: "What is the future of AI tools?",
+      answer: (
+        <>
+          The future of AI tools is both exciting and a little unpredictable.
+          More personalized AI tools will come that adapt to user patterns.
+          Integration with more daily technologies is also expected, like{" "}
+          <strong>
+            <Link
+              href={
+                "https://newo.ai/insights/the-evolution-of-smart-homes-integrating-ai-in-home-automation/"
+              }
+              className="underline text-bold text-black"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              AI in home devices
+            </Link>
+          </strong>
+          . You can stay tuned to our AI news page to get updated with the
+          latest AI trends.
         </>
       ),
     },
