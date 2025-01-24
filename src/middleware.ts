@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
 export const middleware = (req: NextRequest) => {
-  const allowedOrigins = ["localhost:3000", "toolsdirectory-phi.vercel.app"];
+  const allowedOrigins = [
+    "localhost:3000",
+    "toolsdirectory-phi.vercel.app",
+    "167.88.44.78:3000",
+  ];
   const origin = req.headers.get("x-forwarded-host") ?? "";
   const isAllowedOrigin = allowedOrigins.includes(origin);
 
