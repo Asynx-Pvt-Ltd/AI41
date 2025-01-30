@@ -410,7 +410,7 @@ const WhyUseSection = () => {
               value={reason.title.toLowerCase().replace(/\s+/g, "-")}
               className="mt-6"
             >
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6">
                 <div className="flex items-center mb-4">
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
@@ -489,34 +489,48 @@ const WhyChooseUsSection = () => {
   return (
     <section className="py-8 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Why Choose Us?</h2>
-          <p className="text-lg text-gray-600 dark:text-gray-300">
-            Let's guess what you're thinking: "There are so many AI directories
-            out there. Why should I choose this one?" Here's what sets us apart:
-          </p>
-        </div>
+        <h2 className="text-3xl font-bold text-center mb-4">Why Choose Us?</h2>
+        <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
+          Let's guess what you're thinking: "There are so many AI directories
+          out there. Why should I choose this one?" Here's what sets us apart:
+        </p>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <Tabs
+          defaultValue={features[0].title.toLowerCase().replace(/\s+/g, "-")}
+          className="w-full"
+        >
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 gap-4">
+            {features.map((feature, index) => (
+              <TabsTrigger
+                key={index}
+                value={feature.title.toLowerCase().replace(/\s+/g, "-")}
+                className="flex items-center gap-2"
+              >
+                <span>{feature.title}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
           {features.map((feature, index) => (
-            <CardDesign
+            <TabsContent
               key={index}
-              className="hover:shadow-lg transition-shadow duration-300"
+              value={feature.title.toLowerCase().replace(/\s+/g, "-")}
+              className="mt-6"
             >
-              <CardContent className="p-6 mt-5">
-                <div className="flex items-center justify-center mb-3 mt-5">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                <div className="flex items-center mb-4">
                   {feature.icon}
                   <h3 className="text-lg font-semibold ml-4">
                     {feature.title}
                   </h3>
                 </div>
-                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 py-2">
+                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
                   {feature.description}
                 </p>
-              </CardContent>
-            </CardDesign>
+              </div>
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
       </div>
     </section>
   );
