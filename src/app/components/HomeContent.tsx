@@ -260,28 +260,44 @@ const HowToUseSection = () => {
   ];
 
   return (
-    <section className="bg-white dark:bg-gray-800 py-5">
-      <div className="max-w-7xl mx-auto mb-5">
-        <h2 className="text-3xl font-bold mb-4 text-center">How To Use?</h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
+    <section className="bg-white dark:bg-gray-800 py-12">
+      <div className="max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-4">How To Use?</h2>
+        <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto">
           Using our AI Tools directory is pretty simple and fast. Follow these
           steps to choose the right tools that fit your needs.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {steps.map((step, index) => (
-            <CardDesign
-              key={index}
-              className="hover:shadow-lg transition-shadow duration-300"
-            >
-              <CardContent className="p-6 text-center mt-5">
-                <div className="flex justify-center mb-3">{step.icon}</div>
-                <h3 className="text-xl font-semibold mb-3">{step.title}</h3>
-                <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
-                  {step.description}
-                </p>
-              </CardContent>
-            </CardDesign>
-          ))}
+
+        <div className="relative">
+          {/* Connecting Line */}
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-[#222222] -translate-y-1/2" />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+            {steps.map((step, index) => (
+              <div key={index} className="relative h-full">
+                <CardDesign className="relative bg-white dark:bg-gray-700 transition-all duration-300 hover:shadow-xl h-full">
+                  {/* Step Number */}
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#222222] flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                    {index + 1}
+                  </div>
+
+                  <CardContent className="pt-8 pb-6 px-4">
+                    <div className="flex flex-col items-center">
+                      <div className="flex justify-center items-center w-full mt-2 mb-3">
+                        {step.icon}
+                        <h3 className="text-xl font-semibold ml-3">
+                          {step.title}
+                        </h3>
+                      </div>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                        {step.description}
+                      </p>
+                    </div>
+                  </CardContent>
+                </CardDesign>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
