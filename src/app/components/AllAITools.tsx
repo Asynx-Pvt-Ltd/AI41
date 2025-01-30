@@ -408,30 +408,38 @@ export default function AllAITools() {
     <div>
       {/*==================How To Find The Perfect AI Tool?===========*/}
 
-      <section className=" bg-gray-50 dark:bg-gray-900 min-h-full py-5">
-        <div className="max-w-7xl mx-auto mb-5">
-          <h2 className="text-3xl font-bold mb-8 text-center">
+      <section className="bg-gray-50 dark:bg-gray-900 py-12">
+        <div className="max-w-7xl mx-auto px-0">
+          <h2 className="text-3xl font-bold text-center mb-16">
             How To Find The Perfect AI Tool?
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {selectionSteps.map((steps, index) => (
-              <CardDesign
-                key={index}
-                className="hover:shadow-lg transition-shadow duration-300"
-              >
-                <CardContent className="p-6 mt-5">
-                  <div className="flex items-center mb-3 mt-5">
-                    {steps.icon}
-                    <h3 className="text-lg font-semibold mb-3 ml-4">
-                      {steps.title}
-                    </h3>
-                  </div>
-                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
-                    {steps.description}
-                  </p>
-                </CardContent>
-              </CardDesign>
-            ))}
+
+          <div className="relative">
+            {/* Connecting Line */}
+            {/* <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-[#222222] -translate-y-1/2" /> */}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 relative">
+              {selectionSteps.map((step, index) => (
+                <div key={index} className="relative h-full">
+                  <CardDesign className="relative bg-white dark:bg-gray-700 transition-all duration-300 hover:shadow-xl h-full">
+                    {/* Step Number */}
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#222222] flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                      {index + 1}
+                    </div>
+
+                    <CardContent className="pt-8 pb-6 px-6">
+                      <div className="flex items-center mb-4">
+                        <span className="text-3xl mr-4">{step.icon}</span>
+                        <h3 className="text-xl font-semibold">{step.title}</h3>
+                      </div>
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                        {step.description}
+                      </p>
+                    </CardContent>
+                  </CardDesign>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
