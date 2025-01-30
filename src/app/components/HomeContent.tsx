@@ -131,12 +131,12 @@ const AIToolsSection = () => {
           to automate the process. You can use them for everything, right from
           spotting errors to generating code. Get more done in less time!
           <span className="flex justify-between mt-7">
-            <Link href="/">
+            <Link href="/ai-categories">
               <button className="bg-[#222222] text-white font-bold py-2 px-4 rounded-lg">
                 Tools for developers
               </button>
             </Link>
-            <Link href="/">
+            <Link href="/ai-categories">
               <button className="bg-[#222222] text-white font-bold py-2 px-4 rounded-lg">
                 Ai coding tools
               </button>
