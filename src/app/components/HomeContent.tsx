@@ -23,6 +23,12 @@ import {
 } from "lucide-react";
 import { CardDesign, CardContent } from "@/app/components/ui/cardDesign";
 import Link from "next/link";
+import {
+  Tabs,
+  TabsList,
+  TabsTrigger,
+  TabsContent,
+} from "@/app/components/ui/TabsCN";
 
 const MainFeatures = () => {
   const features = [
@@ -254,7 +260,7 @@ const HowToUseSection = () => {
   ];
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-800 py-5">
+    <section className="bg-white dark:bg-gray-800 py-5">
       <div className="max-w-7xl mx-auto mb-5">
         <h2 className="text-3xl font-bold mb-4 text-center">How To Use?</h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-12">
@@ -365,24 +371,41 @@ const WhyUseSection = () => {
           Have a look at how our AI directory can help you find the right fit
           from a list of all AI tools:
         </p>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <Tabs
+          defaultValue={reasons[0].title.toLowerCase().replace(/\s+/g, "-")}
+          className="w-full"
+        >
+          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-5 gap-4">
+            {reasons.map((reason, index) => (
+              <TabsTrigger
+                key={index}
+                value={reason.title.toLowerCase().replace(/\s+/g, "-")}
+                className="flex items-center gap-2"
+              >
+                <span>{reason.title}</span>
+              </TabsTrigger>
+            ))}
+          </TabsList>
+
           {reasons.map((reason, index) => (
-            <CardDesign
+            <TabsContent
               key={index}
-              className="hover:shadow-lg transition-shadow duration-300"
+              value={reason.title.toLowerCase().replace(/\s+/g, "-")}
+              className="mt-6"
             >
-              <CardContent className="p-6 mt-5">
-                <div className="flex items-center mb-3 mt-5">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6">
+                <div className="flex items-center mb-4">
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
                   {reason.description}
                 </p>
-              </CardContent>
-            </CardDesign>
+              </div>
+            </TabsContent>
           ))}
-        </div>
+        </Tabs>
       </div>
     </section>
   );
