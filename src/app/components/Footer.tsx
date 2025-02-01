@@ -12,16 +12,11 @@ function Footer() {
           {/* Site Branding */}
           <div className="space-y-4">
             <div className="my-2 justify-center site-brand-foot">
-              <Image
-                src="/logo-light-aixploria.webp"
-                alt="Aixploria"
-                title="Aixploria"
-                width="200"
-                height="45"
-                className="logo24"
-                loading="lazy"
-                decoding="async"
-              />
+              <Link href="/" className="flex items-center cursor-pointer">
+                <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold">
+                  AI41
+                </span>
+              </Link>
             </div>
             <p className="text-base">
               A project by{" "}

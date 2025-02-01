@@ -34,8 +34,8 @@ body {
 }
 
 .site-brand-foot {
-  filter: invert(1) hue-rotate(35deg);
   line-height: 54px;
+  color: white;
 }
 
 .border-image {

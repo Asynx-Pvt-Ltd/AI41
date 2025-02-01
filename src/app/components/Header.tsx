@@ -31,7 +31,7 @@ export const Header = () => {
         {/* Left: Logo/Image */}
         <Link href="/" className="flex items-center cursor-pointer">
           <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold text-white dark:text-gray-300 hover:text-gray-300 dark:hover:text-blue-400">
-            AI XPORIA
+            AI41
           </span>
         </Link>
 
