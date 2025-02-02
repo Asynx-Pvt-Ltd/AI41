@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Tutorial" ALTER COLUMN "likeCount" SET DATA TYPE TEXT,
-ALTER COLUMN "viewCount" SET DATA TYPE TEXT;

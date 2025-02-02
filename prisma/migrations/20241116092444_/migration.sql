@@ -1,3 +1,0 @@
--- AlterTable
-ALTER TABLE "Tutorial" ALTER COLUMN "likeCount" DROP NOT NULL,
-ALTER COLUMN "viewCount" DROP NOT NULL;
