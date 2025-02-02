@@ -30,11 +30,12 @@ export default async function handler(
   }
 
   if (req.method === "POST") {
-    const { name, slug } = JSON.parse(req.body);
+    const { name, slug, fontIcon } = JSON.parse(req.body);
     const newCategory = await prisma.jobRole.create({
       data: {
         name: name,
         slug: slug,
+        fontIcon: fontIcon,
       },
     });
     return res.status(201).json(newCategory);

@@ -50,21 +50,29 @@ export default function Page() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {categories.length > 0
                 ? categories.map((item: any, index: number) => (
-                    <Link
-                      href={`/job/${item.slug}`}
-                      key={index}
-                      className="bg-white shadow-md rounded-lg px-6 py-4 flex items-center justify-between"
+                    <lord-icon
+                      src={`https://cdn.lordicon.com/${item.fontIcon}.json`}
+                      trigger="hover"
+                      style={{
+                        width: "25" + "px",
+                        height: "25" + "px",
+                        padding: "10px",
+                      }}
                     >
-                      <div className="flex items-center">
-                        <h3 className="text-lg font-semibold">
+                      <Link
+                        href={`/job/${item.slug}`}
+                        key={index}
+                        className="bg-white shadow-md rounded-lg px-6 py-4 flex items-center justify-between lg:min-w-60 lg:h-12"
+                      >
+                        <h3 className="text-lg font-semibold ml-4">
                           <i className={item.fontIcon}></i>{" "}
                           {item.name ? item.name : "General"}
                         </h3>
-                      </div>
-                      <span className="text-gray-500 text-sm">
-                        {item.tools.length}
-                      </span>
-                    </Link>
+                        <span className="text-gray-500 text-sm">
+                          {item.tools.length}
+                        </span>
+                      </Link>
+                    </lord-icon>
                   ))
                 : null}
             </div>

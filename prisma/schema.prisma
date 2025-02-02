@@ -50,6 +50,8 @@ model Tool {
     hasFreePrice     Boolean?
     hasPaidPrice     Boolean?
     paidPrice        String?
+    fontIcon String?
+
 }
 
 model FeatureProject {
