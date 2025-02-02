@@ -5,8 +5,9 @@ import { toast } from "react-toastify";
 
 function JobRoles() {
   const [jobRoles, setJobRoles] = useState<any>([]);
-  const [formData, setFormData] = useState<{ name: string }>({
+  const [formData, setFormData] = useState<{ name: string; fontIcon: string }>({
     name: "",
+    fontIcon: "",
   });
 
   const [editMode, setEditMode] = useState(false);
@@ -51,6 +52,7 @@ function JobRoles() {
         body: JSON.stringify({
           name: formData.name,
           slug: slug,
+          fontIcon: formData.fontIcon,
         }),
       })
         .then((res) => {
@@ -69,6 +71,7 @@ function JobRoles() {
         body: JSON.stringify({
           name: formData.name,
           slug: slug,
+          fontIcon: formData.fontIcon,
         }),
       })
         .then((res) => {
@@ -82,7 +85,7 @@ function JobRoles() {
         });
     }
 
-    setFormData({ name: "" });
+    setFormData({ name: "", fontIcon: "" });
     setEditMode(false);
     fetchJobRoles();
   };
@@ -95,20 +98,26 @@ function JobRoles() {
 
   const handleDelete = async (id: any) => {
     setLoading(true);
-    fetch(`/api/job-roles/${id}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
-      .then((d) => {
-        setJobRoles(d);
-        setLoading(false);
-        toast.success("Job Role deleted successfully");
-      })
-      .catch((err) => {
-        console.error("Error deleting job role:", err);
-        toast.error("Error deleting job role");
-        setLoading(false);
+    try {
+      const response = await fetch(`/api/job-roles/${id}`, {
+        method: "DELETE",
       });
+
+      if (response.ok) {
+        // Filter out the deleted job role locally
+        setJobRoles((prevRoles: any[]) =>
+          prevRoles.filter((role: any) => role.id !== id)
+        );
+        toast.success("Job Role deleted successfully");
+      } else {
+        toast.error("Error deleting job role");
+      }
+    } catch (err) {
+      console.error("Error deleting job role:", err);
+      toast.error("Error deleting job role");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -121,7 +130,8 @@ function JobRoles() {
               <table className="min-w-full bg-white">
                 <thead>
                   <tr>
-                    <th className="py-2 px-4">Name</th>
+                    <th className="py-2 px-4">Name</th>{" "}
+                    <th className="py-2 px-4">Font Icon</th>
                     <th className="py-2 px-4">Actions</th>
                   </tr>
                 </thead>
@@ -130,6 +140,18 @@ function JobRoles() {
                     ? jobRoles.map((jobRole: any) => (
                         <tr key={jobRole.id}>
                           <td className="border px-4 py-2">{jobRole.name}</td>
+                          <td className="border px-4 py-2 flex items-center">
+                            <i className={jobRole.fontIcon}></i>
+                            <lord-icon
+                              src={`https://cdn.lordicon.com/${jobRole.fontIcon}.json`}
+                              trigger="hover"
+                              style={{
+                                width: "25" + "px",
+                                height: "25" + "px",
+                              }}
+                            ></lord-icon>
+                            <span className="ml-2">{jobRole.fontIcon}</span>
+                          </td>
                           <td className="h-auto align-middle justify-center border px-4 py-2">
                             <div className="flex flex-row justify-center">
                               <button
@@ -175,7 +197,15 @@ function JobRoles() {
                 onChange={handleInputChange}
                 className="max-w-52 block mb-4 p-2 border"
               />
-
+              <label>Lordicon code</label>
+              <input
+                type="text"
+                name="fontIcon"
+                placeholder="e.g. jeuxydnh"
+                value={formData.fontIcon}
+                onChange={handleInputChange}
+                className="max-w-52 block mb-4 p-2 border"
+              />
               <button
                 type="submit"
                 className="max-w-48 mt-4 bg-green-500 text-white px-4 py-2"
