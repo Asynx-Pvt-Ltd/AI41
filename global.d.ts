@@ -11,6 +11,7 @@ declare global {
         src: string;
         trigger?: string;
         style?: React.CSSProperties;
+        children?: any;
         // Add any other attributes you plan to use
       };
     }
