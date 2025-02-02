@@ -8,6 +8,7 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "lord-icon": {
+        target?: string;
         src: string;
         trigger?: string;
         style?: React.CSSProperties;

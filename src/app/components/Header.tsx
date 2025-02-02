@@ -29,22 +29,22 @@ export const Header = () => {
     {
       href: "/all-ai-tools",
       text: "Full List",
-      iconSrc: "https://cdn.lordicon.com/jeuxydnh.json", // List icon
+      iconSrc: "https://cdn.lordicon.com/jeuxydnh.json",
     },
     {
       href: "/ai-categories",
       text: "AI Categories",
-      iconSrc: "https://cdn.lordicon.com/xcrjfxeh.json", // Category/folder icon
+      iconSrc: "https://cdn.lordicon.com/xcrjfxeh.json",
     },
     {
       href: "/ai-tutorials",
       text: "AI Tutorials",
-      iconSrc: "https://cdn.lordicon.com/fihkmkwt.json", // Book/tutorial icon
+      iconSrc: "https://cdn.lordicon.com/fihkmkwt.json",
     },
     {
       href: "/job",
       text: "AI Jobs",
-      iconSrc: "https://cdn.lordicon.com/mrdiiocb.json", // Briefcase/job icon
+      iconSrc: "https://cdn.lordicon.com/mrdiiocb.json",
     },
   ];
 
