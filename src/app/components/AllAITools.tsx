@@ -408,8 +408,8 @@ export default function AllAITools() {
     <div>
       {/*==================How To Find The Perfect AI Tool?===========*/}
 
-      <section className="bg-gray-50 dark:bg-gray-900 py-12">
-        <div className="max-w-7xl mx-auto px-0">
+      <section className="bg-gray-50 dark:bg-gray-900 my-10">
+        <div className="max-w-7xl mx-auto py-8">
           <h2 className="text-3xl font-bold text-center mb-16">
             How To Find The Perfect AI Tool?
           </h2>
@@ -446,8 +446,8 @@ export default function AllAITools() {
 
       {/*==================MAIN FEATURES===========*/}
 
-      <section className="bg-white dark:bg-gray-800 py-5">
-        <div className="max-w-7xl mx-auto mb-5">
+      <section className="bg-white dark:bg-gray-800 my-5">
+        <div className="max-w-7xl mx-auto py-5">
           <h2 className="text-3xl font-bold mb-8 text-center">Main Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {MainFeatures.map((feature, index) => (
@@ -456,10 +456,12 @@ export default function AllAITools() {
                 className="hover:shadow-lg transition-shadow duration-300"
               >
                 <CardContent className="p-6 text-center mt-5">
-                  <div className="flex justify-center mb-3">{feature.icon}</div>
-                  <h3 className="text-xl font-semibold mb-3">
-                    {feature.title}
-                  </h3>
+                  <div className="flex justify-center items-center mb-3">
+                    {feature.icon}
+                    <h3 className="text-xl font-semibold ml-3">
+                      {feature.title}
+                    </h3>
+                  </div>
                   <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
                     {feature.description}
                   </p>
@@ -472,8 +474,8 @@ export default function AllAITools() {
 
       {/*==================FREE VS PAID TABLE==================*/}
 
-      <div className="container mx-auto px-4 py-4 ">
-        <h2 className="text-3xl font-bold text-center mb-8">
+      <div className="container mx-auto px-4 py-4 my-5">
+        <h2 className="text-3xl font-bold text-center my-8">
           Free vs Paid AI Tools: What's Right for You?
         </h2>
         <div className="overflow-x-auto">
@@ -649,8 +651,8 @@ export default function AllAITools() {
 
       {/*==================AI Tools Facts and Curiosities===========*/}
 
-      <section className="bg-gray-50 dark:bg-gray-800 py-5">
-        <div className="max-w-7xl mx-auto mb-5">
+      <section className="bg-gray-50 dark:bg-gray-800 my-12">
+        <div className="max-w-7xl mx-auto py-8">
           <h2 className="text-3xl font-bold mb-4 text-center">
             AI Tools Facts and Curiosities
           </h2>
@@ -682,7 +684,7 @@ export default function AllAITools() {
       <div>
         <FAQTutorialsAccordion faqs={faq} title="Frequently Asked Questions" />
       </div>
-      <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 py-12 px-16">
+      <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 mt-10 mb-16 px-16 py-5">
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Find The Best AI Tools With Our List!
         </h1>

@@ -70,7 +70,7 @@ export default function FullList() {
     <div>
       <div className="flex flex-col min-h-screen">
         <Header />
-        <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
+        <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center mt-5">
           <div className="flex flex-col items-center justify-center space-y-4">
             {/* Search Element */}
             <div className="relative w-full md:w-2/3 lg:w-1/2">
@@ -134,7 +134,7 @@ export default function FullList() {
 
           {/* Card 1 */}
 
-          <h1 className="text-2xl font-semibold text-center pt-[6vh]">
+          <h1 className="text-2xl font-semibold text-center pt-[6vh] my-3">
             AI Categories
           </h1>
           <ToolsByCategories />
