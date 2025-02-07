@@ -46,7 +46,7 @@ const FAQTutorialsAccordion: React.FC<FAQTutorialsAccordionProps> = ({
                 openIndex === index ? "max-h-[26rem] py-4" : "max-h-0"
               }`}
             >
-              <p className="text-gray-600 dark:text-gray-300 text-justify">
+              <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
                 {faq.answer}
               </p>
             </div>
