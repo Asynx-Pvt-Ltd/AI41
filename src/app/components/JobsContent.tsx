@@ -10,6 +10,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import FAQ from "@/app/components/ui/FAQ";
+import { CardContent, CardDesign } from "./ui/cardDesign";
 
 export default function JobsContent() {
   const KeyBenefits = [
@@ -98,7 +99,7 @@ export default function JobsContent() {
     },
     {
       icon: <User className="text-purple-500" />,
-      title: "Evaluate Use-Friendliness",
+      title: "Evaluate User-Friendly",
       description: (
         <>
           Even the most advanced AI tools are of no use if they are difficult to
@@ -181,39 +182,47 @@ export default function JobsContent() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <main className="flex-grow container mx-auto px-4 py-8">
-        {/* Hero Section */}
-        <section className="text-center mb-12">
-          <h1 className="text-3xl font-bold mb-4 text-gray-800 dark:text-white">
+      <section className="bg-gray-50 dark:bg-gray-800 my-10">
+        <div className="max-w-7xl mx-auto px-4 py-5">
+          <h2 className="text-3xl font-bold text-center mb-4">
             How To Choose The Right AI Tool?
-          </h1>
-          <p className="text-sm text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+          </h2>
+          <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto">
             As the number of AI tools increases, it becomes more challenging to
             find the right fit. Check out some tips on how to select AI tools
             for your purpose:
           </p>
-        </section>
 
-        {/* Key Benefits Grid */}
-        <section className="grid md:grid-cols-4 gap-6 mb-12">
-          {KeyBenefits.map((benefit, index) => (
-            <div
-              key={index}
-              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md hover:shadow-xl transition-all"
-            >
-              <div className="flex items-center justify-center mb-4">
-                {benefit.icon}
-              </div>
-              <h3 className="text-lg font-semibold text-center mb-2">
-                {benefit.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-justify text-sm">
-                {benefit.description}
-              </p>
+          <div className="relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 relative">
+              {KeyBenefits.map((benefit, index) => (
+                <div key={index} className="relative h-full">
+                  <CardDesign className="relative bg-white dark:bg-gray-700 transition-all duration-300 hover:shadow-xl h-full">
+                    {/* Step Number */}
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 rounded-full bg-[#222222] flex items-center justify-center text-white text-xl font-bold shadow-lg">
+                      {index + 1}
+                    </div>
+
+                    <CardContent className="pt-8 pb-6 px-4">
+                      <div className="flex flex-col items-center">
+                        <div className="flex justify-center items-center w-full mb-3 gap-3">
+                          {benefit.icon}
+                          <h3 className="text-lg font-semibold text-left">
+                            {benefit.title}
+                          </h3>
+                        </div>
+                        <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                          {benefit.description}
+                        </p>
+                      </div>
+                    </CardContent>
+                  </CardDesign>
+                </div>
+              ))}
             </div>
-          ))}
-        </section>
-      </main>
+          </div>
+        </div>
+      </section>
       {/* FAQ Section */}
       <section className="bg-white dark:bg-gray-800">
         <FAQ faqs={faq} title="Frequently Asked Questions" />
