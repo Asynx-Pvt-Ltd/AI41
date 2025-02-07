@@ -130,12 +130,12 @@ const AIToolsSection = () => {
           spotting errors to generating code. Get more done in less time!
           <span className="flex justify-between mt-4 items-center">
             <Link href="/ai-categories">
-              <button className="bg-[#222222] text-white font-bold py-2 px-2 rounded-sm text-sm">
+              <button className="bg-[#222222] text-white font-bold py-1 px-2 rounded-sm text-[12px]">
                 Tools for developers
               </button>
             </Link>
             <Link href="/ai-categories">
-              <button className="bg-[#222222] text-white font-bold py-2 px-2 rounded-sm text-sm">
+              <button className="bg-[#222222] text-white font-bold py-1 px-2 rounded-sm text-[12px]">
                 Ai coding tools
               </button>
             </Link>
