@@ -13,7 +13,7 @@ import Link from "next/link";
 const TipsToUse = () => {
   const features = [
     {
-      icon: <BookOpen className="w-6 h-6 mb-2" />,
+      icon: <BookOpen className="w-6 h-6 mb-2 text-blue-500" />,
       title: "Learn Prompt Engineering",
       description: (
         <>
@@ -27,7 +27,7 @@ const TipsToUse = () => {
       ),
     },
     {
-      icon: <PenTool className="w-6 h-6 mb-2" />,
+      icon: <PenTool className="w-6 h-6 mb-2 text-green-500" />,
       title: "Understand Tool Limitations",
       description: (
         <>
@@ -43,7 +43,7 @@ const TipsToUse = () => {
       ),
     },
     {
-      icon: <Settings className="w-6 h-6 mb-2" />,
+      icon: <Settings className="w-6 h-6 mb-2 text-[#607D8B]" />,
       title: "Customize Settings",
       description: (
         <>
@@ -57,7 +57,7 @@ const TipsToUse = () => {
       ),
     },
     {
-      icon: <Brain className="w-6 h-6 mb-2" />,
+      icon: <Brain className="w-6 h-6 mb-2 text-[#FF9800]" />,
       title: "Stay Updated",
       description: (
         <>
@@ -72,7 +72,7 @@ const TipsToUse = () => {
       ),
     },
     {
-      icon: <Combine className="w-6 h-6 mb-2" />,
+      icon: <Combine className="w-6 h-6 mb-2 text-amber-800" />,
       title: "Combine Tools",
       description: (
         <>
@@ -88,7 +88,7 @@ const TipsToUse = () => {
   return (
     <div className=" bg-gray-50 dark:bg-gray-900">
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-12">
+      <div className="container mx-auto px-4 my-5 py-8">
         <Tabs defaultValue="overview" className="space-y-8">
           <TabsList className="grid w-full grid-cols-2 lg:grid-cols-2 gap-4">
             <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -106,14 +106,14 @@ const TipsToUse = () => {
                 key={index}
                 className="hover:shadow-lg transition-shadow duration-300"
               >
-                <CardContent className="p-6">
-                  <div className="flex items-center mb-3 mt-5">
+                <CardContent className="p-6 mt-5">
+                  <div className="flex items-center">
                     {feature.icon}
-                    <h3 className="text-xl font-semibold mb-3 ml-4">
+                    <h3 className="text-xl font-semibold ml-4 mb-2">
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-justify">
+                  <p className="text-gray-600 dark:text-gray-300 text-justify text-sm mt-1">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -123,20 +123,18 @@ const TipsToUse = () => {
 
           <TabsContent value="overview" className="space-y-8">
             <CardDesign>
-              <h3 className="text-md p-5 text-justify">
+              <p className="text-md p-5 text-justify text-gray-600 dark:text-gray-300">
                 AI tools are getting better day by day with new features. But
                 let’s be honest. It’s not always easy for newbies to keep up
                 with these changes. Most of them find it challenging to use the
-                tools effectively. <br />
-                <br />
-                That’s why we have carefully curated a list of the most
-                informative YouTube videos to guide you on using various tools.
-                Check out the tutorials to make the most of AI tools without the
-                headache.
-              </h3>
-              <h1 className="text-2xl font-semibold leading-none tracking-tight p-5">
+                tools effectively. That’s why we have carefully curated a list
+                of the most informative YouTube videos to guide you on using
+                various tools. Check out the tutorials to make the most of AI
+                tools without the headache.
+              </p>
+              <h2 className="text-xl font-semibold leading-none tracking-tight p-5">
                 Why Watch Tutorials Before Using AI Tools?
-              </h1>
+              </h2>
               <CardContent className="space-y-4">
                 <p>
                   Merely jumping into{" "}
@@ -146,7 +144,7 @@ const TipsToUse = () => {
                   straightly is not advised. Here are some reasons as to why you
                   must watch tutorial videos before getting started:
                 </p>
-                <ul className="list-disc pl-6 space-y-2">
+                <ul className="list-disc pl-6 space-y-2 text-sm">
                   <li>
                     Not{" "}
                     <Link

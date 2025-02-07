@@ -360,10 +360,10 @@ export default function Page() {
             <div className="flex flex-col items-center justify-center space-y-4">
               <div className=" text-black w-full p-4">
                 <div className=" text-center">
-                  <h1 className="text-3xl font-bold mb-6">
+                  <h1 className="text-3xl font-bold mb-5">
                     Master AI Tools with Expert Tutorials
                   </h1>
-                  <p className="text-xl mb-8">
+                  <p className="text-md mb-2">
                     Learn to harness the power of AI tools effectively with our
                     curated video tutorials and guides.
                   </p>
@@ -398,7 +398,7 @@ export default function Page() {
                     onClick={() => handleCategoryChange(category)}
                     className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
                       selectedCategory === category
-                        ? "bg-blue-500 text-white"
+                        ? "bg-[#222222] text-white"
                         : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-300"
                     }`}
                   >
@@ -433,7 +433,7 @@ export default function Page() {
       </div>
 
       {/*FAQ Tutorials */}
-      <div>
+      <div className="pb-14 mt-3">
         <FAQ faqs={faqs} title="Frequently Asked Questions" />
       </div>
       <Footer />
