@@ -29,6 +29,7 @@ import {
   TabsTrigger,
   TabsContent,
 } from "@/app/components/ui/TabsCN";
+import Image from "next/image";
 
 const MainFeatures = () => {
   const features = [
@@ -96,9 +97,9 @@ const MainFeatures = () => {
   ];
 
   return (
-    <section className="bg-white dark:bg-gray-900 my-10">
-      <div className="max-w-7xl mx-auto mb-5">
-        <h2 className="text-3xl font-bold my-8 text-center">Main Features</h2>
+    <section className="bg-white dark:bg-gray-900 mt-10">
+      <div className="max-w-7xl mx-auto py-5">
+        <h2 className="text-3xl font-bold mb-8 text-center">Main Features</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {features.map((feature, index) => (
             <CardDesign
@@ -106,8 +107,13 @@ const MainFeatures = () => {
               className="hover:shadow-lg transition-shadow duration-300"
             >
               <CardContent className="p-6 text-center mt-5">
-                <div className="flex justify-center">{feature.icon}</div>
-                <h3 className="text-xl font-semibold mb-3">{feature.title}</h3>
+                <div className="flex justify-center">
+                  {feature.icon}
+
+                  <h3 className="text-xl font-semibold ml-3">
+                    {feature.title}
+                  </h3>
+                </div>
                 <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
                   {feature.description}
                 </p>
@@ -130,14 +136,14 @@ const AIToolsSection = () => {
           Coding is no longer a one-man task. Nowadays, there are many AI tools
           to automate the process. You can use them for everything, right from
           spotting errors to generating code. Get more done in less time!
-          <span className="flex justify-between mt-7">
+          <span className="flex justify-between mt-4 items-center">
             <Link href="/ai-categories">
-              <button className="bg-[#222222] text-white font-bold py-2 px-4 rounded-lg">
+              <button className="bg-[#222222] text-white font-bold py-2 px-2 rounded-sm text-sm">
                 Tools for developers
               </button>
             </Link>
             <Link href="/ai-categories">
-              <button className="bg-[#222222] text-white font-bold py-2 px-4 rounded-lg">
+              <button className="bg-[#222222] text-white font-bold py-2 px-2 rounded-sm text-sm">
                 Ai coding tools
               </button>
             </Link>
@@ -194,8 +200,8 @@ const AIToolsSection = () => {
   ];
 
   return (
-    <section className="bg-gray-50 dark:bg-gray-900 py-5">
-      <div className="max-w-7xl mx-auto mb-5">
+    <section className="bg-gray-50 dark:bg-gray-900 my-10">
+      <div className="max-w-7xl mx-auto py-8">
         <h2 className="text-3xl font-bold text-center mb-4">
           AI Tools for Every Task
         </h2>
@@ -272,8 +278,8 @@ const HowToUseSection = () => {
   ];
 
   return (
-    <section className="bg-white dark:bg-gray-800 py-12">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-white dark:bg-gray-800 my-10">
+      <div className="max-w-7xl mx-auto px-4 py-5">
         <h2 className="text-3xl font-bold text-center mb-4">How To Use?</h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-16 max-w-2xl mx-auto">
           Using our AI Tools directory is pretty simple and fast. Follow these
@@ -390,8 +396,8 @@ const WhyUseSection = () => {
   ];
 
   return (
-    <section className="py-8 bg-gray-50 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-gray-50 dark:bg-gray-900 my-10">
+      <div className="max-w-7xl mx-auto px-4 py-5">
         <h2 className="text-3xl font-bold text-center mb-4">
           Why Use An AI Directory?
         </h2>
@@ -411,6 +417,7 @@ const WhyUseSection = () => {
                 value={reason.title.toLowerCase().replace(/\s+/g, "-")}
                 className="flex items-center gap-2"
               >
+                {reason.icon}
                 <span>{reason.title}</span>
               </TabsTrigger>
             ))}
@@ -423,10 +430,10 @@ const WhyUseSection = () => {
               className="mt-6"
             >
               <div className="bg-white dark:bg-gray-800 rounded-lg p-6 mt-28 lg:mt-0 md:mt-28">
-                <div className="flex items-center mb-4">
+                {/* <div className="flex items-center mb-4">
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
-                </div>
+                </div> */}
                 <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
                   {reason.description}
                 </p>
@@ -499,8 +506,8 @@ const WhyChooseUsSection = () => {
   ];
 
   return (
-    <section className="py-8 bg-white dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto px-4">
+    <section className="bg-white dark:bg-gray-900 my-10">
+      <div className="max-w-7xl mx-auto px-4 py-5">
         <h2 className="text-3xl font-bold text-center mb-4">Why Choose Us?</h2>
         <p className="text-center text-gray-600 dark:text-gray-300 mb-8">
           Let's guess what you're thinking: "There are so many AI directories
@@ -511,13 +518,14 @@ const WhyChooseUsSection = () => {
           defaultValue={features[0].title.toLowerCase().replace(/\s+/g, "-")}
           className="w-full"
         >
-          <TabsList className="grid w-full grid-cols-2 lg:grid-cols-4 gap-4">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {features.map((feature, index) => (
               <TabsTrigger
                 key={index}
                 value={feature.title.toLowerCase().replace(/\s+/g, "-")}
                 className="flex items-center gap-2"
               >
+                {feature.icon}
                 <span>{feature.title}</span>
               </TabsTrigger>
             ))}
@@ -530,12 +538,12 @@ const WhyChooseUsSection = () => {
               className="mt-6"
             >
               <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mt-16 md:mt-16 lg:mt-0">
-                <div className="flex items-center mb-4">
+                {/* <div className="flex items-center mb-4">
                   {feature.icon}
                   <h3 className="text-lg font-semibold ml-4">
                     {feature.title}
                   </h3>
-                </div>
+                </div> */}
                 <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
                   {feature.description}
                 </p>

@@ -530,9 +530,9 @@ export default function Page() {
       <main className="bg-white dark:bg-gray-800 w-full h-auto pt-10 pl-6 pr-6 pb-6 text-center flex-grow">
         {/* Hero Section */}
         <section className="max-w-7xl mx-auto mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-roboto">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 font-roboto">
             Discover The Best AI Tools Instantly!
-          </h1>
+          </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
             Have a look at our curated list of AI tools to simplify your tasks.
             Easily compare and select the best AI tools for your needs.
@@ -612,7 +612,7 @@ export default function Page() {
         </section>
 
         {/* About Section */}
-        <section className="w-full flex md:flex-row flex-col justify-center items-center mt-1 mb-1 bg-gray-50">
+        <section className="w-full flex md:flex-row flex-col justify-center items-center bg-gray-50">
           <div className="flex flex-1 md:flex-col flex-row justify-center items-center">
             <Image
               src="/ai-tools-directory.webp"
@@ -622,12 +622,12 @@ export default function Page() {
               className="w-auto h-auto"
             />
           </div>
-          <div className="flex flex-1 md:flex-col flex-row justify-evenly px-8">
+          <div className="flex flex-1 md:flex-col flex-row justify-evenly px-8 py-6 mt-4">
             <div className="flex flex-col">
-              <h2 className="text-2xl font-bold text-center mb-6">
+              <h2 className="text-3xl font-bold text-center mb-6">
                 The World's Best AI Tools Directory
               </h2>
-              <p className="text-justify text-gray-600 dark:text-gray-300">
+              <p className="text-justify text-gray-600 dark:text-gray-300 text-md">
                 We started an AI tool directory with a simple realization: the
                 AI industry is growing tremendously. With many tools popping up
                 day by day, finding the right fit for your needs can be as
@@ -654,12 +654,12 @@ export default function Page() {
           <WhyChooseUsSection />
         </main>
         {/* FAQ Section */}
-        <section className=" bg-gray-50 dark:bg-gray-900">
+        <section className=" bg-gray-50 dark:bg-gray-900 my-5 py-5">
           <FAQ faqs={faqs} title="Frequently Asked Questions" />
         </section>
 
         {/* Call to Action */}
-        <section className="py-16 bg-white dark:bg-gray-800">
+        <section className="my-10 bg-white dark:bg-gray-800">
           <div className="max-w-7xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">
               Submit an AI Tool Today!
