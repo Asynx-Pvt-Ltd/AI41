@@ -37,12 +37,10 @@ const AINewsPage: React.FC = () => {
       description: (
         <>
           News about AI usually introduces you to new tools to{" "}
-          <Link href={"/job"} className="underline text-bold text-black">
-            simplify your job
-          </Link>{" "}
-          tasks. You might find Otter.ai for transcription, DeepBrain for making
-          digital avatars, and other tools that could be revolutionaries in your
-          workflow. You will be able to improve productivity like never before.
+          <Link href={"/job"}>simplify your job</Link> tasks. You might find
+          Otter.ai for transcription, DeepBrain for making digital avatars, and
+          other tools that could be revolutionaries in your workflow. You will
+          be able to improve productivity like never before.
         </>
       ),
     },
@@ -52,14 +50,8 @@ const AINewsPage: React.FC = () => {
       description: (
         <>
           AI news isn't about tools alone. It’s also about learning. New
-          methodologies with{" "}
-          <Link
-            href={"/ai-tutorials"}
-            className="underline text-bold text-black"
-          >
-            tutorials
-          </Link>{" "}
-          can change the way how you work. So, staying updated means constantly
+          methodologies with <Link href={"/ai-tutorials"}>tutorials</Link> can
+          change the way how you work. So, staying updated means constantly
           learning and getting better at your skills.
         </>
       ),
@@ -202,7 +194,7 @@ const AINewsPage: React.FC = () => {
                           {features.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify link_design">
                         {features.description}
                       </p>
                     </CardContent>
@@ -220,19 +212,10 @@ const AINewsPage: React.FC = () => {
         <h2 className="text-3xl font-bold text-center py-4">
           Get AI Updates Instantly!
         </h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 text-md">
-          Keep in touch with our{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
-            news page
-          </Link>{" "}
-          to get to know{" "}
-          <Link
-            href={"/all-ai-tools"}
-            className="underline text-bold text-black"
-          >
-            all AI tool
-          </Link>{" "}
-          updates before your competitors. Stay ahead of the competition!
+        <p className="text-center text-gray-600 dark:text-gray-300 text-md link_design">
+          Keep in touch with our <Link href={"/ai-news"}>news page</Link> to get
+          to know <Link href={"/all-ai-tools"}>all AI tool</Link> updates before
+          your competitors. Stay ahead of the competition!
         </p>
       </div>
     </main>

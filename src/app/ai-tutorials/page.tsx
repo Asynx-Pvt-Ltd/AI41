@@ -341,10 +341,7 @@ export default function Page() {
       question: "Can I list a tool in your directory?",
       answer: (
         <>
-          Of course. You can{" "}
-          <Link href={"/submit-ai"} className="underline text-bold text-black">
-            submit your AI
-          </Link>{" "}
+          Of course. You can <Link href={"/submit-ai"}>submit your AI</Link>{" "}
           tool to our directory. Just contact us to know more!
         </>
       ),

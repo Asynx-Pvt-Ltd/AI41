@@ -30,6 +30,7 @@ import {
   TabsContent,
 } from "@/app/components/ui/TabsCN";
 import Image from "next/image";
+import "../styles/style.css";
 
 const MainFeatures = () => {
   const features = [
@@ -40,11 +41,8 @@ const MainFeatures = () => {
         <>
           Find the right AI tool easily with our advanced filters. You can
           filter by category or pricing model to find what you need. Just find
-          the perfect AI tools{" "}
-          <Link href={"/job"} className="underline text-bold text-black">
-            for your job
-          </Link>{" "}
-          in a flash without wasting time scrolling.
+          the perfect AI tools <Link href={"/job"}>for your job</Link> in a
+          flash without wasting time scrolling.
         </>
       ),
     },
@@ -68,15 +66,9 @@ const MainFeatures = () => {
         <>
           We understand that time is so precious. That’s why we have done all
           the heavy lifting for you. Our curated collections take{" "}
-          <Link
-            href={"/all-ai-tools"}
-            className="underline text-bold text-black"
-          >
-            {" "}
-            all important AI tools
-          </Link>{" "}
-          and group them into meaningful categories. It will help you to cut
-          through the noise easily to get the answers you need.
+          <Link href={"/all-ai-tools"}> all important AI tools</Link> and group
+          them into meaningful categories. It will help you to cut through the
+          noise easily to get the answers you need.
         </>
       ),
     },
@@ -114,7 +106,7 @@ const MainFeatures = () => {
                     {feature.title}
                   </h3>
                 </div>
-                <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
                   {feature.description}
                 </p>
               </CardContent>
@@ -219,7 +211,7 @@ const AIToolsSection = () => {
                   {tool.icon}
                   <h3 className="text-xl font-semibold ml-4">{tool.title}</h3>
                 </div>
-                <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
+                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
                   {tool.description}
                 </p>
               </CardContent>
@@ -307,7 +299,7 @@ const HowToUseSection = () => {
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify link_design">
                         {step.description}
                       </p>
                     </div>
@@ -362,10 +354,8 @@ const WhyUseSection = () => {
           you catch up with it. Unlike websites carrying on with old
           information, directories are regularly updated. You will always know
           what is happening. We even provide you with a dedicated{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
-            AI news
-          </Link>{" "}
-          page to inform you of the latest trends in the industry.
+          <Link href={"/ai-news"}>AI news</Link> page to inform you of the
+          latest trends in the industry.
         </>
       ),
     },
@@ -434,7 +424,7 @@ const WhyUseSection = () => {
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
                 </div> */}
-                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
+                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design">
                   {reason.description}
                 </p>
               </div>
@@ -465,12 +455,8 @@ const WhyChooseUsSection = () => {
         <>
           The AI industry is changing rapidly. We are always keeping pace with
           it by updating our listings with the latest tools on the market. You
-          can even find the latest{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
-            {" "}
-            AI news
-          </Link>{" "}
-          on our website to stay ahead with the updates.
+          can even find the latest <Link href={"/ai-news"}> AI news</Link> on
+          our website to stay ahead with the updates.
         </>
       ),
     },
@@ -482,13 +468,8 @@ const WhyChooseUsSection = () => {
           Any tool in our directory comes packed with accurate, well-thought-out
           information. You can find everything, right from features to pricing,
           to make a confident choice. We even provide{" "}
-          <Link
-            href={"/ai-tutorials"}
-            className="underline text-bold text-black"
-          >
-            video tutorials
-          </Link>{" "}
-          to help you get started.
+          <Link href={"/ai-tutorials"}>video tutorials</Link> to help you get
+          started.
         </>
       ),
     },
@@ -544,7 +525,7 @@ const WhyChooseUsSection = () => {
                     {feature.title}
                   </h3>
                 </div> */}
-                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
+                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design">
                   {feature.description}
                 </p>
               </div>

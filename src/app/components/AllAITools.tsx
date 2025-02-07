@@ -21,6 +21,7 @@ import Link from "next/link";
 import { CardDesign, CardContent } from "@/app/components/ui/cardDesign";
 import Image from "next/image";
 import FAQTutorialsAccordion from "@/app/components/ui/FAQ";
+import "@/app/styles/style.css";
 
 export default function AllAITools() {
   {
@@ -77,13 +78,7 @@ export default function AllAITools() {
           you save time or improve your work quality. You must analyze their
           user interface and the accuracy of the responses. Want to solve the
           technical issues on your own? Check out our{" "}
-          <Link
-            href={"/ai-tutorials"}
-            className="underline text-bold text-black"
-          >
-            tutorials section
-          </Link>
-          .
+          <Link href={"/ai-tutorials"}>tutorials section</Link>.
         </>
       ),
     },
@@ -94,27 +89,16 @@ export default function AllAITools() {
         <>
           Never rely on the marketing hype. Check out what users are saying
           through unbiased platforms like{" "}
-          <Link
-            href={"http://g2.com/"}
-            className="underline text-bold text-black"
-            target="_blank"
-            rel="noopener"
-          >
+          <Link href={"http://g2.com/"} target="_blank" rel="noopener">
             G2
           </Link>
           ,{" "}
-          <Link
-            href={"https://isitlegit.co/"}
-            className="underline text-bold text-black"
-            target="_blank"
-            rel="noopener"
-          >
+          <Link href={"https://isitlegit.co/"} target="_blank" rel="noopener">
             IsItLegit
           </Link>{" "}
           or{" "}
           <Link
             href={"https://www.trustpilot.com/"}
-            className="underline text-bold text-black"
             target="_blank"
             rel="noopener"
           >
@@ -183,18 +167,10 @@ export default function AllAITools() {
         <>
           We have everything you need to know about all AI Tools - beginners and
           advanced professionals alike. Stay up-to-date with our latest{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
-            AI news
-          </Link>
-          . Learn how to use all important AI tools with our step-by-step{" "}
-          <Link
-            href={"/ai-tutorials"}
-            className="underline text-bold text-black"
-          >
-            tutorials
-          </Link>{" "}
-          Use our AI Jobs features to find all AI tools list that match your
-          purpose.
+          <Link href={"/ai-news"}>AI news</Link>. Learn how to use all important
+          AI tools with our step-by-step{" "}
+          <Link href={"/ai-tutorials"}>tutorials</Link> Use our AI Jobs features
+          to find all AI tools list that match your purpose.
         </>
       ),
     },
@@ -247,7 +223,6 @@ export default function AllAITools() {
             href={
               "https://www.forbes.com/sites/britneynguyen/2023/12/27/new-york-times-sues-openai-and-microsoft-billions-owed-for-ai-copyright-infringement-case-claims/"
             }
-            className="underline text-bold text-black"
             target="_blank"
             rel="noopener"
           >
@@ -434,7 +409,7 @@ export default function AllAITools() {
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify mt-2">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify mt-2 link_design">
                         {step.description}
                       </p>
                     </CardContent>
@@ -464,7 +439,7 @@ export default function AllAITools() {
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
+                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -554,7 +529,7 @@ export default function AllAITools() {
 
       {/*=============AI Tools Stats================*/}
 
-      <section className="w-5/6 flex bg-slate-300 rounded-lg py-8 px-3 md:flex-row flex-col-reverse justify-center mx-auto mt-2 mb-8">
+      <section className="w-5/6 flex bg-slate-300 rounded-lg py-8 px-3 md:flex-row flex-col-reverse justify-center mx-auto mt-2 mb-8 link_design">
         <div className="flex flex-1 flex-col justify-evenly">
           <h1 className="text-2xl font-bold text-center mb-1">
             AI Tools Stats
@@ -563,7 +538,6 @@ export default function AllAITools() {
             Check out some of the{" "}
             <Link
               href={"https://socialmarketing90.com/ai-statistics-usage-trends/"}
-              className="underline text-bold text-black"
               target="_blank"
               rel="noopener"
             >
@@ -576,7 +550,6 @@ export default function AllAITools() {
                 href={
                   "https://www.hostinger.co.uk/tutorials/ai-statistics#ai-investment"
                 }
-                className="underline text-bold text-black"
                 target="_blank"
                 rel="noopener"
               >
@@ -592,7 +565,6 @@ export default function AllAITools() {
                 href={
                   "https://www.statista.com/forecasts/1449844/ai-tool-users-worldwide"
                 }
-                className="underline text-bold text-black"
                 target="_blank"
                 rel="noopener"
               >
@@ -606,7 +578,6 @@ export default function AllAITools() {
                 href={
                   "https://finbold.com/ai-sector-to-become-a-trillion-dollar-market-in-the-next-5-years/"
                 }
-                className="underline text-bold text-black"
                 target="_blank"
                 rel="noopener"
               >
@@ -624,7 +595,6 @@ export default function AllAITools() {
                 href={
                   "https://www.weforum.org/press/2020/10/recession-and-automation-changes-our-future-of-work-but-there-are-jobs-coming-report-says-52c5162fce/"
                 }
-                className="underline text-bold text-black"
                 target="_blank"
                 rel="noopener"
               >
@@ -638,7 +608,6 @@ export default function AllAITools() {
                 href={
                   "https://www.forbes.com/advisor/business/artificial-intelligence-consumer-sentiment/"
                 }
-                className="underline text-bold text-black"
                 target="_blank"
                 rel="noopener"
               >
@@ -672,7 +641,7 @@ export default function AllAITools() {
                 <CardContent className="p-6 text-center mt-5">
                   <div className="flex justify-center mb-3">{facts.icon}</div>
                   <h3 className="text-xl font-semibold mb-3">{facts.title}</h3>
-                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300">
+                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
                     {facts.description}
                   </p>
                 </CardContent>
@@ -686,7 +655,7 @@ export default function AllAITools() {
       <div>
         <FAQTutorialsAccordion faqs={faq} title="Frequently Asked Questions" />
       </div>
-      <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 mt-10 mb-16 px-16 py-5">
+      <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 mt-10 mb-16 px-16 py-5 link_design">
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Find The Best AI Tools With Our List!
         </h1>
@@ -694,17 +663,8 @@ export default function AllAITools() {
           Still doubtful of where to start? Well, our AI directory paves the
           starting line with a curated list of the top-performing tools in
           various industries. Go through our dedicated product pages to see all{" "}
-          <Link
-            href={"/all-ai-tools"}
-            className="underline text-bold text-black"
-          >
-            AI tools
-          </Link>{" "}
-          that work for your{" "}
-          <Link href={"/job"} className="underline text-bold text-black">
-            job purpose
-          </Link>
-          . Get started now!
+          <Link href={"/all-ai-tools"}>AI tools</Link> that work for your{" "}
+          <Link href={"/job"}>job purpose</Link>. Get started now!
         </p>
       </div>
     </div>

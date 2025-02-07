@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import Link from "next/link";
+import "./../../styles/style.css";
 
 interface FAQ {
   question: string;
@@ -46,7 +47,7 @@ const FAQTutorialsAccordion: React.FC<FAQTutorialsAccordionProps> = ({
                 openIndex === index ? "max-h-[26rem] py-4" : "max-h-0"
               }`}
             >
-              <p className="text-gray-600 dark:text-gray-300 text-justify text-sm">
+              <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design">
                 {faq.answer}
               </p>
             </div>

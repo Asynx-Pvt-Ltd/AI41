@@ -257,7 +257,6 @@ export default function Page() {
           <strong>
             <Link
               href={"https://aiforeveryone.org/"}
-              className="underline text-bold text-black"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -301,12 +300,7 @@ export default function Page() {
           If you have developed an AI tool, we'd be glad to showcase it. Please
           visit our{" "}
           <strong>
-            <Link
-              href={"/submit-ai"}
-              className="underline text-bold text-black"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <Link href={"/submit-ai"} target="_blank" rel="noopener noreferrer">
               ‘Submit AI Tool’
             </Link>
           </strong>{" "}
@@ -348,7 +342,6 @@ export default function Page() {
               <strong>
                 <Link
                   href={"https://chatgpt.com/"}
-                  className="underline text-bold text-black"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -364,7 +357,6 @@ export default function Page() {
               <strong>
                 <Link
                   href={"https://gemini.google.com/"}
-                  className="underline text-bold text-black"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -380,7 +372,6 @@ export default function Page() {
               <strong>
                 <Link
                   href={"https://claude.ai/"}
-                  className="underline text-bold text-black"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -396,7 +387,6 @@ export default function Page() {
               <strong>
                 <Link
                   href={"https://x.com/i/grok"}
-                  className="underline text-bold text-black"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -412,7 +402,6 @@ export default function Page() {
               <strong>
                 <Link
                   href={"https://www.perplexity.ai/"}
-                  className="underline text-bold text-black"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
@@ -448,7 +437,6 @@ export default function Page() {
           <strong>
             <Link
               href={"https://gdprinfo.eu/"}
-              className="underline text-bold text-black"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -469,7 +457,6 @@ export default function Page() {
           <strong>
             <Link
               href={"https://discover.carnegielearning.com/texas-mathia"}
-              className="underline text-bold text-black"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -510,7 +497,6 @@ export default function Page() {
               href={
                 "https://newo.ai/insights/the-evolution-of-smart-homes-integrating-ai-in-home-automation/"
               }
-              className="underline text-bold text-black"
               target="_blank"
               rel="noopener noreferrer"
             >

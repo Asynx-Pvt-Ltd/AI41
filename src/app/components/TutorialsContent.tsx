@@ -34,11 +34,7 @@ const TipsToUse = () => {
           Every AI tool has its strengths and its weak spots. For instance, Chat
           GPT works really well for creative purposes. But when it comes to
           research, Perplexity AI has an edge. With this knowledge, you can
-          choose the right tool for{" "}
-          <Link href={"/job"} className="underline text-bold text-black">
-            your job purpose
-          </Link>
-          .
+          choose the right tool for <Link href={"/job"}>your job purpose</Link>.
         </>
       ),
     },
@@ -63,11 +59,8 @@ const TipsToUse = () => {
         <>
           AI technology is constantly changing. Tools often update with new
           features. You must keep track of these changes through their official
-          websites or our dedicated{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
-            news section
-          </Link>
-          . Try out the latest features to utilize the tools effectively.
+          websites or our dedicated <Link href={"/ai-news"}>news section</Link>.
+          Try out the latest features to utilize the tools effectively.
         </>
       ),
     },
@@ -113,7 +106,7 @@ const TipsToUse = () => {
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-justify text-sm mt-1">
+                  <p className="text-gray-600 dark:text-gray-300 text-justify text-sm mt-1 link_design">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -137,23 +130,14 @@ const TipsToUse = () => {
               </h2>
               <CardContent className="space-y-4">
                 <p>
-                  Merely jumping into{" "}
-                  <Link href={"/"} className="underline text-bold text-black">
-                    AI tools
-                  </Link>{" "}
+                  Merely jumping into <Link href={"/"}>AI tools</Link>{" "}
                   straightly is not advised. Here are some reasons as to why you
                   must watch tutorial videos before getting started:
                 </p>
                 <ul className="list-disc pl-6 space-y-2 text-sm">
                   <li>
-                    Not{" "}
-                    <Link
-                      href={"/all-ai-tools"}
-                      className="underline text-bold text-black"
-                    >
-                      all AI tools
-                    </Link>{" "}
-                    are user-friendly. Sometimes, you need to watch step-by-step
+                    Not <Link href={"/all-ai-tools"}>all AI tools</Link> are
+                    user-friendly. Sometimes, you need to watch step-by-step
                     video tutorials to know how to use them.
                   </li>
                   <li>

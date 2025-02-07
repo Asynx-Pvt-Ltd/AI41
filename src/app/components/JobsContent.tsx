@@ -44,15 +44,10 @@ export default function JobsContent() {
         <>
           AI is no longer the monopoly of some tools. New tools are popping up
           day by day. So, compare{" "}
-          <Link
-            href={"/all-ai-tools"}
-            className="underline text-bold text-black"
-          >
-            all AI tools
-          </Link>{" "}
-          side-by-side, considering the features. Budget is, of course, a
-          concern. But never settle for the cheapest option. A slightly pricier
-          tool may offer better ROI through advanced features that save time.
+          <Link href={"/all-ai-tools"}>all AI tools</Link> side-by-side,
+          considering the features. Budget is, of course, a concern. But never
+          settle for the cheapest option. A slightly pricier tool may offer
+          better ROI through advanced features that save time.
         </>
       ),
     },
@@ -90,10 +85,8 @@ export default function JobsContent() {
           scalability. Remember, your job requirements change over time. A good
           tool can grow with you either through modular features or frequent
           updates with increasing data loads. Stay tuned to our{" "}
-          <Link href={"/ai-news"} className="underline text-bold text-black">
-            AI news
-          </Link>{" "}
-          page to get to know the latest updates on your favorite AI tools.
+          <Link href={"/ai-news"}>AI news</Link> page to get to know the latest
+          updates on your favorite AI tools.
         </>
       ),
     },
@@ -107,13 +100,8 @@ export default function JobsContent() {
           tutorials. Tools with the least learning curve enable you to focus on
           your job rather than wasting time trying to figure out how the tool
           works.Is it too difficult to use your current AI tool? Check out our{" "}
-          <Link
-            href={"/ai-tutorials"}
-            className="underline text-bold text-black"
-          >
-            video tutorials
-          </Link>{" "}
-          on how to use the AI tools effectively.
+          <Link href={"/ai-tutorials"}>video tutorials</Link> on how to use the
+          AI tools effectively.
         </>
       ),
     },
@@ -171,10 +159,8 @@ export default function JobsContent() {
         <>
           We regularly update our platform, so you'll always be able to access
           the freshest AI tools with reliable information. You can even{" "}
-          <Link href={"/submit-ai"} className="underline text-bold text-black">
-            submit your AI
-          </Link>{" "}
-          tools to our directory.
+          <Link href={"/submit-ai"}>submit your AI</Link> tools to our
+          directory.
         </>
       ),
     },
@@ -211,7 +197,7 @@ export default function JobsContent() {
                             {benefit.title}
                           </h3>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                        <p className="text-gray-600 dark:text-gray-300 text-sm text-justify link_design">
                           {benefit.description}
                         </p>
                       </div>
@@ -231,20 +217,10 @@ export default function JobsContent() {
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Match AI to Your Job
         </h1>
-        <p className="text-md text-gray-600 dark:text-gray-300 text-center">
+        <p className="text-md text-gray-600 dark:text-gray-300 text-center link_design">
           Never get left behind in the tech race. Use our page to find the
-          perfect{" "}
-          <Link
-            href={"/all-ai-tools"}
-            className="underline text-bold text-black"
-          >
-            AI tools
-          </Link>{" "}
-          that fit{" "}
-          <Link href={"/job"} className="underline text-bold text-black">
-            your job
-          </Link>{" "}
-          like a glove. Stay ahead now!
+          perfect <Link href={"/all-ai-tools"}>AI tools</Link> that fit{" "}
+          <Link href={"/job"}>your job</Link> like a glove. Stay ahead now!
         </p>
       </div>
     </div>

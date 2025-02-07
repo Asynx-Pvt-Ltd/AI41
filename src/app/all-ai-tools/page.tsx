@@ -156,13 +156,10 @@ export default function FullList() {
                 <h1 className="text-2xl font-bold">
                   What is an AI Tool Directory?
                 </h1>
-                <p className="text-justify mt-4 pr-4">
-                  An{" "}
-                  <Link href={"/"} className="underline text-bold text-black">
-                    AI Tool directory
-                  </Link>{" "}
-                  is a curated collection of important AI tools in a wide range
-                  of industries. It’s just like a library. But here, instead of
+                <p className="text-justify mt-4 pr-4 link_design">
+                  An <Link href={"/"}>AI Tool directory</Link> is a curated
+                  collection of important AI tools in a wide range of
+                  industries. It’s just like a library. But here, instead of
                   books, you will get a list of all AI tools for your purpose—
                   be it writing, designing, coding, or education. You can even
                   have a glance at the description, including the features,
@@ -177,18 +174,12 @@ export default function FullList() {
               <h1 className="text-2xl font-bold">
                 Where To Find A List With All AI Tools?
               </h1>
-              <p className="text-justify mt-2 pl-4">
+              <p className="text-justify mt-2 pl-4 link_design">
                 Luckily, our AI tool directory has a curated list of all{" "}
-                <Link
-                  href={"/all-ai-tools"}
-                  className="underline text-bold text-black"
-                >
-                  AI tools
-                </Link>
-                . You can use our advanced filtering system to find the tools
-                that match your purpose. We even provide a dedicated page for
-                each tool with all details. So the decision-making process will
-                be much easier.
+                <Link href={"/all-ai-tools"}>AI tools</Link>. You can use our
+                advanced filtering system to find the tools that match your
+                purpose. We even provide a dedicated page for each tool with all
+                details. So the decision-making process will be much easier.
               </p>
             </div>
             <div className="flex flex-1 flex-col justify-center items-center">
