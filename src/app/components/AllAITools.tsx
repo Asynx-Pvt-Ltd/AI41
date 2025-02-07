@@ -418,7 +418,7 @@ export default function AllAITools() {
             {/* Connecting Line */}
             {/* <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-[#222222] -translate-y-1/2" /> */}
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
               {selectionSteps.map((step, index) => (
                 <div key={index} className="relative h-full">
                   <CardDesign className="relative bg-white dark:bg-gray-700 transition-all duration-300 hover:shadow-xl h-full">
@@ -427,12 +427,14 @@ export default function AllAITools() {
                       {index + 1}
                     </div>
 
-                    <CardContent className="pt-8 pb-6 px-6">
-                      <div className="flex items-center mb-4">
-                        <span className="text-3xl mr-4">{step.icon}</span>
-                        <h3 className="text-xl font-semibold">{step.title}</h3>
+                    <CardContent className="p-6 mt-8">
+                      <div className="flex items-center">
+                        <span className="mr-4">{step.icon}</span>
+                        <h3 className="text-xl font-semibold mb-2">
+                          {step.title}
+                        </h3>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify mt-2">
                         {step.description}
                       </p>
                     </CardContent>
