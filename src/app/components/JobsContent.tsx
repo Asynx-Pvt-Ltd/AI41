@@ -183,7 +183,7 @@ export default function JobsContent() {
   return (
     <div className="flex flex-col min-h-screen">
       <section className="bg-gray-50 dark:bg-gray-800 my-10">
-        <div className="max-w-7xl mx-auto px-4 py-5">
+        <div className="max-w-7xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-4">
             How To Choose The Right AI Tool?
           </h2>
@@ -224,10 +224,10 @@ export default function JobsContent() {
         </div>
       </section>
       {/* FAQ Section */}
-      <section className="bg-white dark:bg-gray-800">
+      <section className="bg-white dark:bg-gray-800 py-5">
         <FAQ faqs={faq} title="Frequently Asked Questions" />
       </section>
-      <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 py-12">
+      <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 pt-10 pb-16">
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Match AI to Your Job
         </h1>
