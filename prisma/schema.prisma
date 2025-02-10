@@ -1,103 +1,104 @@
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-    provider  = "postgresql"
-    url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
-    directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
-    shadowDatabaseUrl = env("POSTGRES_PRISMA_SHADOW_URL")
+  provider          = "postgresql"
+  url               = env("POSTGRES_PRISMA_URL")
+  directUrl         = env("POSTGRES_URL_NON_POOLING")
+  shadowDatabaseUrl = env("POSTGRES_PRISMA_SHADOW_URL")
 }
 
 model Category {
-    id       Int    @id @default(autoincrement())
-    name     String @unique
-    slug     String @unique
-    fontIcon String?
-    tools    ToolsOnCategories[]
+  id       Int                 @id @default(autoincrement())
+  name     String              @unique
+  slug     String              @unique
+  fontIcon String?
+  tools    ToolsOnCategories[]
 }
 
 model JobRole {
-  id       Int    @id @default(autoincrement())
-  name     String @unique
-  slug     String @unique
-  tools    ToolsOnJobRoles[]
+  id       Int               @id @default(autoincrement())
+  name     String            @unique
+  slug     String            @unique
   fontIcon String?
+  tools    ToolsOnJobRoles[]
 }
 
 model ToolsOnJobRoles {
-  tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
-  toolId     Int
-  jobRole    JobRole  @relation(fields: [jobRoleId], references: [id], onDelete: Cascade)
-  jobRoleId  Int
+  toolId    Int
+  jobRoleId Int
+  jobRole   JobRole @relation(fields: [jobRoleId], references: [id], onDelete: Cascade)
+  tool      Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
 
   @@id([toolId, jobRoleId])
 }
 
 model Tool {
-    id               Int      @id @default(autoincrement())
-    icon             String
-    thumbnail        String
-    name             String
-    slug             String
-    description      String
-    shortDescription String
-    url              String
-    pricing          String
-    categories       ToolsOnCategories[]
-    tags             String[]
-    jobRoles         ToolsOnJobRoles[]
-    hasFreePrice     Boolean?
-    hasPaidPrice     Boolean?
-    paidPrice        String?
-
+  id               Int                 @id @default(autoincrement())
+  icon             String
+  thumbnail        String
+  name             String
+  slug             String
+  description      String
+  shortDescription String
+  url              String
+  pricing          String
+  tags             String[]
+  hasFreePrice     Boolean?
+  hasPaidPrice     Boolean?
+  paidPrice        String?
+  cons             String
+  pros             String
+  categories       ToolsOnCategories[]
+  jobRoles         ToolsOnJobRoles[]
 }
 
 model FeatureProject {
-    id          Int    @id @default(autoincrement())
-    icon        String
-    title       String @unique
-    description String
-    link        String
+  id          Int    @id @default(autoincrement())
+  icon        String
+  title       String @unique
+  description String
+  link        String
 }
 
 model Tutorial {
-    id          Int      @id @default(autoincrement())
-    icon        String
-    title       String
-    url         String   @unique
-    tags        String[]
-    videoId     String?  @unique
-    viewCount   String?
-    likeCount   String?
+  id        Int      @id @default(autoincrement())
+  icon      String
+  title     String
+  url       String   @unique
+  tags      String[]
+  videoId   String?  @unique
+  viewCount String?
+  likeCount String?
 }
 
 model News {
-    id          Int      @id @default(autoincrement())
-    icon        String
-    title       String
-    url         String
-    date        String?
-    slugUrl     String   @unique
-    description String
+  id          Int     @id @default(autoincrement())
+  icon        String
+  title       String
+  url         String
+  date        String?
+  slugUrl     String  @unique
+  description String
 }
 
 model tutorialKeyword {
-    id      Int     @id @default(autoincrement())
-    keyword String?
+  id      Int     @id @default(autoincrement())
+  keyword String?
 }
 
 model newsKeyword {
-    id         Int    @id @default(autoincrement())
-    keyword    String
-    keywordUrl String
+  id         Int    @id @default(autoincrement())
+  keyword    String
+  keywordUrl String
 }
 
 model ToolsOnCategories {
-    tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
-    toolId     Int
-    category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-    categoryId Int
+  toolId     Int
+  categoryId Int
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
 
-    @@id([toolId, categoryId])
+  @@id([toolId, categoryId])
 }

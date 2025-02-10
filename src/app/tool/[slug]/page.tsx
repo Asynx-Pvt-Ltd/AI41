@@ -8,11 +8,69 @@ import { Card } from "@/app/components/Card";
 import Link from "next/link";
 import FormattedContent from "@/app/components/FormattedContent";
 import { FaExternalLinkAlt } from "react-icons/fa";
+import { CheckCircle, XCircle } from "lucide-react";
+import FAQTutorialsAccordion from "@/app/components/ui/FAQ";
 
 export default function Tool() {
   const [tool, setTool] = useState<any>();
   const [alternatives, setAlternatives] = useState<any>([]);
   const params = useParams<{ slug: string }>();
+  const faqs = [
+    {
+      question: "What is an AI tool directory?",
+      answer: (
+        <>
+          An AI tool directory is a curated platform with a list of assorted
+          tools empowered by Artificial Intelligence. You can use it to find the
+          right tools for your needs.
+        </>
+      ),
+    },
+    {
+      question: "Are the tools listed here free?",
+      answer: (
+        <>
+          Our list includes some free and paid tools. You can go through the
+          dedicated page of each tool to know the pricing details.
+        </>
+      ),
+    },
+    {
+      question:
+        "Do I need to sign up or create an account to access the directory?",
+      answer: (
+        <>
+          No sign-up or account is required to check the tools. Even with a
+          sign-up account, you may benefit from such features as adding tools to
+          your favorite list.
+        </>
+      ),
+    },
+    {
+      question: "Are the tools listed verified and reliable?",
+      answer: (
+        <>
+          We're serious about reliability. Every tool in our directory is vetted
+          through user feedback and performance checks. We even consider the
+          credibility of the developers. That means you will see only trusted,
+          high-quality tools for your purpose.
+        </>
+      ),
+    },
+    {
+      question:
+        "How do you verify the effectiveness of the AI tools listed here?",
+      answer: (
+        <>
+          We run the tools through scenarios relevant to their intended use.
+          Similarly, our team checks the case studies and user reviews.
+          Sometimes, we even reach out to the companies directly for deeper
+          insights. Thus, we ensure that all the tools listed on our platform
+          are high-quality.
+        </>
+      ),
+    },
+  ];
 
   useEffect(() => {
     if (params && params.slug) {
@@ -363,11 +421,39 @@ export default function Tool() {
                   dangerouslySetInnerHTML={{ __html: tool?.description }}
                 ></p> */}
                 <FormattedContent content={tool?.description} />
+                {/* {PROS AND CONS} */}
+                <div className="grid md:grid-cols-2 gap-6 mt-6">
+                  {/* Pros Section */}
+                  <div className="bg-green-50 rounded-lg p-5 border border-green-100">
+                    <div className="flex items-center gap-2 mb-4">
+                      <CheckCircle className="text-green-600 w-5 h-5" />
+                      <h2 className="text-lg font-semibold text-green-800">
+                        Pros
+                      </h2>
+                    </div>
+                    <div className="space-y-3">
+                      <FormattedContent content={tool?.pros} />
+                    </div>
+                  </div>
+
+                  {/* Cons Section */}
+                  <div className="bg-red-50 rounded-lg p-5 border border-red-100">
+                    <div className="flex items-center gap-2 mb-4">
+                      <XCircle className="text-red-600 w-5 h-5" />
+                      <h2 className="text-lg font-semibold text-red-800">
+                        Cons
+                      </h2>
+                    </div>
+                    <div className="space-y-3">
+                      <FormattedContent content={tool?.cons} />
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="flex flex-col max-w-[390px] w-full">
                 <div className="flex flex-row justify-center items-center text-center w-full h-[70px] bg-white shadow-lg border border-slate-400 rounded-md">
                   <span className="font-bold text-xl">
-                    Alternatives to {tool.name}
+                    Similar to {tool.name}
                   </span>
                 </div>
                 {alternatives ? (
@@ -427,6 +513,9 @@ export default function Tool() {
         )}
         <Card />
       </main>
+      <div>
+        <FAQTutorialsAccordion faqs={faqs} />
+      </div>
       <Footer />
     </div>
   );

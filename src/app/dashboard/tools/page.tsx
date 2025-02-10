@@ -11,6 +11,8 @@ interface ToolFormData {
   name: string;
   description: string;
   shortDescription: string;
+  pros: string;
+  cons: string;
   url: string;
   categories: Array<{ id: number; name: string }>;
   jobRoles: Array<{ id: number; name: string }>;
@@ -36,6 +38,8 @@ function Tools() {
     name: "",
     description: "",
     shortDescription: "",
+    pros: "",
+    cons: "",
     url: "",
     categories: [],
     jobRoles: [],
@@ -158,6 +162,8 @@ function Tools() {
       name: formData.name,
       description: formData.description,
       shortDescription: formData.shortDescription,
+      pros: formData.pros,
+      cons: formData.cons,
       url: formData.url,
       categories: formData.categories,
       jobRoles: formData.jobRoles,
@@ -234,6 +240,8 @@ function Tools() {
       name: "",
       description: "",
       shortDescription: "",
+      pros: "",
+      cons: "",
       url: "",
       categories: [],
       jobRoles: [],
@@ -462,6 +470,19 @@ function Tools() {
                   setFormData({ ...formData, description: html })
                 }
               />
+              <div>
+                <label>Pros</label>
+                <AdvancedEditor
+                  value={formData.pros}
+                  onChange={(html) => setFormData({ ...formData, pros: html })}
+                />
+                <label>Cons</label>
+                <AdvancedEditor
+                  value={formData.cons}
+                  onChange={(html) => setFormData({ ...formData, cons: html })}
+                />
+              </div>
+
               <div className="flex flex-row items-center">
                 <span className="pt-2 pr-2">
                   Icon : <span className="text-red-500">*</span>

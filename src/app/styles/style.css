@@ -93,6 +93,7 @@ body {
     text-decoration: underline;
     font-weight: bold;
     transition: color 0.3s ease;
+    text-underline-offset: 4px;
   }
 
   a::after {

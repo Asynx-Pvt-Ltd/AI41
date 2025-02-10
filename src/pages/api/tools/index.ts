@@ -10,6 +10,8 @@ export default async function handler(
       name,
       description,
       shortDescription,
+      pros,
+      cons,
       url,
       pricing,
       categories,
@@ -30,6 +32,8 @@ export default async function handler(
         slug: string;
         description: string;
         shortDescription: string;
+        pros: string;
+        cons: string;
         url: string;
         pricing: string;
         tags: string[];
@@ -45,6 +49,8 @@ export default async function handler(
         slug: name.toLowerCase().split(" ").join("-"),
         description,
         shortDescription,
+        pros,
+        cons,
         url,
         pricing,
         tags,
