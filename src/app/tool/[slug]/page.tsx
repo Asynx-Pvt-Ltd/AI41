@@ -15,6 +15,7 @@ export default function Tool() {
   const [tool, setTool] = useState<any>();
   const [alternatives, setAlternatives] = useState<any>([]);
   const params = useParams<{ slug: string }>();
+
   const faqs = [
     {
       question: "What is an AI tool directory?",
@@ -414,8 +415,8 @@ export default function Tool() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-center gap-2 mt-[65px] lg:mt-6 mx-auto flex-wrap lg:flex-nowrap">
-              <div className="flex flex-col max-w-[880px] w-full bg-white shadow-lg p-5">
+            <div className="flex justify-center gap-2 mt-[65px] lg:mt-6 mx-11">
+              <div className="flex flex-col w-full bg-white shadow-lg p-5 px-8">
                 {/* <p
                   className="text-gray-600 mb-4 text-left whitespace-pre-line"
                   dangerouslySetInnerHTML={{ __html: tool?.description }}
@@ -450,41 +451,39 @@ export default function Tool() {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col max-w-[390px] w-full">
-                <div className="flex flex-row justify-center items-center text-center w-full h-[70px] bg-white shadow-lg border border-slate-400 rounded-md">
-                  <span className="font-bold text-xl">
-                    Similar to {tool.name}
-                  </span>
-                </div>
-                {alternatives ? (
-                  alternatives
+            </div>
+            <div className="flex flex-col mx-11 gap-4 mt-12 items-center">
+              <div>
+                <span className="font-bold text-2xl">
+                  Similar to {tool.name}
+                </span>
+              </div>
+              {alternatives ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-auto justify-items-center">
+                  {alternatives
                     .sort(() => Math.random() - 0.5) // Shuffle the array
                     .slice(0, 5)
                     .map((tool: any, idx: number) => (
                       <div
                         key={idx}
-                        className="flex flex-row rounded-md w-full p-2 mt-2 overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
+                        className="rounded-md overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
                       >
-                        <div className="flex flex-col justify-around">
-                          <div className="flex flex-row justify-center items-center mt-4">
-                            <div className="flex flex-col justify-center mr-1">
+                        <div className="flex flex-col justify-between h-full">
+                          <div className="flex flex-col items-center">
+                            <div className="flex flex-row justify-center items-center mt-4">
                               <Image
                                 src={tool?.icon}
                                 alt={tool?.name}
                                 width={32}
                                 height={32}
-                                className="w-10 h-10"
+                                className="w-10 h-10 mr-2"
                               />
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
                               <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
                                 {tool.name}
                               </h4>
                             </div>
-                          </div>
-                          <div className="flex flex-row justify-center items-center py-1">
                             <p
-                              className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-2"
+                              className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
                               dangerouslySetInnerHTML={{
                                 __html: tool.shortDescription,
                               }}
@@ -493,20 +492,20 @@ export default function Tool() {
                           <div className="flex flex-col justify-center items-center mb-4">
                             <Link
                               href={"/tool/" + tool.slug}
-                              className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2"
+                              className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2 mt-2"
                             >
                               Visit <FaExternalLinkAlt size={10} />
                             </Link>
                           </div>
                         </div>
                       </div>
-                    ))
-                ) : (
-                  <div className="flex flex-row justify-center items-center">
-                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
-                  </div>
-                )}
-              </div>
+                    ))}
+                </div>
+              ) : (
+                <div className="flex flex-row justify-center items-center">
+                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
+                </div>
+              )}
             </div>
           </>
         ) : (
@@ -514,7 +513,9 @@ export default function Tool() {
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white "></div>
           </div>
         )}
-        <Card />
+        <div className="mt-8 ">
+          <Card />
+        </div>
       </main>
       <div>
         <FAQTutorialsAccordion faqs={faqs} />
