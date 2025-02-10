@@ -29,6 +29,10 @@ export const Card = () => {
       .catch((err) => {});
   }, []);
 
+  if (loading || !projects?.length) {
+    return null;
+  }
+
   return (
     <section className="container mx-auto">
       <h2 className="text-2xl font-semibold text-gray-900 dark:text-white pt-6 mb-6">

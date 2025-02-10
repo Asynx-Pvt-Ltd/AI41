@@ -508,7 +508,7 @@ export default function Tool() {
           </>
         ) : (
           <div className="flex flex-row justify-center items-center">
-            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
+            <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white "></div>
           </div>
         )}
         <Card />
