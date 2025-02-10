@@ -457,47 +457,50 @@ export default function Tool() {
                   </span>
                 </div>
                 {alternatives ? (
-                  alternatives.slice(-4).map((tool: any, idx: number) => (
-                    <div
-                      key={idx}
-                      className="flex flex-row rounded-md w-full p-2 mt-2 overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
-                    >
-                      <div className="flex flex-col justify-around">
-                        <div className="flex flex-row justify-center items-center mt-4">
-                          <div className="flex flex-col justify-center mr-1">
-                            <Image
-                              src={tool?.icon}
-                              alt={tool?.name}
-                              width={32}
-                              height={32}
-                              className="w-10 h-10"
+                  alternatives
+                    .sort(() => Math.random() - 0.5) // Shuffle the array
+                    .slice(0, 5)
+                    .map((tool: any, idx: number) => (
+                      <div
+                        key={idx}
+                        className="flex flex-row rounded-md w-full p-2 mt-2 overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
+                      >
+                        <div className="flex flex-col justify-around">
+                          <div className="flex flex-row justify-center items-center mt-4">
+                            <div className="flex flex-col justify-center mr-1">
+                              <Image
+                                src={tool?.icon}
+                                alt={tool?.name}
+                                width={32}
+                                height={32}
+                                className="w-10 h-10"
+                              />
+                            </div>
+                            <div className="flex flex-col items-center justify-center">
+                              <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
+                                {tool.name}
+                              </h4>
+                            </div>
+                          </div>
+                          <div className="flex flex-row justify-center items-center py-1">
+                            <p
+                              className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-2"
+                              dangerouslySetInnerHTML={{
+                                __html: tool.shortDescription,
+                              }}
                             />
                           </div>
-                          <div className="flex flex-col items-center justify-center">
-                            <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
-                              {tool.name}
-                            </h4>
+                          <div className="flex flex-col justify-center items-center mb-4">
+                            <Link
+                              href={"/tool/" + tool.slug}
+                              className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2"
+                            >
+                              Visit <FaExternalLinkAlt size={10} />
+                            </Link>
                           </div>
                         </div>
-                        <div className="flex flex-row justify-center items-center py-1">
-                          <p
-                            className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-2"
-                            dangerouslySetInnerHTML={{
-                              __html: tool.shortDescription,
-                            }}
-                          />
-                        </div>
-                        <div className="flex flex-col justify-center items-center mb-4">
-                          <Link
-                            href={"/tool/" + tool.slug}
-                            className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2"
-                          >
-                            Visit <FaExternalLinkAlt size={10} />
-                          </Link>
-                        </div>
                       </div>
-                    </div>
-                  ))
+                    ))
                 ) : (
                   <div className="flex flex-row justify-center items-center">
                     <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
