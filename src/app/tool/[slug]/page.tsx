@@ -10,6 +10,12 @@ import FormattedContent from "@/app/components/FormattedContent";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import { CheckCircle, XCircle } from "lucide-react";
 import FAQTutorialsAccordion from "@/app/components/ui/FAQ";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/app/components/ui/TabsCN";
 
 export default function Tool() {
   const [tool, setTool] = useState<any>();
@@ -415,97 +421,124 @@ export default function Tool() {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center gap-2 mt-[65px] lg:mt-6 mx-11">
-              <div className="flex flex-col w-full bg-white shadow-lg p-5 px-8">
-                {/* <p
-                  className="text-gray-600 mb-4 text-left whitespace-pre-line"
-                  dangerouslySetInnerHTML={{ __html: tool?.description }}
-                ></p> */}
-                <FormattedContent content={tool?.description} />
-                {/* {PROS AND CONS} */}
-                <div className="grid md:grid-cols-2 gap-6 mt-6">
-                  {/* Pros Section */}
-                  <div className="bg-green-50 rounded-lg p-5 border border-green-100">
-                    <div className="flex items-center gap-2 mb-4">
-                      <CheckCircle className="text-green-600 w-5 h-5" />
-                      <h2 className="text-lg font-semibold text-green-800">
-                        Pros
-                      </h2>
-                    </div>
-                    <div className="space-y-3">
-                      <FormattedContent content={tool?.pros} />
-                    </div>
-                  </div>
+            <div className="mt-8 mx-auto max-w-[1278px]">
+              <Tabs defaultValue="description" className="w-full">
+                <TabsList className="w-full justify-start">
+                  <TabsTrigger value="description">Description</TabsTrigger>
+                  <TabsTrigger value="proscons">Pros & Cons</TabsTrigger>
+                  <TabsTrigger value="similar">Similar Tools</TabsTrigger>
+                  <TabsTrigger value="featured">Featured Tools</TabsTrigger>
+                  <TabsTrigger value="faq">FAQ</TabsTrigger>
+                </TabsList>
+                <TabsContent
+                  value="description"
+                  className="bg-white shadow-lg rounded-lg p-8"
+                >
+                  <FormattedContent content={tool.description} />
+                </TabsContent>
 
-                  {/* Cons Section */}
-                  <div className="bg-red-50 rounded-lg p-5 border border-red-100">
-                    <div className="flex items-center gap-2 mb-4">
-                      <XCircle className="text-red-600 w-5 h-5" />
-                      <h2 className="text-lg font-semibold text-red-800">
-                        Cons
-                      </h2>
+                <TabsContent
+                  value="proscons"
+                  className="bg-white shadow-lg rounded-lg p-8"
+                >
+                  <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+                    <div className="bg-green-50 rounded-lg p-5 border border-green-100">
+                      <div className="flex items-center gap-2 mb-4">
+                        <CheckCircle className="text-green-600 w-5 h-5" />
+                        <h2 className="text-lg font-semibold text-green-800">
+                          Pros
+                        </h2>
+                      </div>
+                      <div className="space-y-3">
+                        <FormattedContent content={tool.pros} />
+                      </div>
                     </div>
-                    <div className="space-y-3">
-                      <FormattedContent content={tool?.cons} />
+
+                    <div className="bg-red-50 rounded-lg p-5 border border-red-100">
+                      <div className="flex items-center gap-2 mb-4">
+                        <XCircle className="text-red-600 w-5 h-5" />
+                        <h2 className="text-lg font-semibold text-red-800">
+                          Cons
+                        </h2>
+                      </div>
+                      <div className="space-y-3">
+                        <FormattedContent content={tool.cons} />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col mx-11 gap-4 mt-12 items-center">
-              <div>
-                <span className="font-bold text-2xl">
-                  Similar to {tool.name}
-                </span>
-              </div>
-              {alternatives ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 m-auto justify-items-center">
-                  {alternatives
-                    .sort(() => Math.random() - 0.5) // Shuffle the array
-                    .slice(0, 5)
-                    .map((tool: any, idx: number) => (
-                      <div
-                        key={idx}
-                        className="rounded-md overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50"
-                      >
-                        <div className="flex flex-col justify-between h-full">
-                          <div className="flex flex-col items-center">
-                            <div className="flex flex-row justify-center items-center mt-4">
-                              <Image
-                                src={tool?.icon}
-                                alt={tool?.name}
-                                width={32}
-                                height={32}
-                                className="w-10 h-10 mr-2"
-                              />
-                              <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
-                                {tool.name}
-                              </h4>
-                            </div>
-                            <p
-                              className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
-                              dangerouslySetInnerHTML={{
-                                __html: tool.shortDescription,
-                              }}
-                            />
-                          </div>
-                          <div className="flex flex-col justify-center items-center mb-4">
-                            <Link
-                              href={"/tool/" + tool.slug}
-                              className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2 mt-2"
+                </TabsContent>
+
+                <TabsContent
+                  value="similar"
+                  className="bg-white shadow-lg rounded-lg p-8"
+                >
+                  <div className="flex flex-col gap-4">
+                    <h2 className="font-bold text-2xl text-center">
+                      Similar to {tool.name}
+                    </h2>
+                    {alternatives ? (
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        {alternatives
+                          .sort(() => Math.random() - 0.5)
+                          .slice(0, 5)
+                          .map((tool: any, idx: number) => (
+                            <div
+                              key={idx}
+                              className="rounded-md overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border hover:border-slate-700 relative"
                             >
-                              Visit <FaExternalLinkAlt size={10} />
-                            </Link>
-                          </div>
-                        </div>
+                              <div className="flex flex-col justify-between h-full">
+                                <div className="flex flex-col items-center">
+                                  <div className="flex flex-row justify-center items-center mt-4">
+                                    <Image
+                                      src={tool.icon}
+                                      alt={tool.name}
+                                      width={32}
+                                      height={32}
+                                      className="w-10 h-10 mr-2"
+                                    />
+                                    <h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
+                                      {tool.name}
+                                    </h4>
+                                  </div>
+                                  <p
+                                    className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
+                                    dangerouslySetInnerHTML={{
+                                      __html: tool.shortDescription,
+                                    }}
+                                  />
+                                </div>
+                                <div className="flex flex-col justify-center items-center mb-4">
+                                  <Link
+                                    href={"/tool/" + tool.slug}
+                                    className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2 mt-2"
+                                  >
+                                    Visit <FaExternalLinkAlt size={10} />
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
                       </div>
-                    ))}
-                </div>
-              ) : (
-                <div className="flex flex-row justify-center items-center">
-                  <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
-                </div>
-              )}
+                    ) : (
+                      <div className="flex justify-center">
+                        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white" />
+                      </div>
+                    )}
+                  </div>
+                </TabsContent>
+                <TabsContent
+                  value="featured"
+                  className="bg-white shadow-lg rounded-lg p-8"
+                >
+                  <Card />
+                </TabsContent>
+                <TabsContent
+                  value="faq"
+                  className="bg-white shadow-lg rounded-lg p-8"
+                >
+                  <FAQTutorialsAccordion faqs={faqs} />
+                </TabsContent>
+              </Tabs>
             </div>
           </>
         ) : (
@@ -513,13 +546,7 @@ export default function Tool() {
             <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white "></div>
           </div>
         )}
-        <div className="mt-8 ">
-          <Card />
-        </div>
       </main>
-      <div>
-        <FAQTutorialsAccordion faqs={faqs} />
-      </div>
       <Footer />
     </div>
   );
