@@ -94,9 +94,9 @@ const FeaturedTools: NextPage<Props> = ({}) => {
                         </h4>
                       </div>
                     </div>
-                    <div className="flex flex-row justify-center ">
+                    <div className="flex flex-row justify-center mt-2">
                       <p
-                        className="my-3 text-black tracking-wide leading-tight text-sm text-pretty text-justify px-2 m-auto line-clamp-5 overflow-hidden not-italic "
+                        className="my-3 text-black tracking-wide leading-tight text-sm text-pretty text-center px-2 m-auto line-clamp-3 overflow-hidden not-italic "
                         dangerouslySetInnerHTML={{
                           __html: project.description,
                         }}
