@@ -41,7 +41,7 @@ export const Card = () => {
       <>
         {loading === false ? (
           <div className="max-w-7xl mx-auto px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-10">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 py-5">
               {projects?.length && !loading
                 ? projects?.map((project, idx) => (
                     <div
