@@ -67,16 +67,18 @@ export const Header = () => {
               className="flex items-center justify-between group"
             >
               <div className="flex items-center space-x-2 group">
-                <lord-icon
-                  src={item.iconSrc}
-                  trigger="hover"
-                  target=".group"
-                  style={{
-                    width: "25px",
-                    height: "25px",
-                  }}
-                />
-                <span className="text-sm sm:text-base md:text-lg lg:text-xl text-white dark:text-gray-300 group-hover:text-gray-300 dark:group-hover:text-blue-400">
+                <span className="site-icon">
+                  <lord-icon
+                    src={item.iconSrc}
+                    trigger="hover"
+                    target=".group"
+                    style={{
+                      width: "25px",
+                      height: "25px",
+                    }}
+                  />
+                </span>
+                <span className="text-sm md:text-lg lg:text-xl text-white dark:text-gray-300 group-hover:text-gray-300 dark:group-hover:text-blue-400 site-title">
                   {item.text}
                 </span>
               </div>

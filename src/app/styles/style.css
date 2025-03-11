@@ -29,6 +29,34 @@ body {
   font-family: "Roboto";
 }
 
+@media only screen and (max-width: 480px) {
+  .site-header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 0;
+    width: 100%;
+    background: #fff;
+    height: 100px;
+    margin-bottom: 0;
+    box-shadow: #7198ef 0 0 11px;
+    position: sticky;
+    z-index: 10000;
+    top: 0;
+    border-bottom: 2px solid #c7c7c700;
+    transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    background: #222222;
+    border-radius: 0vw 0vw 3vw 3vw;
+    font-family: "Roboto";
+  }
+  .site-title {
+    font-size: 3vw;
+  }
+  .site-icon {
+    display: none;
+  }
+}
+
 .site-header:hover {
   box-shadow: #7198ef 0 4px 16px;
 }
