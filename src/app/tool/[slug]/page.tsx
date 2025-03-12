@@ -523,7 +523,7 @@ export default function Tool() {
                                         </h4>
                                       </div>
                                       <p
-                                        className="my-3 text-justify text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
+                                        className="my-3 text-center text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
                                         dangerouslySetInnerHTML={{
                                           __html: tool.shortDescription,
                                         }}
