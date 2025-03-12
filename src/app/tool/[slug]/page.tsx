@@ -282,7 +282,7 @@ export default function Tool() {
             <div className="flex flex-col md:flex-row gap-4 w-full">
               <div className="w-full">
                 <div className="flex flex-row">
-                  <div className="flex flex-col h-fit w-full lg:w-[1150] mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
+                  <div className="flex flex-col h-fit w-full lg:w-[1150px] mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
                     <div className="flex flex-col sm:flex-row justify-between mb-4 sm:mb-0">
                       <div className="flex gap-1 mb-2 sm:mb-0">
                         <CategoryTags categories={tool.categories} />
@@ -444,7 +444,7 @@ export default function Tool() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 mx-auto w-full lg:w-[1150]">
+                <div className="mt-8 mx-auto w-full lg:w-[1150px]">
                   <Tabs defaultValue="description" className="w-full">
                     <TabsList className="w-full overflow-x-auto flex flex-nowrap justify-start">
                       <TabsTrigger value="description">Description</TabsTrigger>
