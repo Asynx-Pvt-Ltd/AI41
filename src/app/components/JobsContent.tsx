@@ -210,14 +210,14 @@ export default function JobsContent() {
         </div>
       </section>
       {/* FAQ Section */}
-      <section className="bg-white dark:bg-gray-800 py-5">
+      <section className="bg-white dark:bg-gray-800 py-5 px-5">
         <FAQ faqs={faq} title="Frequently Asked Questions" />
       </section>
       <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 pt-10 pb-16">
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Match AI to Your Job
         </h1>
-        <p className="text-md text-gray-600 dark:text-gray-300 text-center link_design">
+        <p className="text-md text-gray-600 dark:text-gray-300 text-center link_design px-5">
           Never get left behind in the tech race. Use our page to find the
           perfect <Link href={"/all-ai-tools"}>AI tools</Link> that fit{" "}
           <Link href={"/job"}>your job</Link> like a glove. Stay ahead now!

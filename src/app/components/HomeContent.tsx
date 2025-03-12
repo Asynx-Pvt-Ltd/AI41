@@ -419,7 +419,7 @@ const WhyUseSection = () => {
               value={reason.title.toLowerCase().replace(/\s+/g, "-")}
               className="mt-6"
             >
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 mt-28 lg:mt-0 md:mt-28">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 lg:mt-0 md:mt-28">
                 {/* <div className="flex items-center mb-4">
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
@@ -518,7 +518,7 @@ const WhyChooseUsSection = () => {
               value={feature.title.toLowerCase().replace(/\s+/g, "-")}
               className="mt-6"
             >
-              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 mt-16 md:mt-16 lg:mt-0">
+              <div className="bg-gray-50 dark:bg-gray-800 rounded-lg p-6 md:mt-16 lg:mt-0">
                 {/* <div className="flex items-center mb-4">
                   {feature.icon}
                   <h3 className="text-lg font-semibold ml-4">

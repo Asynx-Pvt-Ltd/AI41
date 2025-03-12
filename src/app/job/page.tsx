@@ -27,7 +27,7 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 my-3">
+      <main className="flex-grow bg-white dark:bg-gray-800 w-full lg:pt-10 lg:pl-6 lg:pr-6 lg:pb-6 my-3 pt-8">
         <div className="flex-col items-center justify-center">
           <h1 className="text-3xl font-bold text-center mb-2">AI Jobs</h1>
           <p className="text-sm mx-[6vw] text-justify py-2 link_design">

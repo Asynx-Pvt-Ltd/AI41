@@ -383,7 +383,7 @@ export default function AllAITools() {
     <div>
       {/*==================How To Find The Perfect AI Tool?===========*/}
 
-      <section className="bg-gray-50 dark:bg-gray-900 my-10">
+      <section className="bg-gray-50 dark:bg-gray-900 my-10 px-5">
         <div className="max-w-7xl mx-auto py-8">
           <h2 className="text-3xl font-bold text-center mb-16">
             How To Find The Perfect AI Tool?
@@ -423,7 +423,7 @@ export default function AllAITools() {
 
       {/*==================MAIN FEATURES===========*/}
 
-      <section className="bg-white dark:bg-gray-800 my-5">
+      <section className="bg-white dark:bg-gray-800 my-5 px-5">
         <div className="max-w-7xl mx-auto py-5">
           <h2 className="text-3xl font-bold mb-8 text-center">Main Features</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -622,7 +622,7 @@ export default function AllAITools() {
 
       {/*==================AI Tools Facts and Curiosities===========*/}
 
-      <section className="bg-gray-50 dark:bg-gray-800 my-12">
+      <section className="bg-gray-50 dark:bg-gray-800 my-12 px-5">
         <div className="max-w-7xl mx-auto py-8">
           <h2 className="text-3xl font-bold mb-4 text-center">
             AI Tools Facts and Curiosities
@@ -652,7 +652,7 @@ export default function AllAITools() {
       </section>
 
       {/*========================FAQ=========================*/}
-      <div>
+      <div className="px-5">
         <FAQTutorialsAccordion faqs={faq} title="Frequently Asked Questions" />
       </div>
       <div className="flex flex-col items-center gap-4 bg-gray-50 dark:bg-gray-900 mt-10 mb-16 px-16 py-5 link_design">

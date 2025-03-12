@@ -163,7 +163,7 @@ const AINewsPage: React.FC = () => {
         </div>
       </section> */}
 
-      <section className="bg-gray-50 dark:bg-gray-900 my-10">
+      <section className="bg-gray-50 dark:bg-gray-900 my-10 px-5">
         <div className="max-w-7xl mx-auto py-8">
           <h2 className="text-3xl font-bold text-center mb-6">
             5 Reasons Why You Must Stay Ahead With the Latest AI News
@@ -205,14 +205,14 @@ const AINewsPage: React.FC = () => {
           </div>
         </div>
       </section>
-      <div className="bg-white dark:bg-gray-800">
+      <div className="bg-white dark:bg-gray-800 px-5">
         <FAQ faqs={faq} title="Frequently Asked Questions" />
       </div>
       <div className="bg-gray-50 dark:bg-gray-900 mt-5 pt-5 pb-16">
         <h2 className="text-3xl font-bold text-center py-4">
           Get AI Updates Instantly!
         </h2>
-        <p className="text-center text-gray-600 dark:text-gray-300 text-md link_design">
+        <p className="text-center text-gray-600 dark:text-gray-300 text-md link_design px-5">
           Keep in touch with our <Link href={"/ai-news"}>news page</Link> to get
           to know <Link href={"/all-ai-tools"}>all AI tool</Link> updates before
           your competitors. Stay ahead of the competition!

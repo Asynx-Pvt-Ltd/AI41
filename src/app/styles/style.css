@@ -98,7 +98,40 @@ body {
   display: initial;
   padding-bottom: 3px;
 }
-
+@media only screen and (max-width: 480px) {
+  .border-image {
+    font-size: 2em;
+    color: #333;
+    border-image: linear-gradient(
+        89deg,
+        #a0dbfd 1%,
+        #947bed 26%,
+        #fb81b5 51%,
+        #ffbd75 98%
+      )
+      1;
+    -o-border-image: linear-gradient(
+        88deg,
+        #0f6a97 0.66%,
+        #9679fa 28.1%,
+        #3287bb 61.1%,
+        #03a9f4 100%
+      )
+      1;
+    border-image: linear-gradient(
+        89deg,
+        #a0dbfd 1%,
+        #947bed 26%,
+        #fb81b5 51%,
+        #ffbd75 98%
+      )
+      1;
+    border-bottom: 3px solid;
+    display: initial;
+    padding-bottom: 0px;
+    line-height: 50px;
+  }
+}
 /* .custom-dropdown-items {
   display: block;
   height: fit-content;

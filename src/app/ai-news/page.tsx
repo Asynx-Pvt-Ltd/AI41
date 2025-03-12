@@ -139,7 +139,7 @@ export default function Page() {
                     className="w-[400px] h-[180px] object-cover rounded-[inherit]"
                   />
 
-                  <h2 className="text-lg font-semibold p-2 line-clamp-2 font-roboto">
+                  <h2 className="text-lg font-semibold px-2 line-clamp-2 font-roboto">
                     {n.title}
                   </h2>
                   {/* <div className="px-4 mb-4">

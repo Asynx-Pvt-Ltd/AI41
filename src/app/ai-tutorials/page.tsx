@@ -351,7 +351,7 @@ export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
+      <main className="flex-grow bg-white dark:bg-gray-800 w-full lg:pt-10 lg:pl-6 lg:pr-6 lg:pb-6 text-center pt-6">
         {loading === false ? (
           <>
             <div className="flex flex-col items-center justify-center space-y-4">
@@ -367,7 +367,7 @@ export default function Page() {
                 </div>
               </div>
 
-              <div className="flex w-full md:w-2/3 lg:w-1/2 gap-4">
+              <div className="flex md:w-2/3 lg:w-1/2 gap-4">
                 <input
                   type="text"
                   placeholder="Search for tutorials..."
@@ -430,7 +430,7 @@ export default function Page() {
       </div>
 
       {/*FAQ Tutorials */}
-      <div className="pb-14 mt-3">
+      <div className="pb-14 mt-3 px-5">
         <FAQ faqs={faqs} title="Frequently Asked Questions" />
       </div>
       <Footer />

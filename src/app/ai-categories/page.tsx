@@ -45,9 +45,9 @@ export default function Page() {
                       <Link
                         href={`/ai-categories/${item.slug}`}
                         key={index}
-                        className="bg-white shadow-md rounded-lg px-6 py-4 flex items-center justify-between lg:min-w-60 lg:h-12"
+                        className="bg-white shadow-md rounded-lg px-6 py-4 flex items-center justify-between min-w-80 h-12 lg:min-w-60 lg:h-12"
                       >
-                        <h3 className="text-lg font-semibold ml-4">
+                        <h3 className="text-lg font-semibold lg:ml-4">
                           {item.name ? item.name : "General"}
                         </h3>{" "}
                         <span className="text-gray-500 text-sm">
