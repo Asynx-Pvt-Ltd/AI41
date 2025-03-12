@@ -102,7 +102,7 @@ export default function Tool() {
     if (!roles || roles.length === 0) return null;
 
     return (
-      <div className="flex gap-2">
+      <div className="flex flex-col sm:flex-row gap-2">
         <span className="text-gray-700 font-medium">Best For:</span>
         <div className="flex flex-wrap items-center gap-1">
           {showAll ? (
@@ -213,7 +213,7 @@ export default function Tool() {
     if (!categories || categories.length === 0) return null;
 
     return (
-      <div className="flex gap-1 items-center">
+      <div className="flex flex-wrap gap-1 items-center">
         {showAll ? (
           <>
             {categories.map((cat) => (
@@ -276,21 +276,25 @@ export default function Tool() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 pl-6 pr-6 pb-6 text-center">
+      <main className="flex-grow bg-white dark:bg-gray-800 w-full pt-10 px-2 sm:px-4 md:px-6 pb-6 text-center">
         {tool ? (
           <>
-            <div className="flex flex-row gap-4 w-full">
-              <div className="">
+            <div className="flex flex-col md:flex-row gap-4 w-full">
+              <div className="w-full">
                 <div className="flex flex-row">
-                  <div className="flex flex-col h-fit w-[1150px] mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
-                    <div className="flex flex-row justify-between">
-                      <div className="flex gap-1">
+                  <div className="flex flex-col h-fit w-full lg:w-[1150] mx-auto border-[#222222] bg-white p-2 lg:p-6 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
+                    <div className="flex flex-col sm:flex-row justify-between mb-4 sm:mb-0">
+                      <div className="flex gap-1 mb-2 sm:mb-0">
                         <CategoryTags categories={tool.categories} />
                       </div>
                       <div className="flex flex-col">
-                        <div className="flex flex-row justify-around">
+                        <div className="flex flex-row justify-center sm:justify-around">
                           <a
-                            href={`https://twitter.com/intent/tweet?url=${window.location.href}`}
+                            href={`https://twitter.com/intent/tweet?url=${
+                              typeof window !== "undefined"
+                                ? window.location.href
+                                : ""
+                            }`}
                             target="_blank"
                             className="mr-1"
                           >
@@ -302,7 +306,11 @@ export default function Tool() {
                             />
                           </a>
                           <a
-                            href={`https://www.facebook.com/sharer/sharer.php?u=${window.location.href}`}
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${
+                              typeof window !== "undefined"
+                                ? window.location.href
+                                : ""
+                            }`}
                             target="_blank"
                             className="mr-1"
                           >
@@ -315,7 +323,11 @@ export default function Tool() {
                             />
                           </a>
                           <a
-                            href={`https://www.linkedin.com/shareArticle?url=${window.location.href}&title=${tool.name}`}
+                            href={`https://www.linkedin.com/shareArticle?url=${
+                              typeof window !== "undefined"
+                                ? window.location.href
+                                : ""
+                            }&title=${tool.name}`}
                             target="_blank"
                             className="mr-2"
                           >
@@ -327,7 +339,11 @@ export default function Tool() {
                             />
                           </a>
                           <a
-                            href={`https://t.me/share/url?url=${window.location.href}`}
+                            href={`https://t.me/share/url?url=${
+                              typeof window !== "undefined"
+                                ? window.location.href
+                                : ""
+                            }`}
                             target="_blank"
                             className="mr-2"
                           >
@@ -339,7 +355,11 @@ export default function Tool() {
                             />
                           </a>
                           <a
-                            href={`mailto:?subject=${tool.name}&body=${window.location.href}`}
+                            href={`mailto:?subject=${tool.name}&body=${
+                              typeof window !== "undefined"
+                                ? window.location.href
+                                : ""
+                            }`}
                             target="_blank"
                             className="mr-1"
                           >
@@ -353,8 +373,8 @@ export default function Tool() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-wrap justify-between md:flex-nowrap">
-                      <div className="flex flex-col md:pr-4">
+                    <div className="flex flex-col md:flex-row justify-between gap-4">
+                      <div className="flex flex-col md:pr-4 w-full md:w-1/2">
                         <div className="flex w-full flex-row p-[3px] bg-[#222222] overflow-hidden rounded-lg shadow-lg">
                           <Image
                             src={
@@ -365,7 +385,7 @@ export default function Tool() {
                             width={566}
                             height={288}
                             alt="ChatGPT"
-                            className="w-[566px] h-[288px] object-cover object-top"
+                            className="w-full h-auto object-cover object-top"
                           />
                         </div>
                         <div className="flex flex-row mt-3 w-fit gap-1">
@@ -390,7 +410,7 @@ export default function Tool() {
                           <JobRoles roles={tool.jobRoles} />
                         </div>
                       </div>
-                      <div className="flex flex-col justify-around lg:mt-0 mt-6">
+                      <div className="flex flex-col justify-around w-full md:w-1/2 gap-4">
                         <div className="flex flex-row justify-center gap-1">
                           <Image
                             src={tool.icon}
@@ -399,12 +419,12 @@ export default function Tool() {
                             height={32}
                             className="w-8 h-8"
                           />
-                          <h1 className="text-2xl font-bold text-gray-800 ">
+                          <h1 className="text-xl sm:text-2xl font-bold text-gray-800">
                             {tool?.name}
                           </h1>
                         </div>
 
-                        <div className="flex flex-row max-w-[500px] py-1 px-2 lg:py-4 lg:px-4 bg-[rgba(34,34,34,0.9)] rounded-lg shadow-lg shadow-[#222222] lg:p-2">
+                        <div className="flex flex-row w-full py-1 px-2 lg:py-4 lg:px-4 bg-[rgba(34,34,34,0.9)] rounded-lg shadow-lg shadow-[#222222] lg:p-2">
                           <p
                             className="text-white text-center leading-tight line-clamp-5 overflow-hidden"
                             dangerouslySetInnerHTML={{
@@ -416,7 +436,7 @@ export default function Tool() {
                           href={tool?.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="flex gap-2 items-center max-w-32 self-center mt-4 lg:mt-0 bg-[rgba(34,34,34,0.9)] text-white px-4 py-2 rounded-md hover:bg-[#222222] transition"
+                          className="flex gap-2 items-center max-w-32 self-center mt-2 lg:mt-0 bg-[rgba(34,34,34,0.9)] text-white px-4 py-2 rounded-md hover:bg-[#222222] transition"
                         >
                           Visit Site <FaExternalLinkAlt size={12} />
                         </a>
@@ -424,28 +444,27 @@ export default function Tool() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-8 mx-auto w-[1150px]">
+                <div className="mt-8 mx-auto w-full lg:w-[1150]">
                   <Tabs defaultValue="description" className="w-full">
-                    <TabsList className="w-full justify-start">
+                    <TabsList className="w-full overflow-x-auto flex flex-nowrap justify-start">
                       <TabsTrigger value="description">Description</TabsTrigger>
                       <TabsTrigger value="proscons">Pros & Cons</TabsTrigger>
                       <TabsTrigger value="similar">Similar Tools</TabsTrigger>
-                      {/* <TabsTrigger value="featured">Featured Tools</TabsTrigger> */}
                       <TabsTrigger value="faq">FAQ</TabsTrigger>
                     </TabsList>
                     <TabsContent
                       value="description"
-                      className="bg-white shadow-lg rounded-lg p-8"
+                      className="bg-white shadow-lg rounded-lg p-4 sm:p-8"
                     >
                       <FormattedContent content={tool.description} />
                     </TabsContent>
 
                     <TabsContent
                       value="proscons"
-                      className="bg-white shadow-lg rounded-lg p-8"
+                      className="bg-white shadow-lg rounded-lg p-4 sm:p-8"
                     >
-                      <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
-                        <div className="bg-green-50 rounded-lg p-5 border border-green-100">
+                      <div className="grid w-full grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="bg-green-50 rounded-lg p-3 sm:p-5 border border-green-100">
                           <div className="flex items-center gap-2 mb-4">
                             <CheckCircle className="text-green-600 w-5 h-5" />
                             <h2 className="text-lg font-semibold text-green-800">
@@ -457,7 +476,7 @@ export default function Tool() {
                           </div>
                         </div>
 
-                        <div className="bg-red-50 rounded-lg p-5 border border-red-100">
+                        <div className="bg-red-50 rounded-lg p-3 sm:p-5 border border-red-100">
                           <div className="flex items-center gap-2 mb-4">
                             <XCircle className="text-red-600 w-5 h-5" />
                             <h2 className="text-lg font-semibold text-red-800">
@@ -473,10 +492,10 @@ export default function Tool() {
 
                     <TabsContent
                       value="similar"
-                      className="bg-white shadow-lg rounded-lg p-8"
+                      className="bg-white shadow-lg rounded-lg p-4 sm:p-8"
                     >
                       <div className="flex flex-col gap-4">
-                        <h2 className="font-bold text-2xl text-center">
+                        <h2 className="font-bold text-xl sm:text-2xl text-center">
                           Similar to {tool.name}
                         </h2>
                         {alternatives ? (
@@ -529,22 +548,16 @@ export default function Tool() {
                         )}
                       </div>
                     </TabsContent>
-                    {/* <TabsContent
-                  value="featured"
-                  className="bg-white shadow-lg rounded-lg p-8"
-                >
-                  <Card />
-                </TabsContent> */}
                     <TabsContent
                       value="faq"
-                      className="bg-white shadow-lg rounded-lg p-8"
+                      className="bg-white shadow-lg rounded-lg p-4 sm:p-8"
                     >
                       <FAQTutorialsAccordion faqs={faqs} />
                     </TabsContent>
                   </Tabs>
                 </div>
               </div>
-              <div className="">
+              <div className="w-full md:w-auto mt-4 md:mt-0">
                 <FeaturedTools />
               </div>
             </div>
