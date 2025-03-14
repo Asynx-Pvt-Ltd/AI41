@@ -26,8 +26,7 @@ const FeaturedTools: NextPage<Props> = ({}) => {
       .then((res) => res.json())
       .then((ft) => {
         setLoading(false);
-        // Only keep the first 2 tools
-        setProjects(ft.slice(0, 2));
+        setProjects(ft.slice(0, 5));
       })
       .catch((err) => {});
   }, []);
@@ -38,15 +37,13 @@ const FeaturedTools: NextPage<Props> = ({}) => {
 
   return (
     <div>
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-        Featured Tools
-      </h2>
+      <h2 className="font-bold text-2xl text-center mb-6">Featured Tools</h2>
       {loading ? (
         <div className="flex flex-row justify-center items-center w-full ml-10">
           <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
         </div>
       ) : (
-        <div className="max-w-7xl mx-auto px-8">
+        <div className="max-w-7xl mx-auto pr-5">
           <div className="flex flex-col justify-center items-center">
             {projects?.map((project, idx) => (
               <div
