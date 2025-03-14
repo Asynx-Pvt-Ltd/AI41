@@ -280,7 +280,7 @@ export default function Tool() {
         {tool ? (
           <>
             <div className="flex flex-row">
-              <div className="flex flex-col h-fit w-full mx-10 border-[#222222] bg-white p-2 lg:p-10 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
+              <div className="flex flex-col h-fit w-full lg:mx-10 mx-0 border-[#222222] bg-white p-2 lg:p-10 shadow-sm shadow-[#222222] rounded-lg justify-around gap-2">
                 <div className="flex flex-row justify-between">
                   <div className="flex gap-1">
                     <CategoryTags categories={tool.categories} />
