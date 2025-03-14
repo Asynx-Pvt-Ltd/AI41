@@ -388,7 +388,7 @@ export default function Tool() {
                       <JobRoles roles={tool.jobRoles} />
                     </div>
                   </div>
-                  <div className="flex flex-col justify-around lg:mt-0 mt-6">
+                  <div className="flex flex-col justify-around lg:mt-0 mt-4 gap-5 lg:justify-center">
                     <div className="flex flex-row justify-center gap-1">
                       <Image
                         src={tool.icon}
@@ -422,10 +422,10 @@ export default function Tool() {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-center w-full">
-              <div className="mt-8 mx-10 min-w-[1050px]">
+            <div className="flex flex-col lg:flex-row justify-center w-full">
+              <div className="mt-8 w-full md:mx-4 lg:mx-10 lg:min-w-[1050px]">
                 <Tabs defaultValue="description" className="w-full">
-                  <TabsList className="w-full justify-start">
+                  <TabsList className="w-full justify-start overflow-x-auto">
                     <TabsTrigger value="description">Description</TabsTrigger>
                     <TabsTrigger value="proscons">Pros & Cons</TabsTrigger>
                     <TabsTrigger value="similar">Similar Tools</TabsTrigger>
@@ -435,7 +435,12 @@ export default function Tool() {
                     value="description"
                     className="bg-white shadow-lg rounded-lg p-8"
                   >
-                    <FormattedContent content={tool.description} />
+                    <p
+                      className="text-left"
+                      dangerouslySetInnerHTML={{
+                        __html: tool.description,
+                      }}
+                    />
                   </TabsContent>
 
                   <TabsContent
@@ -451,7 +456,12 @@ export default function Tool() {
                           </h2>
                         </div>
                         <div className="space-y-3">
-                          <FormattedContent content={tool.pros} />
+                          <p
+                            className="text-left"
+                            dangerouslySetInnerHTML={{
+                              __html: tool.pros,
+                            }}
+                          />
                         </div>
                       </div>
 
@@ -463,7 +473,12 @@ export default function Tool() {
                           </h2>
                         </div>
                         <div className="space-y-3">
-                          <FormattedContent content={tool.cons} />
+                          <p
+                            className="text-left"
+                            dangerouslySetInnerHTML={{
+                              __html: tool.pros,
+                            }}
+                          />
                         </div>
                       </div>
                     </div>
@@ -478,7 +493,7 @@ export default function Tool() {
                         Similar to {tool.name}
                       </h2>
                       {alternatives ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           {alternatives
                             .sort(() => Math.random() - 0.5)
                             .slice(0, 5)
@@ -535,7 +550,7 @@ export default function Tool() {
                   </TabsContent>
                 </Tabs>
               </div>
-              <div className="mt-8 min-w-[360px]">
+              <div className="mt-8 w-full md:min-w-[360px] lg:min-w-[360px]">
                 <FeaturedTools />
               </div>
             </div>
