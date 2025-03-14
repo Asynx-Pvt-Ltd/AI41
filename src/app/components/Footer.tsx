@@ -6,17 +6,17 @@ import "../styles/style.css";
 
 function Footer() {
   return (
-    <footer className="w-full bg-[#222222] text-white py-8 sticky rounded-t-[3vw] font-roboto text-lg">
+    <footer className="w-full bg-[#222222] text-white py-8 rounded-t-[3vw] font-roboto">
       <div className="container mx-auto px-4">
-        <div className="flex flex-row md:flex-row justify-between md:items-start gap-6">
+        <div className="flex flex-wrap md:flex-row justify-between space-y-6 md:space-y-0 md:space-x-6 mb-5">
           {/* Site Branding */}
-          <div className="space-y-4 md:text-left">
-            <div className="my-2 flex  md:justify-start site-brand-foot">
-              <Link href="/" className="flex items-center cursor-pointer">
+          <div className="space-y-4">
+            <div className="my-2">
+              <Link href="/" className="flex items-center">
                 <span className="text-xl md:text-2xl font-bold">AI41</span>
               </Link>
             </div>
-            <p className="text-sm md:text-base max-w-xs">
+            <p className="text-sm md:text-base">
               A project by{" "}
               <strong className="underline">
                 <Link href="https://aiforeveryone.org/" target="_blank">
@@ -28,9 +28,9 @@ function Footer() {
           </div>
 
           {/* Resources */}
-          <div className="text-center md:text-left">
+          <div className="space-y-3">
+            <h3 className="font-bold text-lg md:text-xl">Resources</h3>
             <ul className="space-y-2">
-              <li className="font-bold text-lg md:text-xl">Resources</li>
               <li>
                 <a
                   href="/ai-tutorials"
@@ -51,9 +51,9 @@ function Footer() {
           </div>
 
           {/* Useful Tools */}
-          <div className="text-center md:text-left">
+          <div className="space-y-3">
+            <h3 className="font-bold text-lg md:text-xl">Useful Links</h3>
             <ul className="space-y-2">
-              <li className="font-bold text-lg md:text-xl">Useful Links</li>
               <li>
                 <a
                   href="/ai-categories"
@@ -82,13 +82,11 @@ function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-6">
-          <div className="flex flex-col md:flex-row justify-center items-center">
-            <div className="flex flex-row items-center text-center">
-              <span className="text-xs md:text-sm">
-                © 2024 Aixploria. All rights reserved.
-              </span>
-            </div>
+        <div className="border-t border-gray-700 pt-6">
+          <div className="text-center">
+            <span className="text-xs md:text-sm">
+              © 2024 Aixploria. All rights reserved.
+            </span>
           </div>
         </div>
       </div>
