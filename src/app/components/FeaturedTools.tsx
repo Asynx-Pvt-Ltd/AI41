@@ -1,15 +1,18 @@
 "use client";
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface Props {}
 interface Project {
+  id: number;
   icon: string;
   title: string;
   description: string;
   link: string;
+  slug?: string;
 }
 
 interface CardsProps {
@@ -25,10 +28,17 @@ const FeaturedTools: NextPage<Props> = ({}) => {
     fetch("/api/feature-tools")
       .then((res) => res.json())
       .then((ft) => {
+        const projectsWithSlugs = ft.slice(0, 5).map((project: Project) => ({
+          ...project,
+          slug: project.title.toLowerCase().replace(/\s+/g, "-"),
+        }));
         setLoading(false);
-        setProjects(ft.slice(0, 5));
+        setProjects(projectsWithSlugs);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.error("Error fetching featured tools:", err);
+        setLoading(false);
+      });
   }, []);
 
   if (!loading && (!projects || projects.length === 0)) {
@@ -47,7 +57,7 @@ const FeaturedTools: NextPage<Props> = ({}) => {
           <div className="flex flex-col justify-center items-center">
             {projects?.map((project, idx) => (
               <div
-                key={project?.link}
+                key={project?.id}
                 className="relative group block p-2 h-full w-full"
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
@@ -100,13 +110,12 @@ const FeaturedTools: NextPage<Props> = ({}) => {
                       ></p>
                     </div>
                     <div className="flex flex-col justify-center items-center mt-2">
-                      <a
-                        href={project.link}
-                        target={"_blank"}
+                      <Link
+                        href={`/tool/${project.slug}`}
                         className="w-14 h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black"
                       >
                         Visit
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

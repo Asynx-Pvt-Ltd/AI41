@@ -2,12 +2,15 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Project {
+  id: number;
   icon: string;
   title: string;
   description: string;
   link: string;
+  slug?: string;
 }
 
 interface CardsProps {
@@ -23,10 +26,17 @@ export const Card = () => {
     fetch("/api/feature-tools")
       .then((res) => res.json())
       .then((ft) => {
+        const projectsWithSlugs = ft.map((project: Project) => ({
+          ...project,
+          slug: project.title.toLowerCase().replace(/\s+/g, "-"),
+        }));
         setLoading(false);
-        setProjects(ft);
+        setProjects(projectsWithSlugs);
       })
-      .catch((err) => {});
+      .catch((err) => {
+        console.error("Error fetching featured tools:", err);
+        setLoading(false);
+      });
   }, []);
 
   if (loading || !projects?.length) {
@@ -45,7 +55,7 @@ export const Card = () => {
               {projects?.length && !loading
                 ? projects?.map((project, idx) => (
                     <div
-                      key={project?.link}
+                      key={project?.id}
                       className="relative group block p-2 h-full w-full "
                       onMouseEnter={() => setHoveredIndex(idx)}
                       onMouseLeave={() => setHoveredIndex(null)}
@@ -54,7 +64,7 @@ export const Card = () => {
                         {hoveredIndex === idx && (
                           <motion.span
                             className="absolute inset-0 h-full w-full block"
-                            layoutId="hoverBackground" // required for the background to follow
+                            layoutId="hoverBackground"
                             initial={{ opacity: 0 }}
                             animate={{
                               opacity: 1,
@@ -68,7 +78,6 @@ export const Card = () => {
                         )}
                       </AnimatePresence>
                       <div className="flex flex-col justify-around rounded-md h-full w-full p-2 overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border dark:group-hover:border-slate-300 group-hover:border-slate-700 relative z-50">
-                        {/* <div className='relative z-50'> */}
                         <div className="flex flex-col justify-around">
                           <div className="flex flex-row justify-center text-white dark:text-white dark:bg-gray-800 bg-[#222222] rounded-xl opacity-95">
                             <span className="text-xl my-auto mx-1 ">★</span>
@@ -99,16 +108,14 @@ export const Card = () => {
                             ></p>
                           </div>
                           <div className="flex flex-col justify-center items-center mt-2">
-                            <a
-                              href={project.link}
-                              target={"_blank"}
+                            <Link
+                              href={`/tool/${project.slug}`}
                               className="w-14 h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black"
                             >
                               Visit
-                            </a>
+                            </Link>
                           </div>
                         </div>
-                        {/* </div> */}
                       </div>
                     </div>
                   ))
