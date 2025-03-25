@@ -156,7 +156,7 @@ export default function FullList() {
                 <h1 className="text-2xl font-bold">
                   What is an AI Tool Directory?
                 </h1>
-                <p className="text-justify mt-4 pr-4 link_design">
+                <p className="text-center mt-4 pr-4 link_design">
                   An <Link href={"/"}>AI Tool directory</Link> is a curated
                   collection of important AI tools in a wide range of
                   industries. It’s just like a library. But here, instead of
@@ -174,7 +174,7 @@ export default function FullList() {
               <h1 className="text-2xl font-bold">
                 Where To Find A List With All AI Tools?
               </h1>
-              <p className="text-justify mt-2 pl-4 link_design">
+              <p className="text-center mt-2 pl-4 link_design">
                 Luckily, our AI tool directory has a curated list of all{" "}
                 <Link href={"/all-ai-tools"}>AI tools</Link>. You can use our
                 advanced filtering system to find the tools that match your

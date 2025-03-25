@@ -409,7 +409,7 @@ export default function AllAITools() {
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify mt-2 link_design">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-center mt-2 link_design">
                         {step.description}
                       </p>
                     </CardContent>
@@ -439,7 +439,7 @@ export default function AllAITools() {
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
+                  <p className="text-sm text-center text-gray-600 dark:text-gray-300 link_design">
                     {feature.description}
                   </p>
                 </CardContent>
@@ -487,7 +487,7 @@ export default function AllAITools() {
             </tbody>
           </table>
         </div>
-        <div className="my-6 text-justify text-gray-600 dark:text-gray-300 mb-10">
+        <div className="my-6 text-center text-gray-600 dark:text-gray-300 mb-10">
           <p>
             So, in a nutshell, priced tools are better for a normal individual
             or company. You will get regular updates and contact the support
@@ -506,7 +506,7 @@ export default function AllAITools() {
           <h1 className="text-2xl font-bold text-center">
             How Many AI Tools Really Exist?
           </h1>
-          <p className="text-justify mt-2 pl-4">
+          <p className="text-center mt-2 pl-4">
             According to our estimations and research,{" "}
             <strong>there are over 5,000 generative AI tools.</strong> The
             number of all AI tools is growing daily, so pinning down an exact
@@ -534,7 +534,7 @@ export default function AllAITools() {
           <h1 className="text-2xl font-bold text-center mb-1">
             AI Tools Stats
           </h1>
-          <p className="text-justify my-3 pl-6">
+          <p className="text-left my-3 pl-6">
             Check out some of the{" "}
             <Link
               href={"https://socialmarketing90.com/ai-statistics-usage-trends/"}
@@ -544,7 +544,7 @@ export default function AllAITools() {
               coolest AI stats in 2025:
             </Link>
           </p>
-          <ul className="flex flex-col gap-3 list-disc text-justify pl-[5vw] max-w-5xl">
+          <ul className="flex flex-col gap-3 list-disc text-left pl-[5vw] max-w-5xl">
             <li>
               <Link
                 href={
@@ -641,7 +641,7 @@ export default function AllAITools() {
                 <CardContent className="p-6 text-center mt-5">
                   <div className="flex justify-center mb-3">{facts.icon}</div>
                   <h3 className="text-xl font-semibold mb-3">{facts.title}</h3>
-                  <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
+                  <p className="text-sm text-center text-gray-600 dark:text-gray-300 link_design">
                     {facts.description}
                   </p>
                 </CardContent>
@@ -659,7 +659,7 @@ export default function AllAITools() {
         <h1 className="text-3xl text-center font-bold text-gray-800 dark:text-white">
           Find The Best AI Tools With Our List!
         </h1>
-        <p className="text-md text-gray-600 dark:text-gray-300 text-justify max-w-7xl">
+        <p className="text-md text-gray-600 dark:text-gray-300 text-center max-w-7xl">
           Still doubtful of where to start? Well, our AI directory paves the
           starting line with a curated list of the top-performing tools in
           various industries. Go through our dedicated product pages to see all{" "}
