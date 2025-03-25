@@ -593,7 +593,7 @@ export default function Page() {
           <SeeMoreButton />
         </section>
         <section className="container p-4 my-11">
-          <h1 className="text-2xl font-bold mb-6">Popular AI Platforms</h1>
+          <h1 className="text-2xl font-bold mb-6 mt-1">Popular AI Platforms</h1>
           <AIPlatformsCarousel />
         </section>
 

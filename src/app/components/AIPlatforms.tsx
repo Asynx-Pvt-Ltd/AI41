@@ -28,7 +28,7 @@ const AIPlatformsCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden whitespace-nowrap relative">
+    <div className="overflow-hidden whitespace-nowrap relative mt-10">
       <ul className="flex animate-scroll gap-x-10 hover:animate-pause">
         {[...latestAITools, ...latestAITools].map((tool, index) => (
           <Link href={tool.url} key={index} className="flex items-center">

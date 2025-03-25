@@ -496,7 +496,7 @@ export default function Tool() {
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
                           {alternatives
                             .sort(() => Math.random() - 0.5)
-                            .slice(0, 5)
+                            .slice(0, 4)
                             .map((tool: any, idx: number) => (
                               <div
                                 key={idx}
