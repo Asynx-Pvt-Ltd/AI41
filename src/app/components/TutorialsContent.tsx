@@ -100,7 +100,7 @@ const TipsToUse = () => {
                 className="hover:shadow-lg transition-shadow duration-300"
               >
                 <CardContent className="p-6 mt-5">
-                  <div className="flex items-center">
+                  <div className="flex items-center justify-center">
                     {feature.icon}
                     <h3 className="text-xl font-semibold ml-4 mb-2">
                       {feature.title}
@@ -116,7 +116,7 @@ const TipsToUse = () => {
 
           <TabsContent value="overview" className="space-y-8">
             <CardDesign>
-              <p className="text-md p-5 text-justify text-gray-600 dark:text-gray-300">
+              <p className="text-md p-5 text-left text-gray-600 dark:text-gray-300">
                 AI tools are getting better day by day with new features. But
                 let’s be honest. It’s not always easy for newbies to keep up
                 with these changes. Most of them find it challenging to use the

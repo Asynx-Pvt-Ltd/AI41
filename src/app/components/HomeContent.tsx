@@ -207,7 +207,7 @@ const AIToolsSection = () => {
               className="hover:shadow-lg transition-shadow duration-300"
             >
               <CardContent className="p-6 text-center mt-5">
-                <div className="flex mt-5">
+                <div className="flex mt-5 justify-center">
                   {tool.icon}
                   <h3 className="text-xl font-semibold ml-4">{tool.title}</h3>
                 </div>
@@ -424,7 +424,7 @@ const WhyUseSection = () => {
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
                 </div> */}
-                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design mt-2">
+                <p className="text-gray-600 dark:text-gray-300 text-left text-sm link_design mt-2">
                   {reason.description}
                 </p>
               </div>
@@ -525,7 +525,7 @@ const WhyChooseUsSection = () => {
                     {feature.title}
                   </h3>
                 </div> */}
-                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design mt-2">
+                <p className="text-gray-600 dark:text-gray-300 text-left text-sm link_design mt-2">
                   {feature.description}
                 </p>
               </div>

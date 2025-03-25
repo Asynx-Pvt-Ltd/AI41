@@ -30,7 +30,7 @@ export default function Page() {
       <main className="flex-grow bg-white dark:bg-gray-800 w-full lg:pt-10 lg:pl-6 lg:pr-6 lg:pb-6 my-3 pt-8">
         <div className="flex-col items-center justify-center">
           <h1 className="text-3xl font-bold text-center mb-2">AI Jobs</h1>
-          <p className="text-sm mx-[6vw] text-justify py-2 link_design">
+          <p className="text-sm mx-[6vw] text-left py-2 link_design">
             Do you ever get the feeling that AI is speeding away, leaving you
             behind? Unfortunately, many people worry that AI is here to replace
             jobs.Well, let’s be realistic. AI is not going to replace everyone.

@@ -188,7 +188,7 @@ const AINewsPage: React.FC = () => {
                     </div>
 
                     <CardContent className="p-6 mt-8">
-                      <div className="flex items-center">
+                      <div className="flex items-center justify-center">
                         <span className="mr-4">{features.icon}</span>
                         <h3 className="text-xl font-semibold mb-4">
                           {features.title}
