@@ -106,7 +106,7 @@ const TipsToUse = () => {
                       {feature.title}
                     </h3>
                   </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-justify text-sm mt-1 link_design">
+                  <p className="text-gray-600 dark:text-gray-300 text-center text-sm mt-2 link_design">
                     {feature.description}
                   </p>
                 </CardContent>

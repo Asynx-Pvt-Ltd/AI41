@@ -197,7 +197,7 @@ export default function JobsContent() {
                             {benefit.title}
                           </h3>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm text-justify link_design">
+                        <p className="text-gray-600 dark:text-gray-300 text-sm text-center mt-2 link_design">
                           {benefit.description}
                         </p>
                       </div>
