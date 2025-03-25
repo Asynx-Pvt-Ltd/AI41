@@ -106,7 +106,7 @@ const MainFeatures = () => {
                     {feature.title}
                   </h3>
                 </div>
-                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
+                <p className="text-sm text-center text-gray-600 dark:text-gray-300 link_design mt-2">
                   {feature.description}
                 </p>
               </CardContent>
@@ -128,7 +128,7 @@ const AIToolsSection = () => {
           Coding is no longer a one-man task. Nowadays, there are many AI tools
           to automate the process. You can use them for everything, right from
           spotting errors to generating code. Get more done in less time!
-          <span className="flex justify-between mt-4 items-center">
+          <span className="flex justify-between mt-6 items-center">
             <Link href="/ai-categories">
               <button className="bg-[#222222] text-white font-bold py-1 px-2 rounded-sm text-[12px]">
                 Tools for developers
@@ -211,7 +211,7 @@ const AIToolsSection = () => {
                   {tool.icon}
                   <h3 className="text-xl font-semibold ml-4">{tool.title}</h3>
                 </div>
-                <p className="text-sm text-justify text-gray-600 dark:text-gray-300 link_design">
+                <p className="text-sm text-center text-gray-600 dark:text-gray-300 link_design mt-2">
                   {tool.description}
                 </p>
               </CardContent>
@@ -299,7 +299,7 @@ const HowToUseSection = () => {
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm text-justify link_design">
+                      <p className="text-gray-600 dark:text-gray-300 text-sm text-center link_design mt-2">
                         {step.description}
                       </p>
                     </div>
@@ -424,7 +424,7 @@ const WhyUseSection = () => {
                   {reason.icon}
                   <h3 className="text-lg font-semibold ml-4">{reason.title}</h3>
                 </div> */}
-                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design">
+                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design mt-2">
                   {reason.description}
                 </p>
               </div>
@@ -525,7 +525,7 @@ const WhyChooseUsSection = () => {
                     {feature.title}
                   </h3>
                 </div> */}
-                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design">
+                <p className="text-gray-600 dark:text-gray-300 text-justify text-sm link_design mt-2">
                   {feature.description}
                 </p>
               </div>

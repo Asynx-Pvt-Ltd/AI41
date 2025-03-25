@@ -613,7 +613,7 @@ export default function Page() {
               <h2 className="text-3xl font-bold text-center mb-6">
                 The World's Best AI Tools Directory
               </h2>
-              <p className="text-justify text-gray-600 dark:text-gray-300 text-md">
+              <p className="text-gray-600 dark:text-gray-300 text-md">
                 We started an AI tool directory with a simple realization: the
                 AI industry is growing tremendously. With many tools popping up
                 day by day, finding the right fit for your needs can be as
