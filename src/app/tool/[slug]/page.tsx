@@ -369,7 +369,7 @@ export default function Tool() {
                     <div className="flex flex-row mt-3 w-fit gap-1">
                       {tool.hasFreePrice && (
                         <Link
-                          href={`/submit-ai`}
+                          href={`/tool/free`}
                           className="px-3 py-1 bg-green-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
                         >
                           Free
