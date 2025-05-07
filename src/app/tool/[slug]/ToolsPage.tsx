@@ -16,9 +16,14 @@ import {
 import FeaturedTools from '@/app/components/FeaturedTools';
 import { usePathname } from 'next/navigation';
 
-export default function Tool({ tool }: { tool: any }) {
+export default function Tool({
+	tool,
+	alternatives,
+}: {
+	tool: any;
+	alternatives: any;
+}) {
 	const pathname = usePathname();
-	const alternatives = tool.alternatives;
 
 	const faqs = [
 		{
@@ -477,54 +482,49 @@ export default function Tool({ tool }: { tool: any }) {
 											<h2 className="font-bold text-2xl text-center">
 												Similar to {tool.name}
 											</h2>
-											{alternatives ? (
-												<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
-													{alternatives
-														.sort(() => Math.random() - 0.5)
-														.slice(0, 8)
-														.map((tool: any, idx: number) => (
-															<div
-																key={idx}
-																className="rounded-md overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border hover:border-slate-700 relative"
-															>
-																<div className="flex flex-col justify-between h-full">
-																	<div className="flex flex-col items-center">
-																		<div className="flex flex-row justify-center items-center mt-4">
-																			<Image
-																				src={tool.icon}
-																				alt={tool.name}
-																				width={32}
-																				height={32}
-																				className="w-10 h-10 mr-2"
-																			/>
-																			<h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
-																				{tool.name}
-																			</h4>
-																		</div>
-																		<p
-																			className="my-3 text-center text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
-																			dangerouslySetInnerHTML={{
-																				__html: tool.shortDescription,
-																			}}
+
+											<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
+												{alternatives
+													.sort(() => Math.random() - 0.5)
+													.slice(0, 8)
+													.map((tool: any, idx: number) => (
+														<div
+															key={idx}
+															className="rounded-md overflow-hidden bg-white border-slate-400 dark:bg-gray-800 dark:border-slate-500 border hover:border-slate-700 relative"
+														>
+															<div className="flex flex-col justify-between h-full">
+																<div className="flex flex-col items-center">
+																	<div className="flex flex-row justify-center items-center mt-4">
+																		<Image
+																			src={tool.icon}
+																			alt={tool.name}
+																			width={32}
+																			height={32}
+																			className="w-10 h-10 mr-2"
 																		/>
+																		<h4 className="text-black dark:text-zinc-100 font-bold tracking-wide text-lg capitalize">
+																			{tool.name}
+																		</h4>
 																	</div>
-																	<div className="flex flex-col justify-center items-center mb-4">
-																		<Link
-																			href={'/tool/' + tool.slug}
-																			className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2 mt-2"
-																		>
-																			Visit <FaExternalLinkAlt size={10} />
-																		</Link>
-																	</div>
+																	<p
+																		className="my-3 text-center text-black tracking-wide leading-0 text-sm line-clamp-3 overflow-hidden px-4"
+																		dangerouslySetInnerHTML={{
+																			__html: tool.shortDescription,
+																		}}
+																	/>
+																</div>
+																<div className="flex flex-col justify-center items-center mb-4">
+																	<Link
+																		href={'/tool/' + tool.slug}
+																		className="w-fit h-8 rounded-md py-1 px-2 bg-black text-white dark:bg-white dark:text-black flex items-center gap-2 mt-2"
+																	>
+																		Visit <FaExternalLinkAlt size={10} />
+																	</Link>
 																</div>
 															</div>
-														))}
-												</div>
-											) : (
-												<div className="flex justify-center">
-													<div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white" />
-												</div>
-											)}
+														</div>
+													))}
+											</div>
 										</div>
 									</TabsContent>
 									<TabsContent

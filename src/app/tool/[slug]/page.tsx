@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props) {
 const Page: NextPage<Props> = async ({ params }) => {
 	const { slug } = await params;
 	const data = await fetchTool(slug);
-	return <Tool tool={data.tool} />;
+	return <Tool tool={data.tool} alternatives={data.alternatives} />;
 };
 
 export default Page;
