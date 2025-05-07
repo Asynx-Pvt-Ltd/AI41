@@ -1,0 +1,3 @@
+ALTER TABLE "Tool"
+ADD COLUMN "metaTitle" TEXT NOT NULL,
+ADD COLUMN "metaDescription" TEXT NOT NULL;
