@@ -22,6 +22,8 @@ export default async function handler(
 			hasFreePrice,
 			hasPaidPrice,
 			paidPrice,
+			metaTitle,
+			metaDescription,
 		} = JSON.parse(req.body);
 
 		try {
@@ -42,6 +44,8 @@ export default async function handler(
 				hasFreePrice?: boolean;
 				hasPaidPrice?: boolean;
 				paidPrice?: string;
+				metaTitle?: string;
+				metaDescription?: string;
 			} = {
 				icon: icon ?? '',
 				thumbnail: thumbnail ?? '',
@@ -66,6 +70,8 @@ export default async function handler(
 				...(hasFreePrice !== null && { hasFreePrice }),
 				...(hasPaidPrice !== null && { hasPaidPrice }),
 				...(paidPrice !== null && { paidPrice }),
+				metaTitle: metaTitle ?? null,
+				metaDescription: metaDescription ?? null,
 			};
 
 			if (jobRoles && jobRoles.length > 0) {
