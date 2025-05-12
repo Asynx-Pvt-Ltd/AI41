@@ -48,12 +48,49 @@ model Tool {
   hasFreePrice     Boolean?
   hasPaidPrice     Boolean?
   paidPrice        String?
-  cons             String
-  pros             String
+  freeTierType     String?
+  discounts        String?
+  refundPolicy     String?
+  pricingUrl       String?
+  contactEmail     String?
+  contactPhone     String?
+  contactPageUrl   String?
+  contactSocial    ContactSocial?
+  cons             String?
+  pros             String?
   metaTitle        String?
   metaDescription  String?
   categories       ToolsOnCategories[]
   jobRoles         ToolsOnJobRoles[]
+  pricingPlans     PricingPlan[]
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+}
+
+model PricingPlan {
+  id              Int      @id @default(autoincrement())
+  name            String
+  price           Float
+  billingPeriod   String  
+  toolId          Int
+  tool            Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model ContactSocial {
+  id         Int     @id @default(autoincrement())
+  toolId     Int     @unique
+  tool       Tool    @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  
+  facebook   String?
+  twitter    String?
+  linkedin   String?
+  instagram  String?
+  youtube    String?
+  
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
 
 model FeatureProject {
