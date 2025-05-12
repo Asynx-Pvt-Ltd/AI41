@@ -64,7 +64,7 @@ model Tool {
   jobRoles         ToolsOnJobRoles[]
   pricingPlans     PricingPlan[]
   createdAt        DateTime            @default(now())
-  updatedAt        DateTime            @updatedAt
+  updatedAt        DateTime?            @updatedAt
 }
 
 model PricingPlan {
