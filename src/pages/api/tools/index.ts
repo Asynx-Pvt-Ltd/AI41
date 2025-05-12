@@ -22,6 +22,14 @@ export default async function handler(
 			hasFreePrice,
 			hasPaidPrice,
 			paidPrice,
+			freeTierType,
+			pricingColumns,
+			discounts,
+			refundpolicy,
+			contactSocial,
+			contactEmail,
+			contactPhone,
+			contactPageUrl,
 			metaTitle,
 			metaDescription,
 		} = JSON.parse(req.body);
@@ -44,6 +52,14 @@ export default async function handler(
 				hasFreePrice?: boolean;
 				hasPaidPrice?: boolean;
 				paidPrice?: string;
+				freeTierType?: string;
+				pricingColumns?: any[];
+				discounts?: string;
+				refundpolicy?: string;
+				contactSocial?: any;
+				contactEmail?: string;
+				contactPhone?: string;
+				contactPageUrl?: string;
 				metaTitle?: string;
 				metaDescription?: string;
 			} = {
@@ -70,6 +86,15 @@ export default async function handler(
 				...(hasFreePrice !== null && { hasFreePrice }),
 				...(hasPaidPrice !== null && { hasPaidPrice }),
 				...(paidPrice !== null && { paidPrice }),
+				...(freeTierType !== null && { freeTierType }),
+				...(pricingColumns !== null && { pricingColumns }),
+				...(discounts !== null && { discounts }),
+				...(refundpolicy !== null && { refundpolicy }),
+				...(contactSocial !== null && { contactSocial }),
+				...(contactEmail !== null && { contactEmail }),
+				...(contactPhone !== null && { contactPhone }),
+				...(contactPageUrl !== null && { contactPageUrl }),
+
 				metaTitle: metaTitle ?? null,
 				metaDescription: metaDescription ?? null,
 			};
