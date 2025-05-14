@@ -70,7 +70,7 @@ model Tool {
 model PricingPlan {
   id              Int      @id @default(autoincrement())
   name            String
-  price           Float
+  price           String
   billingPeriod   String  
   toolId          Int
   tool            Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
