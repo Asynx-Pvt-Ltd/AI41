@@ -1,3 +1,4 @@
+import AdvancedEditor from '@/app/components/AdvancedEditor';
 import React, { useState } from 'react';
 
 function PricingSection({
@@ -260,23 +261,27 @@ function PricingSection({
 
 			<div className="mb-4">
 				<label>Discounts</label>
-				<textarea
+				<AdvancedEditor
 					value={formData.discounts}
-					onChange={handleDiscountsChange}
-					className="w-full p-2 border rounded"
-					placeholder="Describe any available discounts"
-					rows={3}
+					onChange={(val: string) =>
+						setFormData((prev: any) => ({
+							...prev,
+							discounts: val,
+						}))
+					}
 				/>
 			</div>
 
 			<div className="mb-4">
 				<label>Refund Policy</label>
-				<textarea
+				<AdvancedEditor
 					value={formData.refundPolicy}
-					onChange={handleRefundPolicyChange}
-					className="w-full p-2 border rounded"
-					placeholder="Describe your refund policy"
-					rows={3}
+					onChange={(val: string) =>
+						setFormData((prev: any) => ({
+							...prev,
+							refundPolicy: val,
+						}))
+					}
 				/>
 			</div>
 
