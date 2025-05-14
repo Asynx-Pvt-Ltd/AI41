@@ -33,9 +33,10 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 		hasPaidPrice: false,
 		paidPrice: '',
 		freeTierType: '',
-		pricingColumns: [],
 		discounts: '',
 		refundPolicy: '',
+		pricingUrl: '',
+		pricingPlans: [],
 		contactSocial: {
 			facebook: '',
 			twitter: '',
@@ -96,7 +97,6 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				hasPaidPrice: editingTool.hasPaidPrice ?? false,
 				paidPrice: editingTool.paidPrice ?? '',
 				freeTierType: editingTool.freeTierType || '',
-				pricingColumns: editingTool.pricingColumns || [],
 				discounts: editingTool.discounts || '',
 				refundPolicy: editingTool.refundPolicy || '',
 				contactSocial: editingTool.contactSocial || {
@@ -109,6 +109,8 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				contactEmail: editingTool.contactEmail || '',
 				contactPhone: editingTool.contactPhone || '',
 				contactPageUrl: editingTool.contactPageUrl || '',
+				pricingUrl: editingTool.pricingUrl || '',
+				pricingPlans: editingTool.pricingPlans || [],
 				tags: editingTool.tags || [],
 			});
 		}
@@ -214,13 +216,14 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 			hasPaidPrice: formData.hasPaidPrice,
 			paidPrice: formData.paidPrice,
 			freeTierType: formData.freeTierType,
-			pricingColumns: formData.pricingColumns,
 			discounts: formData.discounts,
 			refundPolicy: formData.refundPolicy,
 			contactSocial: formData.contactSocial,
 			contactEmail: formData.contactEmail,
 			contactPhone: formData.contactPhone,
 			contactPageUrl: formData.contactPageUrl,
+			pricingUrl: formData.pricingUrl,
+			pricingPlans: formData.pricingPlans,
 			metaTitle: formData.metaTitle,
 			metaDescription: formData.metaDescription,
 		};

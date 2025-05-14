@@ -46,7 +46,6 @@ function PricingSection({
 	const addPricingPlan = () => {
 		if (planForm.name && planForm.price) {
 			const newPlan = {
-				id: Date.now(),
 				name: planForm.name,
 				price: planForm.price,
 				billingPeriod: planForm.billingPeriod,
@@ -54,7 +53,7 @@ function PricingSection({
 
 			setFormData((prev: any) => ({
 				...prev,
-				pricingColumns: [...(prev.pricingColumns || []), newPlan],
+				pricingPlans: [...(prev.pricingPlans || []), newPlan],
 			}));
 
 			setPlanForm({
@@ -70,9 +69,7 @@ function PricingSection({
 	const removePricingPlan = (planId: any) => {
 		setFormData((prev: any) => ({
 			...prev,
-			pricingColumns: prev.pricingColumns.filter(
-				(plan: any) => plan.id !== planId,
-			),
+			pricingPlans: prev.pricingPlans.filter((plan: any) => plan.id !== planId),
 		}));
 	};
 
@@ -170,9 +167,9 @@ function PricingSection({
 					</button>
 				</div>
 
-				{formData.pricingColumns && formData.pricingColumns.length > 0 ? (
+				{formData.pricingPlans && formData.pricingPlans.length > 0 ? (
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-						{formData.pricingColumns.map((plan: any) => (
+						{formData.pricingPlans.map((plan: any) => (
 							<div key={plan.id} className="border rounded p-3 relative">
 								<button
 									type="button"
