@@ -15,6 +15,7 @@ import {
 } from '@/app/components/ui/TabsCN';
 import FeaturedTools from '@/app/components/FeaturedTools';
 import { usePathname } from 'next/navigation';
+import FormatMarkdownText from '@/app/components/textFormatter';
 
 export default function Tool({
 	tool,
@@ -209,7 +210,7 @@ export default function Tool({
 						{categories.map((cat) => (
 							<Link
 								key={cat.id}
-								className="bg-blue-600 text-white px-3 py-1 rounded-full 
+								className="bg-[#1c1c1c] text-white px-3 py-1 rounded-full 
                 hover:bg-blue-700 transition-all duration-300 shadow-md 
                 hover:shadow-lg transform hover:-translate-y-1 text-xs"
 								href={
@@ -236,7 +237,7 @@ export default function Tool({
 						{categories.slice(0, 2).map((cat) => (
 							<Link
 								key={cat.id}
-								className="bg-blue-600 text-white px-3 py-1 rounded-full 
+								className="bg-[#1c1c1c] text-white px-3 py-1 rounded-full 
                 hover:bg-blue-700 transition-all duration-300 shadow-md 
                 hover:shadow-lg transform hover:-translate-y-1 text-xs"
 								href={
@@ -277,7 +278,7 @@ export default function Tool({
 									</div>
 									<div className="flex flex-col">
 										<div className="flex flex-row justify-around">
-											<a
+											<Link
 												href={`https://twitter.com/intent/tweet?url=${pathname}`}
 												target="_blank"
 												className="mr-1"
@@ -288,8 +289,8 @@ export default function Tool({
 													height={14}
 													alt="x.com"
 												/>
-											</a>
-											<a
+											</Link>
+											<Link
 												href={`https://www.facebook.com/sharer/sharer.php?u=${pathname}`}
 												target="_blank"
 												className="mr-1"
@@ -301,8 +302,8 @@ export default function Tool({
 													alt="facebook.com"
 													className="mt-[-2px]"
 												/>
-											</a>
-											<a
+											</Link>
+											<Link
 												href={`https://www.linkedin.com/shareArticle?url=${pathname}&title=${tool.name}`}
 												target="_blank"
 												className="mr-2"
@@ -313,8 +314,8 @@ export default function Tool({
 													height={14}
 													alt="linkedin.com"
 												/>
-											</a>
-											<a
+											</Link>
+											<Link
 												href={`https://t.me/share/url?url=${pathname}`}
 												target="_blank"
 												className="mr-2"
@@ -325,8 +326,8 @@ export default function Tool({
 													height={16}
 													alt="telegram.com"
 												/>
-											</a>
-											<a
+											</Link>
+											<Link
 												href={`mailto:?subject=${tool.name}&body=${pathname}`}
 												target="_blank"
 												className="mr-1"
@@ -337,7 +338,7 @@ export default function Tool({
 													height={16}
 													alt="Mail"
 												/>
-											</a>
+											</Link>
 										</div>
 									</div>
 								</div>
@@ -400,14 +401,14 @@ export default function Tool({
 												}}
 											></p>
 										</div>
-										<a
+										<Link
 											href={tool?.url}
 											target="_blank"
 											rel="noopener noreferrer"
 											className="flex gap-2 items-center max-w-32 self-center mt-4 lg:mt-0 bg-[rgba(34,34,34,0.9)] text-white px-4 py-2 rounded-md hover:bg-[#222222] transition"
 										>
 											Visit Site <FaExternalLinkAlt size={12} />
-										</a>
+										</Link>
 									</div>
 								</div>
 							</div>
@@ -420,6 +421,8 @@ export default function Tool({
 										<TabsTrigger value="proscons">Pros & Cons</TabsTrigger>
 										<TabsTrigger value="similar">Similar Tools</TabsTrigger>
 										<TabsTrigger value="faq">FAQ</TabsTrigger>
+										<TabsTrigger value="pricing">Pricing</TabsTrigger>
+										<TabsTrigger value="contact">Contact</TabsTrigger>
 									</TabsList>
 									<TabsContent
 										value="description"
@@ -532,6 +535,232 @@ export default function Tool({
 										className="bg-white shadow-lg rounded-lg p-8"
 									>
 										<FAQTutorialsAccordion faqs={faqs} />
+									</TabsContent>
+									<TabsContent
+										value="pricing"
+										className="bg-white shadow-xl rounded-lg p-8"
+									>
+										<div className="flex flex-col gap-4">
+											{tool.hasFreePrice && (
+												<div className="mb-6 bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+													<h3 className="text-xl font-semibold mb-2 text-blue-800">
+														Free Tier
+													</h3>
+													<p className="text-gray-700">{tool.freeTierType}</p>
+												</div>
+											)}
+											{tool.hasPaidPrice && (
+												<div className="mb-6 bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
+													<h3 className="text-xl font-semibold mb-2 text-yellow-800">
+														Paid Tier
+													</h3>
+													<p className="text-gray-700">{tool.paidPrice}</p>
+												</div>
+											)}
+											{/* Pricing plans */}
+											<div>
+												<h3 className="text-xl font-semibold mb-2 text-gray-800 border-b pb-2">
+													Pricing Plans
+												</h3>
+												<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+													{tool.pricingPlans?.map((plan: any, index: any) => (
+														<div
+															key={index}
+															className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+														>
+															<div className="bg-gray-50 p-4 border-b">
+																<h4 className="font-bold text-lg text-center">
+																	{plan.name}
+																</h4>
+															</div>
+															<div className="p-6 text-center">
+																<p className="text-3xl font-bold text-gray-800 mb-1">
+																	{plan.price}
+																</p>
+																<p className="text-gray-600 mb-4">
+																	per {plan.billingPeriod}
+																</p>
+															</div>
+														</div>
+													))}
+												</div>
+											</div>
+
+											{/* Discounts */}
+											{tool.discounts && (
+												<div className="my-4 bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+													<h3 className="text-xl font-semibold mb-2 text-green-800">
+														Discounts
+													</h3>
+													<FormatMarkdownText text={tool.discounts} />
+												</div>
+											)}
+
+											{/* Refund Policy */}
+											{tool.refundPolicy && (
+												<div className="my-4 bg-amber-50 p-6 rounded-lg border-l-4 border-amber-500">
+													<h3 className="text-xl font-semibold mb-2 text-amber-800">
+														Refund Policy
+													</h3>
+													<FormatMarkdownText text={tool.refundPolicy} />
+												</div>
+											)}
+
+											{/* Pricing URL button */}
+											{tool.pricingUrl && (
+												<div className="mt-8 text-center">
+													<Link
+														href={tool.pricingUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="bg-[#1c1c1c] text-white px-8 py-3 rounded-lg font-medium hover:bg-black/80 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
+													>
+														Check Pricing on {tool.name} Website
+													</Link>
+												</div>
+											)}
+										</div>
+									</TabsContent>
+									<TabsContent
+										value="contact"
+										className="bg-white shadow-xl rounded-lg p-8"
+									>
+										<div className="flex flex-col gap-8">
+											{/* Contact information */}
+											<div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+												<h3 className="text-xl font-semibold mb-5 text-gray-800 border-b pb-2">
+													Contact Information
+												</h3>
+												<div className="space-y-4">
+													{tool.contactEmail && (
+														<div className="flex items-center">
+															<div className="w-10 h-10 rounded-full bg-[#1c1c1c] flex items-center justify-center mr-4">
+																<span className="text-white">@</span>
+															</div>
+															<div>
+																<p className="text-sm text-gray-500">Email</p>
+																<p className="font-medium">
+																	{tool.contactEmail}
+																</p>
+															</div>
+														</div>
+													)}
+													{tool.contactPhone && (
+														<div className="flex items-center">
+															<div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4">
+																<span className="text-green-600">☎</span>
+															</div>
+															<div>
+																<p className="text-sm text-gray-500">Phone</p>
+																<p className="font-medium">
+																	{tool.contactPhone}
+																</p>
+															</div>
+														</div>
+													)}
+												</div>
+											</div>
+
+											{/* Social Media */}
+											{tool.contactSocial && (
+												<div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+													<h3 className="text-xl font-semibold mb-5 text-gray-800 border-b pb-2">
+														Social Media
+													</h3>
+													<div className="flex flex-wrap gap-4 text-normal">
+														{tool.contactSocial.facebook && (
+															<Link
+																href={tool.contactSocial.facebook}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center py-2 px-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+															>
+																<div className="flex items-center gap-2">
+																	<span className="text-tiny w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full">
+																		FB
+																	</span>
+																	<span>Facebook</span>
+																</div>
+															</Link>
+														)}
+														{tool.contactSocial.twitter && (
+															<Link
+																href={tool.contactSocial.twitter}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center py-2 px-3 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors duration-300"
+															>
+																<div className="flex items-center gap-2">
+																	<span className="text-tiny w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full">
+																		TW
+																	</span>
+																	<span>Twitter</span>
+																</div>
+															</Link>
+														)}
+														{tool.contactSocial.linkedin && (
+															<Link
+																href={tool.contactSocial.linkedin}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center py-2 px-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors duration-300"
+															>
+																<div className="flex items-center gap-2">
+																	<span className="text-tiny w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full">
+																		LI
+																	</span>
+																	<span>LinkedIn</span>
+																</div>
+															</Link>
+														)}
+														{tool.contactSocial.instagram && (
+															<Link
+																href={tool.contactSocial.instagram}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center py-2 px-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors duration-300"
+															>
+																<div className="flex items-center gap-2">
+																	<span className="w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-tiny">
+																		IG
+																	</span>
+																	<span>Instagram</span>
+																</div>
+															</Link>
+														)}
+														{tool.contactSocial.youtube && (
+															<Link
+																href={tool.contactSocial.youtube}
+																target="_blank"
+																rel="noopener noreferrer"
+																className="flex items-center py-2 px-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"
+															>
+																<div className="flex items-center gap-2">
+																	<span className="w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-tiny">
+																		YT
+																	</span>
+																	<span>YouTube</span>
+																</div>
+															</Link>
+														)}
+													</div>
+												</div>
+											)}
+
+											{/* Contact page button */}
+											{tool.contactPageUrl && (
+												<div className="mt-6 text-center">
+													<Link
+														href={tool.contactPageUrl}
+														target="_blank"
+														rel="noopener noreferrer"
+														className="bg-[#1c1c1c] text-white px-8 py-2 rounded-lg font-medium hover:bg-[#1c1c1c]/80 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
+													>
+														Contact {tool.name}
+													</Link>
+												</div>
+											)}
+										</div>
 									</TabsContent>
 								</Tabs>
 							</div>
