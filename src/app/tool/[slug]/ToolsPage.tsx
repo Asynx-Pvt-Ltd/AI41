@@ -549,85 +549,96 @@ export default function Tool({
 										value="pricing"
 										className="bg-white shadow-xl rounded-lg p-8"
 									>
-										<div className="flex flex-col gap-4">
-											{tool.hasFreePrice && (
-												<div className="mb-6 bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
-													<h3 className="text-xl font-semibold mb-2 text-blue-800">
+										<div className="w-full bg-white px-4 sm:px-6 lg:px-8">
+											<div className="max-w-7xl mx-auto">
+												{/* Free Tier */}
+												<div className="mb-8 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
+													<h3 className="text-xl font-semibold mb-2 text-gray-800">
 														Free Tier
 													</h3>
-													<p className="text-gray-700">{tool.freeTierType}</p>
+													<p className="text-gray-700">
+														Access to core features with limited usage
+													</p>
 												</div>
-											)}
-											{tool.hasPaidPrice && (
-												<div className="mb-6 bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-500">
-													<h3 className="text-xl font-semibold mb-2 text-yellow-800">
+
+												{/* Paid Tier */}
+												<div className="mb-10 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
+													<h3 className="text-xl font-semibold mb-2 text-gray-800">
 														Paid Tier
 													</h3>
-													<p className="text-gray-700">{tool.paidPrice}</p>
+													<p className="text-gray-700">
+														Unlock premium features with flexible subscription
+														options
+													</p>
 												</div>
-											)}
-											{/* Pricing plans */}
-											<div>
-												<h3 className="text-xl font-semibold mb-2 text-gray-800 border-b pb-2">
-													Pricing Plans
-												</h3>
-												<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-													{tool.pricingPlans?.map((plan: any, index: any) => (
-														<div
-															key={index}
-															className="border rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-														>
-															<div className="bg-gray-50 p-4 border-b">
-																<h4 className="font-bold text-lg text-center">
-																	{plan.name}
-																</h4>
-															</div>
-															<div className="p-6 text-center">
-																<p className="text-3xl font-bold text-gray-800 mb-1">
-																	{plan.price}
-																</p>
-																<p className="text-gray-600 mb-4">
-																	per {plan.billingPeriod}
-																</p>
-															</div>
-														</div>
-													))}
-												</div>
-											</div>
 
-											{/* Discounts */}
-											{tool.discounts && (
-												<div className="my-4 bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
-													<h3 className="text-xl font-semibold mb-2 text-green-800">
+												{/* Pricing Plans */}
+												<div>
+													<h3 className="text-xl font-semibold mb-6 text-gray-800 border-b border-gray-300 pb-2">
+														Pricing Plans
+													</h3>
+													<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+														{tool.pricingPlans.map((plan: any, index: any) => (
+															<div
+																key={index}
+																className="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+															>
+																<div className="bg-gray-50 p-4 border-b border-gray-200">
+																	<h4 className="font-bold text-lg text-center text-gray-800">
+																		{plan.name}
+																	</h4>
+																</div>
+																<div className="p-8 text-center bg-white">
+																	<p className="text-3xl font-bold text-gray-900 mb-1">
+																		{plan.price}
+																	</p>
+																	<p className="text-gray-600 mb-6">
+																		per {plan.billingPeriod}
+																	</p>
+																	<button className="bg-gray-900 text-white px-6 py-2 rounded font-medium hover:bg-gray-800 transition-colors duration-300 w-full">
+																		Get Started
+																	</button>
+																</div>
+															</div>
+														))}
+													</div>
+												</div>
+
+												{/* Discounts */}
+												<div className="my-8 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
+													<h3 className="text-xl font-semibold mb-2 text-gray-800">
 														Discounts
 													</h3>
-													<FormatMarkdownText text={tool.discounts} />
+													<p className="text-gray-700">
+														Save 20% with annual billing on all plans.
+														Educational and non-profit organizations qualify for
+														special pricing.
+													</p>
 												</div>
-											)}
 
-											{/* Refund Policy */}
-											{tool.refundPolicy && (
-												<div className="my-4 bg-amber-50 p-6 rounded-lg border-l-4 border-amber-500">
-													<h3 className="text-xl font-semibold mb-2 text-amber-800">
+												{/* Refund Policy */}
+												<div className="my-8 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
+													<h3 className="text-xl font-semibold mb-2 text-gray-800">
 														Refund Policy
 													</h3>
-													<FormatMarkdownText text={tool.refundPolicy} />
+													<p className="text-gray-700">
+														14-day money-back guarantee for all paid plans. No
+														questions asked.
+													</p>
 												</div>
-											)}
 
-											{/* Pricing URL button */}
-											{tool.pricingUrl && (
-												<div className="mt-8 text-center">
-													<Link
-														href={tool.pricingUrl}
+												{/* Pricing URL button */}
+												<div className="mt-10 text-center">
+													<a
+														href="#"
 														target="_blank"
 														rel="noopener noreferrer"
-														className="bg-[#1c1c1c] text-white px-8 py-3 rounded-lg font-medium hover:bg-black/80 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
+														className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
 													>
-														Check Pricing on {tool.name} Website
-													</Link>
+														See Full Pricing Details
+													</a>
 												</div>
-											)}
+											</div>
 										</div>
 									</TabsContent>
 									<TabsContent
@@ -640,7 +651,7 @@ export default function Tool({
 												<h3 className="text-xl font-semibold mb-5 text-gray-800 border-b pb-2">
 													Contact Information
 												</h3>
-												<div className="flex gap-6 items-center py-4 justify-center">
+												<div className="flex gap-6 items-center py-4 justify-center flex-wrap">
 													{tool.contactEmail && (
 														<div className="flex items-center">
 															<div className="w-10 h-10 rounded-full bg-[#1c1c1c] flex items-center justify-center mr-2">
