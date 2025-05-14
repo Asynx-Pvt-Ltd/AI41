@@ -23,9 +23,9 @@ export default async function handler(
 			hasPaidPrice,
 			paidPrice,
 			freeTierType,
-			pricingColumns,
+			pricingPlans,
 			discounts,
-			refundpolicy,
+			refundPolicy,
 			contactSocial,
 			contactEmail,
 			contactPhone,
@@ -53,10 +53,10 @@ export default async function handler(
 				hasPaidPrice?: boolean;
 				paidPrice?: string;
 				freeTierType?: string;
-				pricingColumns?: any[];
+				pricingPlans?: any[];
 				discounts?: string;
-				refundpolicy?: string;
-				contactSocial?: any;
+				refundPolicy?: string;
+				contactSocial?: { create: any };
 				contactEmail?: string;
 				contactPhone?: string;
 				contactPageUrl?: string;
@@ -87,14 +87,23 @@ export default async function handler(
 				...(hasPaidPrice !== null && { hasPaidPrice }),
 				...(paidPrice !== null && { paidPrice }),
 				...(freeTierType !== null && { freeTierType }),
-				...(pricingColumns !== null && { pricingColumns }),
+				...(pricingPlans !== null && { pricingPlans }),
 				...(discounts !== null && { discounts }),
-				...(refundpolicy !== null && { refundpolicy }),
-				...(contactSocial !== null && { contactSocial }),
+				...(refundPolicy !== null && { refundPolicy }),
+				...(contactSocial !== null && {
+					contactSocial: {
+						create: {
+							facebook: contactSocial.facebook || null,
+							twitter: contactSocial.twitter || null,
+							linkedin: contactSocial.linkedin || null,
+							instagram: contactSocial.instagram || null,
+							youtube: contactSocial.youtube || null,
+						},
+					},
+				}),
 				...(contactEmail !== null && { contactEmail }),
 				...(contactPhone !== null && { contactPhone }),
 				...(contactPageUrl !== null && { contactPageUrl }),
-
 				metaTitle: metaTitle ?? null,
 				metaDescription: metaDescription ?? null,
 			};
@@ -146,6 +155,8 @@ export default async function handler(
 							jobRole: true,
 						},
 					},
+					contactSocial: true,
+					pricingPlans: true,
 				},
 			});
 

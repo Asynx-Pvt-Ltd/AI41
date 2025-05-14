@@ -41,14 +41,24 @@ export default async function handler(
 				hasFreePrice,
 				hasPaidPrice,
 				paidPrice,
+				freeTierType,
+				pricingPlans,
+				discounts,
+				refundPolicy,
+				contactSocial,
+				contactEmail,
+				contactPhone,
+				contactPageUrl,
+				pricingUrl,
 				metaTitle,
 				metaDescription,
 			} = JSON.parse(req.body);
-
+			console.log('Received data:', pricingPlans, pricingUrl);
 			const existingTool = await prisma.tool.findUnique({
 				where: { id: Number(id) },
 				include: {
 					jobRoles: true,
+					contactSocial: true, // Include contactSocial to check if it exists
 				},
 			});
 
@@ -107,9 +117,62 @@ export default async function handler(
 				...(hasFreePrice !== undefined && { hasFreePrice }),
 				...(hasPaidPrice !== undefined && { hasPaidPrice }),
 				...(paidPrice !== undefined && { paidPrice }),
+				...(freeTierType !== null && { freeTierType }),
+				...(pricingUrl !== null && { pricingUrl }),
+				...(discounts !== null && { discounts }),
+				...(refundPolicy !== null && { refundPolicy }),
+				...(contactEmail !== null && { contactEmail }),
+				...(contactPhone !== null && { contactPhone }),
+				...(contactPageUrl !== null && { contactPageUrl }),
+
 				metaTitle: metaTitle || null,
 				metaDescription: metaDescription || null,
 			};
+
+			// Handle pricing plans
+			if (pricingPlans) {
+				// Delete existing pricing plans
+				await prisma.pricingPlan.deleteMany({
+					where: {
+						toolId: Number(id),
+					},
+				});
+
+				// Create new pricing plans
+				updateData.pricingPlans = {
+					create: pricingPlans.map((plan: any) => ({
+						name: plan.name,
+						price: plan.price,
+						billingPeriod: plan.billingPeriod,
+					})),
+				};
+			}
+			// Handle contactSocial relation properly
+			if (contactSocial !== null) {
+				if (existingTool.contactSocial) {
+					// Update existing ContactSocial record
+					updateData.contactSocial = {
+						update: {
+							facebook: contactSocial.facebook || null,
+							twitter: contactSocial.twitter || null,
+							linkedin: contactSocial.linkedin || null,
+							instagram: contactSocial.instagram || null,
+							youtube: contactSocial.youtube || null,
+						},
+					};
+				} else {
+					// Create new ContactSocial record
+					updateData.contactSocial = {
+						create: {
+							facebook: contactSocial.facebook || null,
+							twitter: contactSocial.twitter || null,
+							linkedin: contactSocial.linkedin || null,
+							instagram: contactSocial.instagram || null,
+							youtube: contactSocial.youtube || null,
+						},
+					};
+				}
+			}
 
 			// Only include jobRoles in update if it's provided
 			if (jobRoles !== undefined) {
@@ -142,6 +205,7 @@ export default async function handler(
 							jobRole: true,
 						},
 					},
+					contactSocial: true, // Include contactSocial in the response
 				},
 			});
 
@@ -218,6 +282,13 @@ export default async function handler(
 							category: true,
 						},
 					},
+					jobRoles: {
+						include: {
+							jobRole: true,
+						},
+					},
+					contactSocial: true,
+					pricingPlans: true,
 				},
 			});
 			return res.status(200).json(tool);

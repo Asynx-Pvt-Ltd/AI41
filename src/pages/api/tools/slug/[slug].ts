@@ -25,6 +25,8 @@ export default async function handler(
 								jobRole: true,
 							},
 						},
+						contactSocial: true,
+						pricingPlans: true,
 					},
 				});
 
