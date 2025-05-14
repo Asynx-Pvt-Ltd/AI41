@@ -1,20 +1,21 @@
-import { Prisma } from "@prisma/client";
+import { Prisma } from '@prisma/client';
 
 declare global {
-  var prisma: Prisma;
+	var prisma: Prisma;
 }
 
 declare global {
-  namespace JSX {
-    interface IntrinsicElements {
-      "lord-icon": {
-        target?: string;
-        src: string;
-        trigger?: string;
-        style?: React.CSSProperties;
-        children?: any;
-        // Add any other attributes you plan to use
-      };
-    }
-  }
+	namespace JSX {
+		interface IntrinsicElements {
+			'lord-icon': {
+				target?: string;
+				src: string;
+				trigger?: string;
+				style?: React.CSSProperties;
+				children?: any;
+				colors?: any;
+				// Add any other attributes you plan to use
+			};
+		}
+	}
 }

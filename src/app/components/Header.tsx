@@ -30,22 +30,22 @@ export const Header = () => {
 		{
 			href: '/all-ai-tools',
 			text: 'Full List',
-			iconSrc: 'https://cdn.lordicon.com/jeuxydnh.json',
+			iconSrc: 'https://cdn.lordicon.com/rvdhgcpo.json',
 		},
 		{
 			href: '/ai-categories',
 			text: 'AI Categories',
-			iconSrc: 'https://cdn.lordicon.com/xcrjfxeh.json',
+			iconSrc: 'https://cdn.lordicon.com/iwlihxdl.json',
 		},
 		{
 			href: '/ai-tutorials',
 			text: 'AI Tutorials',
-			iconSrc: 'https://cdn.lordicon.com/fihkmkwt.json',
+			iconSrc: 'https://cdn.lordicon.com/rfoqztsr.json',
 		},
 		{
 			href: '/job',
 			text: 'AI Jobs',
-			iconSrc: 'https://cdn.lordicon.com/mrdiiocb.json',
+			iconSrc: 'https://cdn.lordicon.com/mqqsmsvs.json',
 		},
 	];
 
@@ -67,12 +67,13 @@ export const Header = () => {
 							href={item.href}
 							className="flex items-center justify-between group"
 						>
-							<div className="flex items-center space-x-2 group">
+							<div className="flex items-start space-x-2 group">
 								<span className="site-icon">
 									<lord-icon
 										src={item.iconSrc}
 										trigger="hover"
 										target=".group"
+										colors="primary:#ffffff"
 										style={{
 											width: '25px',
 											height: '25px',
@@ -129,8 +130,9 @@ export const Header = () => {
 									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
 								>
 									<lord-icon
-										src="https://cdn.lordicon.com/eqxyjqxd.json"
+										src="https://cdn.lordicon.com/ejurburo.json"
 										trigger="hover"
+										colors="primary:#ffffff"
 										style={{
 											width: '25px',
 											height: '25px',
@@ -148,8 +150,9 @@ export const Header = () => {
 									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
 								>
 									<lord-icon
-										src="https://cdn.lordicon.com/mecwbjnp.json"
+										src="https://cdn.lordicon.com/utrckbca.json"
 										trigger="hover"
+										colors="primary:#ffffff"
 										style={{
 											width: '25px',
 											height: '25px',
@@ -167,8 +170,9 @@ export const Header = () => {
 									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
 								>
 									<lord-icon
-										src="https://cdn.lordicon.com/eqxyjqxd.json"
+										src="https://cdn.lordicon.com/ziflyeyv.json"
 										trigger="hover"
+										colors="primary:#ffffff;"
 										style={{
 											width: '25px',
 											height: '25px',
@@ -188,6 +192,7 @@ export const Header = () => {
 									<lord-icon
 										src="https://cdn.lordicon.com/eqxyjqxd.json"
 										trigger="hover"
+										colors="primary:#ffffff"
 										style={{
 											width: '25px',
 											height: '25px',
@@ -207,6 +212,7 @@ export const Header = () => {
 									<lord-icon
 										src="https://cdn.lordicon.com/eqxyjqxd.json"
 										trigger="hover"
+										colors="primary:#ffffff"
 										style={{
 											width: '25px',
 											height: '25px',

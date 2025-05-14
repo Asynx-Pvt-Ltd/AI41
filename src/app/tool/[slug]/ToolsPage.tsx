@@ -5,7 +5,16 @@ import { Header } from '../../components/Header';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { FaExternalLinkAlt } from 'react-icons/fa';
-import { CheckCircle, XCircle } from 'lucide-react';
+import {
+	CheckCircle,
+	Facebook,
+	Instagram,
+	Linkedin,
+	Twitter,
+	X,
+	XCircle,
+	Youtube,
+} from 'lucide-react';
 import FAQTutorialsAccordion from '@/app/components/ui/FAQ';
 import {
 	Tabs,
@@ -631,14 +640,16 @@ export default function Tool({
 												<h3 className="text-xl font-semibold mb-5 text-gray-800 border-b pb-2">
 													Contact Information
 												</h3>
-												<div className="space-y-4">
+												<div className="flex gap-6 items-center py-4 justify-center">
 													{tool.contactEmail && (
 														<div className="flex items-center">
-															<div className="w-10 h-10 rounded-full bg-[#1c1c1c] flex items-center justify-center mr-4">
+															<div className="w-10 h-10 rounded-full bg-[#1c1c1c] flex items-center justify-center mr-2">
 																<span className="text-white">@</span>
 															</div>
 															<div>
-																<p className="text-sm text-gray-500">Email</p>
+																<p className="text-sm text-gray-500 text-start">
+																	Email
+																</p>
 																<p className="font-medium">
 																	{tool.contactEmail}
 																</p>
@@ -647,11 +658,13 @@ export default function Tool({
 													)}
 													{tool.contactPhone && (
 														<div className="flex items-center">
-															<div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4">
+															<div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-2">
 																<span className="text-green-600">☎</span>
 															</div>
 															<div>
-																<p className="text-sm text-gray-500">Phone</p>
+																<p className="text-sm text-gray-500 text-start">
+																	Phone
+																</p>
 																<p className="font-medium">
 																	{tool.contactPhone}
 																</p>
@@ -667,19 +680,16 @@ export default function Tool({
 													<h3 className="text-xl font-semibold mb-5 text-gray-800 border-b pb-2">
 														Social Media
 													</h3>
-													<div className="flex flex-wrap gap-4 text-normal">
+													<div className="flex flex-wrap gap-4 text-normal justify-center">
 														{tool.contactSocial.facebook && (
 															<Link
 																href={tool.contactSocial.facebook}
 																target="_blank"
 																rel="noopener noreferrer"
-																className="flex items-center py-2 px-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300"
+																className="flex items-center rounded-full p-2 bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300"
 															>
 																<div className="flex items-center gap-2">
-																	<span className="text-tiny w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full">
-																		FB
-																	</span>
-																	<span>Facebook</span>
+																	<Facebook />
 																</div>
 															</Link>
 														)}
@@ -688,13 +698,10 @@ export default function Tool({
 																href={tool.contactSocial.twitter}
 																target="_blank"
 																rel="noopener noreferrer"
-																className="flex items-center py-2 px-3 bg-blue-400 text-white rounded-lg hover:bg-blue-500 transition-colors duration-300"
+																className="flex items-center p-2 bg-black text-white rounded-full hover:bg-blue-500 transition-colors duration-300"
 															>
 																<div className="flex items-center gap-2">
-																	<span className="text-tiny w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full">
-																		TW
-																	</span>
-																	<span>Twitter</span>
+																	<Twitter />
 																</div>
 															</Link>
 														)}
@@ -703,13 +710,10 @@ export default function Tool({
 																href={tool.contactSocial.linkedin}
 																target="_blank"
 																rel="noopener noreferrer"
-																className="flex items-center py-2 px-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors duration-300"
+																className="flex items-center p-2  bg-blue-700 text-white rounded-full hover:bg-blue-800 transition-colors duration-300"
 															>
 																<div className="flex items-center gap-2">
-																	<span className="text-tiny w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full">
-																		LI
-																	</span>
-																	<span>LinkedIn</span>
+																	<Linkedin />
 																</div>
 															</Link>
 														)}
@@ -718,13 +722,10 @@ export default function Tool({
 																href={tool.contactSocial.instagram}
 																target="_blank"
 																rel="noopener noreferrer"
-																className="flex items-center py-2 px-3 bg-pink-600 text-white rounded-lg hover:bg-pink-700 transition-colors duration-300"
+																className="flex items-center p-2 bg-pink-600 text-white rounded-full hover:bg-pink-700 transition-colors duration-300"
 															>
 																<div className="flex items-center gap-2">
-																	<span className="w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-tiny">
-																		IG
-																	</span>
-																	<span>Instagram</span>
+																	<Instagram />
 																</div>
 															</Link>
 														)}
@@ -733,13 +734,10 @@ export default function Tool({
 																href={tool.contactSocial.youtube}
 																target="_blank"
 																rel="noopener noreferrer"
-																className="flex items-center py-2 px-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-300"
+																className="flex items-center p-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors duration-300"
 															>
 																<div className="flex items-center gap-2">
-																	<span className="w-6 h-6 flex items-center justify-center bg-white bg-opacity-20 rounded-full text-tiny">
-																		YT
-																	</span>
-																	<span>YouTube</span>
+																	<Youtube />
 																</div>
 															</Link>
 														)}
