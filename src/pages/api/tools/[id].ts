@@ -53,7 +53,6 @@ export default async function handler(
 				metaTitle,
 				metaDescription,
 			} = JSON.parse(req.body);
-			console.log('Received data:', pricingPlans, pricingUrl);
 			const existingTool = await prisma.tool.findUnique({
 				where: { id: Number(id) },
 				include: {
