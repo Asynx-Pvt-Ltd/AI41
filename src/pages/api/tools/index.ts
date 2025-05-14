@@ -53,7 +53,7 @@ export default async function handler(
 				hasPaidPrice?: boolean;
 				paidPrice?: string;
 				freeTierType?: string;
-				pricingPlans?: any[];
+				pricingPlans?: { create: any[] };
 				discounts?: string;
 				refundPolicy?: string;
 				contactSocial?: { create: any };
@@ -87,7 +87,16 @@ export default async function handler(
 				...(hasPaidPrice !== null && { hasPaidPrice }),
 				...(paidPrice !== null && { paidPrice }),
 				...(freeTierType !== null && { freeTierType }),
-				...(pricingPlans !== null && { pricingPlans }),
+				...(pricingPlans &&
+					pricingPlans.length > 0 && {
+						pricingPlans: {
+							create: pricingPlans.map((plan: any) => ({
+								name: plan.name,
+								price: plan.price,
+								billingPeriod: plan.billingPeriod,
+							})),
+						},
+					}),
 				...(discounts !== null && { discounts }),
 				...(refundPolicy !== null && { refundPolicy }),
 				...(contactSocial !== null && {
