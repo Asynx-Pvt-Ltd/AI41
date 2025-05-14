@@ -19,7 +19,7 @@ function Footer() {
 	}, []);
 
 	return (
-		<footer className="w-full bg-[#222222] text-white py-12 pb-6 font-sans">
+		<footer className="w-full bg-[#222222] text-white py-12 pb-6 font-sans rounded-tr-3xl rounded-tl-3xl">
 			<div className="container mx-auto px-4">
 				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
 					{/* Column 1: AI41 */}
