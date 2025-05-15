@@ -1,69 +1,62 @@
-import Link from "next/link";
-import React from "react";
+import { SignedIn, SignOutButton, UserButton } from '@clerk/nextjs';
+import Link from 'next/link';
+import React from 'react';
 
-function DashboardLayout({ children }: any) {
-  return (
-    <div className="flex min-h-screen h-full">
-      {/* Left Panel */}
-      <aside className="w-64 bg-gray-800 text-white p-6">
-        <nav>
-          <ul>
-            <li className="mb-4">
-              <Link
-                href="/dashboard/feature-tools"
-                className="block p-2 hover:bg-gray-700 rounded"
-              >
-                Feature Tools
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link
-                href="/dashboard/categories"
-                className="block p-2 hover:bg-gray-700 rounded"
-              >
-                Categories
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link
-                href="/dashboard/tools"
-                className="block p-2 hover:bg-gray-700 rounded"
-              >
-                Tools
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link
-                href="/dashboard/tutorials"
-                className="block p-2 hover:bg-gray-700 rounded"
-              >
-                Tutorials
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link
-                href="/dashboard/news"
-                className="block p-2 hover:bg-gray-700 rounded"
-              >
-                AI News
-              </Link>
-            </li>
-            <li className="mb-4">
-              <Link
-                href="/dashboard/job-roles"
-                className="block p-2 hover:bg-gray-700 rounded"
-              >
-                Job Roles
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </aside>
+import { ReactNode } from 'react';
 
-      {/* Main Content */}
-      <main className="flex-1 p-6 bg-gray-100">{children}</main>
-    </div>
-  );
+function DashboardLayout({ children }: { children: ReactNode }) {
+	return (
+		<div className="flex flex-col min-h-screen bg-white">
+			{/* Top Navigation Bar */}
+			<header className="bg-[#2c2c2c] text-white py-3 px-6 flex justify-between items-center shadow-md">
+				<div className="flex items-center">
+					<h1 className="text-xl font-semibold">AI Dashboard</h1>
+				</div>
+				<div className="flex items-center gap-4">
+					<SignedIn>
+						<SignOutButton>
+							<button className="px-3 py-1 text-sm border border-white/30 rounded hover:bg-white/10 transition">
+								Sign Out
+							</button>
+						</SignOutButton>
+						<UserButton afterSignOutUrl="/" />
+					</SignedIn>
+				</div>
+			</header>
+
+			<div className="flex flex-1">
+				{/* Sidebar */}
+				<aside className="w-64 bg-[#2c2c2c] text-white">
+					<nav className="py-6 px-3">
+						<ul className="space-y-1">
+							{[
+								{ href: '/dashboard/feature-tools', label: 'Feature Tools' },
+								{ href: '/dashboard/categories', label: 'Categories' },
+								{ href: '/dashboard/tools', label: 'Tools' },
+								{ href: '/dashboard/tutorials', label: 'Tutorials' },
+								{ href: '/dashboard/news', label: 'AI News' },
+								{ href: '/dashboard/job-roles', label: 'Job Roles' },
+							].map((item) => (
+								<li key={item.href}>
+									<Link
+										href={item.href}
+										className="flex items-center gap-3 px-4 py-3 rounded-md hover:bg-white/10 transition-colors"
+									>
+										<span>{item.label}</span>
+									</Link>
+								</li>
+							))}
+						</ul>
+					</nav>
+				</aside>
+
+				{/* Main Content */}
+				<main className="flex-1 bg-white p-8">
+					<div className="max-w-7xl mx-auto">{children}</div>
+				</main>
+			</div>
+		</div>
+	);
 }
 
 export default DashboardLayout;
