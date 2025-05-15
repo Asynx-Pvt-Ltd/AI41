@@ -1,5 +1,6 @@
 'use client';
 
+import { ClerkProvider } from '@clerk/nextjs';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
@@ -15,16 +16,18 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
-			<head>
-				<Script src="https://cdn.lordicon.com/lordicon.js" />
-			</head>
-			<body className={inter.className}>
-				<HelmetProvider>
-					<ClientSideToastContainer />
-					<Providers>{children}</Providers>
-				</HelmetProvider>
-			</body>
-		</html>
+		<ClerkProvider>
+			<html lang="en">
+				<head>
+					<Script src="https://cdn.lordicon.com/lordicon.js" />
+				</head>
+				<body className={inter.className}>
+					<HelmetProvider>
+						<ClientSideToastContainer />
+						<Providers>{children}</Providers>
+					</HelmetProvider>
+				</body>
+			</html>
+		</ClerkProvider>
 	);
 }
