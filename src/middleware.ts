@@ -1,43 +1,55 @@
-import { NextResponse } from "next/server";
-import type { NextRequest } from "next/server";
+import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server';
+import { NextResponse } from 'next/server';
+import type { NextFetchEvent, NextRequest } from 'next/server';
 
-export const middleware = (req: NextRequest) => {
-  const allowedOrigins = [
-    "localhost:3000",
-    "toolsdirectory-phi.vercel.app",
-    "167.88.44.78:3000",
-  ];
-  const origin = req.headers.get("x-forwarded-host") ?? "";
-  const isAllowedOrigin = allowedOrigins.includes(origin);
+const isDashboardRoute = createRouteMatcher(['/dashboard(.*)']);
+const isApiRoute = createRouteMatcher([
+	'/api/addNews(.*)',
+	'/api/addTutorials(.*)',
+]);
 
-  if (isAllowedOrigin) {
-    return NextResponse.next();
-  }
+const clerkHandler = clerkMiddleware(async (auth, req) => {
+	if (isDashboardRoute(req)) await auth.protect();
+});
 
-  const authHeader = req.headers.get("Authorization");
-  if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return NextResponse.json(
-      {
-        error: "Unauthorized",
-      },
-      { status: 401 }
-    );
-  }
+async function customMiddleware(req: NextRequest) {
+	if (isApiRoute(req)) {
+		const allowedOrigins = [
+			'localhost:3000',
+			'toolsdirectory-phi.vercel.app',
+			'167.88.44.78:3000',
+		];
+		const origin = req.headers.get('x-forwarded-host') ?? '';
+		const isAllowedOrigin = allowedOrigins.includes(origin);
 
-  const token = authHeader.split(" ")[1];
+		if (isAllowedOrigin) {
+			return NextResponse.next();
+		}
 
-  if (token !== process.env.AUTHORIZATION_TOKEN) {
-    return NextResponse.json(
-      {
-        error: "Unauthorized",
-      },
-      { status: 401 }
-    );
-  }
+		const authHeader = req.headers.get('Authorization');
+		if (!authHeader || !authHeader.startsWith('Bearer ')) {
+			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+		}
 
-  return NextResponse.next();
-};
+		const token = authHeader.split(' ')[1];
+		if (token !== process.env.AUTHORIZATION_TOKEN) {
+			return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+		}
+	}
+
+	return NextResponse.next();
+}
+
+export default async function middleware(
+	req: NextRequest,
+	event: NextFetchEvent,
+) {
+	const response = await clerkHandler(req, event);
+	if (response) return response;
+
+	return customMiddleware(req);
+}
 
 export const config = {
-  matcher: ["/api/addNews", "/api/addTutorials"],
+	matcher: ['/dashboard/:path*', '/api/addNews', '/api/addTutorials'],
 };
