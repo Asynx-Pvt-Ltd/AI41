@@ -369,7 +369,7 @@ export default function Tool({
 										<div className="flex flex-row mt-3 w-fit gap-1">
 											{tool.hasFreePrice && (
 												<Link
-													href={`/tool/free`}
+													href={`/tools/free`}
 													className="px-3 py-1 bg-green-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
 												>
 													Free
@@ -552,91 +552,107 @@ export default function Tool({
 										<div className="w-full bg-white px-4 sm:px-6 lg:px-8">
 											<div className="max-w-7xl mx-auto">
 												{/* Free Tier */}
-												<div className="mb-8 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
-													<h3 className="text-xl font-semibold mb-2 text-gray-800">
-														Free Tier
-													</h3>
-													<p className="text-gray-700">
-														Access to core features with limited usage
-													</p>
-												</div>
-
-												{/* Paid Tier */}
-												<div className="mb-10 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
-													<h3 className="text-xl font-semibold mb-2 text-gray-800">
-														Paid Tier
-													</h3>
-													<p className="text-gray-700">
-														Unlock premium features with flexible subscription
-														options
-													</p>
-												</div>
+												{tool.hasFreePrice && (
+													<div className="mb-8 bg-gray-50 p-6 rounded-lg border-l-4 border-green-500">
+														<div className="flex items-center gap-2 mb-2">
+															<CheckCircle className="text-green-600 w-5 h-5" />
+															<h3 className="text-xl font-semibold text-gray-800">
+																Free Tier
+															</h3>
+														</div>
+														<p className="text-gray-700">
+															Access to core features with limited usage
+														</p>
+														<div className="mt-2">
+															<Link
+																href="/tools/free"
+																className="px-3 py-1 bg-green-200 hover:bg-gray-300 text-gray-800 rounded-full text-xs"
+															>
+																Free
+															</Link>
+														</div>
+													</div>
+												)}
 
 												{/* Pricing Plans */}
-												<div>
-													<h3 className="text-xl font-semibold mb-6 text-gray-800 border-b border-gray-300 pb-2">
-														Pricing Plans
-													</h3>
-													<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-														{tool.pricingPlans.map((plan: any, index: any) => (
-															<div
-																key={index}
-																className="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
-															>
-																<div className="bg-gray-50 p-4 border-b border-gray-200">
-																	<h4 className="font-bold text-lg text-center text-gray-800">
-																		{plan.name}
-																	</h4>
-																</div>
-																<div className="p-8 text-center bg-white">
-																	<p className="text-3xl font-bold text-gray-900 mb-1">
-																		{plan.price}
-																	</p>
-																	<p className="text-gray-600 mb-6">
-																		per {plan.billingPeriod}
-																	</p>
-																	<button className="bg-gray-900 text-white px-6 py-2 rounded font-medium hover:bg-gray-800 transition-colors duration-300 w-full">
-																		Get Started
-																	</button>
-																</div>
-															</div>
-														))}
+												{tool.pricingPlans && (
+													<div>
+														<h3 className="text-xl font-semibold mb-6 text-gray-800 border-b border-gray-300 pb-2">
+															Pricing Plans (Paid Tier)
+														</h3>
+														<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+															{tool.pricingPlans.map(
+																(plan: any, index: any) => (
+																	<div
+																		key={index}
+																		className="border border-gray-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300"
+																	>
+																		<div className="bg-gray-50 p-4 border-b border-gray-200">
+																			<h4 className="font-bold text-lg text-center text-gray-800">
+																				{plan.name}
+																			</h4>
+																		</div>
+																		<div className="p-8 text-center bg-white">
+																			<p className="text-3xl font-bold text-gray-900 mb-1">
+																				${plan.price}
+																			</p>
+																			<p className="text-gray-600 mb-6">
+																				per {plan.billingPeriod}
+																			</p>
+																		</div>
+																	</div>
+																),
+															)}
+														</div>
 													</div>
-												</div>
+												)}
 
 												{/* Discounts */}
-												<div className="my-8 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
-													<h3 className="text-xl font-semibold mb-2 text-gray-800">
-														Discounts
-													</h3>
-													<p className="text-gray-700">
-														Save 20% with annual billing on all plans.
-														Educational and non-profit organizations qualify for
-														special pricing.
-													</p>
-												</div>
+												<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+													{/* Discounts */}
+													<div className="bg-gray-50 p-6 rounded-lg border-l-4 border-blue-500">
+														<div className="flex items-center gap-2 mb-2">
+															<div className="w-5 h-5 text-blue-600">%</div>
+															<h3 className="text-xl font-semibold text-gray-800">
+																Discounts
+															</h3>
+														</div>
+														<p
+															className="text-gray-700"
+															dangerouslySetInnerHTML={{
+																__html: tool.discounts,
+															}}
+														/>
+													</div>
 
-												{/* Refund Policy */}
-												<div className="my-8 bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
-													<h3 className="text-xl font-semibold mb-2 text-gray-800">
-														Refund Policy
-													</h3>
-													<p className="text-gray-700">
-														14-day money-back guarantee for all paid plans. No
-														questions asked.
-													</p>
+													{/* Refund Policy */}
+													<div className="bg-gray-50 p-6 rounded-lg border-l-4 border-[#2c2c2c]">
+														<div className="flex items-center gap-2 mb-2">
+															<div className="w-5 h-5 text-yellow-600">↩️</div>
+															<h3 className="text-xl font-semibold text-gray-800">
+																Refund Policy
+															</h3>
+														</div>
+														<p
+															className="text-gray-700"
+															dangerouslySetInnerHTML={{
+																__html: tool.refundPolicy,
+															}}
+														/>
+													</div>
 												</div>
 
 												{/* Pricing URL button */}
 												<div className="mt-10 text-center">
-													<a
-														href="#"
+													<Link
+														href={tool.pricingUrl}
 														target="_blank"
 														rel="noopener noreferrer"
-														className="bg-gray-900 text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
+														className="bg-gray-900 text-white px-8 py-2 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
 													>
-														See Full Pricing Details
-													</a>
+														See Full Pricing Details{' '}
+														<FaExternalLinkAlt className="ml-2" size={12} />
+													</Link>
 												</div>
 											</div>
 										</div>
@@ -758,14 +774,15 @@ export default function Tool({
 
 											{/* Contact page button */}
 											{tool.contactPageUrl && (
-												<div className="mt-6 text-center">
+												<div className="text-center">
 													<Link
 														href={tool.contactPageUrl}
 														target="_blank"
 														rel="noopener noreferrer"
 														className="bg-[#1c1c1c] text-white px-8 py-2 rounded-lg font-medium hover:bg-[#1c1c1c]/80 transition-colors duration-300 inline-flex items-center justify-center shadow-md"
 													>
-														Contact {tool.name}
+														Contact {tool.name}{' '}
+														<FaExternalLinkAlt className="ml-2" size={12} />
 													</Link>
 												</div>
 											)}
