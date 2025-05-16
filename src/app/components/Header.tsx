@@ -156,7 +156,7 @@ export const Header = () => {
 										}}
 									/>
 								</span>
-								<span className="text-lg text-white dark:text-gray-300 group-hover:text-blue-400 transition duration-200 site-title">
+								<span className="text-lg text-white dark:text-gray-300 group-hover:text-gray-200 transition duration-200 site-title">
 									{item.text}
 								</span>
 							</div>
@@ -184,7 +184,7 @@ export const Header = () => {
 										height: '25px',
 									}}
 								/>
-								<span className="text-lg text-white dark:text-gray-300 hover:text-blue-400 transition duration-200">
+								<span className="text-lg text-white dark:text-gray-300 hover:text-gray-200 transition duration-200">
 									More
 								</span>
 							</div>
@@ -207,13 +207,13 @@ export const Header = () => {
 								>
 									<Link
 										href={item.href}
-										className="flex items-center space-x-2 px-4 py-2 text-lg text-white dark:text-gray-300 hover:text-blue-400 transition duration-200"
+										className="flex items-center space-x-2 px-4 py-2 text-lg text-white dark:text-gray-300 hover:text-[#2c2c2c] transition duration-200"
 									>
 										<lord-icon
 											src={item.iconSrc}
 											target=".group"
 											trigger="hover"
-											colors="primary:#ffffff;"
+											colors="primary:#ffffff"
 											style={{
 												width: '25px',
 												height: '25px',
