@@ -610,7 +610,7 @@ export default function Tool({
 												{/* Discounts */}
 												<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
 													{/* Discounts */}
-													<div className="bg-gray-50 p-6 rounded-lg border-l-4 border-blue-500">
+													<div className="bg-gray-50 p-6 rounded-lg border-l-4 border-[#2c2c2c]">
 														<div className="flex items-center gap-2 mb-2">
 															<div className="w-5 h-5 text-blue-600">%</div>
 															<h3 className="text-xl font-semibold text-gray-800">
