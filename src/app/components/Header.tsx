@@ -38,14 +38,19 @@ export const Header = () => {
 			iconSrc: 'https://cdn.lordicon.com/iwlihxdl.json',
 		},
 		{
+			href: '/job',
+			text: 'AI Jobs',
+			iconSrc: 'https://cdn.lordicon.com/mqqsmsvs.json',
+		},
+		{
 			href: '/ai-tutorials',
 			text: 'AI Tutorials',
 			iconSrc: 'https://cdn.lordicon.com/rfoqztsr.json',
 		},
 		{
-			href: '/job',
-			text: 'AI Jobs',
-			iconSrc: 'https://cdn.lordicon.com/mqqsmsvs.json',
+			href: '/ai-news',
+			text: 'AI News',
+			iconSrc: 'https://cdn.lordicon.com/ejurburo.json',
 		},
 	];
 
@@ -94,13 +99,15 @@ export const Header = () => {
 					>
 						<DropdownTrigger>
 							<div
-								className="flex items-center space-x-2 cursor-pointer"
+								className="flex space-x-2 cursor-pointer"
 								onMouseEnter={() => setMenuDisplay(true)}
 								onClick={() => setMenuDisplay(!menuDisplay)}
 							>
 								<lord-icon
-									src="https://cdn.lordicon.com/vexjzsuj.json"
+									src="https://cdn.lordicon.com/zhgkkdks.json"
+									target=".group"
 									trigger="hover"
+									colors="primary:#ffffff;"
 									style={{
 										width: '25px',
 										height: '25px',
@@ -111,6 +118,7 @@ export const Header = () => {
 								</span>
 							</div>
 						</DropdownTrigger>
+
 						<DropdownMenu
 							className="bg-[#222222]"
 							aria-label="Static Actions"
@@ -126,19 +134,41 @@ export const Header = () => {
 								className="bg-[#222222] hover:bg-gray-600"
 							>
 								<Link
-									href="/ai-news"
+									href="/about"
 									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
 								>
 									<lord-icon
-										src="https://cdn.lordicon.com/ejurburo.json"
+										src="https://cdn.lordicon.com/ziflyeyv.json"
+										target=".group"
 										trigger="hover"
-										colors="primary:#ffffff"
+										colors="primary:#ffffff;"
 										style={{
 											width: '25px',
 											height: '25px',
 										}}
 									/>
-									<span>AI News</span>
+									<span>About Us</span>
+								</Link>
+							</DropdownItem>
+							<DropdownItem
+								key="contact"
+								className="bg-[#222222] hover:bg-gray-600"
+							>
+								<Link
+									href="/contact"
+									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
+								>
+									<lord-icon
+										src="https://cdn.lordicon.com/ctsunjjx.json"
+										target=".group"
+										trigger="hover"
+										colors="primary:#ffffff;"
+										style={{
+											width: '25px',
+											height: '25px',
+										}}
+									/>
+									<span>Contact Us</span>
 								</Link>
 							</DropdownItem>
 							<DropdownItem
@@ -151,6 +181,7 @@ export const Header = () => {
 								>
 									<lord-icon
 										src="https://cdn.lordicon.com/utrckbca.json"
+										target=".group"
 										trigger="hover"
 										colors="primary:#ffffff"
 										style={{
@@ -159,66 +190,6 @@ export const Header = () => {
 										}}
 									/>
 									<span>Submit AI</span>
-								</Link>
-							</DropdownItem>
-							<DropdownItem
-								key="news"
-								className="bg-[#222222] hover:bg-gray-600"
-							>
-								<Link
-									href="/about"
-									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
-								>
-									<lord-icon
-										src="https://cdn.lordicon.com/ziflyeyv.json"
-										trigger="hover"
-										colors="primary:#ffffff;"
-										style={{
-											width: '25px',
-											height: '25px',
-										}}
-									/>
-									<span>About Us</span>
-								</Link>
-							</DropdownItem>
-							<DropdownItem
-								key="news"
-								className="bg-[#222222] hover:bg-gray-600"
-							>
-								<Link
-									href="/privacy-policy"
-									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
-								>
-									<lord-icon
-										src="https://cdn.lordicon.com/eqxyjqxd.json"
-										trigger="hover"
-										colors="primary:#ffffff"
-										style={{
-											width: '25px',
-											height: '25px',
-										}}
-									/>
-									<span>Privacy policy</span>
-								</Link>
-							</DropdownItem>
-							<DropdownItem
-								key="news"
-								className="bg-[#222222] hover:bg-gray-600"
-							>
-								<Link
-									href="/terms"
-									className="flex items-center space-x-2 px-4 py-2 text-sm sm:text-base md:text-lg lg:text-lg text-white dark:text-gray-300 hover:text-black dark:hover:text-blue-400"
-								>
-									<lord-icon
-										src="https://cdn.lordicon.com/eqxyjqxd.json"
-										trigger="hover"
-										colors="primary:#ffffff"
-										style={{
-											width: '25px',
-											height: '25px',
-										}}
-									/>
-									<span>Term of service</span>
 								</Link>
 							</DropdownItem>
 						</DropdownMenu>
