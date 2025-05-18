@@ -426,12 +426,24 @@ export default function Tool({
 							<div className="mt-8 w-full md:mx-4 lg:mx-10 lg:min-w-[1050px]">
 								<Tabs defaultValue="description" className="w-full">
 									<TabsList className="w-full justify-start overflow-x-auto">
-										<TabsTrigger value="description">Description</TabsTrigger>
-										<TabsTrigger value="proscons">Pros & Cons</TabsTrigger>
-										<TabsTrigger value="similar">Similar Tools</TabsTrigger>
-										<TabsTrigger value="faq">FAQ</TabsTrigger>
-										<TabsTrigger value="pricing">Pricing</TabsTrigger>
-										<TabsTrigger value="contact">Contact</TabsTrigger>
+										<h2>
+											<TabsTrigger value="description">Description</TabsTrigger>
+										</h2>
+										<h2>
+											<TabsTrigger value="proscons">Pros & Cons</TabsTrigger>
+										</h2>
+										<h2>
+											<TabsTrigger value="similar">Similar Tools</TabsTrigger>
+										</h2>
+										<h2>
+											<TabsTrigger value="faq">FAQ</TabsTrigger>
+										</h2>
+										<h2>
+											<TabsTrigger value="pricing">Pricing</TabsTrigger>
+										</h2>
+										<h2>
+											<TabsTrigger value="contact">Contact</TabsTrigger>
+										</h2>
 									</TabsList>
 									<TabsContent
 										value="description"
@@ -453,9 +465,9 @@ export default function Tool({
 											<div className="bg-green-50 rounded-lg p-5 border border-green-100">
 												<div className="flex items-center gap-2 mb-4">
 													<CheckCircle className="text-green-600 w-5 h-5" />
-													<h2 className="text-lg font-semibold text-green-800">
+													<h3 className="text-lg font-semibold text-green-800">
 														Pros
-													</h2>
+													</h3>
 												</div>
 												<div className="space-y-3">
 													<p
@@ -491,9 +503,9 @@ export default function Tool({
 										className="bg-white shadow-lg rounded-lg p-8"
 									>
 										<div className="flex flex-col gap-4">
-											<h2 className="font-bold text-2xl text-center">
+											<h3 className="font-bold text-2xl text-center">
 												Similar to {tool.name}
-											</h2>
+											</h3>
 
 											<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4">
 												{alternatives
@@ -560,7 +572,7 @@ export default function Tool({
 																Free Tier
 															</h3>
 														</div>
-														<p className="text-gray-700">
+														<p className="text-gray-500 text-left">
 															Access to core features with limited usage
 														</p>
 														<div className="mt-2">
@@ -618,7 +630,7 @@ export default function Tool({
 															</h3>
 														</div>
 														<p
-															className="text-gray-700"
+															className="text-gray-500 text-left"
 															dangerouslySetInnerHTML={{
 																__html: tool.discounts,
 															}}
@@ -634,7 +646,7 @@ export default function Tool({
 															</h3>
 														</div>
 														<p
-															className="text-gray-700"
+															className="text-gray-500 text-left"
 															dangerouslySetInnerHTML={{
 																__html: tool.refundPolicy,
 															}}
