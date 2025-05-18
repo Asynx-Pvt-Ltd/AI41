@@ -50,6 +50,7 @@ model Tool {
   paidPrice        String?
   freeTierType     String?
   discounts        String?
+  discountCoupon   String?
   refundPolicy     String?
   pricingUrl       String?
   contactEmail     String?
