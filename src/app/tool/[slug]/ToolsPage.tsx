@@ -272,7 +272,15 @@ export default function Tool({
 			</div>
 		);
 	};
+	const [copied, setCopied] = useState(false);
+	const handleCopyClick = () => {
+		navigator.clipboard.writeText(tool.discountCoupon);
+		setCopied(true);
 
+		setTimeout(() => {
+			setCopied(false);
+		}, 2000);
+	};
 	return (
 		<div className="flex flex-col min-h-screen">
 			<Header />
@@ -622,7 +630,7 @@ export default function Tool({
 												{/* Discounts */}
 												<div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
 													{/* Discounts */}
-													<div className="bg-gray-50 p-6 rounded-lg border-l-4 border-[#2c2c2c]">
+													<div className="bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
 														<div className="flex items-center gap-2 mb-2">
 															<div className="w-5 h-5 text-blue-600">%</div>
 															<h3 className="text-xl font-semibold text-gray-800">
@@ -630,11 +638,41 @@ export default function Tool({
 															</h3>
 														</div>
 														<p
-															className="text-gray-500 text-left"
+															className="text-gray-500 text-left mb-4"
 															dangerouslySetInnerHTML={{
 																__html: tool.discounts,
 															}}
 														/>
+
+														{tool.discountCoupon && (
+															<div className="mt-4 text-left">
+																<h3 className="font-medium text-gray-700 mb-2">
+																	Coupon Code
+																</h3>
+																<div className="flex items-center">
+																	<div className="relative flex-1">
+																		<div className="bg-white border border-gray-300 rounded-l-md py-2 px-4 font-mono text-gray-800 w-full">
+																			{tool.discountCoupon}
+																		</div>
+																	</div>
+																	<button
+																		onClick={handleCopyClick}
+																		className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-r-md transition-colors"
+																	>
+																		{copied ? (
+																			<CheckCircle size={20} />
+																		) : (
+																			'Copy'
+																		)}
+																	</button>
+																</div>
+																{copied && (
+																	<p className="text-green-600 text-sm mt-1">
+																		Coupon copied to clipboard!
+																	</p>
+																)}
+															</div>
+														)}
 													</div>
 
 													{/* Refund Policy */}
