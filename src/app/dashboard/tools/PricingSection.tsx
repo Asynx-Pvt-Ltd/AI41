@@ -270,6 +270,15 @@ function PricingSection({
 						}))
 					}
 				/>
+				<label>Discount Coupon</label>
+				<input
+					type="text"
+					name="discountCoupon"
+					value={formData.discountCoupon || ''}
+					onChange={handleInputChange}
+					className="w-full p-2 border rounded"
+					placeholder="e.g. SAVE10"
+				/>
 			</div>
 
 			<div className="mb-4">

@@ -34,6 +34,7 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 		paidPrice: '',
 		freeTierType: '',
 		discounts: '',
+		discountCoupon: '',
 		refundPolicy: '',
 		pricingUrl: '',
 		pricingPlans: [],
@@ -98,6 +99,7 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				paidPrice: editingTool.paidPrice ?? '',
 				freeTierType: editingTool.freeTierType || '',
 				discounts: editingTool.discounts || '',
+				discountCoupon: editingTool.discountCoupon || '',
 				refundPolicy: editingTool.refundPolicy || '',
 				contactSocial: editingTool.contactSocial || {
 					facebook: '',
@@ -217,6 +219,7 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 			paidPrice: formData.paidPrice,
 			freeTierType: formData.freeTierType,
 			discounts: formData.discounts,
+			discountCoupon: formData.discountCoupon,
 			refundPolicy: formData.refundPolicy,
 			contactSocial: formData.contactSocial,
 			contactEmail: formData.contactEmail,
