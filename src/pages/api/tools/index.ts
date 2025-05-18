@@ -25,6 +25,7 @@ export default async function handler(
 			freeTierType,
 			pricingPlans,
 			discounts,
+			discountCoupon,
 			refundPolicy,
 			contactSocial,
 			contactEmail,
@@ -55,6 +56,7 @@ export default async function handler(
 				freeTierType?: string;
 				pricingPlans?: { create: any[] };
 				discounts?: string;
+				discountCoupon?: string;
 				refundPolicy?: string;
 				contactSocial?: { create: any };
 				contactEmail?: string;
@@ -98,6 +100,7 @@ export default async function handler(
 						},
 					}),
 				...(discounts !== null && { discounts }),
+				...(discountCoupon !== null && { discountCoupon }),
 				...(refundPolicy !== null && { refundPolicy }),
 				...(contactSocial !== null && {
 					contactSocial: {
