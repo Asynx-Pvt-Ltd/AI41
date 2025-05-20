@@ -110,29 +110,27 @@ export const Header = () => {
 					className="md:hidden flex items-center z-20"
 					aria-label="Toggle mobile menu"
 				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke="currentColor"
-						className="w-6 h-6 text-white"
-					>
-						{mobileMenuOpen ? (
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M6 18L18 6M6 6l12 12"
-							/>
-						) : (
-							<path
-								strokeLinecap="round"
-								strokeLinejoin="round"
-								strokeWidth={2}
-								d="M4 6h16M4 12h16M4 18h16"
-							/>
-						)}
-					</svg>
+					{mobileMenuOpen ? (
+						<lord-icon
+							src="https://cdn.lordicon.com/lmofuouh.json"
+							trigger="loop"
+							colors="primary:#ffffff"
+							style={{
+								width: '30px',
+								height: '30px',
+							}}
+						></lord-icon>
+					) : (
+						<lord-icon
+							src="https://cdn.lordicon.com/ervhjijl.json"
+							colors="primary:#ffffff"
+							trigger="hover"
+							style={{
+								width: '30px',
+								height: '30px',
+							}}
+						></lord-icon>
+					)}
 				</button>
 
 				{/* Desktop Navigation */}
@@ -244,6 +242,8 @@ export const Header = () => {
 								<lord-icon
 									src={item.iconSrc}
 									colors="primary:#ffffff"
+									trigger="loop"
+									delay="500"
 									style={{
 										width: '25px',
 										height: '25px',
@@ -264,6 +264,8 @@ export const Header = () => {
 								>
 									<lord-icon
 										src={item.iconSrc}
+										trigger="loop"
+										delay="500"
 										colors="primary:#ffffff"
 										style={{
 											width: '25px',

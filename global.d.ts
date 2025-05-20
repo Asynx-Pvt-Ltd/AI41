@@ -14,6 +14,7 @@ declare global {
 				style?: React.CSSProperties;
 				children?: any;
 				colors?: any;
+				delay?: any;
 				// Add any other attributes you plan to use
 			};
 		}
