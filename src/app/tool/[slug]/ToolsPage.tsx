@@ -384,12 +384,9 @@ export default function Tool({
 												</Link>
 											)}
 											{tool.hasPaidPrice && (
-												<Link
-													href={`/submit-ai`}
-													className="px-3 py-1 bg-orange-200 text-gray-800 rounded-full text-xs hover:bg-gray-300 transition-colors"
-												>
+												<p className="px-3 py-1 bg-orange-200 text-gray-800 rounded-full text-xs">
 													From ${tool.paidPrice}
-												</Link>
+												</p>
 											)}
 										</div>
 										<div className="flex flex-row mt-5 w-fit">
@@ -570,7 +567,7 @@ export default function Tool({
 										className="bg-white shadow-xl rounded-lg p-8"
 									>
 										<div className="w-full bg-white px-4 sm:px-6 lg:px-8">
-											<div className="max-w-7xl mx-auto">
+											<div className="max-w-7xl">
 												{/* Free Tier */}
 												{tool.hasFreePrice && (
 													<div className="mb-8 bg-gray-50 p-6 rounded-lg border-l-4 border-green-500">
@@ -583,7 +580,7 @@ export default function Tool({
 														<p className="text-gray-500 text-left">
 															Access to core features with limited usage
 														</p>
-														<div className="mt-2">
+														<div className="mt-2 text-left">
 															<Link
 																href="/tools/free"
 																className="px-3 py-1 bg-green-200 hover:bg-gray-300 text-gray-800 rounded-full text-xs"
@@ -657,10 +654,13 @@ export default function Tool({
 																	</div>
 																	<button
 																		onClick={handleCopyClick}
-																		className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-r-md transition-colors"
+																		className="bg-blue-600 hover:bg-blue-700 text-white rounded-r-md transition-colors w-24 h-10 text-center"
 																	>
 																		{copied ? (
-																			<CheckCircle size={20} />
+																			<CheckCircle
+																				size={20}
+																				className="mx-auto"
+																			/>
 																		) : (
 																			'Copy'
 																		)}
