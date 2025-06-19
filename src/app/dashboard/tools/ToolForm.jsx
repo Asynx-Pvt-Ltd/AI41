@@ -130,14 +130,47 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 
 	const handleIconChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
-			setIconFile(e.target.files[0]);
+			const file = e.target.files[0];
+			if (file.size > 5 * 1024 * 1024) {
+				// 5MB limit
+				setIconError('Icon file size must be less than 5MB');
+				return;
+			}
+			setIconFile(file);
+			setIconError('');
 		}
 	};
 
 	const handleThumbnailChange = (e) => {
 		if (e.target.files && e.target.files.length > 0) {
-			setThumbnailFile(e.target.files[0]);
+			const file = e.target.files[0];
+			if (file.size > 5 * 1024 * 1024) {
+				// 5MB limit
+				setThumbnailError('Thumbnail file size must be less than 5MB');
+				return;
+			}
+			setThumbnailFile(file);
+			setThumbnailError('');
 		}
+	};
+
+	const compressImage = (file, maxWidth = 800, quality = 0.8) => {
+		return new Promise((resolve) => {
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			const img = new Image();
+
+			img.onload = () => {
+				const ratio = Math.min(maxWidth / img.width, maxWidth / img.height);
+				canvas.width = img.width * ratio;
+				canvas.height = img.height * ratio;
+
+				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+				canvas.toBlob(resolve, 'image/jpeg', quality);
+			};
+
+			img.src = URL.createObjectURL(file);
+		});
 	};
 
 	const handleJobRoleChange = (e) => {
@@ -245,11 +278,12 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 			setThumbnailError('');
 
 			if (iconFile) {
+				const compressedIcon = await compressImage(iconFile);
 				const response = await fetch(
 					`/api/image/upload?filename=${iconFile.name}`,
 					{
 						method: 'POST',
-						body: iconFile,
+						body: compressedIcon,
 					},
 				);
 				const url = (await response.json()).url;
@@ -257,11 +291,12 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 			}
 
 			if (thumbnailFile) {
+				const compressedThumbnail = await compressImage(thumbnailFile);
 				const response = await fetch(
 					`/api/image/upload?filename=${thumbnailFile.name}`,
 					{
 						method: 'POST',
-						body: thumbnailFile,
+						body: compressedThumbnail,
 					},
 				);
 				const url = (await response.json()).url;
