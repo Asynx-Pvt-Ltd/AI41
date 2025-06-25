@@ -59,6 +59,7 @@ model Tool {
   contactSocial    ContactSocial?
   cons             String?
   pros             String?
+  faqs             FAQ[]
   metaTitle        String?
   metaDescription  String?
   categories       ToolsOnCategories[]
@@ -141,4 +142,13 @@ model ToolsOnCategories {
   tool       Tool     @relation(fields: [toolId], references: [id], onDelete: Cascade)
 
   @@id([toolId, categoryId])
+}
+
+model FAQ {
+  id        Int    @id @default(autoincrement())
+  question  String
+  answer    String
+  toolId    Int
+  tool      Tool   @relation(fields: [toolId], references: [id], onDelete: Cascade)
+  order     Int    @default(0)
 }
