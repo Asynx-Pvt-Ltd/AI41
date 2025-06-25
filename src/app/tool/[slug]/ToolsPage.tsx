@@ -26,6 +26,12 @@ import FeaturedTools from '@/app/components/FeaturedTools';
 import { usePathname } from 'next/navigation';
 import FormatMarkdownText from '@/app/components/textFormatter';
 
+interface FAQ {
+	question: string;
+	answer: string;
+	order?: number;
+}
+
 export default function Tool({
 	tool,
 	alternatives,
@@ -505,7 +511,7 @@ export default function Tool({
 										className="bg-white shadow-lg rounded-lg p-8"
 									>
 										<FAQTutorialsAccordion
-											faqs={faqs.map((faq: any) => ({
+											faqs={faqs.map((faq: FAQ) => ({
 												question: faq.question,
 												answer: faq.answer,
 											}))}

@@ -225,7 +225,15 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 	const handleFormSubmit = async (e) => {
 		e.preventDefault();
 		setSubmitting(true);
-
+		// Validate FAQs
+		const invalidFAQs = formData.faqs.some(
+			(faq) => !faq.question.trim() || !faq.answer.trim(),
+		);
+		if (invalidFAQs) {
+			toast.error('Please fill in all FAQ questions and answers');
+			setSubmitting(false);
+			return;
+		}
 		if (
 			formData.name === '' ||
 			formData.shortDescription === '' ||
@@ -593,7 +601,6 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 					/>
 				</div>
 			</div>
-
 			<PricingSection
 				formData={formData}
 				setFormData={setFormData}
@@ -601,52 +608,137 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				handlePriceCheckboxChange={handlePriceCheckboxChange}
 				handlePaidPriceChange={handlePaidPriceChange}
 			/>
+
 			<div className="mb-6">
-				<h3 className="text-lg font-semibold mb-4">FAQ</h3>
-
-				{formData.faqs.map((faq, index) => (
-					<div key={index} className="border p-4 mb-4 rounded">
-						<div className="flex justify-between items-center mb-2">
-							<h4 className="font-medium">FAQ {index + 1}</h4>
-							<button
-								type="button"
-								onClick={() => removeFAQ(index)}
-								className="text-red-500 hover:text-red-700"
-							>
-								Remove
-							</button>
-						</div>
-
-						<div className="mb-2">
-							<label>Question</label>
-							<input
-								type="text"
-								value={faq.question}
-								onChange={(e) => updateFAQ(index, 'question', e.target.value)}
-								className="w-full p-2 border rounded"
-								placeholder="Enter question"
+				<div className="flex items-center justify-between mb-4">
+					<h3 className="text-lg font-semibold">Frequently Asked Questions</h3>
+					<button
+						type="button"
+						onClick={addFAQ}
+						className="inline-flex items-center px-3 py-2 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-200 rounded-lg hover:bg-blue-100 transition-colors"
+					>
+						<svg
+							className="w-4 h-4 mr-2"
+							fill="none"
+							stroke="currentColor"
+							viewBox="0 0 24 24"
+						>
+							<path
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								strokeWidth={2}
+								d="M12 4v16m8-8H4"
 							/>
-						</div>
+						</svg>
+						Add FAQ
+					</button>
+				</div>
 
-						<div>
-							<label>Answer</label>
-							<textarea
-								value={faq.answer}
-								onChange={(e) => updateFAQ(index, 'answer', e.target.value)}
-								className="w-full p-2 border rounded h-20"
-								placeholder="Enter answer"
-							/>
+				{formData.faqs.length === 0 ? (
+					<div className="text-center py-8 text-gray-500 bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
+						<p className="text-sm">
+							No FAQs added yet. Click "Add FAQ" to get started.
+						</p>
+					</div>
+				) : (
+					<div className="border border-gray-200 rounded-lg bg-gray-50 h-full">
+						<div className="p-3 border-b border-gray-200 bg-white rounded-t-lg">
+							<div className="flex items-center justify-between">
+								<span className="text-sm font-medium text-gray-700">
+									{formData.faqs.length} FAQ
+									{formData.faqs.length !== 1 ? 's' : ''} added
+								</span>
+								{formData.faqs.length > 3 && (
+									<span className="text-xs text-gray-500">
+										Scroll to view all
+									</span>
+								)}
+							</div>
+						</div>
+						<div
+							className="p-4"
+							style={
+								formData.faqs.length > 3
+									? { maxHeight: '800px', overflowY: 'auto' }
+									: {}
+							}
+						>
+							<div className="space-y-4">
+								{formData.faqs.map((faq, index) => (
+									<div
+										key={index}
+										className="bg-white border border-gray-200 rounded-lg p-4 shadow-sm"
+									>
+										<div className="flex items-center justify-between mb-3">
+											<div className="flex items-center space-x-2">
+												<span className="inline-flex items-center justify-center w-6 h-6 text-xs font-medium text-blue-600 bg-blue-100 rounded-full">
+													{index + 1}
+												</span>
+												<span className="text-sm font-medium text-gray-700">
+													FAQ {index + 1}
+												</span>
+											</div>
+											<button
+												type="button"
+												onClick={() => removeFAQ(index)}
+												className="inline-flex items-center p-1 text-red-500 hover:text-red-700 hover:bg-red-50 rounded transition-colors"
+												title="Remove FAQ"
+											>
+												<svg
+													className="w-4 h-4"
+													fill="none"
+													stroke="currentColor"
+													viewBox="0 0 24 24"
+												>
+													<path
+														strokeLinecap="round"
+														strokeLinejoin="round"
+														strokeWidth={2}
+														d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+													/>
+												</svg>
+											</button>
+										</div>
+
+										<div className="space-y-3">
+											<div>
+												<label className="block text-sm font-medium text-gray-700 mb-1">
+													Question <span className="text-red-500">*</span>
+												</label>
+												<input
+													type="text"
+													value={faq.question}
+													onChange={(e) =>
+														updateFAQ(index, 'question', e.target.value)
+													}
+													className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+													placeholder="Enter your question here..."
+													required
+												/>
+											</div>
+
+											<div>
+												<label className="block text-sm font-medium text-gray-700 mb-1">
+													Answer <span className="text-red-500">*</span>
+												</label>
+												<textarea
+													value={faq.answer}
+													onChange={(e) =>
+														updateFAQ(index, 'answer', e.target.value)
+													}
+													className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+													placeholder="Enter your answer here..."
+													rows={3}
+													required
+												/>
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
 						</div>
 					</div>
-				))}
-
-				<button
-					type="button"
-					onClick={addFAQ}
-					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-				>
-					Add FAQ
-				</button>
+				)}
 			</div>
 
 			<ContactSection
@@ -655,7 +747,6 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				handleInputChange={handleInputChange}
 				handleContactSocialChange={handleContactSocialChange}
 			/>
-
 			<button
 				type="submit"
 				className="mt-6 bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition-colors w-full md:w-auto"
