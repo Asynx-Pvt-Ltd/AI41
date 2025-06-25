@@ -12,6 +12,7 @@ export default async function handler(
 			shortDescription,
 			pros,
 			cons,
+			faqs,
 			url,
 			pricing,
 			categories,
@@ -45,6 +46,7 @@ export default async function handler(
 				shortDescription: string;
 				pros: string;
 				cons: string;
+				faqs?: { create: any[] };
 				url: string;
 				pricing: string;
 				tags: string[];
@@ -116,6 +118,16 @@ export default async function handler(
 				...(contactEmail !== null && { contactEmail }),
 				...(contactPhone !== null && { contactPhone }),
 				...(contactPageUrl !== null && { contactPageUrl }),
+				...(faqs &&
+					faqs.length > 0 && {
+						faqs: {
+							create: faqs.map((faq: any, index: number) => ({
+								question: faq.question,
+								answer: faq.answer,
+								order: faq.order || index,
+							})),
+						},
+					}),
 				metaTitle: metaTitle ?? null,
 				metaDescription: metaDescription ?? null,
 			};
@@ -145,6 +157,11 @@ export default async function handler(
 							jobRole: true,
 						},
 					},
+					faqs: {
+						orderBy: {
+							order: 'asc',
+						},
+					},
 				},
 			});
 
@@ -169,6 +186,11 @@ export default async function handler(
 					},
 					contactSocial: true,
 					pricingPlans: true,
+					faqs: {
+						orderBy: {
+							order: 'asc',
+						},
+					},
 				},
 			});
 

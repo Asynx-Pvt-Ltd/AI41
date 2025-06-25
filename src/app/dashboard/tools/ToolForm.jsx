@@ -24,6 +24,7 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 		shortDescription: '',
 		pros: '',
 		cons: '',
+		faqs: [],
 		url: '',
 		categories: [],
 		jobRoles: [],
@@ -114,6 +115,7 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				pricingUrl: editingTool.pricingUrl || '',
 				pricingPlans: editingTool.pricingPlans || [],
 				tags: editingTool.tags || [],
+				faqs: editingTool.faqs || [],
 			});
 		}
 	}, [editMode, editingTool]);
@@ -242,6 +244,7 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 			shortDescription: formData.shortDescription,
 			pros: formData.pros,
 			cons: formData.cons,
+			faqs: formData.faqs,
 			url: formData.url,
 			categories: formData.categories,
 			jobRoles: formData.jobRoles,
@@ -342,6 +345,32 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				...prev.contactSocial,
 				[platform]: value,
 			},
+		}));
+	};
+
+	const addFAQ = () => {
+		setFormData((prev) => ({
+			...prev,
+			faqs: [
+				...prev.faqs,
+				{ question: '', answer: '', order: prev.faqs.length },
+			],
+		}));
+	};
+
+	const removeFAQ = (index) => {
+		setFormData((prev) => ({
+			...prev,
+			faqs: prev.faqs.filter((_, i) => i !== index),
+		}));
+	};
+
+	const updateFAQ = (index, field, value) => {
+		setFormData((prev) => ({
+			...prev,
+			faqs: prev.faqs.map((faq, i) =>
+				i === index ? { ...faq, [field]: value } : faq,
+			),
 		}));
 	};
 
@@ -572,6 +601,53 @@ function ToolForm({ editMode, editingTool, onSubmitSuccess }) {
 				handlePriceCheckboxChange={handlePriceCheckboxChange}
 				handlePaidPriceChange={handlePaidPriceChange}
 			/>
+			<div className="mb-6">
+				<h3 className="text-lg font-semibold mb-4">FAQ</h3>
+
+				{formData.faqs.map((faq, index) => (
+					<div key={index} className="border p-4 mb-4 rounded">
+						<div className="flex justify-between items-center mb-2">
+							<h4 className="font-medium">FAQ {index + 1}</h4>
+							<button
+								type="button"
+								onClick={() => removeFAQ(index)}
+								className="text-red-500 hover:text-red-700"
+							>
+								Remove
+							</button>
+						</div>
+
+						<div className="mb-2">
+							<label>Question</label>
+							<input
+								type="text"
+								value={faq.question}
+								onChange={(e) => updateFAQ(index, 'question', e.target.value)}
+								className="w-full p-2 border rounded"
+								placeholder="Enter question"
+							/>
+						</div>
+
+						<div>
+							<label>Answer</label>
+							<textarea
+								value={faq.answer}
+								onChange={(e) => updateFAQ(index, 'answer', e.target.value)}
+								className="w-full p-2 border rounded h-20"
+								placeholder="Enter answer"
+							/>
+						</div>
+					</div>
+				))}
+
+				<button
+					type="button"
+					onClick={addFAQ}
+					className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+				>
+					Add FAQ
+				</button>
+			</div>
 
 			<ContactSection
 				formData={formData}

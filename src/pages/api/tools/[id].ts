@@ -31,6 +31,7 @@ export default async function handler(
 				shortDescription,
 				pros,
 				cons,
+				faqs,
 				url,
 				pricing,
 				categories,
@@ -91,7 +92,12 @@ export default async function handler(
 					},
 				});
 			}
-
+			// Delete existing FAQs
+			await prisma.fAQ.deleteMany({
+				where: {
+					toolId: Number(id),
+				},
+			});
 			// Prepare the update data
 			const updateData: any = {
 				icon: icon || existingTool.icon || '',
@@ -190,6 +196,16 @@ export default async function handler(
 							: [],
 				};
 			}
+			// Handle FAQs
+			if (faqs) {
+				updateData.faqs = {
+					create: faqs.map((faq: any, index: number) => ({
+						question: faq.question,
+						answer: faq.answer,
+						order: faq.order || index,
+					})),
+				};
+			}
 
 			// Update tool with new data
 			const updatedTool = await prisma.tool.update({
@@ -207,6 +223,11 @@ export default async function handler(
 						},
 					},
 					contactSocial: true, // Include contactSocial in the response
+					faqs: {
+						orderBy: {
+							order: 'asc',
+						},
+					},
 				},
 			});
 
@@ -290,6 +311,11 @@ export default async function handler(
 					},
 					contactSocial: true,
 					pricingPlans: true,
+					faqs: {
+						orderBy: {
+							order: 'asc',
+						},
+					},
 				},
 			});
 			return res.status(200).json(tool);

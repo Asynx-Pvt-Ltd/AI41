@@ -27,6 +27,11 @@ export default async function handler(
 						},
 						contactSocial: true,
 						pricingPlans: true,
+						faqs: {
+							orderBy: {
+								order: 'asc',
+							},
+						},
 					},
 				});
 
