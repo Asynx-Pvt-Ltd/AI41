@@ -35,63 +35,7 @@ export default function Tool({
 }) {
 	const pathname = usePathname();
 
-	const faqs = [
-		{
-			question: 'What is an AI tool directory?',
-			answer: (
-				<>
-					An AI tool directory is a curated platform with a list of assorted
-					tools empowered by Artificial Intelligence. You can use it to find the
-					right tools for your needs.
-				</>
-			),
-		},
-		{
-			question: 'Are the tools listed here free?',
-			answer: (
-				<>
-					Our list includes some free and paid tools. You can go through the
-					dedicated page of each tool to know the pricing details.
-				</>
-			),
-		},
-		{
-			question:
-				'Do I need to sign up or create an account to access the directory?',
-			answer: (
-				<>
-					No sign-up or account is required to check the tools. Even with a
-					sign-up account, you may benefit from such features as adding tools to
-					your favorite list.
-				</>
-			),
-		},
-		{
-			question: 'Are the tools listed verified and reliable?',
-			answer: (
-				<>
-					We're serious about reliability. Every tool in our directory is vetted
-					through user feedback and performance checks. We even consider the
-					credibility of the developers. That means you will see only trusted,
-					high-quality tools for your purpose.
-				</>
-			),
-		},
-		{
-			question:
-				'How do you verify the effectiveness of the AI tools listed here?',
-			answer: (
-				<>
-					We run the tools through scenarios relevant to their intended use.
-					Similarly, our team checks the case studies and user reviews.
-					Sometimes, we even reach out to the companies directly for deeper
-					insights. Thus, we ensure that all the tools listed on our platform
-					are high-quality.
-				</>
-			),
-		},
-	];
-
+	const faqs = tool.faqs || [];
 	const JobRoles = ({
 		roles,
 	}: {
@@ -560,7 +504,12 @@ export default function Tool({
 										value="faq"
 										className="bg-white shadow-lg rounded-lg p-8"
 									>
-										<FAQTutorialsAccordion faqs={faqs} />
+										<FAQTutorialsAccordion
+											faqs={faqs.map((faq: any) => ({
+												question: faq.question,
+												answer: faq.answer,
+											}))}
+										/>
 									</TabsContent>
 									<TabsContent
 										value="pricing"
