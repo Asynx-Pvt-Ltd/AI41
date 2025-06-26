@@ -9,15 +9,16 @@ const isApiRoute = createRouteMatcher([
 ]);
 
 const clerkHandler = clerkMiddleware(async (auth, req) => {
-	if (isDashboardRoute(req)) await auth.protect();
+	if (isDashboardRoute(req)) {
+		await auth.protect();
+	}
 });
 
 async function customMiddleware(req: NextRequest) {
+	console.log(isApiRoute(req));
 	if (isApiRoute(req)) {
 		const allowedOrigins = [
-			'localhost:3000',
-			'toolsdirectory-phi.vercel.app',
-			'167.88.44.78:3000',
+			'', // 'localhost:3000', // 'toolsdirectory-phi.vercel.app', // '167.88.44.78:3000',
 		];
 		const origin = req.headers.get('x-forwarded-host') ?? '';
 		const isAllowedOrigin = allowedOrigins.includes(origin);
@@ -44,12 +45,13 @@ export default async function middleware(
 	req: NextRequest,
 	event: NextFetchEvent,
 ) {
-	const response = await clerkHandler(req, event);
-	if (response) return response;
-
+	const clerkResponse = await clerkHandler(req, event);
+	if (clerkResponse && clerkResponse.status !== 200) {
+		return clerkResponse;
+	}
 	return customMiddleware(req);
 }
 
 export const config = {
-	matcher: ['/dashboard/:path*', '/api/addNews', '/api/addTutorials'],
+	matcher: ['/dashboard/:path*', '/api/addNews', '/api/addTutorials', '/'],
 };
