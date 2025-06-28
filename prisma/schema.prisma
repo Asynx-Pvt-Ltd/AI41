@@ -115,13 +115,24 @@ model Tutorial {
 }
 
 model News {
-  id          Int     @id @default(autoincrement())
+  id          Int      @id @default(autoincrement())
   icon        String
   title       String
-  url         String
+  url         String   @unique // Make URL unique to prevent exact duplicates
   date        String?
-  slugUrl     String  @unique
+  slugUrl     String   @unique
   description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // Additional fields for better duplicate detection
+  normalizedTitle String? // Store normalized title for faster comparison
+  urlHash         String? @unique // Hash of normalized URL for faster lookups
+  
+  // Indexes for better performance
+  @@index([createdAt])
+  @@index([normalizedTitle])
+  @@index([urlHash])
 }
 
 model tutorialKeyword {
