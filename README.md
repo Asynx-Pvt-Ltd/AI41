@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧠 AI41 – The Ultimate AI Tools Directory
 
-## Getting Started
+![image](https://github.com/user-attachments/assets/22c2b881-4ac8-4b58-a035-d5a093ca09a1)
 
-First, run the development server:
+
+> Discover top AI tools categorized by **job roles**, explore tools by **categories**, read curated **AI tutorials** and **news**, and even **submit your own tools** for listing — all in one place.
+
+🔗 **Live Site**: [https://ai41.org](https://ai41.org)  
+🔧 Built and maintained by [Asynx Devs](https://asynx.in)
+
+---
+
+## 🚀 Overview
+
+**AI41** is a modern AI tools directory that helps professionals discover the best AI tools based on their job roles and interests. It features curated AI tools, educational tutorials, news, and a submission system for listing your own tools.
+
+Built for speed, flexibility, and scale, AI41 includes a custom CMS admin panel, Clerk-based authentication, and a developer-friendly tech stack.
+
+---
+
+## 🔑 Key Features
+
+- 🔍 **Browse by Role** – Find tools tailored for developers, marketers, designers, and more.
+- 🗃️ **Category Exploration** – Discover AI tools sorted by domain and use-case.
+- 📰 **Latest Tutorials & News** – Stay informed with trending AI topics and learning resources.
+- 📝 **Tool Submissions** – Let developers and companies showcase their AI tools to the world.
+- 🔐 **Secure Auth** – Powered by Clerk for seamless sign-in and user management.
+- 🧑‍💻 **Custom Admin Dashboard** – Role-based CMS to manage listings, content, and approvals.
+- 🖼️ **Image Hosting** – Custom file storage solution to manage tool assets (not using S3).
+- ⚡ **SEO-Optimized** – Fast-loading, search-friendly frontend with Next.js.
+
+---
+
+## 🧱 Tech Stack
+
+- **Frontend**: Next.js, Tailwind CSS
+- **Auth**: Clerk.dev
+- **CMS**: Custom-built admin dashboard with role-based access
+- **Proxy**: Nginx reverse proxy
+- **File Storage**: Custom solution for images/assets
+- **Deployment**: Node.js with Nginx on a Linux server
+
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the Repo
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+git clone https://github.com/your-username/ai41.git
+cd ai41
