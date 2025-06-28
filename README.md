@@ -47,5 +47,12 @@ Built for speed, flexibility, and scale, AI41 includes a custom CMS admin panel,
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/your-username/ai41.git
+git clone https://github.com/Asynx-Pvt-Ltd/AI41.git
 cd ai41
+```
+### Add ENV's
+
+```bash
+yarn
+yarn dev
+```
