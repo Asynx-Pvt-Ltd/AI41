@@ -129,7 +129,7 @@ export default function Page() {
 							<div className="animate-spin rounded-full h-16 w-16 border-t-4 border-black dark:border-white"></div>
 						</div>
 					) : filteredNews.length > 0 ? (
-						<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-10 gap-y-5">
+						<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:gap-x-4 gap-x-10 gap-y-5">
 							{filteredNews.map((n: NewsItem, index: number) => (
 								<Link
 									href={'/ai-news/' + encodeURIComponent(n.slugUrl)}

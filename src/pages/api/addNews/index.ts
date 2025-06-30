@@ -185,11 +185,13 @@ const formatTitle = (title: string): string => {
 
 async function generateAIImagePrompt(newsTitle: string): Promise<string> {
 	const aiPrompts = [
-		`Futuristic digital visualization of Artificial Intelligence, representing: ${newsTitle}`,
-		`High-tech neural network illustration capturing the essence of: ${newsTitle}`,
-		`Cybernetic concept art depicting advanced AI technology: ${newsTitle}`,
-		`Stunning abstract representation of artificial intelligence and machine learning: ${newsTitle}`,
-		`Cutting-edge AI visualization with interconnected digital neural pathways: ${newsTitle}`,
+		// `Futuristic digital visualization of Artificial Intelligence, representing: ${newsTitle}`,
+		// `High-tech neural network illustration capturing the essence of: ${newsTitle}`,
+		// `Cybernetic concept art depicting advanced AI technology: ${newsTitle}`,
+		// `Stunning abstract representation of artificial intelligence and machine learning: ${newsTitle}`,
+		// `Cutting-edge AI visualization with interconnected digital neural pathways: ${newsTitle}`,
+		`A simple, modern illustration for our blog post: ${newsTitle}`,
+		// `Cool animated background (i.e. changing colors) with text:${newsTitle}`,
 	];
 
 	return aiPrompts[Math.floor(Math.random() * aiPrompts.length)];
