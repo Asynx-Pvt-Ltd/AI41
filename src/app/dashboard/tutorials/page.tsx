@@ -77,7 +77,6 @@ function Tutorials() {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION_TOKEN}`,
 				},
 				body: JSON.stringify({ keyword: keywords }),
 			});
@@ -141,7 +140,6 @@ function Tutorials() {
 					method: 'PUT',
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION_TOKEN}`,
 					},
 					body: JSON.stringify(data),
 				});
@@ -151,7 +149,6 @@ function Tutorials() {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
-						Authorization: `Bearer ${process.env.NEXT_PUBLIC_AUTHORIZATION_TOKEN}`,
 					},
 					body: JSON.stringify(data),
 				});

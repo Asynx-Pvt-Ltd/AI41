@@ -18,7 +18,9 @@ async function customMiddleware(req: NextRequest) {
 	console.log(isApiRoute(req));
 	if (isApiRoute(req)) {
 		const allowedOrigins = [
-			'', // 'localhost:3000', // 'toolsdirectory-phi.vercel.app', // '167.88.44.78:3000',
+			'localhost:3000',
+			'https://ai41.org/',
+			// 'toolsdirectory-phi.vercel.app', // '167.88.44.78:3000',
 		];
 		const origin = req.headers.get('x-forwarded-host') ?? '';
 		const isAllowedOrigin = allowedOrigins.includes(origin);
