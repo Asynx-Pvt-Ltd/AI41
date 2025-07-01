@@ -155,7 +155,7 @@ const RelatedNews = ({ currentNewsId }: { currentNewsId: number }) => {
 			<div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 				{relatedNews.map((news) => (
 					<Link
-						href={'/news/' + encodeURIComponent(news.slugUrl)}
+						href={'/ai-news/' + encodeURIComponent(news.slugUrl)}
 						key={news.id}
 						className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300"
 					>
