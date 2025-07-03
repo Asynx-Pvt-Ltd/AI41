@@ -22,6 +22,7 @@ async function customMiddleware(req: NextRequest) {
 			'https://ai41.org/',
 			// 'toolsdirectory-phi.vercel.app',
 			'167.88.44.78:3000',
+			'ai41.org',
 		];
 		const origin = req.headers.get('x-forwarded-host') ?? '';
 		const isAllowedOrigin = allowedOrigins.includes(origin);
